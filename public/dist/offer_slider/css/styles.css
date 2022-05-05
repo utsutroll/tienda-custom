@@ -1,0 +1,778 @@
+img{
+	max-width: 100%;
+    height: auto;
+}
+
+.product-style-1{
+	display: block;
+	max-width: 200px;
+	width: 100%;
+}
+.product-style-1 .product-info{
+	display: block;
+	width: 100%;
+	text-align: center;
+	padding-top: 5px;
+}
+.product-style-1 .product-info .product-name{
+    line-height: 18px;
+    color: #444444;
+}
+.product-style-1 .product-info .product-name span{
+    text-align: center !important;
+}
+.product-style-1 .product-info .wrap-btn {
+	display: block;
+	padding-top: 7px;
+}
+.product-style-1 .product-info .wrap-btn a{
+	position: relative;
+}
+.product-style-1 .product-info .wrap-btn a i{
+	margin-left: 5px;
+}
+.product-style-1 .product-info .wrap-btn a::after{
+	display: block;
+	content: '';
+	height: 1px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.product .product-thumnail figure{
+    display: inline-block;
+    overflow: hidden;
+}
+.product .product-thumnail figure img{
+    transition: transform ease-out 0.3s 0s;
+    -webkit-transition: transform ease-out 0.3s 0s;
+    -moz-transition: transform ease-out 0.3s 0s;
+    -o-transition: transform ease-out 0.3s 0s;
+}
+.product:hover .product-thumnail figure img{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+}
+
+.wrap-main-slide{
+    display: block;
+    margin-top: 10px;
+}
+.wrap-main-slide .item-slide .img-slide,
+.wrap-main-slide .item-slide{
+    min-height: 190px;
+}
+.wrap-main-slide .slide-carousel .slide-info{
+    position: absolute;
+}
+.wrap-main-slide .slide-carousel .slide-info.slide-1{
+    top: 30%;
+    left: 40%;
+    z-index: 15;
+    transform: translate( 4px, -7px);
+    -webkit-transform: translate( 4px, -7px);
+    -ms-transform: translate( 4px, -7px);
+}
+.wrap-main-slide .slide-carousel .slide-info.slide-2{
+    max-width: 370px;
+    z-index: 30;
+    left: 8%;
+    top: 22%;
+    transform: translate(1px, 0px);
+    -webkit-transform: translate(1px, 0px);
+    -ms-transform: translate(1px, 0px);
+}
+.wrap-main-slide .slide-carousel .slide-info.slide-3{
+    top: 20%;
+    left: 8%;
+    max-width: 500px;
+    transform: translate(7px, 4px);
+    -ms-transform: translate(7px, 4px);
+    -webkit-transform: translate(7px, 4px);
+}
+.wrap-main-slide .slide-1 .f-title{
+    font-size: 35px;
+    line-height: 28.8px;
+    color: #555555;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-left: -2px;
+}
+.wrap-main-slide .slide-1 .f-title b{
+    color: #222222;
+    font-size: 45px;
+    font-weight: 700;
+}
+.wrap-main-slide .slide-1 .subtitle{
+    font-size: 18px;
+    line-height: 24px;
+    color: #555555;
+    display: inline-block;
+}
+.wrap-main-slide .slide-1 .sale-info{
+    font-size: 16px;
+    line-height: 24px;
+    color: #888888;
+    margin-top: 6px;
+    margin-bottom: 19px;
+}
+.wrap-main-slide .slide-1 .sale-info .price{
+    font-weight: 700;
+    color: #ff2832;
+    font-size: 24px;
+}
+.wrap-main-slide .slide-3 .btn-link,
+.wrap-main-slide .slide-1 .btn-link{
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #eff5f5;
+    border: 0;
+    border-radius: 0;
+    padding: 7.5px 22px;
+    display: inline-block;
+}
+.wrap-main-slide .slide-3 .btn-link:hover,
+.wrap-main-slide .slide-1 .btn-link:hover{
+    text-decoration: none;
+    background-color: #333333;
+}
+.wrap-main-slide .slide-2 .f-title{
+    font-size: 40px;
+    line-height: 35px;
+    color: #ff2832;
+    font-weight: 700;
+    display: inline-block;
+    text-transform: uppercase;
+    max-width: 172px;
+}
+.wrap-main-slide .slide-2 .f-subtitle{
+    font-size: 18px;
+    line-height: 24px;
+    color: #555555;
+    display: inline-block;
+}
+.wrap-main-slide .slide-2 .discount-code{
+    font-size: 18px;
+    line-height: 24px;
+    color: #ffffff;
+    background-color: #222222;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    font-weight: 300;
+    display: inline-block;
+    padding: 3px 27.27px 3px 20px;
+    margin-top: 3px;
+    margin-left: 1px;
+    margin-bottom: 12px;
+}
+.wrap-main-slide .slide-2 .s-title{
+    font-size: 30px;
+    line-height: 24px;
+    color: #333333;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-left: -1px;
+    margin-bottom: 4px;
+}
+.wrap-main-slide .slide-2 .s-subtitle{
+    font-size: 20px;
+    line-height: 24px;
+    color: #666666;
+    text-transform: uppercase;
+    margin-left: -1px;
+}
+.wrap-main-slide .slide-3 .f-title{
+    text-align: left;
+    font-size: 35px;
+    line-height: 35px;
+    color: #555555;
+    text-transform: uppercase;
+    margin-left: -3px;
+    margin-bottom: 7px;
+}
+.wrap-main-slide .slide-3 .f-title b{
+    color: #222222;
+    font-weight: 700;
+}
+.wrap-main-slide .slide-3 .f-subtitle{
+    font-size: 18px;
+    line-height: 24px;
+    color: #555555;
+    text-align: left;
+    margin-left: -2px;
+    display: inline-block;
+}
+.wrap-main-slide .slide-3 .sale-info{
+    font-size: 18px;
+    line-height: 24px;
+    color: #666666;
+    text-align: left;
+    margin-top: 8px;
+    margin-left: -1px;
+    margin-bottom: 20px;
+}
+.wrap-main-slide .slide-3 .sale-info .price{
+    font-weight: 700;
+    font-size: 25px;
+    color: #ff2832;
+}
+
+/* main slide's animate */
+.wrap-main-slide .active .slide-1 .f-title{
+    animation-duration: 1.6s;
+    -webkit-animation-duration: 1.6s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    animation-name: bounceInRight;
+    -webkit-animation-name: bounceInRight;
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+.wrap-main-slide .active .slide-1 .subtitle{
+    animation-duration: 1.6s;
+    -webkit-animation-duration: 1.6s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    animation-name: bounceInLeft;
+    -webkit-animation-name: bounceInLeft;
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+.wrap-main-slide .active .slide-1 .sale-info{
+     animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    animation-name: bounceIn;
+    -webkit-animation-name: bounceIn;
+    -webkit-animation-delay: 0.6s;
+    animation-delay: 0.6s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+.wrap-main-slide .active .slide-3 .btn-link,
+.wrap-main-slide .active .slide-1 .btn-link{
+    animation-duration: 1.6s;
+    -webkit-animation-duration: 1.6s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    animation-name: fadeIn;
+    -webkit-animation-name: fadeIn;
+    -webkit-animation-delay: 0.6s;
+    animation-delay: 0.6s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+.wrap-main-slide .active .slide-2 .f-title{
+    animation-duration: 0.5s;
+    -webkit-animation-duration: 0.5s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    animation-name: slideInLeft;
+    -webkit-animation-name: slideInLeft;
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+.wrap-main-slide .active .slide-2 .f-subtitle{
+    animation-duration: 0.5s;
+    -webkit-animation-duration: 0.5s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    animation-name: slideInLeft;
+    -webkit-animation-name: slideInRight;
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+.wrap-main-slide .active .slide-2 .discount-code{
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    animation-name: zoomIn;
+    -webkit-animation-name: zoomIn;
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+.wrap-main-slide .active .slide-2 .s-title{
+    animation-duration: 0.9s;
+    -webkit-animation-duration: 0.9s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    animation-name: bounceInLeft;
+    -webkit-animation-name: bounceInLeft;
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+.wrap-main-slide .active .slide-2 .s-subtitle{
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    animation-name: bounceInLeft;
+    -webkit-animation-name: bounceInLeft;
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;   
+}
+.wrap-main-slide .active .slide-3 .f-title{
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    animation-name: bounceInRight;
+    -webkit-animation-name: bounceInRight;
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+.wrap-main-slide .active .slide-3 .f-subtitle{
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    animation-name: bounceInLeft;
+    -webkit-animation-name: bounceInLeft;
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+.wrap-main-slide .active .slide-3 .sale-info{
+    animation-duration: 0.9s;
+    -webkit-animation-duration: 0.9s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    animation-name: bounceInLeft;
+    -webkit-animation-name: bounceInLeft;
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;    
+}
+
+
+.has-countdown .wrap-products{
+    display: inline-block;
+}
+.wrap-show-advance-info-box.has-countdown{
+    position: relative;
+}
+.wrap-show-advance-info-box.has-countdown .wrap-products{
+    border: 1px solid #e6e6e6;
+    padding-top: 39px;
+}
+.wrap-show-advance-info-box>.wrap-countdown{
+    display: inline-block;
+    background-color: #f9f9f9;
+    border: 1px solid #e6e6e6;
+    padding: 9px 10px 9px 0;
+    position: absolute;
+    top: 40px;
+    left: 0;
+}
+.wrap-show-advance-info-box>.wrap-countdown span{
+    font-size: 13px;
+    line-height: 17px;
+    color: #666666;
+    display: inline-block;
+}
+.wrap-show-advance-info-box>.wrap-countdown span:not(:last-child)::after{
+    content: ":";
+    font-size: 20px;
+    line-height: 17px;
+    font-weight: 300;
+    color: #666666;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.wrap-show-advance-info-box>.wrap-countdown span b{
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 17px;
+    color: #333333;
+}
+.wrap-show-advance-info-box>.wrap-countdown::before{
+    content: "\f017";
+    font-family: FontAwesome;
+    font-size: 24px;
+    line-height: 21px;
+    color: #000000;
+    display: inline-block;
+    float: left;
+    margin-left: 19px;
+    margin-right: 19px;
+}
+/**********************product style 2 ***********************/
+.product-style-2{
+    display: inline-block;
+    padding: 19px 9px 13px 9px;
+    border: 1px solid transparent;
+    margin-bottom: 9px;
+    -webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}
+.product-style-2:hover{
+    border-color: #ffa67b;
+}
+.product .product-thumnail{
+    display: inline-block;
+    position: relative;
+}
+.product .product-thumnail .group-flash{
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1px;
+    height: auto;
+    max-width: 83px;
+}
+.product .product-thumnail .group-flash .flash-item{
+    display: inline-block;
+    float: left;
+    color: #fff;
+    text-transform: uppercase;
+    background: #00bf3f;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1.5px 9px 5.5px 9px;
+    line-height: 10px;
+    position: relative;
+    margin-bottom: 10px;
+    margin-left: 8px;
+}
+.product .product-thumnail .group-flash .flash-item::before{
+    content: '';
+    display: block;
+    border-top: 0 solid #00bf3f;
+    border-left: 9px solid #00bf3f;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid transparent;
+    position: absolute;
+    bottom: -4px;
+    left: 4px;
+}
+.product .product-thumnail .group-flash .flash-item.new-label{
+    background-color: #365db5;
+    margin-left: 8px;
+}
+.product .product-thumnail .group-flash .flash-item.new-label::before{
+    border-top-color: #365db5;
+    border-left-color: #365db5;
+}
+.product .product-thumnail .group-flash .flash-item.sale-label{
+    background-color: #ff2832;
+    margin-left: 8px;
+}
+.product .product-thumnail .group-flash .flash-item.sale-label::before{
+    border-top-color: #ff2832;
+    border-left-color: #ff2832;
+}
+.product .product-info .product-name span,
+.product-style-2 .product-info .product-name span{
+    font-size: 13px;
+    line-height: 18px;
+    color: #222222;
+    text-align: left;
+    display: inline-block;
+    width: 100%;
+    margin-top: 5px;
+}
+.product .product-info .product-rating,
+.wrap-product-detail .detail-info .product-rating{
+    display: inline-block;
+    margin-top: 8px;
+}
+
+.product-style-2 .product-info .product-rating{
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: -2px;
+}
+.product-style-2 .product-info .product-rating i:not(:last-child){
+    margin-right: 2px;
+}
+.product-style-2 .product-info .product-rating i:last-child{
+    margin-right: 3px;
+}
+.wrap-product-detail .detail-info .product-rating i,
+.product .product-info .product-rating i,
+.product-style-2 .product-info .product-rating i{
+    display: inline-block;
+    font-size: 13px;
+    color: #efce4a;
+    line-height: 20px;
+}
+.wrap-product-detail .detail-info .product-rating .count-review,
+.product .product-info .product-rating .count-review,
+.product-style-2 .product-info .product-rating .count-review{
+    font-size: 14px;
+    line-height: 20px;
+    color: #888888;
+    font-style: italic;
+}
+.product .product-info .wrap-price,
+.product-style-2 .product-info .wrap-price{
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    margin-top: 3px;
+}
+.product .product-info .wrap-price .product-price,
+.product-style-2 .product-info .wrap-price .product-price{
+    font-size: 14px;
+    line-height: 24px;
+    display: inline-block;
+    margin: 0;
+}
+.product .product-info .wrap-price span.product-price,
+.product-style-2 .product-info .wrap-price span.product-price{
+    font-family: 'Lato', san-serif;
+    font-weight: 700;
+    color: #222222;
+}
+.wrap-product-detail .detail-info .wrap-price ins>p,
+.product .product-info .wrap-price ins>p,
+.product-style-2 .product-info .wrap-price ins>p{
+    font-weight: 600;
+    color: #ff2832;
+    text-align: left;
+    padding-right: 8px;
+}
+.wrap-product-detail .detail-info .wrap-price del>p,
+.product .product-info .wrap-price del>p,
+.product-style-2 .product-info .wrap-price del>p{
+    font-family: 'Lato', san-serif;
+    font-weight: 300;
+    font-size: 13px !important;
+    color: #aaaaaa;
+    text-decoration: line-through;
+}
+.product .product-thumnail,
+.product-style-2 .product-thumnail{
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+.product-style-2 .product-thumnail .wrap-btn{
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.product-style-2 .product-thumnail .wrap-btn .function-link{
+    display: inline-block;
+    font-size: 13px;
+    line-height: 25px;
+    color: #ffffff;
+    font-weight: 600;
+    background-color: #000000;
+    text-transform: capitalize;
+    padding: 0 10.42px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    visibility: hidden;
+    transform: translateX(100px);
+    -webkit-transform: translateX(100px);
+    -ms-transform: translateX(100px);
+    transition: all ease 0.5s 0s;
+    -webkit-transition: all ease 0.5s 0s;
+    -moz-transition: all ease 0.5s 0s;
+    -o-transition: all ease 0.5s 0s;
+}
+.product-style-2:hover .product-thumnail .wrap-btn .function-link{
+    opacity: 1;
+    filter: alpha(opacity=100);
+    visibility: visible;
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+}
+
+/********************
+*owl main slide
+********************/
+.style-nav-1 .owl-nav{
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: 0;
+    z-index: 10;
+}
+.style-nav-1 .owl-nav button{
+    display: block;
+    width: 36px;
+    height: 56px;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    border: 0;
+    border-radius: 0 !important;
+    background-color: #c8c8c8 !important;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    visibility: hidden;
+    transition: all ease 0.5s 0s;
+    -webkit-transition: all ease 0.5s 0s;
+    -moz-transition: all ease 0.5s 0s;
+    -o-transition: all ease 0.5s 0s;
+}
+.style-nav-1.slide-carousel:hover .owl-nav button{
+    opacity: 1;
+    filter: alpha(opacity=100);
+    visibility: visible;
+}
+.style-nav-1 .owl-nav button i{
+    font-size: 31px;
+    font-weight: 100;
+    line-height: 20px;
+}
+.style-nav-1 .owl-nav button:hover{
+    background-color: #888888 !important;
+    color: #ffffff;
+}
+.style-nav-1 .owl-nav button.owl-prev{
+    float: left;
+}
+.style-nav-1 .owl-nav button.owl-next{
+    float: right;
+}
+.style-twin-default{
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+.style-twin-default .banner-item{
+    display: inline-block;
+    float: left;
+    width: calc( 50% - 5px);
+    width: -webkit-calc( 50% - 5px);
+    width: -moz-calc( 50% - 5px);
+    text-align: center;
+    padding: 10px 0 0 0;
+}
+.style-twin-default .banner-item:nth-child(even){
+    margin-left: 10px;
+}
+.wrap-show-advance-info-box{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    margin-top: 30px;
+    font-size: 0;
+}
+.wrap-show-advance-info-box.box-boder .wrap-products{
+    border: 1px solid #e6e6e6;
+}
+.wrap-show-advance-info-box:last-child{
+    margin-bottom: 30px;
+}
+.wrap-show-advance-info-box.style-1 .style-nav-1 .owl-nav button.owl-next{
+    margin-right: 10px;
+}
+.wrap-show-advance-info-box.style-1 .style-nav-1 .owl-nav button.owl-prev{
+    margin-left: 10px;
+}
+.wrap-show-advance-info-box .title-box{
+    display: inline-block;
+    width: 100%;
+    /*float: left;*/
+    text-align: left;
+    background-color: #ff2832;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fefefe;
+    line-height: 14px;
+    padding: 13px 18px;
+    margin: 0;
+}
+.wrap-combined-box .wrap-product-tab.tab-style-1{
+    margin-top: 10px;
+}
+.wrap-product-tab.tab-style-1{
+    display: block;
+    margin-top: 10px;
+    border: 1px solid #e6e6e6;
+    font-size: 0;
+}
+.tab-style-1 .tab-control{
+    display: inline-block;
+    width: 100%;
+}
+.tab-style-1 .tab-control .tab-control-item{
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    line-height: 24px;
+    color: #555555;
+    text-transform: capitalize;
+    padding: 8px 20.32px;
+    text-align: center;
+    border: 1px solid #e6e6e6;
+    margin-top: -1px;
+    margin-left: -1px;
+    background-color: #f9f9f9;
+}
+.tab-style-1 .tab-control .tab-control-item.active,
+.tab-style-1 .tab-control .tab-control-item:hover{
+    background: transparent;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    color: #222222;
+}
+.wrap-product-tab .tab-contents{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+.tab-contents .tab-content-item{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: block;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    visibility: hidden;
+    transition: all ease 0.5s 0s;
+    -webkit-transition: all ease 0.5s 0s;
+    -moz-transition: all ease 0.5s 0s;
+    -o-transition: all ease 0.5s 0s;
+    overflow: hidden;
+}
+.tab-contents .tab-content-item.active{
+    position: static;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    visibility: visible;
+}
+.has-countdown .wrap-products{
+    display: inline-block;
+}
+.wrap-show-advance-info-box.has-countdown{
+    position: relative;
+}
