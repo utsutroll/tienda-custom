@@ -10,8 +10,9 @@
             <div class="modal-body">
                 <div wire:loading wire:target="update">
                     <div class="loader">
-                        <div class="loader__figure"></div>
-                        <p class="loader__label" style="color: red;">La Mega Tienda Turén</p>
+                        <div>
+                           <img class="animate-pulse" width="35" height="35" src="{{ asset('assets/images/logo/logo-pulso.svg') }}" alt="Logo La Mega Tienda Turen">
+                        </div>    
                     </div>
                     <div>
                         <br><br><br><br><br><br><br>
@@ -39,6 +40,7 @@
                                 <input type="text" id="search_box" wire:model="search" class="form-control" placeholder="Buscar &hellip;" />
                             </div> 
                         </div>
+                        
                         @if(count($products) > 0)
                         <ul class="list-group mt-4 list-group-flush">
                             @error('price')
@@ -48,13 +50,14 @@
                             @enderror
 
                             @foreach($products as $p)
+                            
                             <li class="list-group-item">
                                 <div class="form-group row">
                                     <div class="col-3">
                                         <label for="">Producto</label><br/>
-                                        <span class="font-bold mt-3">{{$p->name}} {{$p->presentation->name}}{{$p->presentation->medida}}</span>
+                                        <span class="font-bold mt-3">{{$p->product->name}} {{$p->product->presentation->name}} {{$p->product->brand->name}} {{$p->characteristic->name}}</span>
                                     </div>
-                                    <div class="col-3 text-center">
+                                    <div class="col-3 text-center"> 
                                         <label for="">Precio actual</label><br>
                                         <span class="font-bold mt-3">{{$p->price}}$</span>
                                     </div>

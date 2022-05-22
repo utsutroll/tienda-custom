@@ -27,6 +27,21 @@
 
         @livewireStyles
 
+        <style>
+            .animate-pulse	{ animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;}
+            @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .2;
+            }
+            }
+            .w-16 {
+                width: 4rem;
+            }
+        </style>
+
     </head>
     <body class="skin-default fixed-layout">
         <!-- ============================================================== -->
@@ -34,8 +49,9 @@
         <!-- ============================================================== -->
         <div class="preloader">
             <div class="loader">
-                <div class="loader__figure"></div>
-                <p class="loader__label" style="color: red;">La Mega Tienda Turén</p>
+                <div>
+                   <img class="animate-pulse w-16" src="{{ asset('assets/images/logo/logo-pulso.svg') }}" alt="Logo La Mega Tienda Turen">
+                </div>    
             </div>
         </div>
         <!-- ============================================================== -->

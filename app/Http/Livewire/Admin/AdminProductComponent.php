@@ -77,8 +77,9 @@ class AdminProductComponent extends Component
 
         try {
             $product->delete();
-            $images->delete();
-            $this->emit('ProductDeleted');
+            $images->delete(); 
+            
+            $this->emit('productDeleted');
             
         } catch (\Exception $e) {
 

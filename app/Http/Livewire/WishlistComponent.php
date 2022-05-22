@@ -32,7 +32,7 @@ class WishlistComponent extends Component
     {
         foreach(Cart::instance('wishlist')->content() as $witem)
         {
-            if ($witem->id == $product_id) 
+            if ($witem->rowId == $product_id) 
             {
                 Cart::instance('wishlist')->remove($witem->rowId);
                 return;

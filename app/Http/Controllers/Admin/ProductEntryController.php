@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Entry;
-use App\Models\Product;
-use App\Models\ProductEntry;
+use App\Models\CharacteristicProduct;
+use App\Models\CharacteristicProductEntry;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -23,12 +23,12 @@ class ProductEntryController extends Controller
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
 
-        $products = Product::all();
+        $products = CharacteristicProduct::all();
 
         if($products->count() > 0)
         {
             foreach($products as $p){
-                $product[$p->id] = $p->id = $p->name .' '. $p->presentation->name .' '. $p->presentation->medida;
+                $product[$p->id] = $p->id = $p->product->name .' '. $p->product->presentation->name .' '. $p->product->brand->name .' '. $p->characteristic->name;
             }
         }
         else 
@@ -62,8 +62,8 @@ class ProductEntryController extends Controller
 
 	    	while($cont < count($product_id)){
 
-                $products = new ProductEntry();
-                $products->product_id=$product_id[$cont];
+                $products = new CharacteristicProductEntry();
+                $products->characteristic_product_id=$product_id[$cont];
                 $products->entry_id=$entrada->id;
                 $products->quantity=$quantity[$cont];
                 $products->save();
@@ -81,22 +81,22 @@ class ProductEntryController extends Controller
 
     public function show($id)
     {
-        $product = ProductEntry::find($id);
+        $product = CharacteristicProductEntry::find($id);
 
-        return view('admin.product-entry.show',["product" => $product]);
+        return view('admin.product-entry.show', compact("product"));
     }
 
-    public function edit(Product $product)
+    public function edit(CharacteristicProductEntry $product)
     {
         //
     }
 
-    public function update(Request $request, Product $product)
+    public function update(Request $request, CharacteristicProductEntry $product)
     {
         //
     }
 
-    public function destroy(Product $product)
+    public function destroy(CharacteristicProductEntry $product)
     {
         //
     }
@@ -111,7 +111,7 @@ class ProductEntryController extends Controller
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
 
-        $products = Product::all();
+        $products = CharacteristicProductEntry::all();
         $pdf = PDF::loadview('admin.pdf.stock-product', compact('products', 'date'));
 
         return $pdf->download('Stock-de-Productos-'.$date->format('d-m-Y h:m:s').'.pdf');

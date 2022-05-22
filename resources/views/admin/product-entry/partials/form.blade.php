@@ -15,7 +15,7 @@
             {!! Form::label('product', 'Producto') !!}
             {!! Form::select('product', $product, null, ['class' => 'form-control', 'style' => 'width: 100%;', 'placeholder' ]) !!} 
 
-        </div>
+        </div> 
     </div>
         
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">

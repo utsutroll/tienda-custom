@@ -2,19 +2,19 @@
 
 namespace App\Observers;
 
-use App\Models\OrderItem;
-use App\Models\Product;
+use App\Models\CharacteristicProductOrder;
+use App\Models\CharacteristicProduct;
 
 class OrderItemObserver
 {
     
-    public function created(OrderItem $orderItem)
+    public function created(CharacteristicProductOrder $orderItem)
     {
-        $product = Product::find($orderItem->product_id);
+        $product = CharacteristicProduct::find($orderItem->product_id);
 
         $stock = $product->stock - $orderItem->quantity;
         
-        Product::where('id', $orderItem->product_id)
+        CharacteristicProduct::where('id', $orderItem->product_id)
                 ->update(['stock' => $stock]);
     }
    

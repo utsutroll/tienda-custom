@@ -2,7 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Product;
+
+use App\Models\CharacteristicProduct;
 use App\Models\Sale;
 use Livewire\Component;
 
@@ -10,7 +11,7 @@ class Offer extends Component
 {
     public function render()
     {   
-        $sproducts = Product::where('sale_price', '>', 0)->inRandomOrder()->get()->take(8);
+        $sproducts = CharacteristicProduct::where('sale_price', '>', 0)->inRandomOrder()->get()->take(8);
         
         if($sproducts->count() < 0)
         {

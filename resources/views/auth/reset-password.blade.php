@@ -1,51 +1,48 @@
 <x-guest-layout>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <section id="wrapper" class="login-register login-sidebar" style="background-image:url(../assets/images/login-register.jpg);">
-        <div class="login-box card">
-            <div class="card-body p-40">
-                @if (session('status'))
-                    <div class="mb-4 font-medium text-sm text-green-600">
-                        {{ session('status') }}
-                    </div>
-                @endif
-                <form class="form-horizontal form-material mt-20" id="loginform" method="POST" action="{{ route('password.update') }}">
-                    @csrf
+    <x-auth-card>
+        <x-slot name="logo">
+            <a href="/">
+                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+            </a>
+        </x-slot>
 
-                    <input type="hidden" name="token" value="{{ $request->route('token') }}">
+        <!-- Validation Errors -->
+        <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                    <a href="/" class="flex justify-center"><img src="{{asset('/assets/images/logo/logo-main-text.svg')}}" class="h-10 w-auto" alt="Inicio" /></a>
-                    <h3 class="box-title m-t-40 m-b-0">Restablecimiento de contraseña</h3>
-                    <div class="form-group m-t-20">
-                        <div class="col-xs-12">
-                            <input id="email" type="email" class="form-control" value="{{ $request->email }}" required autofocus placeholder="Correo Electrónico">
-                        </div>
-                        @error('email')
-                            <small class="text-danger">{{$message}}</small>
-                        @enderror
-                    </div>
-                    <div class="form-group ">
-                        <div class="col-xs-12">
-                            <input id="password" type="password" class="form-control" name="password" required placeholder="Contraseña">
-                        </div>
-                        @error('password')
-                            <small class="text-danger">{{$message}}</small>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required placeholder="Confirmar Contraseña">
-                        </div>
-                    </div>
+        <form method="POST" action="{{ route('password.update') }}">
+            @csrf
 
-                    <div class="form-group text-center m-t-20">
-                        <div class="col-xs-12">
-                            <button class="btn btn-info btn-block text-uppercase waves-effect waves-light btn-rounded" type="submit">Restablecer contraseña</button>
-                        </div>
-                    </div>
-                </form>
+            <!-- Password Reset Token -->
+            <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
+            <!-- Email Address -->
+            <div>
+                <x-label for="email" :value="__('Email')" />
+
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
             </div>
-        </div>
-    </section>
+
+            <!-- Password -->
+            <div class="mt-4">
+                <x-label for="password" :value="__('Password')" />
+
+                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required />
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mt-4">
+                <x-label for="password_confirmation" :value="__('Confirm Password')" />
+
+                <x-input id="password_confirmation" class="block mt-1 w-full"
+                                    type="password"
+                                    name="password_confirmation" required />
+            </div>
+
+            <div class="flex items-center justify-end mt-4">
+                <x-button>
+                    {{ __('Reset Password') }}
+                </x-button>
+            </div>
+        </form>
+    </x-auth-card>
 </x-guest-layout>

@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Product;
-use App\Models\ProductOutput;
+use App\Models\CharacteristicProductOutput;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -37,7 +37,7 @@ class AdminProductOutputComponent extends Component
 
     public function render()
     {
-        $products = ProductOutput::where('created_at', 'LIKE', "%{$this->search}%")
+        $products = CharacteristicProductOutput::where('created_at', 'LIKE', "%{$this->search}%")
                             ->orderBy($this->sort, $this->direcction)
                             ->paginate($this->entries);
                             

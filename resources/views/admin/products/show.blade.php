@@ -47,12 +47,20 @@
                                 <table class="table">
                                     <tbody>
                                         <tr>
+                                            <td width="390">Marca</td>
+                                            <td> {{$product->brand->name}}</td>
+                                        </tr>
+                                        <tr>
                                             <td width="390">Presentación</td>
-                                            <td> {{$product->presentation->name}} {{$product->presentation->medida}}</td>
+                                            <td> {{$product->presentation->name}} </td>
                                         </tr>
                                         <tr>
                                             <td>Categoría</td>
-                                            <td> {{$product->category->name}} </td>
+                                            <td> {{$product->subcategory->category->name}} </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Subcategoría</td>
+                                            <td> {{$product->subcategory->name}} </td>
                                         </tr>
                                         <tr>
                                             <td>Etiquetas</td>
@@ -62,6 +70,16 @@
                                                 @endforeach
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>Caracteristica</td>
+                                            <td>Imagen</td>
+                                        </tr>
+                                        @foreach ($product->characteristics_product as $c )
+                                            <tr>
+                                                <td>{{ $c->characteristic->name }}</td>
+                                                <td><img src="{{ Storage::url($c->image) }}" class="img-thumbnail" width="20%" alt=""></td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

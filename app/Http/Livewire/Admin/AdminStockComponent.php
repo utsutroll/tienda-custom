@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Product;
+use App\Models\CharacteristicProduct;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -36,9 +37,7 @@ class AdminStockComponent extends Component
 
     public function render()
     {
-        $products = Product::where('name', 'LIKE', "%{$this->search}%")
-                            ->orderBy($this->sort, $this->direcction)
-                            ->paginate($this->entries);
+        $products = CharacteristicProduct::all();
 
         return view('livewire.admin.admin-stock-component', compact('products'));
     }

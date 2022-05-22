@@ -11,17 +11,11 @@
             @foreach ($sliders as $s)
             <div @if ($n == 0) class="carousel-item active" @else class="carousel-item" @endif>
                 @if ($s->link == '')
-                    @isset($s->image->url)
-                    <img loading="lazy" class="img-responsive" src="{{Storage::url($s->image->url)}}" alt="{{$s->title}}">    
-                    @endisset
-                    
+                    <img loading="lazy" class="img-responsive" src="{{Storage::url($s->image->url)}}" alt="{{$s->title}}">
                 @else
-                    @isset($s->image->url)
-                    <a href="{{$s->link}}" target="_blank">
-                        <img loading="lazy" class="img-responsive" src="{{Storage::url($s->image->url)}}" alt="{{$s->title}}">   
-                    </a>     
-                    @endisset
-                
+                <a href="{{$s->link}}" target="_blank">
+                    <img loading="lazy" class="img-responsive" src="{{Storage::url($s->image->url)}}" alt="{{$s->title}}">   
+                </a> 
                 @endif
                 
                 <div class="carousel-caption d-none d-md-block">
@@ -45,37 +39,28 @@
     <!-- Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
     <div class="p-3 mb-3 bg-white d-flex justify-content-center">
-        <div class="form-material flex justify-between">
-            <div class="ml-1 input-group flex-2">
-                <div class="input-group-prepend">
-                    <div class="relative inline-block text-left mr-2" x-data="{ open: false }">
-                        <div>
-                            <button x-on:click=" open = true " type="button" class="inline-flex justify-center w-full border-t-0 border-b border-l-0 border-r-0 border-gray-200 px-1 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                                Filtrar por Categoría
-                                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div x-show="open" x-on:click.away=" open = false "
-                            x-transition:enter="transition ease-out duration-100"
-                            x-transition:enter-start="transform opacity-0 scale-95"
-                            x-transition:enter-end="transform opacity-100 scale-100"
-                            x-transition:leave="transition ease-in duration-75"
-                            x-transition:leave-start="transform opacity-100 scale-100"
-                            x-transition:leave-end="transform opacity-0 scale-95"
-                            class="z-50 origin-top-right absolute mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                            
-                            <div class="py-1 overflow-y-auto h-80 sm:h-80 md:h-80 lg:h-90" role="none">
-                                @foreach($categories as $c) 
-                                <a href="{{route('product.category', ['category_slug'=>$c->slug])}}" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">{{$c->name}}</a>
-                                @endforeach 
-                            </div>
-                        </div>
+        <div class="form-material">
+            <div class="grid grid-cols-1 sm:grid-cols-2 sm:gap-1 md:grid-cols-2 md:gap-1 lg:grid-cols-2 lg:gap-1 p-2">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle border-top-0 border-left-0 border-right-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Filtrar por Categoría
+                    </button>
+                    <div class="dropdown-menu">
+                        @foreach($categories as $c) 
+                        <a href="{{route('product.category', ['category_slug'=>$c->slug])}}" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">{{$c->name}}</a>
+                        @endforeach 
+                      <div class="dropdown-divider"></div>
                     </div>
                 </div>
-                <input type="text" id="search_box" wire:model="search" class="form-control" placeholder="Buscar &hellip;" />
+                <div class="input-group">
+                    <input type="search" id="search_box" wire:model="search" class="form-control" placeholder="Buscar &hellip;" />
+                    @if ($search !== '')
+                        <button class="btn btn-outline-secondary border-0 btn-sm waves-effect waves-light" wire:click="$set('search', '')" type="button"><span class="btn-label"><i class="fa fa-times"></i></span></button>    
+                        @endif
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary border-0" type="button" wire:click="$set('buscar', 1)"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>   
             </div>
             <div class="flex-1">
                 <a href="/wishlist" class="text-gray-500 group inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none" aria-expanded="false">
@@ -108,10 +93,7 @@
                         @foreach(Cart::instance('cart')->content() as $item)
                         <div class="p-3 flex items-start rounded-lg hover:bg-gray-100">
                             <div class="box-border h-32 w-32 p-2 border-2 flex-1">
-                                @isset($item->model->image->url)
-                                <img class="w-30 h-30 pt-2" src="{{Storage::url($item->model->image->url)}}" alt="{{$item->model->name}}">    
-                                @endisset
-                                
+                                <img class="w-30 h-30 pt-2" src="{{Storage::url($item->model->image->url)}}" alt="{{$item->model->name}}">
                             </div>
                             <div class="ml-5 justify-center flex-1">
                                 <p class="text-base font-bold text-gray-900">
@@ -151,11 +133,11 @@
                         </div>
                         <div class="p-3 flex justify-between">
                             <span class="text-gray-800 text-lg">Tasa del día:</span>
-                            <span class="text-gray-800 text-lg">@foreach ($dollar as $d){{number_format($d->price, 2)}}@endforeach Bs.F</span>
+                            <span class="text-gray-800 text-lg">@foreach ($dollar as $d){{number_format($d->price, 2)}}@endforeach Bs</span>
                         </div>
                         <div class="p-3 flex justify-between">
                             <span class="text-gray-800 text-lg">Referencia:</span>
-                            <span class="text-gray-800 text-lg">@foreach ($dollar as $d){{number_format(round(($d->price*Cart::instance('cart')->total()),2),2)}}@endforeach Bs.F</span>
+                            <span class="text-gray-800 text-lg">@foreach ($dollar as $d){{number_format(round(($d->price*Cart::instance('cart')->total()),2),2)}}@endforeach Bs</span>
                         </div>
                         <div class="mt-2 flex text-md">
                             <a href="/cart" class="flex-1 rounded-lg border border-gray-800 shadow-md p-2 ml-2 text-gray-800 hover:bg-red-600 hover:text-white text-base text-center max-h-10">Ver Carrito</a>
@@ -168,12 +150,12 @@
                         </div>
                     </div>
                 </div>
-            </div>                
+            </div>               
         </div>  
     </div>                
 
     <!-- Column -->
-    {{-- @livewire('offer') --}}
+    @livewire('offer')
     <!-- Column -->
 
     <h1 class="text-xl uppercase text-center font-bold py-2 my-3">Etiqueta: {{$tag_name}}</h1>
@@ -196,8 +178,8 @@
                     <div class="card-body">    
                         <div class="img-pro">    
                             <a href="{{route('product.details',['slug'=>$p->slug])}}"> 
-                                @isset($p->image->url)
-                                    <img loading="lazy" class="img-fluid image" src="{{Storage::url($p->image->url)}}" alt="{{$p->product}}"/>    
+                                @isset ($p->image->url)
+                                <img loading="lazy" class="img-fluid image" src="{{Storage::url($p->image->url)}}" alt="{{$p->name}}"/>
                                 @endisset
                             </a>
                             <ul class="overlay">
@@ -217,7 +199,7 @@
                         <div class="product-text">
                             <span class="pro-price bg-dark">
                                 <div class="tooltip-ex"><strong>{{$p->price}}$</strong><br>
-                                    <span class="tooltip-ex-text tooltip-ex-top">@foreach ($dollar as $d){{number_format($d->price*$p->price, 2)}}@endforeach Bs.F</span>
+                                    <span class="tooltip-ex-text tooltip-ex-top">@foreach ($dollar as $d){{number_format($d->price*$p->price, 2)}}@endforeach Bs</span>
                                 </div>
                                     
                             </span>
@@ -236,7 +218,7 @@
                             </a>
                         </div>
                     </div>
-                    @if ($p->stock > 0)
+                    @if ($p->stock > 0) 
                         <button type="button" wire:click.prevent="store({{$p->id}}, '{{$p->name}}', {{$p->price}})" wire:loading.attr="disabled" class="bg-red-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-red-600 transition duration-200 each-in-out shadow-md">Agregar al Carrito <i class="ti-shopping-cart"></i></button>    
                     @else
                         <button class="bg-gray-150 text-gray-300 px-6 py-2 rounded font-medium mx-3 transition duration-200 each-in-out shadow-md">Agregar al Carrito <i class="ti-shopping-cart"></i></button>    

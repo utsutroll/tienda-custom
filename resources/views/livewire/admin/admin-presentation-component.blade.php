@@ -94,7 +94,7 @@
                            
                         <tr>
                             <td width="8%">{{ $p->id }}</td>
-                            <td>{{ $p->name }} {{ $p->medida }}</td>
+                            <td>{{ $p->name }}</td>
     
                             <td width="10px" class="text-nowrap">
                                 <button 

@@ -83,8 +83,11 @@
     <script type="text/javascript">
 
     $('#liProducts').addClass("active");
-    $(".select2").select2();
+    $(".select2").select2({
+        width: 'resolve'
+    });
     $("#presentation_id").select2({
+        width: 'resolve',
         placeholder: 'Seleccione'
     });
     $('.dropify').dropify({
@@ -105,7 +108,8 @@
             hideAfter: 3500, 
             stack: 6
           }); 
-    @endif   
+    @endif  
+
     var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
     $('.js-switch').each(function() {
             new Switchery($(this)[0], $(this).data());
@@ -122,6 +126,66 @@
         };
 
         reader.readAsDataURL(file);
-    }                     
+    }     
+    
+    function multiplicarInputs(text){
+        var num= text.value
+        var div='';
+        for (var i=0;i<num;i++){ 
+            var cont=i+1;
+            div+='<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12"><div class="form-group">{!! Form::label("caracteristica", "Característica") !!}{!! Form::select("charact[]", $characteristics, null, ["class" => "form-control select22", "style" => "width: 100%;" ]) !!}</div></div><div class="col-lg-5 col-md-5 col-sm-5 col-xs-12"><div class="form-group">{!! Form::label("imge", "Imagen segun la característica del Producto") !!}{!! Form::file("imge[]", ["class" => "form-control", "accept" => "image/*" ]) !!}@error("imge")<small class="text-danger">{{$message}}</small>@enderror</div></div>';
+        }
+
+      document.getElementById("divMultiInputs").innerHTML=div;
+
+      $(".select22").select2({
+        width: 'resolve'
+      });
+    }
+
+    $(document).ready(function() {
+        
+        $('#category_id').on('selected', function() {
+            var dato = $('#category_id').val();
+            console.log(dato);
+        });
+        
+        $('#category_id').on('change', function() {
+            
+            var categoryID = $(this).val();
+            if(categoryID) {
+                $.ajax({
+                    url: '/select/'+categoryID,
+                    type: "GET",
+                    data : {"_token":"{{ csrf_token() }}"},
+                    dataType: "json",
+                    success:function(data){
+                    if(data){
+                        $('#subcategory_id').empty();
+                        $('#subcategory_id').append('<option hidden>Seleccione</option>'); 
+                        $.each(data, function(key, subcategories){
+
+                            $('select[name="subcategory_id"]').append('<option value="'+ subcategories.id +'">' + subcategories.name + '</option>');
+                        });
+                    }else{
+                        $('#subcategory_id').empty();
+                    }
+                }
+                });
+            }else{
+                $('#subcategory_id').empty();
+            }
+        });
+    });
+
+    $(document).ready(function() {
+        
+        $('#activar').change(function(){ 
+            if(this.checked) $('#caracter').fadeIn('slow');
+
+            else $('#caracter').fadeOut('slow'); 
+
+        });
+    });
     </script>
 @endpush    

@@ -8,31 +8,25 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         
         <!-- Favicon icon -->
-        <link rel="icon" type="image/png" sizes="16x16" href="{{url('/assets/images/favicon.svg')}}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{url('favicon.svg')}}">
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <!-- FontAwesome Pro -->
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EDPVXK5MPB"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-EDPVXK5MPB');
-        </script>
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <script src="{{ asset('js/app.js') }}" defer></script>
+        <link rel="stylesheet" href="{{ url('dist/new/css/styles.css') }}">
+        <link rel="stylesheet" href="{{asset('dist/css/style-custom.css')}}">
 
         @livewireStyles
-        <link href="{{asset('dist/css/style.min.css')}}" rel="stylesheet">
+        {{-- <link href="{{asset('dist/css/style.min.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="{{asset('/assets/node_modules/prism/prism.css')}}">
         <link href="{{asset('/assets/node_modules/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('/assets/node_modules/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
         <link href="{{asset('assets/node_modules/glider.js-master/glider.min.css')}}" rel="stylesheet" />
         <link href="{{asset('dist/pages/ecommerce.css')}}" rel="stylesheet">
-        <link rel="stylesheet" href="{{asset('dist/css/style-custom.css')}}">
+         --}}
         <!--Toaster Popup message CSS -->
         <link href="{{asset('/assets/node_modules/toast-master/css/jquery.toast.css')}}" rel="stylesheet">
         @stack('css')
@@ -60,18 +54,34 @@
                 -webkit-animation-iteration-count: infinite;
                 animation-iteration-count: infinite;
             }
+            .animate-pulse	{ animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;}
+            @keyframes pulse {
+                0%, 100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: .2;
+                }
+            }
+            .w-16 {
+                width: 4rem;
+            }
         </style>
         <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        
+        <script src="{{ url('dist/new/js/script.js') }}"></script>
     </head>
     <body class="font-sans antialiased">
+
         <div class="preloader">
             <div class="loader">
-                <div class="loader__figure"></div>
-                <p class="loader__label" style="color: red;">La Mega Tienda Turén</p>
+                <div>
+                   <img class="animate-pulse w-16" src="{{ asset('assets/images/logo/logo-pulso.svg') }}" alt="Logo La Mega Tienda Turen">
+                </div>    
             </div>
         </div>
-        <div class="min-h-screen bg-gray-100 m-auto">
+
+        <div class="min-h-screen m-auto">
             @include('livewire.navigation')
             
             <!-- Page Content -->
@@ -82,20 +92,20 @@
 
         @stack('modals')
 
-        <footer class="footer flex ml-0">
-            © 2021 La Mega Tienda Turén by <a href="https://instagram.com/spacedigitalsolutions" title="Instagram de Space DicitalSolutions C.A" class="ml-1 hover:text-blue-600 flex" target="_blank">
-                 Space DigitalSolutions C.A <i class="mt-1"><svg class="hover:text-blue-600" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M13 3L16.293 6.293 9.293 13.293 10.707 14.707 17.707 7.707 21 11 21 3z"></path><path d="M19,19H5V5h7l-2-2H5C3.897,3,3,3.897,3,5v14c0,1.103,0.897,2,2,2h14c1.103,0,2-0.897,2-2v-5l-2-2V19z"></path></svg></i>
-            </a>
-        </footer>
+        <a href="https://api.whatsapp.com/send?phone=" class="float-b" target="_blank">
+            <i class="fab fa-whatsapp my-float-b"></i>
+        </a>
+
+        @include('partials.footer-base')
 
         @livewireScripts
         <script src="{{asset('/assets/node_modules/jquery/jquery-3.2.1.min.js')}}"></script>
         <!-- Bootstrap popper Core JavaScript -->
-        <script src="{{asset('/assets/node_modules/popper/popper.min.js')}}"></script>
+        {{-- <script src="{{asset('/assets/node_modules/popper/popper.min.js')}}"></script>
         <script src="{{asset('/assets/node_modules/bootstrap/dist/js/bootstrap.min.js')}}"></script>
         <!-- slimscrollbar scrollbar JavaScript -->
         <script src="{{asset('/dist/js/perfect-scrollbar.jquery.min.js')}}"></script>
-        <script src="{{asset('assets/node_modules/prism/prism.js')}}"></script>
+        <script src="{{asset('assets/node_modules/prism/prism.js')}}"></script> --}}
         <script src="{{asset('/dist/js/carrusel-app.js')}}" type="text/javascript"></script>  
         <!-- Popup message jquery -->
         <script src="{{asset('/assets/node_modules/toast-master/js/jquery.toast.js')}}"></script>
@@ -117,6 +127,10 @@
                     stack: 6
                 });
             });
+
+            document.getElementById('togglemebutton').onclick = function() {
+                document.getElementById("resultnav").classList.toggle("hidden");
+            }
         </script>
     </body>
 </html>

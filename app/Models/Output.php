@@ -13,8 +13,8 @@ class Output extends Model
     
     protected $fillable = ['date', 'time'];
 
-    public function salidaProducto()
+    public function characteristic_product_output()
     {
-        return $this->hasMany(ProductOutput::class);
+        return $this->hasMany(CharacteristicProductOutput::class);
     }
 }

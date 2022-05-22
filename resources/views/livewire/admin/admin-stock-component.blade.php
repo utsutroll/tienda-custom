@@ -88,11 +88,12 @@
                     </thead>
                     <tbody>
                         
-                        @foreach ($products as $product)
+                        @foreach ($products as $prod)
+
                         <tr>
-                            <td>{{$product->id}}</td>
-                            <td>{{ $product->name }} ({{ $product->presentation->name }} {{ $product->presentation->medida }})</td>
-                            <td>{{$product->stock}}</td>
+                            <td>{{ $prod->id }}</td>
+                            <td>{{ $prod->product->name }} ({{ $prod->product->presentation->name }} {{ $prod->product->brand->name }} {{ $prod->characteristic->name }})</td>
+                            <td>{{ $prod->stock }}</td>
     
                             
                             {{-- <td width="10px" class="text-nowrap">
@@ -125,7 +126,7 @@
                 </table>
             </div>
         </div>
-        <div class="card-footer">
+        {{-- <div class="card-footer">
             <div class="float-right">
                 {{$products->links()}}
             </div>
@@ -135,7 +136,7 @@
                 No hay un resultado para la busqueda "{{$search}}"  
             </div>
             </div>
-            </div>
+            </div> --}}
         @else
             <table class="table table-striped">
                 <thead>

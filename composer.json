@@ -13,7 +13,6 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.40",
         "laravel/jetstream": "^2.3",
-        "laravel/passport": "^10.4",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.2",
@@ -23,6 +22,7 @@
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "laravel/breeze": "^1.9",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
@@ -43,7 +43,7 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "if test -f 'storage/oauth-public.key'; then @php artisan package:discover --ansi; fi"
+            "@php artisan package:discover --ansi"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

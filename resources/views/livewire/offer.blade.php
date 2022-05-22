@@ -9,7 +9,10 @@
                 <div class="product product-style-2 equal-elem">
                     <div class="product-thumnail">
                         <a href="{{route('product.details',['slug'=>$sp->slug])}}" title="{{$sp->name}}">
+                            @isset($sp->image->url)
                             <figure><img src="{{Storage::url($sp->image->url)}}" alt="{{$sp->name}}" width="800" height="800"></figure>
+                            @endisset
+                            
                         </a>
                         <div class="group-flash">
                             <span class="flash-item sale-label">Oferta</span>

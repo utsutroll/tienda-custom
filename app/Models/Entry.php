@@ -15,6 +15,6 @@ class Entry extends Model
 
     public function productEntry()
     {
-        return $this->hasMany(ProductEntry::class);
+        return $this->hasMany(CharacteristicProductEntry::class);
     }
 }

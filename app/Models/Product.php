@@ -23,20 +23,23 @@ class Product extends Model
     protected $fillable = [
         'id',
         'name',
+        'subcategory_id',
+        'presentation_id',
+        'brand_id',
         'slug',
         'details',
-        'price',
-        'sale_price',
-        'category_id',
-        'presentation_id',
     ];
 
-    public function category(){
-        return $this->belongsTo(Category::class);
+    public function subcategory(){
+        return $this->belongsTo(Subcategory::class);
     }
 
     public function presentation(){
         return $this->belongsTo(Presentation::class);
+    }
+
+    public function brand(){
+        return $this->belongsTo(Brand::class);
     }
 
     //Relacion muchos a muchos
@@ -45,14 +48,10 @@ class Product extends Model
         return $this->belongsToMany(Tag::class);
     }
     
-    public function productEntries()
+
+    public function characteristics_product()
     {
-        return $this->hasMany(ProductEntry::class);
-    }
-    
-    public function salidas()
-    {
-        return $this->hasMany(ProductOutput::class);
+        return $this->hasMany(CharacteristicProduct::class);
     }
 
     //relacion 1 a 1 polimorfica

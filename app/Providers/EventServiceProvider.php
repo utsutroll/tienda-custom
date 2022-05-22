@@ -7,10 +7,10 @@ use App\Events\OrderEvent;
 use App\Listeners\CancelOrderListener;
 use App\Listeners\OrderListener;
 use App\Models\Order;
-use App\Models\OrderItem;
+use App\Models\CharacteristicProductOrder;
 use App\Models\Product;
-use App\Models\ProductEntry;
-use App\Models\ProductOutput;
+use App\Models\CharacteristicProductEntry;
+use App\Models\CharacteristicProductOutput;
 use App\Observers\OrderItemObserver;
 use App\Observers\OrderObserver;
 use App\Observers\ProductEntryOrserver;
@@ -50,9 +50,9 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Product::observe(ProductOrserver::class);
-        ProductEntry::observe(ProductEntryOrserver::class);
-        ProductOutput::observe(ProductOutputOrserver::class);
+        CharacteristicProductEntry::observe(ProductEntryOrserver::class);
+        CharacteristicProductOutput::observe(ProductOutputOrserver::class);
         Order::observe(OrderObserver::class);
-        OrderItem::observe(OrderItemObserver::class);
+        CharacteristicProductOrder::observe(OrderItemObserver::class);
     }
 }

@@ -10,8 +10,9 @@
                 
                 <div wire:loading>
                     <div class="loader">
-                        <div class="loader__figure"></div>
-                        <p class="loader__label" style="color: red;">La Mega Tienda Turén</p>
+                        <div>
+                           <img class="animate-pulse" width="35" height="35" src="{{ asset('assets/images/logo/logo-pulso.svg') }}" alt="Logo La Mega Tienda Turen">
+                        </div>    
                     </div>
                     <div>
                         <br><br><br><br><br><br><br>
@@ -20,40 +21,9 @@
                 <div wire:loading.remove>
                     <div class="form-group">
                         <label for="presentacion" class="control-label">Presentación</label>
-                        <input type="number" class="form-control" wire:model.defer="name" min="1" placeholder="Ingrese el Volúmen de la Presentación (Ejem: 500)">    
+                        <input type="text" class="form-control" wire:model.defer="name" min="1" placeholder="Ingrese la Presentación">    
             
                         @error('name')
-                            <small class="text-danger">{{$message}}</small>   
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="medida" class="control-label">Medida</label>
-                            
-                        <select class="form-control" wire:model.defer="medida">
-                            <option value="0">Seleccione</option>
-                            <option @if ($medida ="Kg") selected
-                                
-                            @endif value="Kg">Kg</option>
-                            <option @if ($medida ="G") selected
-                                
-                            @endif value="G">G</option>
-                            <option @if ($medida ="L") selected
-                                
-                            @endif value="L">L</option>
-                            <option @if ($medida ="Ml") selected
-                                
-                            @endif value="Ml">Ml</option>
-                            <option @if ($medida ="Cm³") selected
-                                
-                            @endif value="Cm³">Cm³</option>
-                            <option @if ($medida ="M") selected
-                                
-                            @endif value="M">M</option>
-                            <option @if ($medida ="Cm") selected
-                                
-                            @endif value="Cm">Cm</option>
-                        </select>    
-                        @error('media')
                             <small class="text-danger">{{$message}}</small>   
                         @enderror
                     </div>

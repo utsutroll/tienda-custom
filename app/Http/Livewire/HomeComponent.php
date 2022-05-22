@@ -3,11 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Models\BusinessPartner;
-use App\Models\Category;
 use App\Models\DollarRate;
 use App\Models\Product;
-use App\Models\Sale;
 use App\Models\Slider;
+use App\Models\Subcategory;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Cart;
@@ -18,8 +17,9 @@ class HomeComponent extends Component
     use WithPagination;
 
     public $search = '';
-    public $entries = '30';
-    public $category;
+    public $entries = '8';
+    public $subcategory;
+    public $buscar;
 
     protected $paginationTheme = "tailwind";
 
@@ -29,26 +29,28 @@ class HomeComponent extends Component
 
     protected $queryString = [
         'search' => ['except' => ''],
-        'entries' => ['except' => '30']
+        'entries' => ['except' => '8']
     ];
     
     protected $listener = ['addCart' => 'render', 'addWishlist' => 'render'];
 
     public function render()
     {
-        $categories = Category::all();
+        $subcategories = Subcategory::all();
         $dollar = DollarRate::all();
         $sliders = Slider::all();
         $business_partners = BusinessPartner::all();
         
         $this->setAmountForCheckout();
 
-        $products = Product::Where('name', 'LIKE', "%{$this->search}%")
-                            ->where('sale_price', '0')
-                            ->orWhere('category_id', $this->category)
-                            ->paginate($this->entries);
+        
+        $products = Product::take(8)->get();
 
-        return view('livewire.home-component', compact('categories', 'dollar', 'products', 'sliders', 'business_partners'))->layout('layouts.base');
+        $newproducts = Product::orderBy('created_at', 'desc')
+                                ->take(8)->get();
+        
+
+        return view('livewire.home-component', compact('subcategories', 'dollar', 'products', 'newproducts', 'sliders', 'business_partners'))->layout('layouts.base');
     }
 
     public function store($product_id, $product_name, $product_price)
@@ -58,9 +60,9 @@ class HomeComponent extends Component
         $this->emit('addCart');
     }
 
-    public function addToWishlist($product_id, $product_name, $product_price)
+    public function addToWishlist($id, $name, $price)
     {   
-        Cart::instance('wishlist')->add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
+        Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
 
         $this->emit('addWishlist');
     }

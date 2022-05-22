@@ -16,16 +16,16 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->BigInteger('id')->unsigned()->unique();
             $table->string('name');
-            $table->bigInteger('category_id')->unsigned();
+            $table->bigInteger('subcategory_id')->unsigned();
             $table->bigInteger('presentation_id')->unsigned();
-            $table->string('slug')->unique();
+            $table->bigInteger('brand_id')->unsigned();
             $table->text('details');
             $table->decimal('price', 11, 2)->nullable()->default('0');
-            $table->decimal('sale_price', 11, 2)->nullable()->default('0');
-            $table->integer('stock')->nullable()->default('0');
+            $table->string('slug')->unique();
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict');
+            $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('restrict');
             $table->foreign('presentation_id')->references('id')->on('presentations')->onDelete('restrict');
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('restrict');
         });
     }
 

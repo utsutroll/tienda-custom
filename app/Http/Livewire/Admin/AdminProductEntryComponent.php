@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Product;
-use App\Models\ProductEntry;
+use App\Models\CharacteristicProductEntry;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -37,7 +37,7 @@ class AdminProductEntryComponent extends Component
 
     public function render()
     {
-        $products = ProductEntry::where('created_at', 'LIKE', "%{$this->search}%")
+        $products = CharacteristicProductEntry::where('created_at', 'LIKE', "%{$this->search}%")
                             ->orderBy($this->sort, $this->direcction)
                             ->paginate($this->entries);
 

@@ -10,10 +10,12 @@
             <div class="modal-body">
                 <div wire:loading wire:target="update">
                     <div class="loader">
-                        <div class="loader__figure"></div>
-                        <p class="loader__label" style="color: red;">La Mega Tienda Turén</p>
+                        <div>
+                           <img class="animate-pulse" width="35" height="35" src="{{ asset('assets/images/logo/logo-pulso.svg') }}" alt="Logo La Mega Tienda Turen">
+                        </div>    
                     </div>
                     <div>
+                        <br><br><br><br><br><br><br>
                         <br><br><br><br><br><br><br>
                     </div>
                 </div>

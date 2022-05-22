@@ -73,12 +73,13 @@
                     </thead>
                     <tbody>
                         @foreach ($products as $product)
+
                         <tr>
-                            <td>{{ $product->product->name }} ({{ $product->product->presentation->name }} {{ $product->product->presentation->medida }})</td>
+                            <td>{{ $product->characteristic_product->product->name }} ({{ $product->characteristic_product->product->presentation->name }} {{ $product->characteristic_product->product->brand->name }} {{ $product->characteristic_product->characteristic->name }})</td>
                             <td width="20%">{{$product->quantity}}</td>
                             <td width="20%">{{$product->entry->date}} {{$product->entry->time}}</td>
     
-                            
+                             
                             {{-- <td width="10px" class="text-nowrap">
                                 <a 
                                     class="btn btn-info btn-sm"

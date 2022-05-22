@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use App\Events\OrderEvent;
 use App\Models\DollarRate;
 use App\Models\Order;
-use App\Models\OrderItem;
+use App\Models\CharacteristicProductOrder;
 use App\Models\Product;
 use App\Models\User;
 use App\Notifications\OrderNotification;
@@ -75,7 +75,7 @@ class CheckoutComponent extends Component
 
         foreach(Cart::instance('cart')->content() as $item)
         {
-            $orderItem = new OrderItem();
+            $orderItem = new CharacteristicProductOrder();
             $orderItem->product_id = $item->id;
             $orderItem->order_id = $order->id;
             $orderItem->price = $item->price;

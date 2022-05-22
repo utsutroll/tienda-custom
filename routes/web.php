@@ -5,8 +5,11 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductEntryController;
 use App\Http\Controllers\Admin\ProductOutputController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Livewire\AboutComponent;
 use App\Http\Livewire\Admin\AdminBankAccountComponent;
+use App\Http\Livewire\Admin\AdminBrandComponent;
 use App\Http\Livewire\Admin\AdminCategoryComponent;
+use App\Http\Livewire\Admin\AdminCharacteristicComponent;
 use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\CheckoutComponent;
@@ -18,11 +21,14 @@ use App\Http\Livewire\Admin\AdminOrderReportsComponent;
 use App\Http\Livewire\Admin\AdminPresentationComponent;
 use App\Http\Livewire\Admin\AdminProductComponent;
 use App\Http\Livewire\Admin\AdminSaleComponent;
+use App\Http\Livewire\Admin\AdminSubcategoryComponent;
 use App\Http\Livewire\Admin\AdminTagComponent;
 use App\Http\Livewire\Admin\AdminUsersComponent;
 use App\Http\Livewire\Admin\AdminWalletComponent;
 use App\Http\Livewire\CategoryComponent;
+use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\SendPaymentComponent;
+use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\TagComponent;
 use App\Http\Livewire\ThankyouComponent;
 use App\Http\Livewire\User\UserChangePasswordComponent;
@@ -31,6 +37,7 @@ use App\Http\Livewire\User\UserOrdersComponent;
 use App\Http\Livewire\User\UserOrdersDetailsComponent;
 use App\Http\Livewire\WishlistComponent;
 use App\Models\Order;
+use App\Models\Subcategory;
 use App\Models\User;
 use App\Notifications\ApprovedPaymentMail;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +58,9 @@ use Illuminate\Support\Facades\Route;
 }); */
 
 Route::get('/', HomeComponent::class);
+Route::get('/shop', ShopComponent::class)->name('shop');
+Route::get('/about', AboutComponent::class)->name('about');
+Route::get('/contact', ContactComponent::class)->name('contact');
 Route::get('/cart', CartComponent::class)->name('cart');
 Route::get('/wishlist', WishlistComponent::class)->name('wishlist');
 Route::get('/checkout', CheckoutComponent::class)->name('checkout');
@@ -60,9 +70,9 @@ Route::get('/product-category/{category_slug}', CategoryComponent::class)->name(
 Route::get('/product-tag/{tag_slug}', TagComponent::class)->name('product.tag');
 Route::get('/thank-you', ThankyouComponent::class)->name('thankyou');
 
-/* Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard'); */
+})->name('dashboard');
 
 //For User
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
@@ -79,10 +89,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
 
 //For Admin
-Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function(){
+    Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function(){
     Route::get('/admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
     Route::get('/admin/categories', AdminCategoryComponent::class)->name('admin.categories');
+    Route::get('/admin/subcategories', AdminSubcategoryComponent::class)->name('admin.subcategories');
+    Route::get('/admin/brands', AdminBrandComponent::class)->name('admin.brands');
     Route::get('/admin/presentations', AdminPresentationComponent::class)->name('admin.presentations');
+    Route::get('/admin/characteristics', AdminCharacteristicComponent::class)->name('admin.characteristics');
     Route::get('/admin/tags', AdminTagComponent::class)->name('admin.tags');
     Route::resource('/admin/products', ProductController::class)->names('admin.products');
     Route::resource('/admin/product-entry', ProductEntryController::class)->names('admin.product-entry');
@@ -102,7 +115,13 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function(){
     Route::get('/admin/sale', AdminSaleComponent::class)->name('admin.sale');
     Route::get('/admin/orders-reports', AdminOrderReportsComponent::class)->name('admin.orders.reports');
     
-    /*Export PDF */
+    /* Select Dependiente */
+    Route::get('select/{id}', function ($id) {
+        $subcategories = Subcategory::where('category_id',$id)->get();
+        return response()->json($subcategories);
+    });
+
+    /* Export PDF */
     Route::get('/admin/export-stock-pdf', [ProductEntryController::class, 'exportStockPDF'])->name('admin.stock.pdf');
     Route::get('/admin/export-offer-pdf', [ProductController::class, 'exportOfferPDF'])->name('admin.offer.pdf');
 

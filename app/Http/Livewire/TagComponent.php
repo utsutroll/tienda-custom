@@ -20,12 +20,19 @@ class TagComponent extends Component
     public $search ='';
     public $tag_slug;
     public $tag_name;
+    public $entries = '30';
+    public $buscar;
 
     protected $paginationTheme = "tailwind";
 
     public function updatingSearch(){
         $this->resetPage();
     }
+
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'entries' => ['except' => '30']
+    ];
 
     public function mount($tag_slug)
     {
@@ -46,9 +53,17 @@ class TagComponent extends Component
 
         $this->setAmountForCheckout();
         
-        $productss = $tags->products()->where('name', 'LIKE', "%{$this->search}%")
+        if ($this->buscar == 1 ) {
+            $productss = $tags->products()->where('name', 'LIKE', "%{$this->search}%")
                             ->where('sale_price', '0')
-                            ->paginate(15);
+                            ->paginate($this->entries);
+        } else {
+            $productss = $tags->products()
+                            ->where('sale_price', '0')
+                            ->paginate($this->entries);
+        }
+        
+        
   
         return view('livewire.tag-component', compact('productss', 'dollar', 'categories', 'tag', 'sliders', 'business_partners'))->layout('layouts.base');
     }

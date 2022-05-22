@@ -30,17 +30,16 @@
         <!-- Column -->
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-body">
-                     {{-- {{dd($product)}} --}} 
-                    <h3 class="">{{$product[0]->product}}</h3>
+                <div class="card-body"> 
+                    <h3 class="">{{$product->product_characteristic->product->name }} {{ $product->product_characteristic->product->presentation->name }} {{ $product->product_characteristic->product->brand->name }} {{ $product->product_characteristic->characteristic->name }}</h3>
                     <h6 class="card-subtitle"></h6>
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-6">
-                            <div class="white-box text-center"> <img src="{{Storage::url($product[0]->url)}}" class="img-responsive"> </div>
+                            <div class="white-box text-center"> <img src="{{Storage::url($product->product_characteristic->image)}}" class="img-responsive"> </div>
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-6">
                             <h4 class="box-title m-t-40">Descripción del Producto</h4>
-                            <p>{{$product[0]->details}}</p>
+                            <p>{{$product->product_characteristic->product->details}}</p>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <h3 class="box-title m-t-40">Información General</h3>
@@ -50,28 +49,20 @@
                                         
                                         <tr>
                                             <td width="390">Fecha de Entrada</td>
-                                            <td> {{$product[0]->date}} {{$product[0]->time}} </td>
+                                            <td> {{$product->date}} {{$product->time}} </td>
                                             
                                         </tr>
                                         <tr>
                                             <td width="390">Cantidad</td>
-                                            <td> {{$product[0]->quantity}}</td>
+                                            <td> {{$product->quantity}}</td>
                                         </tr>
                                         <tr>
                                             <td width="390">Costo Unitario</td>
-                                            <td> {{$product[0]->price}}$</td>
+                                            <td> {{$product->product_characteristic->price}}$</td>
                                         </tr>
                                         <tr>
                                             <td width="390">Costo Total</td>
-                                            <td> {{$product[0]->quantity*$product[0]->price}}$</td>
-                                        </tr>
-                                        <tr>
-                                            <td width="390">Presentación</td>
-                                            <td> {{$product[0]->present}} {{$product[0]->medida}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Categoría</td>
-                                            <td> {{$product[0]->cat}} </td>
+                                            <td> {{$product->quantity*$product->product_characteristic->price}}$</td>
                                         </tr>
                                         {{-- <tr>
                                             <td>Etiquetas</td>

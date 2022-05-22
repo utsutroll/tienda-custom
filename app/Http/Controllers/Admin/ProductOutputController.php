@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Output;
-use App\Models\ProductOutput;
-use App\Models\Product;
+use App\Models\CharacteristicProductOutput;
+use App\Models\CharacteristicProduct;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -22,12 +22,12 @@ class ProductOutputController extends Controller
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
 
-        $products = Product::all();
+        $products = CharacteristicProduct::all();
 
         if($products->count() > 0)
         {
             foreach($products as $p){
-                $product[$p->id] = $p->id = $p->name .' '. $p->presentation->name .' '. $p->presentation->medida;
+                $product[$p->id] = $p->id = $p->product->name .' '. $p->product->presentation->name .' '. $p->product->brand->name .' '. $p->characteristic->name;
             }
         }
         else 
@@ -53,10 +53,11 @@ class ProductOutputController extends Controller
 
         while($i < count($product_id))
         {
-            $stock_product = Product::find($product_id[$i]);
-            if ($stock_product->stock < $quantity) {
+            $stock_product = CharacteristicProduct::find($product_id[$i]);
+
+            if ($stock_product->stock < $quantity[$i]) {
                 
-                return redirect()->route('admin.product-output.create')->with('info', 'La cantidad de '.$stock_product->name.' que desa sacar es mayor al stock disponible.');
+                return redirect()->route('admin.product-output.create')->with('info', 'La cantidad de '.$stock_product->product->name.' que desa sacar es mayor al stock disponible.');
                 die();
             }
             $i=$i+1;
@@ -72,8 +73,8 @@ class ProductOutputController extends Controller
         $cont = 0;
         
 		while($cont < count($product_id)){
-            $products = new ProductOutput();
-            $products->product_id=$product_id[$cont];
+            $products = new CharacteristicProductOutput();
+            $products->characteristic_product_id=$product_id[$cont];
             $products->output_id=$output->id;
             $products->quantity=$quantity[$cont];
             $products->observation=$observation[$cont];
@@ -92,9 +93,9 @@ class ProductOutputController extends Controller
 
     public function show($id)
     {
-        $product = ProductOutput::find($id);
+        $product = CharacteristicProductOutput::find($id);
 
-        return view('admin.product-output.show',["product" => $product]);
+        return view('admin.product-output.show', compact("product"));
     }
 
     public function edit($id)

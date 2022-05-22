@@ -3,8 +3,8 @@
 namespace App\Observers;
 
 use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\Product;
+use App\Models\CharacteristicProductOrder;
+use App\Models\CharacteristicProduct;
 
 class OrderObserver
 {
@@ -13,15 +13,15 @@ class OrderObserver
     {
         if ($order->status == "canceled") 
         {
-            $orderItem = OrderItem::where('order_id', $order->id)->get();
+            $orderItem = CharacteristicProductOrder::where('order_id', $order->id)->get();
 
             foreach ($orderItem as $o) 
             {
-                $product = Product::find($o->product_id);
+                $product = CharacteristicProduct::find($o->product_id);
 
                 $stock = $product->stock + $o->quantity;
                 
-                Product::where('id', $o->product_id)
+                CharacteristicProduct::where('id', $o->product_id)
                         ->update(['stock' => $stock]);   
             }
         }   

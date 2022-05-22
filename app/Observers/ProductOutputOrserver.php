@@ -2,19 +2,19 @@
 
 namespace App\Observers;
 
-use App\Models\Product;
-use App\Models\ProductOutput;
+use App\Models\CharacteristicProduct;
+use App\Models\CharacteristicProductOutput;
 
 class ProductOutputOrserver
 {
 
-    public function created(ProductOutput $productEntry)
+    public function created(CharacteristicProductOutput $productEntry)
     {
-        $product = Product::find($productEntry->product_id);
+        $product = CharacteristicProduct::find($productEntry->characteristic_product_id);
 
         $stock = $product->stock - $productEntry->quantity;
         
-        Product::where('id', $productEntry->product_id)
+        CharacteristicProduct::where('id', $productEntry->characteristic_product_id)
                 ->update(['stock' => $stock]);
     }
     

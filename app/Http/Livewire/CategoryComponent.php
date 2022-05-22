@@ -20,12 +20,19 @@ class CategoryComponent extends Component
     public $category_slug;
     public $category_name;
     public $search= '';
+    public $entries = 30;
+    public $buscar;
 
     protected $paginationTheme = "tailwind";
 
     public function updatingSearch(){
         $this->resetPage();
     }
+
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'entries' => ['except' => '30']
+    ];
 
     protected $listener = ['addCart' => 'render', 'addWishlist' => 'render'];
 
@@ -47,12 +54,21 @@ class CategoryComponent extends Component
 
         $this->setAmountForCheckout();
 
-        $productss = Product::where('category_id', $category_id)
-                              ->where('name', 'LIKE', "%{$this->search}%")
-                              ->where('sale_price', '0')
-                              ->paginate(15);
 
-        $this->setAmountForCheckout();                      
+        if ($this->buscar == 1 ) {
+            $productss = Product::where('name', 'LIKE', "%{$this->search}%")
+                                ->where('sale_price', '0')
+                                ->where('category_id', $category_id)
+                                ->paginate($this->entries);
+                    if ($productss == []) {
+                    }
+        } else {
+            $productss = Product::where('category_id', $category_id)
+                                ->where('sale_price', '0')
+                                ->paginate($this->entries);
+        }
+            
+
         return view('livewire.category-component', compact('productss', 'dollar', 'categories', 'tags', 'sliders', 'business_partners'))->layout('layouts.base');
     }
 

@@ -75,11 +75,11 @@
                     </div>
                     <div class="p-3 flex justify-between">
                         <span class="text-gray-800 text-lg">Tasa del día:</span>
-                        <span class="text-gray-800 text-lg">@foreach ($dollar as $d){{number_format($d->price, 2)}}@endforeach Bs.F</span>
+                        <span class="text-gray-800 text-lg">@foreach ($dollar as $d){{number_format($d->price, 2)}}@endforeach Bs</span>
                     </div>
                     <div class="p-3 flex justify-between">
                         <span class="text-gray-800 text-lg">Referencia:</span>
-                        <span class="text-gray-800 text-lg">@foreach ($dollar as $d){{number_format(round(($d->price*Cart::instance('cart')->total()),2),2)}}@endforeach Bs.F</span>
+                        <span class="text-gray-800 text-lg">@foreach ($dollar as $d){{number_format(round(($d->price*Cart::instance('cart')->total()),2),2)}}@endforeach Bs</span>
                     </div>
                     <div class="mt-2 flex text-md">
                         <a href="/cart" class="flex-1 rounded-lg border border-gray-800 shadow-md p-2 ml-2 text-gray-800 hover:bg-red-600 hover:text-white text-base text-center max-h-10">Ver Carrito</a>
@@ -116,14 +116,10 @@
                         @elseif($product->stock <= 10) 
                         <span class="text-sm text-red-500"> Disponibilidad: {{ $product->stock }}</span>
                         @endif
-                    </h5> 
+                    </h5>
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-6">
-                            <div class="white-box text-center"> 
-                                @isset($product->image->url)
-                                    <img src="{{Storage::url($product->image->url)}}" class="img-responsive" alt="{{$product->name}}">
-                                @endisset  
-                            </div>
+                            <div class="white-box text-center"> <img src="{{Storage::url($product->image->url)}}" class="img-responsive" alt="{{$product->name}}"> </div>
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-6">
                             <h4 class="box-title m-t-40">Descripción del producto</h4>
@@ -138,7 +134,7 @@
                             <h2 class="m-t-40">{{$product->price}}$</h2>        
                             @endif
                             
-                            @if ($product->stock > 0)
+                            @if ($product->stock > 0) 
                                 <div class="flex flex-row border h-10 w-24 rounded-lg border-gray-400 relative my-3">
                                     <button wire:click.prevent="decreaseQuantityD" class="font-semibold border-r w-7 bg-gray-200 hover:bg-red-600 hover:text-white border-gray-400 flex rounded-l focus:outline-none cursor-pointer">
                                         <span class="m-auto">-</span>
@@ -159,12 +155,16 @@
                             @if ($witems->contains($product->id))
                                 <button class="btn btn-dark btn-rounded m-r-5" wire:click.prevent="removeFromWishlist({{$product->id}})" wire:loading.attr="disabled" data-toggle="tooltip" title="" data-original-title="Agregado a la Lista de deseos"><i class="fa fa-heart text-red-600"></i> <button>    
                             @else
+                                @if ($product->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())    
+                                <button class="btn btn-dark btn-rounded m-r-5" wire:click.prevent="addToWishlist({{$product->id}}, '{{$product->name}}', {{$product->sale_price}})" wire:loading.attr="disabled" data-toggle="tooltip" title="" data-original-title="Añadir a la Lista de Deseos"><i class="fa fa-heart"></i> <button> 
+                                @else    
                                 <button class="btn btn-dark btn-rounded m-r-5" wire:click.prevent="addToWishlist({{$product->id}}, '{{$product->name}}', {{$product->price}})" wire:loading.attr="disabled" data-toggle="tooltip" title="" data-original-title="Añadir a la Lista de Deseos"><i class="fa fa-heart"></i> <button>    
+                                @endif 
                             @endif
 
                             @if ($product->stock > 0)    
                                 <a href="javascript:void(0)" wire:click.prevent="checkout()" class="btn btn-primary btn-rounded">Comprar ahora </a>
-                            @endif    
+                            @endif   
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <h3 class="box-title m-t-40">Información general</h3>
@@ -204,16 +204,20 @@
                         <li class="space-y-2 mb-2 justify-center">
                             <div class="block">
                                 <a class="flex space-y-2 p-2" href="{{route('product.details',['slug'=>$s->slug])}}">
-                                    <img class="w-36 h-20 ml-2 object-cover object-center flex-1" src="{{Storage::url($s->image->url)}}" alt=""/>
-                                    <span class="text-sm font-bold mt-3 ml-2 text-gray-900 flex-1">{{$s->price}}$</span>
-                                    @if ($s->stock > 0)
+                                    <img class="w-36 h-20 ml-2 object-cover object-center flex-1" src="{{Storage::url($s->image->url)}}" alt="{{$s->name}}"/>
+                                    <span class="text-md font-bold mt-3 ml-2 text-gray-900 flex-1">{{$s->price}}$</span>
+                                    @if ($s->stock > 0) 
                                         <button class="btn btn-dark btn-rounded w-5 h-10 mx-2 my-3 flex-1" wire:click.prevent="store({{$s->id}}, '{{$s->name}}', {{$s->price}})" wire:loading.attr="disabled" title="Añadir al carrito"><i class="ti-shopping-cart"></i> <button>    
                                     @endif
                                     
                                     @if ($witems->contains($s->id))
                                     <button class="btn btn-dark btn-rounded w-5 h-10 mx-2 my-3 flex-1" wire:click.prevent="removeFromWishlist({{$s->id}})" wire:loading.attr="disabled" title="Agregado a la Lista de deseos"><i class="fa fa-heart text-red-600"></i> <button>    
                                     @else
-                                    <button class="btn btn-dark btn-rounded w-5 h-10 mx-2 my-3 flex-1" wire:click.prevent="addToWishlist({{$s->id}}, '{{$s->name}}', {{$s->price}})" wire:loading.attr="disabled" title="Añadir a la Lista de Deseos"><i class="fa fa-heart"></i> <button>    
+                                        @if ($product->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())
+                                        <button class="btn btn-dark btn-rounded w-5 h-10 mx-2 my-3 flex-1" wire:click.prevent="addToWishlist({{$s->id}}, '{{$s->name}}', {{$s->sale_price}})" wire:loading.attr="disabled" title="Añadir a la Lista de Deseos"><i class="fa fa-heart"></i> <button>    
+                                        @else
+                                        <button class="btn btn-dark btn-rounded w-5 h-10 mx-2 my-3 flex-1" wire:click.prevent="addToWishlist({{$s->id}}, '{{$s->name}}', {{$s->price}})" wire:loading.attr="disabled" title="Añadir a la Lista de Deseos"><i class="fa fa-heart"></i> <button>    
+                                        @endif
                                     @endif    
                                 </a>
                                 <h1 class="text-sm font-bold text-gray-900 block">
