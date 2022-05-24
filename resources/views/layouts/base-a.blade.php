@@ -10,11 +10,10 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         
         <!-- Favicon icon -->
-        <link rel="icon" type="image/png" sizes="16x16" href="{{url('/assets/images/favicon.svg')}}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{url('favicon.svg')}}">
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-        <!-- chartist CSS -->
-        <link href="{{asset('assets/node_modules/morrisjs/morris.css')}}" rel="stylesheet">
+
         <!--Toaster Popup message CSS -->
         <link href="{{asset('assets/node_modules/toast-master/css/jquery.toast.css')}}" rel="stylesheet">
         <!-- Custom CSS -->
@@ -38,7 +37,10 @@
             }
             }
             .w-16 {
-                width: 4rem;
+                width: 8rem;
+            }
+            .w-6 {
+                width: 30%;
             }
         </style>
 
@@ -50,7 +52,7 @@
         <div class="preloader">
             <div class="loader">
                 <div>
-                   <img class="animate-pulse w-16" src="{{ asset('assets/images/logo/logo-pulso.svg') }}" alt="Logo La Mega Tienda Turen">
+                   <img class="animate-pulse w-16" src="{{ asset('dist/new/img/logos/logo-meka.svg') }}" alt="Inversiones Meka">
                 </div>    
             </div>
         </div>

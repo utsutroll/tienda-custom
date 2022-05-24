@@ -9,17 +9,17 @@
                 <b>
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
-                    <img src="{{asset('assets/images/logo/logo-icon.svg')}}" alt="homepage" class="dark-logo" />
+                    <img src="{{ url('dist/new/img/logos/phone-dark.svg') }}" alt="homepage" class="dark-logo" width="20%"/>
                     <!-- Light Logo icon -->
-                    <img src="{{asset('assets/images/logo/logo-light-icon1.svg')}}" alt="homepage" class="light-logo" />
+                    <img src="{{ url('dist/new/img/logos/phone-light.svg') }}" alt="homepage" class="light-logo" width="20%"/>
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text -->
                 <span>
                     <!-- dark Logo text -->
-                    <img src="{{asset('assets/images/logo/logo-text.svg')}}" alt="homepage" class="dark-logo" />
+                    <img src="{{ url('dist/new/img/logos/letras-dark.svg') }}" alt="homepage" class="dark-logo" width="50%"/>
                     <!-- Light Logo text -->    
-                    <img src="{{asset('assets/images/logo/logo-light-text1.svg')}}" class="light-logo" alt="homepage" />
+                    <img src="{{ url('dist/new/img/logos/letras-light.svg') }}" class="light-logo" alt="homepage" width="50%"/>
                 </span> 
              </a>
         </div>

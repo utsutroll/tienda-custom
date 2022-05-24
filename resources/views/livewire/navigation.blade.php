@@ -1,5 +1,5 @@
 <section id="header">
-  <a href="#"> <img src="{{ url('logo-meka.svg') }}" class="logo" alt="Inversiones Meka"></a>
+  <a href="#"> <img src="{{ url('dist/new/img/logos/logo-meka.svg') }}" class="logo" alt="Inversiones Meka"></a>
 
   <div>
       <ul id="navbar">
@@ -11,13 +11,12 @@
           <li id="lg-bag"><a id="LiCart" href="{{ route('cart') }}"><i class="far fa-shopping-bag"></i></a></li>
           <li id="lg-bag"><a id="LiWiteList" href="{{ route('wishlist') }}"><i class="far fa-heart"></i></a></li>
           <li> <!-- Profile dropdown -->
-            <button type="button" class="text-left text-base group outline-none" id="togglemebutton">
-              @if(Route::has('login'))
-              <span id="lg-bag"><i class="far fa-user-circle"></i></span>
-                @auth 
-                  <img class="h-8 w-8 rounded-full" src="{{ auth()->user()->profile_photo_url }}" alt="">
-            </button>       
-            <div class="z-40 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 hidden transition duration-500" id="resultnav">
+            @if(Route::has('login'))
+              @auth 
+              <button type="button" class="text-left text-base group outline-none flex" id="togglemebutton">
+                  <span id="lg-bag"><i class="far fa-user-circle"></i></span>
+              </button>       
+              <div class="z-40 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 hidden transition duration-500" id="resultnav">
                  
               @if (Auth::user()->utype === 'ADM')
                 <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100" role="menuitem">Panel Administrativo</a>    
@@ -35,12 +34,15 @@
                 </form>
               </div>  
               @else
+              <button type="button" class="text-left text-base group outline-none" id="togglemebutton">
+                <span id="lg-bag"><i class="far fa-user-circle"></i></span>
+              </button> 
               <div class="z-40 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden transition duration-500" id="resultnav">
                 <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Iniciar Sesión</a>
                 <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Registrarse</a>
               </div>
                 @endauth 
-              @endif    
+            @endif    
             
           </li>
       </ul>

@@ -37,11 +37,13 @@ $(function () {
             $("body").trigger("resize");
             $("body").removeClass("mini-sidebar");
             $('.navbar-brand span').show();
+            $('.navbar-brand b img').removeClass('w-6');
         }
         else {
             $("body").trigger("resize");
             $("body").addClass("mini-sidebar");
             $('.navbar-brand span').hide();
+            $('.navbar-brand b img').addClass('w-6');
         }
     });
     // this is for close icon when navigation open in mobile view

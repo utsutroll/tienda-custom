@@ -10,11 +10,11 @@
                 <div wire:loading>
                     <div class="loader">
                         <div>
-                           Inversiones Meka
+                           <img class="animate-pulse" width="80" height="60" src="{{ asset('dist/new/img/logos/logo-meka.svg') }}" alt="Inversiones Meka">
                         </div>    
                     </div>
                     <div>
-                        <br><br><br><br><br><br><br>
+                        <br><br><br><br><br><br><br><br><br>
                     </div>
                 </div>
                 <div wire:loading.remove>

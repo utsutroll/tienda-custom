@@ -11,7 +11,7 @@
                 <div wire:loading wire:target="update">
                     <div class="loader">
                         <div>
-                           <img class="animate-pulse" width="35" height="35" src="{{ asset('assets/images/logo/logo-pulso.svg') }}" alt="Logo La Mega Tienda Turen">
+                           <img class="animate-pulse" width="80" height="60" src="{{ asset('dist/new/img/logos/logo-meka.svg') }}" alt="Inversiones Meka">
                         </div>    
                     </div>
                     <div>
@@ -29,14 +29,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active pt-2" id="manual" role="tabpanel">
                         <div class="form-material mt-4 d-flex justify-content-center">
-                            <div class="col-10 input-group">
-                                <select class="form-control mr-2" wire:model="category">
-                                    <option><i class="icon-filter"></i> Filtrar por Categoría</option>
-                                    @foreach($categories as $c)
-                                        <option value="{{$c->id}}">{{$c->name}}</option>
-                                    @endforeach    
-                                </select>    
-                            
+                            <div class="col-10 form-group"> 
                                 <input type="text" id="search_box" wire:model="search" class="form-control" placeholder="Buscar &hellip;" />
                             </div> 
                         </div>

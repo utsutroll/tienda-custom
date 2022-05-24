@@ -28,7 +28,10 @@ class AdminUpdatePriceComponent extends Component
     {
         $categories = Category::all();
 
-        $products = CharacteristicProduct::paginate(10);
+        $products = CharacteristicProduct::join('products', 'products.id', '=', 'product_id')
+                                            ->select('*')
+                                            ->where('products.name', 'LIKE', "%{$this->search}%")
+                                            ->paginate(10);
 
         return view('livewire.admin.admin-update-price-component', compact('categories', 'products'));
     }

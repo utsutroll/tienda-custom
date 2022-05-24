@@ -7,15 +7,14 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                
                 <div wire:loading>
                     <div class="loader">
                         <div>
-                           <img class="animate-pulse" width="35" height="35" src="{{ asset('assets/images/logo/logo-pulso.svg') }}" alt="Logo La Mega Tienda Turen">
+                           <img class="animate-pulse" width="80" height="60" src="{{ asset('dist/new/img/logos/logo-meka.svg') }}" alt="Inversiones Meka">
                         </div>    
                     </div>
                     <div>
-                        <br><br><br><br><br><br><br>
+                        <br><br><br><br><br><br><br><br><br>
                     </div>
                 </div>
                 <div wire:loading.remove>

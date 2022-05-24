@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{url('/assets/images/favicon.svg')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url('favicon.svg')}}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -37,7 +37,7 @@
             }
             }
             .w-16 {
-                width: 4rem;
+                width: 8rem;
             }
     </style>
 
