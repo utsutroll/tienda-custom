@@ -10,10 +10,16 @@ use Livewire\WithPagination;
 
 class AdminUpdatePriceComponent extends Component
 {
-    public $category;
     public $search ='';
+    public $search_pro ='';
     public $price;
+    public $prices;
     public $product_id;
+    public $entries = '10';
+    public $producto;
+    public $nombre = '';
+    public $precio;
+
     
     use WithPagination;
 
@@ -23,17 +29,17 @@ class AdminUpdatePriceComponent extends Component
             $this->resetPage();
     }
 
+    protected $listeners = ['render', 'render'];
 
     public function render()
     {
-        $categories = Category::all();
 
-        $products = CharacteristicProduct::join('products', 'products.id', '=', 'product_id')
-                                            ->select('*')
-                                            ->where('products.name', 'LIKE', "%{$this->search}%")
-                                            ->paginate(10);
+        $products = CharacteristicProduct::all();
 
-        return view('livewire.admin.admin-update-price-component', compact('categories', 'products'));
+        $productss = Product::where('name', 'LIKE', "%{$this->search_pro}%")
+                            ->paginate($this->entries);
+
+        return view('livewire.admin.admin-update-price-component', compact('productss', 'products'));
     }
 
     public function update($id)
@@ -47,6 +53,34 @@ class AdminUpdatePriceComponent extends Component
         CharacteristicProduct::where('id', $product->id)->update(['price' => $this->price]);
 
         $this->reset(['price']);
+        $this->reset(['nombre']);
+        $this->reset(['precio']);
+        $this->reset(['product_id']);
+
+        $this->emit('render');
+
+    }
+
+    public function actualizar($id)
+    {
+        $product = Product::find($id);
+
+        $this->validate([
+            'prices' => "required",  
+        ]);
+
+        Product::where('id', $product->id)->update(['price' => $this->prices]);
+
+        $this->reset(['prices']);
+
+    }
+
+    public function buscar()
+    {
+        $p = CharacteristicProduct::find($this->producto);
+        $this->nombre = $p->product->name.' '.$p->product->presentation->name.' '.$p->product->brand->name.' '.$p->characteristic->name;
+        $this->precio = $p->price;
+        $this->product_id = $p->id;
 
     }
 

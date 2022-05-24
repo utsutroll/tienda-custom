@@ -57,8 +57,7 @@ class ProductController extends Controller
             'presentation_id' => 'required',    
             'tags' => 'required',    
             'details' => 'required',
-            'file' => 'required|image',
-            'characteristic' => 'required',
+            'file' => 'required|image'
 
         ]);
             
@@ -110,8 +109,8 @@ class ProductController extends Controller
                 $imagen = Storage::put('/products/images', $files[$cont]);
 
                 CharacteristicProduct::create([
-                    'product_id' => $product_id,
                     'characteristic_id' => $characteristic_id[$cont],
+                    'product_id' => $product_id,
                     'image' => $imagen,
                 ]);
                 $cont=$cont+1;
@@ -158,7 +157,6 @@ class ProductController extends Controller
             'presentation_id' => 'required',    
             'tags' => 'required',    
             'details' => 'required',
-            'characteristic' => 'required',
             'slug' => "unique:products,slug,$product->slug"
 
         ]);
@@ -231,8 +229,8 @@ class ProductController extends Controller
                 $imgen = Storage::put('/products/images', $file[$cont]);
 
                 CharacteristicProduct::create([
-                    'product_id' => $product->id,
                     'characteristic_id' => $charact_id[$cont],
+                    'product_id' => $product->id,
                     'image' => $imgen,
                 ]);
                 $cont=$cont+1;
