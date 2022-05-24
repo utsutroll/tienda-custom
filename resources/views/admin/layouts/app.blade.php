@@ -50,7 +50,7 @@
     <div class="preloader">
         <div class="loader">
             <div>
-               <img class="animate-pulse w-16" src="{{ asset('assets/images/logo/logo-pulso.svg') }}" alt="Logo La Mega Tienda Turen">
+               <img class="animate-pulse w-16" src="{{ asset('dist/new/img/logos/logo-meka.svg') }}" alt="Inversiones Meka">
             </div>    
         </div>
     </div>

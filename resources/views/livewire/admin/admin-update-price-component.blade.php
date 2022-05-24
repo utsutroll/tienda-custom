@@ -29,8 +29,8 @@
                 <div class="tab-content">
                     <div class="tab-pane active pt-2" id="manual" role="tabpanel">
                         <div class="row mt-4 d-flex justify-content-center">
-                            <div class="col-5">
-                                <select  wire:model="producto" class="select_pro" style="width:100%;">
+                            <div wire:ignore class="col-5">
+                                <select wire:model="producto" class="select_pro" style="width:100%;">
                                     <option value="0">Selecione</option>
                                     @foreach($products as $p)
                                     <option value="{{ $p->id }}">{{$p->product->name}} {{$p->product->presentation->name}} {{$p->product->brand->name}} {{$p->characteristic->name}} </option>    
@@ -131,9 +131,7 @@
 
 @push('scripts')
     <script>
-        new Selectr('.select_pro', {
-            width: 300
-        });
+        $('.select_pro').select2();
 
         $('.select_pro').on('change', function (e) {
  

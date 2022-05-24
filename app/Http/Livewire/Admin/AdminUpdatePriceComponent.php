@@ -29,7 +29,6 @@ class AdminUpdatePriceComponent extends Component
             $this->resetPage();
     }
 
-    protected $listeners = ['render', 'render'];
 
     public function render()
     {
@@ -57,7 +56,6 @@ class AdminUpdatePriceComponent extends Component
         $this->reset(['precio']);
         $this->reset(['product_id']);
 
-        $this->emit('render');
 
     }
 
