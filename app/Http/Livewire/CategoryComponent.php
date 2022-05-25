@@ -6,9 +6,7 @@ use App\Models\BusinessPartner;
 use App\Models\Category;
 use App\Models\DollarRate;
 use App\Models\Product;
-use App\Models\Sale;
 use App\Models\Slider;
-use App\Models\Tag;
 use Cart;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -47,7 +45,6 @@ class CategoryComponent extends Component
         $sliders = Slider::all();
         $business_partners = BusinessPartner::all();
         $categories = Category::all();
-        $tags = Tag::all();
         $categori = Category::where('slug',$this->category_slug)->first();
         $category_id = $categori->id;
         $this->category_name = $categori->name;
@@ -69,7 +66,7 @@ class CategoryComponent extends Component
         }
             
 
-        return view('livewire.category-component', compact('productss', 'dollar', 'categories', 'tags', 'sliders', 'business_partners'))->layout('layouts.base');
+        return view('livewire.category-component', compact('productss', 'dollar', 'categories', 'sliders', 'business_partners'))->layout('layouts.base');
     }
 
     public function store($product_id, $product_name, $product_price)

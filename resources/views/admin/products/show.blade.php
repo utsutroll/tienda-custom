@@ -51,24 +51,12 @@
                                             <td> {{$product->brand->name}}</td>
                                         </tr>
                                         <tr>
-                                            <td width="390">Presentación</td>
-                                            <td> {{$product->presentation->name}} </td>
-                                        </tr>
-                                        <tr>
                                             <td>Categoría</td>
                                             <td> {{$product->subcategory->category->name}} </td>
                                         </tr>
                                         <tr>
                                             <td>Subcategoría</td>
                                             <td> {{$product->subcategory->name}} </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Etiquetas</td>
-                                            <td> 
-                                                @foreach ($product->tags as $t)
-                                                    <span class="badge badge-info">{{$t->name}}</span>    
-                                                @endforeach
-                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Caracteristica</td>

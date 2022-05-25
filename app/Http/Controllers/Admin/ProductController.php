@@ -9,11 +9,9 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Characteristic;
 use App\Models\CharacteristicProduct;
-use App\Models\Presentation;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\Subcategory;
-use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -32,14 +30,12 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::pluck('name', 'id');
-        $tags = Tag::pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
-        $presents = Presentation::pluck('name', 'id');
         $characteristics = Characteristic::pluck('name', 'id');
         $product_characteristic = CharacteristicProduct::all();
 
 
-        return view('admin.products.create', compact('categories', 'tags', 'brands', 'presents', 'characteristics', 'product_characteristic'));
+        return view('admin.products.create', compact('categories', 'brands', 'characteristics', 'product_characteristic'));
     }
 
     
@@ -53,9 +49,7 @@ class ProductController extends Controller
             'name' => 'required',   
             'category_id' => 'required',
             'subcategory_id' => 'required',  
-            'brand_id' => 'required',
-            'presentation_id' => 'required',    
-            'tags' => 'required',    
+            'brand_id' => 'required',  
             'details' => 'required',
             'file' => 'required|image'
 
@@ -63,10 +57,9 @@ class ProductController extends Controller
             
         $continuar = $request->continue;
 
-        $present=Presentation::find($request->presentation_id);
         $brandss=Brand::find($request->brand_id);
         
-        $slug = Str::slug($request->name.'-'.$present->name.'-'.$brandss->name);
+        $slug = Str::slug($request->name.'-'.$brandss->name);
         $product_slug = Product::where('slug', $slug)->get();
 
         if ($product_slug->count() > 0 ) 
@@ -78,8 +71,7 @@ class ProductController extends Controller
         $product = Product::create([
             'id' => $request->id,   
             'name' => $request->name,   
-            'subcategory_id' => $request->subcategory_id,  
-            'presentation_id' => $request->presentation_id,               
+            'subcategory_id' => $request->subcategory_id,              
             'brand_id' => $request->brand_id,               
             'slug' => $slug,        
             'details' => $request->details,
@@ -92,10 +84,6 @@ class ProductController extends Controller
             $product->image()->create([
                 'url' => $url
             ]);
-        }
-        
-        if($request->tags){
-            $product->tags()->attach($request->tags);
         }
 
         $product_id=$request->id;
@@ -138,12 +126,10 @@ class ProductController extends Controller
     {
         $categories = Category::pluck('name', 'id');
         $subcategories = Subcategory::pluck('name', 'id');
-        $tags = Tag::pluck('name', 'id');
-        $presents = Presentation::pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
         $characteristics = Characteristic::pluck('name', 'id');
 
-        return view('admin.products.edit', compact('product', 'categories', 'subcategories', 'brands', 'tags', 'presents', 'characteristics'));
+        return view('admin.products.edit', compact('product', 'categories', 'subcategories', 'brands', 'characteristics'));
     }
 
     public function update(Request $request, Product $product)
@@ -153,24 +139,19 @@ class ProductController extends Controller
             'name' => "required",   
             'category_id' => 'required', 
             'subcategory_id' => 'required',  
-            'brand_id' => 'required', 
-            'presentation_id' => 'required',    
-            'tags' => 'required',    
+            'brand_id' => 'required',   
             'details' => 'required',
             'slug' => "unique:products,slug,$product->slug"
 
         ]);
          
-
-        $present=Presentation::find($request->presentation_id);
         $brandss=Brand::find($request->brand_id);
         
         $product->update([
             'name' => $request->name,   
-            'subcategory_id' => $request->subcategory_id,  
-            'presentation_id' => $request->presentation_id,               
+            'subcategory_id' => $request->subcategory_id,                
             'brand_id' => $request->brand_id,      
-            'slug' => Str::slug($request->name.'-'.$present->name.'-'.$brandss->name),        
+            'slug' => Str::slug($request->name.'-'.$brandss->name),        
             'details' => $request->details,
         ]);
 
@@ -191,11 +172,6 @@ class ProductController extends Controller
                 ]);
             }
         }
-
-        if($request->tags){
-            $product->tags()->sync($request->tags);
-        }
-
 
         $files = $request->file('image');
 

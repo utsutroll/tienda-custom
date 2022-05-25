@@ -92,7 +92,7 @@
 
                         <tr>
                             <td>{{ $prod->id }}</td>
-                            <td>{{ $prod->product->name }} ({{ $prod->product->presentation->name }} {{ $prod->product->brand->name }} {{ $prod->characteristic->name }})</td>
+                            <td>{{ $prod->product->name }} ({{ $prod->product->brand->name }} {{ $prod->characteristic->name }})</td>
                             <td>{{ $prod->stock }}</td>
     
                             

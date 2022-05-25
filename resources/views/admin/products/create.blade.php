@@ -72,10 +72,7 @@
     $(".select2").select2({
         width: 'resolve'
     });
-    $("#presentation_id").select2({
-        width: 'resolve',
-        placeholder: 'Seleccione'
-    });
+
     $('.dropify').dropify({
         messages: {
             default: 'Arrastre y suelte un archivo aquí o haga clic',

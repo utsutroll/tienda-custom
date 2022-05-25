@@ -31,7 +31,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body"> 
-                    <h3 class="">{{$product->product_characteristic->product->name }} {{ $product->product_characteristic->product->presentation->name }} {{ $product->product_characteristic->product->brand->name }} {{ $product->product_characteristic->characteristic->name }}</h3>
+                    <h3 class="">{{$product->product_characteristic->product->name }} {{ $product->product_characteristic->product->brand->name }} {{ $product->product_characteristic->characteristic->name }}</h3>
                     <h6 class="card-subtitle"></h6>
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-6">
@@ -60,14 +60,6 @@
                                             <td>Observación</td>
                                             <td> {{$product->observation}} </td>
                                         </tr>
-                                        {{-- <tr>
-                                            <td>Etiquetas</td>
-                                            <td> 
-                                                @foreach ($tags= App\Models\Product_tag::where('product_id', $product[0]->product_id)->get() as $t)
-                                                    <span class="badge badge-info">{{$t->name}}</span>    
-                                                @endforeach
-                                            </td>
-                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>

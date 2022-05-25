@@ -75,7 +75,7 @@
                 </ul>
                 <div class="des">
                     <span>{{ $p->brand->name }}</span>
-                    <a href="{{route('product.details',['slug'=>$p->slug])}}"><h5>{{$p->name}} {{$p->presentation->name}}</h5></a>
+                    <a href="{{route('product.details',['slug'=>$p->slug])}}"><h5>{{$p->name}}</h5></a>
                     <h4>{{$p->price}}$</h4>
                 </div>
                 <a href="#"><i class="fal fa-shopping-cart cart"></i></a>

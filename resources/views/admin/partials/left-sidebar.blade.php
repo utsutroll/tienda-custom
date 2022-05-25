@@ -38,18 +38,6 @@
                         <span class="hide-menu">Subcategoría</span>
                     </a>
                 </li>
-                <li id="LiTags"> 
-                    <a class="waves-effect waves-dark" href="{{route('admin.tags')}}" aria-expanded="false">
-                        <i class="icon-tag"></i>
-                        <span class="hide-menu">Etiqueta</span>
-                    </a>
-                </li>
-                <li id="LiPresentations"> 
-                    <a class="waves-effect waves-dark" href="{{route('admin.presentations')}}" aria-expanded="false">
-                        <i class="ti-layers-alt"></i>
-                        <span class="hide-menu">Presentación</span>
-                    </a>
-                </li>
                 <li id="LiBrand"> 
                     <a class="waves-effect waves-dark" href="{{route('admin.brands')}}" aria-expanded="false">
                         <i class="ti-bookmark"></i>

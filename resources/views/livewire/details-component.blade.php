@@ -172,20 +172,8 @@
                                 <table class="table">
                                     <tbody>
                                         <tr>
-                                            <td width="390">Presentación</td>
-                                            <td> {{$product->presentation->name}} {{$product->presentation->medida}}</td>
-                                        </tr>
-                                        <tr>
                                             <td>Categoría</td>
                                             <td> {{$product->category->name}} </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Etiquetas</td>
-                                            <td> 
-                                                @foreach ($product->tags as $t)
-                                                <a href="{{route('product.tag', ['tag_slug'=>$t->slug])}}" class="badge badge-info"><span>{{$t->name}}</span></a>     
-                                                @endforeach
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

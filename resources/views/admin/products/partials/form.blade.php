@@ -44,18 +44,6 @@
             @enderror
         </div>
 
-        <div class="form-group">
-            
-            {!! Form::label('presentation_id', 'Presentación') !!}
-            {!! Form::select('presentation_id', $presents, null, ['class' => 'form-control', 'data-placeholder' => 'Seleccione']) !!} 
-
-
-            @error('presentation_id')
-                <small class="text-danger">{{$message}}</small>   
-            @enderror
-
-        </div>
-
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
@@ -83,25 +71,13 @@
                     <select class="form-control select2" name="subcategory_id" id="subcategory_id">
                     </select>
                     @endisset
-                    
-                    
-                    
+
                     @error('subcategory_id')
                         <small class="text-danger">{{$message}}</small>   
                     @enderror
                     
                 </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            {!! Form::label('tags', 'Etiquetas') !!}
-            {!! Form::select('tags[]', $tags, null, ['class'=> 'form-control select2 select2-multiple', 'style' => 'width: 100%;', 'multiple' => 'multiple', 'data-placeholder' => 'Seleccione' ]) !!}
-            
-            @error('tags')
-                <small class="text-danger">{{$message}}</small>   
-            @enderror
-            
         </div>
 
     </div>

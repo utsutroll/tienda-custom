@@ -18,28 +18,21 @@ use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Admin\AdminOrderComponent;
 use App\Http\Livewire\Admin\AdminOrderDetailsComponent;
 use App\Http\Livewire\Admin\AdminOrderReportsComponent;
-use App\Http\Livewire\Admin\AdminPresentationComponent;
-use App\Http\Livewire\Admin\AdminProductComponent;
 use App\Http\Livewire\Admin\AdminSaleComponent;
 use App\Http\Livewire\Admin\AdminSubcategoryComponent;
-use App\Http\Livewire\Admin\AdminTagComponent;
 use App\Http\Livewire\Admin\AdminUsersComponent;
 use App\Http\Livewire\Admin\AdminWalletComponent;
 use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\SendPaymentComponent;
 use App\Http\Livewire\ShopComponent;
-use App\Http\Livewire\TagComponent;
 use App\Http\Livewire\ThankyouComponent;
 use App\Http\Livewire\User\UserChangePasswordComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\User\UserOrdersComponent;
 use App\Http\Livewire\User\UserOrdersDetailsComponent;
 use App\Http\Livewire\WishlistComponent;
-use App\Models\Order;
 use App\Models\Subcategory;
-use App\Models\User;
-use App\Notifications\ApprovedPaymentMail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,7 +60,6 @@ Route::get('/checkout', CheckoutComponent::class)->name('checkout');
 Route::get('/send-payment/{order_id}', SendPaymentComponent::class)->name('sendpayment');
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 Route::get('/product-category/{category_slug}', CategoryComponent::class)->name('product.category');
-Route::get('/product-tag/{tag_slug}', TagComponent::class)->name('product.tag');
 Route::get('/thank-you', ThankyouComponent::class)->name('thankyou');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -94,9 +86,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/admin/categories', AdminCategoryComponent::class)->name('admin.categories');
     Route::get('/admin/subcategories', AdminSubcategoryComponent::class)->name('admin.subcategories');
     Route::get('/admin/brands', AdminBrandComponent::class)->name('admin.brands');
-    Route::get('/admin/presentations', AdminPresentationComponent::class)->name('admin.presentations');
     Route::get('/admin/characteristics', AdminCharacteristicComponent::class)->name('admin.characteristics');
-    Route::get('/admin/tags', AdminTagComponent::class)->name('admin.tags');
     Route::resource('/admin/products', ProductController::class)->names('admin.products');
     Route::resource('/admin/product-entry', ProductEntryController::class)->names('admin.product-entry');
     Route::get('/admin/stock', [ProductEntryController::class, 'stock'])->name('admin.product-entry.stock');

@@ -24,7 +24,6 @@ class Product extends Model
         'id',
         'name',
         'subcategory_id',
-        'presentation_id',
         'brand_id',
         'slug',
         'details',
@@ -34,20 +33,9 @@ class Product extends Model
         return $this->belongsTo(Subcategory::class);
     }
 
-    public function presentation(){
-        return $this->belongsTo(Presentation::class);
-    }
-
     public function brand(){
         return $this->belongsTo(Brand::class);
-    }
-
-    //Relacion muchos a muchos
-
-    public function tags(){
-        return $this->belongsToMany(Tag::class);
-    }
-    
+    }   
 
     public function characteristics_product()
     {

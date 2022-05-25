@@ -80,7 +80,6 @@
                             @endif
                             
                         </th>
-                        <th>Presentación</th>
                         <th>Imagen</th>
                         <th colspan="3" class="text-nowrap">Opciones</th>
                     </tr>
@@ -92,7 +91,6 @@
                     <tr>
                         <td width="8%">{{ $p->id }}</td>
                         <td width="20%">{{ $p->name }}</td>
-                        <td>{{ $p->presentation->name }} {{ $p->presentation->medida }}</td>
                         <td><img width="20%" @if ($p->image) src="{{Storage::url($p->image->url) }}" @else src="" @endif  alt="{{ $p->product }}" class="img-thumbnail"></td>
                         
                         <td width="10px" class="text-nowrap">
@@ -143,14 +141,13 @@
                 <tr>
                     <th>ID</th>
                     <th>Producto</th>
-                    <th>Presentación</th>
                     <th>Imagen</th>
                     <th colspan="2" class="text-nowrap">Opciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="text-center">
-                    <td colspan="5">No se Encontraron Registros</td>
+                    <td colspan="4">No se Encontraron Registros</td>
                 </tr>
             </tbody>
         </table> 
