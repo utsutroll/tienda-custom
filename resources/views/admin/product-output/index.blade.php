@@ -14,6 +14,7 @@
     <link href="{{url('assets/node_modules/wizard/steps.css')}}" rel="stylesheet">
     <!--alerts CSS -->
     <link href="{{url('assets/node_modules/sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
+
 @endpush
 
 @push('scripts')
@@ -26,7 +27,7 @@
     <!-- Sweet-Alert  -->
     <script src="{{url('assets/node_modules/sweetalert/sweetalert.min.js')}}"></script>
     <script src="{{url('assets/node_modules/wizard/steps.js')}}"></script>
-
+    
     <script type="text/javascript">
 
     $('#liAlmacen').addClass("active");

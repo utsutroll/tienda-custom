@@ -8,8 +8,7 @@
           <li><a id="LiCategory" href="{{ route('shop') }}">Categorías</a></li>
           <li><a id="LiAbout" href="{{ route('about') }}">Nosotros</a></li>
           <li><a id="LiContact" href="{{ route('contact') }}">Contacto</a></li>
-          <li id="lg-bag"><a id="LiCart" href="{{ route('cart') }}"><i class="far fa-shopping-bag"></i></a></li>
-          <li id="lg-bag"><a id="LiWiteList" href="{{ route('wishlist') }}"><i class="far fa-heart"></i></a></li>
+          <livewire:icon-cart />
           <li> <!-- Profile dropdown -->
             @if(Route::has('login'))
               @auth 

@@ -39,10 +39,10 @@
         <form method="post">
             <span>LEAVE A MESSAGE</span>
             <h2>We love to hear from you</h2>
-            <input type="text" placeholder="Your Name">
-            <input type="text" placeholder="E-mail">
-            <input type="text" placeholder="Subject">
-            <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
+            <input type="text" class="input" placeholder="Your Name">
+            <input type="text" class="input" placeholder="E-mail">
+            <input type="text" class="input" placeholder="Subject">
+            <textarea name="" id="" class="textarea" cols="30" rows="10" placeholder="Your Message"></textarea>
             <button class="normal">Submit</button>
         </form> 
         

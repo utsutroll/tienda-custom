@@ -29,6 +29,7 @@
          --}}
         <!--Toaster Popup message CSS -->
         <link href="{{asset('/assets/node_modules/toast-master/css/jquery.toast.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.1.0/dist/flowbite.min.css" />
         @stack('css')
         <style>
             .notify-m{
@@ -109,6 +110,7 @@
         <script src="{{asset('/dist/js/carrusel-app.js')}}" type="text/javascript"></script>  
         <!-- Popup message jquery -->
         <script src="{{asset('/assets/node_modules/toast-master/js/jquery.toast.js')}}"></script>
+        <script src="https://unpkg.com/@themesberg/flowbite@1.1.0/dist/flowbite.bundle.js"></script>
         @stack('scripts')
         <script>
             $(function () {

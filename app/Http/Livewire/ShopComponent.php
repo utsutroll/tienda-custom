@@ -40,7 +40,6 @@ class ShopComponent extends Component
         $business_partners = BusinessPartner::all();
 
         $products = Product::where('name', 'LIKE', "%{$this->search}%")
-                            ->where('price', '0')
                             ->paginate($this->entries);
 
 

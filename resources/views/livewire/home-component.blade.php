@@ -85,21 +85,19 @@
             @foreach ($products as $p)
             <div class="pro">
                 @isset ($p->image->url)
-                <img loading="lazy" src="{{Storage::url($p->image->url)}}" alt="{{$p->name}}">
+                <a href="{{route('product.details',['slug'=>$p->slug])}}">
+                    <img loading="lazy" src="{{Storage::url($p->image->url)}}" alt="{{$p->name}}">
+                </a>
                 @endisset
-                <ul class="overlay">
-                    @foreach ($p->tags as $t)
-                    <li class="tag bg-success rounded-pill">    
-                        <a href="{{route('product.tag', ['tag_slug'=>$t->slug])}}">{{$t->name}}</a>
-                    </li>    
-                    @endforeach
-                </ul>
                 <div class="des">
                     <span>{{ $p->brand->name }}</span>
                     <a href="{{route('product.details',['slug'=>$p->slug])}}"><h5>{{$p->name}}</h5></a>
-                    <h4>{{$p->price}}$</h4>
+                    <h4 data-tooltip-target="tooltip-top" data-tooltip-placement="top" class="text-center">{{ $p->price }}$</h4>
+                    <div id="tooltip-top" role="tooltip" class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 invisible" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(918px, 449px, 0px);">
+                        @foreach ($dollar as $d){{ number_format($d->price*$p->price, 2) }}@endforeach Bs
+                        <div class="tooltip-arrow" data-popper-arrow="" style="position: absolute; left: 0px; transform: translate3d(54px, 0px, 0px);"></div>
+                    </div>
                 </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
             </div>
             @endforeach
         </div>
@@ -125,21 +123,19 @@
             @foreach ($newproducts as $np)
             <div class="pro">
                 @isset ($np->image->url)
-                <img loading="lazy" src="{{Storage::url($np->image->url)}}" alt="{{$np->name}}">
+                <a href="{{route('product.details',['slug'=>$np->slug])}}">
+                    <img loading="lazy" src="{{Storage::url($np->image->url)}}" alt="{{$np->name}}">
+                </a>
                 @endisset
-                <ul class="overlay">
-                    @foreach ($np->tags as $t)
-                    <li class="tag bg-success rounded-pill">    
-                        <a href="{{route('product.tag', ['tag_slug'=>$t->slug])}}">{{$t->name}}</a>
-                    </li>    
-                    @endforeach
-                </ul>
                 <div class="des">
                     <span>{{ $np->brand->name }}</span>
-                    <a href="{{route('product.details',['slug'=>$np->slug])}}"><h5>{{$np->name}} {{$np->presentation->name}}</h5></a>
-                    <h4>{{$np->price}}$</h4>
+                    <a href="{{route('product.details',['slug'=>$np->slug])}}"><h5>{{$np->name}}</h5></a>
+                    <h4 data-tooltip-target="tooltip-top" data-tooltip-placement="top" class="text-center">{{ $np->price }}$</h4>
+                    <div id="tooltip-top" role="tooltip" class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 invisible" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(918px, 449px, 0px);">
+                        @foreach ($dollar as $d){{ number_format($d->price*$np->price, 2) }}@endforeach Bs
+                        <div class="tooltip-arrow" data-popper-arrow="" style="position: absolute; left: 0px; transform: translate3d(54px, 0px, 0px);"></div>
+                    </div>
                 </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
             </div>
             @endforeach
         </div>

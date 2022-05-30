@@ -76,7 +76,7 @@ class AdminUpdatePriceComponent extends Component
     public function buscar()
     {
         $p = CharacteristicProduct::find($this->producto);
-        $this->nombre = $p->product->name.' '.$p->product->presentation->name.' '.$p->product->brand->name.' '.$p->characteristic->name;
+        $this->nombre = $p->product->name.' '.$p->product->brand->name.' '.$p->characteristic->name;
         $this->precio = $p->price;
         $this->product_id = $p->id;
 

@@ -2,20 +2,21 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\CharacteristicProduct;
 use App\Models\DollarRate;
 use App\Models\Product;
 use App\Models\Sale;
 use Cart;
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
 
 class DetailsComponent extends Component
 {
     public $slug;
     public $qty = 1;
+    public $id_product;
+    public $name;
+    public $price;
     
-
-    protected $listener = ['addCart' => 'render', 'addWishlist' => 'render'];
 
     public function mount($slug)
     {
@@ -29,42 +30,27 @@ class DetailsComponent extends Component
 
         $product = Product::where('slug', $this->slug)->first();
 
-        $similares = Product::where('category_id', $product->category_id)
+        $similares = Product::where('subcategory_id', $product->subcategory_id)
                            ->where('id', '!=', $product->id)
-                           ->where('sale_price', '0')
                            ->latest('id')
                            ->take(4)
                            ->get(); 
 
-        $this->setAmountForCheckout();
-
         return view('livewire.details-component', compact('dollar', 'product', 'similares', 'sale'))->layout('layouts.base');
     }
 
-    public function store($product_id, $product_name, $product_price)
+
+    public function store()
     {
-        Cart::instance('cart')->add($product_id,$product_name,$this->qty,$product_price)->associate('App\Models\Product');
-        $this->emit('addCart');
+        $product_cart = CharacteristicProduct::find($this->id_product);
+        $this->name = $product_cart->product->name.' '.$product_cart->product->brand->name.' '.$product_cart->characteristic->name;
+
+        Cart::instance('cart')->add($product_cart->id, $this->name, $this->qty, $product_cart->price)->associate('App\Models\CharacteristicProduct');
+
+        $this->reset('id_product');
     }
 
-    public function addToWishlist($product_id, $product_name, $product_price)
-    {   
-        Cart::instance('wishlist')->add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
 
-        $this->emit('addWishlist');
-    }
-
-    public function removeFromWishlist($product_id)
-    {
-        foreach(Cart::instance('wishlist')->content() as $witem)
-        {
-            if ($witem->rowId == $product_id) 
-            {
-                Cart::instance('wishlist')->remove($witem->rowId);
-                return;
-            }
-        }
-    }
 
     public function increaseQuantityD()
     {
@@ -93,41 +79,5 @@ class DetailsComponent extends Component
         Cart::instance('cart')->update($rowId,$qty);
     }
 
-    public function destroy($rowId)
-    {
-        Cart::instance('cart')->remove($rowId);
-    }
 
-    public function destroyAll()
-    {
-        Cart::instance('cart')->destroy();
-    }
-
-    public function checkout()
-    {
-        if (Auth::check()) {
-            
-            return redirect()->route('checkout');
-
-        } else {
-            
-            return redirect()->route('login');
-        }  
-    }
-
-    public function setAmountForCheckout()
-    {
-        if(!Cart::instance('cart')->count() > 0)
-        {
-            session()->forget('checkout');
-            return;
-        }
-        
-        session()->put('checkout',[
-            'discount' => 0,
-            'subtotal' => Cart::instance('cart')->subtotal(),
-            'tax' => Cart::instance('cart')->tax(),
-            'total' => Cart::instance('cart')->total(),
-        ]);
-    }
 }
