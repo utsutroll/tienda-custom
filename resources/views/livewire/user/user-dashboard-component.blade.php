@@ -1,42 +1,32 @@
-<div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <div class="row page-titles">
-        <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Panel Administrativo</h4>
-        </div>
-        <div class="col-md-7 align-self-center text-right">
-            <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-                    <li class="breadcrumb-item active">Panel Administrativo</li>
-                </ol>
+<div class="p-2 md:p-4 lg:p-4 m-2 md:m-4 lg:m-4">
+    <div class="py-4 px-5 my-2 text-gray-900 rounded-md text-sm border-b border-gray-200">
+        <div class="flex">
+            <div class="flex-1 justify-items-start mt-4 md:mt-0 lg:mt-0">
+                <h4 class="text-lg font-sans font-semibold">Panel Administrativo</h4>
             </div>
+
+            <ul class="flex justify-items-end">
+                <li><a href="{{ route('shop') }}" class="underline font-semibold">Tienda</a></li>
+                <li><span class="mx-2">/</span></li>
+                <li>Panel Administrativo</li>
+            </ul>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Info box -->
-    <!-- ============================================================== -->
-    <div class="card-group">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="d-flex no-block align-items-center">
-                            <div>
-                                <h3><i class="ti-money"></i></h3>
-                                <p class="text-muted">Total Gastado</p>
-                            </div>
-                            <div class="ml-auto">
-                                <h2 class="counter text-primary">{{ $users }}$</h2>
-                            </div>
+
+    <div class="my-6 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-4">
+        <div class="cols-1 md:cols-4 lg:cols-4">
+            <div class="bg-slate-200 rounded-md shadow-md hover:shadow-lg shadow-orange-500 hover:shadow-orange-500/60 transition duration-700 ease-in-out">
+                <div class="p-3 md:p-6 lg:p-6">
+                    <div class="flex items-stretch">
+                        <div class="flex-1 justify-start">
+                            <h3 class="text-2xl"><i class="far fa-money-bill"></i></h3>
+                            <p class="text-base text-gray-400 font-sans">Total Gastado</p>
+                        </div>
+                        <div class="text-end">
+                            <h2 class="text-2xl font-semibold font-sans text-orange-500">{{ $users }}$</h2>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="mt-2 bg-orange-500 rounded-md">
                         <div class="progress">
                             <div class="progress-bar bg-primary" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -44,23 +34,20 @@
                 </div>
             </div>
         </div>
-        <!-- Column -->
-        <!-- Column -->
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="d-flex no-block align-items-center">
-                            <div>
-                                <h3><i class="ti-shopping-cart-full"></i></h3>
-                                <p class="text-muted">Pendientes</p>
-                            </div>
-                            <div class="ml-auto">
-                                <h2 class="counter text-cyan">{{ $pending }}</h2>
-                            </div>
+
+        <div class="cols-1 md:cols-4 lg:cols-4">
+            <div class="bg-slate-200 rounded-md shadow-md hover:shadow-lg shadow-blue-500 hover:shadow-blue-500/60 transition duration-700 ease-in-out">
+                <div class="p-3 md:p-6 lg:p-6">
+                    <div class="flex items-stretch">
+                        <div class="flex-1 justify-start">
+                            <h3 class="text-2xl"><i class="fad fa-shopping-cart"></i></h3>
+                            <p class="text-base text-gray-400 font-sans">Pendientes</p>
+                        </div>
+                        <div class="text-end">
+                            <h2 class="text-2xl font-semibold font-sans text-blue-500">{{ $pending }}</h2>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="mt-2 bg-blue-500 rounded-md">
                         <div class="progress">
                             <div class="progress-bar bg-cyan" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -68,23 +55,20 @@
                 </div>
             </div>
         </div>
-        <!-- Column -->
-        <!-- Column -->
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="d-flex no-block align-items-center">
-                            <div>
-                                <h3><i class="ti-bag"></i></h3>
-                                <p class="text-muted">Entregados</p>
-                            </div>
-                            <div class="ml-auto">
-                                <h2 class="counter text-purple">{{ $delivered }}</h2>
-                            </div>
+
+        <div class="cols-1 md:cols-4 lg:cols-4">
+            <div class="bg-slate-200 rounded-md shadow-md hover:shadow-lg shadow-indigo-500 hover:shadow-indigo-500/60 transition duration-700 ease-in-out">
+                <div class="p-3 md:p-6 lg:p-6">
+                    <div class="flex items-stretch">
+                        <div class="flex-1 justify-start">
+                            <h3 class="text-2xl"><i class="far fa-shopping-bag"></i></h3>
+                            <p class="text-base text-gray-400 font-sans">Entregados</p>
+                        </div>
+                        <div class="text-end">
+                            <h2 class="text-2xl font-semibold font-sans text-indigo-500">{{ $delivered }}</h2>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="mt-2 bg-indigo-500 rounded-md">
                         <div class="progress">
                             <div class="progress-bar bg-purple" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -92,23 +76,20 @@
                 </div>
             </div>
         </div>
-        <!-- Column -->
-        <!-- Column -->
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="d-flex no-block align-items-center">
-                            <div>
-                                <h3><i class="ti-na"></i></h3>
-                                <p class="text-muted">Cancelados</p>
-                            </div>
-                            <div class="ml-auto">
-                                <h2 class="counter text-danger">{{ $canceled }}</h2>
-                            </div>
+
+        <div class="cols-1 md:cols-4 lg:cols-4">
+            <div class="bg-slate-200 rounded-md shadow-md hover:shadow-lg shadow-teal-500 hover:shadow-teal-500/60 transition duration-700 ease-in-out">
+                <div class="p-3 md:p-6 lg:p-6">
+                    <div class="flex items-stretch">
+                        <div class="flex-1 justify-start">
+                            <h3 class="text-2xl"><i class="far fa-ban"></i></h3>
+                            <p class="text-base text-gray-400 font-sans">Cancelados</p>
+                        </div>
+                        <div class="text-end">
+                            <h2 class="text-2xl font-semibold font-sans text-teal-500">{{ $canceled }}</h2>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="mt-2 bg-teal-500 rounded-md">
                         <div class="progress">
                             <div class="progress-bar bg-danger" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -117,49 +98,4 @@
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <!-- column -->
-        <div class="col-lg-6">
-            <div class="card">
-                {{-- <div class="card-body">
-                </div> --}}
-            </div>      
-        </div>       
-    </div>    
-    <!-- ============================================================== -->
-    <!-- End Info box -->
-    <!-- ============================================================== -->
-    @push('scripts')
-
-    <!--morris JavaScript -->
-    <script src="{{ asset('assets/node_modules/raphael/raphael-min.js') }}"></script>
-    <script src="{{ asset('assets/node_modules/morrisjs/morris.min.js') }}"></script>
-
-    <script>
-    $('#liMenu').addClass("active");
-
-    // Morris donut chart
-    $(function () {
-        "use strict";    
-        Morris.Donut({
-            element: 'morris-donut-chart',
-            data: [{
-                label: "Pendientes",
-                value: {{ $pending }},
-
-            }, {
-                label: "Entregados",
-                value: {{ $delivered }},
-            }, {
-                label: "Cancelados",
-                value: {{ $canceled }}
-            }],
-            resize: true,
-            colors:['#20ad73', '#01c0c8', '#e05151']
-        });
-    });
- 
-    </script>
-    @endpush
 </div>

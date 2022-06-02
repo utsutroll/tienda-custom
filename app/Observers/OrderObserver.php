@@ -17,11 +17,11 @@ class OrderObserver
 
             foreach ($orderItem as $o) 
             {
-                $product = CharacteristicProduct::find($o->product_id);
+                $product = CharacteristicProduct::find($o->characteristic_product_id);
 
                 $stock = $product->stock + $o->quantity;
                 
-                CharacteristicProduct::where('id', $o->product_id)
+                CharacteristicProduct::where('id', $o->characteristic_product_id)
                         ->update(['stock' => $stock]);   
             }
         }   

@@ -91,7 +91,7 @@ class AdminBankAccountComponent extends Component
 
     protected $rules = [
         'type_account' => 'required',   
-        'account' => 'required|min:20|numeric|max:20|unique:bank_accounts',   
+        'account' => 'required|numeric|unique:bank_accounts',   
         'cedula' => 'required|min:1|numeric',   
         'phone' => 'required|min:1|numeric',   
         'beneficiary' => 'required',   

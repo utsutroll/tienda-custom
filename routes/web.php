@@ -31,7 +31,6 @@ use App\Http\Livewire\User\UserChangePasswordComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\User\UserOrdersComponent;
 use App\Http\Livewire\User\UserOrdersDetailsComponent;
-use App\Http\Livewire\WishlistComponent;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\Route;
 
@@ -55,7 +54,6 @@ Route::get('/shop', ShopComponent::class)->name('shop');
 Route::get('/about', AboutComponent::class)->name('about');
 Route::get('/contact', ContactComponent::class)->name('contact');
 Route::get('/cart', CartComponent::class)->name('cart');
-Route::get('/wishlist', WishlistComponent::class)->name('wishlist');
 Route::get('/checkout', CheckoutComponent::class)->name('checkout');
 Route::get('/send-payment/{order_id}', SendPaymentComponent::class)->name('sendpayment');
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');

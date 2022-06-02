@@ -1,221 +1,235 @@
-<div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <div class="row page-titles">
-        <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Detalles de la Orden</h4>
-        </div>
-        <div class="col-md-7 align-self-center text-right">
-            <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Tienda</a></li>
-                    <li class="breadcrumb-item"><a href="{{route('user.orders')}}">Listado de Órdenes</a></li>
-                    <li class="breadcrumb-item active">Detalle de la Orden</li>
-                </ol>
+<div class="p-2 md:p-4 lg:p-4 m-2 md:m-4 lg:m-4">
+    <div class="py-4 px-5 my-2 text-gray-900 rounded-md text-sm border-b border-gray-200">
+        <div class="flex flex-col-reverse md:flex-row lg:flex-row">
+            <div class="flex-1 justify-items-start mt-4 md:mt-0 lg:mt-0">
+                <h4 class="text-lg font-sans font-semibold">Detalles de la Orden</h4>
             </div>
 
+            <ul class="flex justify-items-end">
+                <li><a href="{{ route('shop') }}" class="underline font-semibold">Tienda</a></li>
+                <li><span class="mx-2">/</span></li>
+                <li><a href="{{ route('user.orders') }}" class="underline font-semibold">Listado de Órdenes</a></li>
+                <li><span class="mx-2">/</span></li>
+                <li>Detalle de la Orden</li>
+            </ul>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card shadow-md">
-                <div class="card-header">
-                    Detalles del Pedido
-                    <div class="card-actions">
-                        <a class="" data-action="collapse"><i class="ti-minus"></i></a>
-                        <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
-                        <a class="btn-close" data-action="close"><i class="ti-close"></i></a>
-                    </div>
-                </div>
-                <div class="card-body collapse show">
-                    <div class="table-responsive">
-                        <table class="table product-overview">
-                           
-                                <tr>
-                                    <th>Id del Pedido</th>
-                                    <td>{{ $order->id }}</td>
-                                    <th>Fecha del Pedido</th>
-                                    <td>{{ $order->created_at }}</td>
-                                    <th>Estatus</th>
-                                    <td>
-                                        @if ($order->status == "ordered")
-                                            <div class="badge badge-info">Ordenada</div>
-                                        @elseif($order->status == "delivered")
-                                            <div class="badge badge-success">Entregado</div>
-                                        @elseif($order->status == "canceled")
-                                            <div class="badge badge-danger">Cancelado</div>
-                                        @endif
-                                    </td>
-                                    @if ($order->status == "delivered")
-                                    <th>Fecha de Entregas</th>
-                                    <td>{{ $order->delivered_date }}</td>    
-                                    @elseif($order->status == "canceled")
-                                    <th>Fecha de Cancelación</th>
-                                    <td>{{ $order->canceled_date }}</td>   
-                                    @endif
-                                    
-                                </tr>
-                        </table>
-                    </div>
-                </div>
+
+
+    <div class="my-6 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        ID
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Fecha del Pedido
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Estatus
+                    </th>
+                    @if ($order->status == "delivered")
+                    <th scope="col" class="px-6 py-3">
+                        Fecha de Entrega
+                    </th>
+                    @elseif($order->status == "canceled")
+                    <th scope="col" class="px-6 py-3">
+                        Fecha de Cancelación
+                    </th>
+                    @endif
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-4">
+                        {{ $order->id }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $order->created_at }}
+                    </td>
+                    <td>
+                        @if ($order->status == "ordered")
+                        <div
+                            class="p-1 w-24 rounded-md text-center text-base text-white font-medium bg-blue-500 hover:bg-blue-700">
+                            Ordenada</div>
+                        @elseif($order->status == "delivered")
+                        <div
+                            class="p-1 w-24 rounded-md text-center text-base text-white font-medium bg-green-500 hover:bg-green-700">
+                            Entregado</div>
+                        @elseif($order->status == "canceled")
+                        <div
+                            class="p-1 w-24 rounded-md text-center text-base text-white font-medium bg-red-500 hover:bg-red-700">
+                            Cancelado</div>
+                        @endif
+                    </td>
+                    @if ($order->status == "delivered")
+                    <td class="px-6 py-4 text-right">
+                        {{ $order->delivered_date }}
+                    </td>
+                    @elseif($order->status == "canceled")
+                    <td class="px-6 py-4 text-right">
+                        {{ $order->canceled_date }}
+                    </td>
+                    @endif
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="my-6 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="px-4 py-2 sm:px-6">
+            <h3 class="text-lg leading-6 font-medium font-sans text-gray-900">Detalles de los Productos</h3>
+        </div>
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Producto
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Imágen
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Precio
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Cantidad
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        SubTotal
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($order->characteristic_product_order as $item)
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                        {{ $item->characteristic_product->product->name }} {{ $item->characteristic_product->product->brand->name }} {{ $item->characteristic_product->characteristic->name }}
+                    </th>
+                    <td class="px-6 py-4">
+                        <img src="{{ Storage::url($item->characteristic_product->image) }}" width="80">
+                    </td>
+                    <td width="80" class="px-6 py-4">
+                        {{ $item->price }}$
+                    </td>
+                    <td width="150" class="px-6 py-4 text-center">
+                        {{ $item->quantity }}
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        {{ round(($item->price*$item->quantity),2) }}$
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        <hr />
+        <div class="flex justify-end my-3 mr-2">
+            <h5 class="text-base font-bold text-gray-800">Total Pagado: {{ $order->total }}$ ~ {{
+                number_format(round($order->total_bs,2),2)}} Bs</h5>
+        </div>
+    </div>
+
+    <div class="my-6 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="px-4 py-2 sm:px-6">
+            <h3 class="text-lg leading-6 font-medium font-sans text-gray-900">Detalles de la Facturación</h3>
+        </div>
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Cédula
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Nombre y Apellido
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Teléfono
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                        {{ $order->cedula }}
+                    </th>
+                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                        {{ $order->firstname }} {{ $order->lastname }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $order->mobile }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="my-6 bg-white shadow overflow-hidden sm:rounded-lg">
+        <div class="px-4 py-2 sm:px-6">
+            <h3 class="text-lg leading-6 font-medium font-sans text-gray-900">Detalles de la Transacción</h3>
+        </div>
+        <div class="border-t border-gray-200">
+            @if ($order->transactions == null)
+            <div class="tex-center">
+                <h3 class="text-lg leading-6 font-medium font-sans text-gray-900">Los datos del pago no fueron enviados</h3>
             </div>
+            @else
+            <dl>
+                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-md font-medium text-gray-800">Modo de Transacción</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        @if ($order->transactions->mode == "bank")
+                            Transferencia o Pago Móvil
+                        @elseif($order->transactions->mode == "wallet")
+                            Billetera Virtual
+                        @else
+                            Efectivo
+                        @endif
+                    </dd>
+                </div>
+                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-lg font-medium text-gray-800">Estatus</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        @if ($order->transactions->status == "pending")
+                            <div class="p-1 w-24 rounded-md text-center text-base text-white font-medium bg-blue-500 hover:bg-blue-700">Pendiente</div>
+                        @elseif ($order->transactions->status == "approved")
+                            <div class="p-1 w-24 rounded-md text-center text-base text-white font-medium bg-green-500 hover:bg-green-700">Aprobado</div>
+                        @elseif ($order->transactions->status == "declined")
+                            <div class="p-1 w-24 rounded-md text-center text-base text-white font-medium bg-red-500 hover:bg-red-700">Rechazada</div>
+                        @endif
+                    </dd>
+                </div>
+                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-md font-medium text-gray-800">Fecha de la Transacción</dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $order->transactions->created_at }}</dd>
+                </div>
+                @if ($order->transactions->mode != "money")
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-lg font-medium text-gray-800">N° de Referencia</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $order->transactions->reference }}</dd>
+                    </div>
+                    @isset($order->transactions->url)
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-lg font-medium text-gray-800">Captura</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            <img src="{{Storage::url($order->transactions->url)}}" width="150">    
+                        </dd>
+                    </div>
+                    @endisset
+                @endif
+            </dl>
+            @endif
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card shadow-md b-1">
-                <div class="card-header">
-                    Productos Ordenados
-                    <div class="card-actions">
-                        <a class="" data-action="collapse"><i class="ti-minus"></i></a>
-                        <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
-                        <a class="btn-close" data-action="close"><i class="ti-close"></i></a>
-                    </div>
-                </div>
-                <div class="card-body collapse show">
-                    <div class="table-responsive">
-                        <table class="table product-overview">
-                            <thead>
-                                <tr>
-                                    <th>Imagen</th>
-                                    <th>Información del producto</th>
-                                    <th>Precio</th>
-                                    <th>Cantidad</th>
-                                    <th style="text-align:center">SubTotal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($order->orderItems as $item)
-                                <tr>
-                                    <td width="150"><img src="{{Storage::url($item->product->image->url)}}" alt="{{$item->product->name}}" width="80"></td>
-                                    <td width="550">
-                                        <h5 class="font-500">{{$item->product->name}}</h5>
-                                        <p>{{$item->product->details}}</p>
-                                    </td>
-                                    <td>{{$item->price}}$</td>
-                                    <td width="80">{{ $item->quantity }}</td>
-                                    <td width="150" align="center" class="font-500">{{round(($item->price*$item->quantity),2)}}$</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <hr/>
-                        <div class="form-group d-flex justify-content-end my-3">
-                            <h5 class="text-base font-bold text-gray-800">Total Pagado: {{ $order->total }}$ ~ {{ number_format(round($order->total_bs,2),2)}} Bs</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    Detalles de la Facturación
-                    <div class="card-actions">
-                        <a class="" data-action="collapse"><i class="ti-minus"></i></a>
-                        <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
-                        <a class="btn-close" data-action="close"><i class="ti-close"></i></a>
-                    </div>
-                </div>
-                <div class="card-body collapse show">
-                    <div class="table-responsive">
-                        <table class="table product-overview">
-                            <thead>
-                                <th>Cédula</th>
-                                <th>Nombre y Apellido</th>
-                                <th>Teléfono</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{ $order->cedula }}</td>
-                                    <td>{{ $order->firstname }} {{ $order->lastname }}</td>
-                                    <td>{{ $order->mobile }}</td>
-                                </tr>    
-                            </tbody>    
-                        </table>
-                    </div> 
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card shadow-md b-1">
-                <div class="card-header">
-                    Detalles de la Transacción
-                    <div class="card-actions">
-                        <a class="" data-action="collapse"><i class="ti-minus"></i></a>
-                        <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
-                        <a class="btn-close" data-action="close"><i class="ti-close"></i></a>
-                    </div>
-                </div>
-                <div class="card-body collapse show">
-                    <div class="table-responsive">
-                        <table class="table product-overview">
-                            @if ($order->transactions == null)
-                                <tr class="text-center">
-                                    <td>Los datos del pago no fueron enviados</td>
-                                </tr>
-                            @else     
-                                <tr>
-                                    <th>Modo de Transacción</th>
-                                    <td>
-                                        @if ($order->transactions->mode == "bank")
-                                            Transferencia o Pago Móvil
-                                        @elseif($order->transactions->mode == "wallet")
-                                            Billetera Virtual
-                                        @else
-                                            Efectivo    
-                                        @endif
-                                    </td>
-                                </tr>    
-                                <tr>
-                                    <th>Estatus</th>
-                                    <td>
-                                        @if ($order->transactions->status == "pending")
-                                            <div class="badge badge-info">Pendiente</div>    
-                                        @elseif ($order->transactions->status == "approved")
-                                            <div class="badge badge-success">Aprobado</div>
-                                        @elseif ($order->transactions->status == "declined")
-                                            <div class="badge badge-danger">Rechazada</div>
-                                        @endif
-                                    </td>
-                                </tr>    
-                                <tr>
-                                    <th>Fecha de la Transacción</th>
-                                    <td>{{ $order->transactions->created_at }}</td>
-                                </tr>    
-                                @if ($order->transactions->mode != "money")    
-                                    <tr>
-                                        <th>Referencia</th>
-                                            <td>{{ $order->transactions->reference }}</td>
-                                        </tr>    
-                                     <tr>
-                                        <th>Captura</th>
-                                        <td width="150"><img src="{{Storage::url($order->transactions->url)}}" width="250"></td>
-                                    </tr>
-                                @endif
-                            @endif    
-                        </table> 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     @push('scripts')
     <!-- This is data table -->
     <script src="{{url('assets/node_modules/datatables/jquery.dataTables.min.js')}}"></script>
 
     <script type="text/javascript">
-          
-    $('#liOrders').addClass("active");
+        $('#liOrders').addClass("active");
 
     window.livewire.on('orderUpdate',()=>{
 

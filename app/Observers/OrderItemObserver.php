@@ -10,7 +10,7 @@ class OrderItemObserver
     
     public function created(CharacteristicProductOrder $orderItem)
     {
-        $product = CharacteristicProduct::find($orderItem->product_id);
+        $product = CharacteristicProduct::find($orderItem->characteristic_product_id);
 
         $stock = $product->stock - $orderItem->quantity;
         

@@ -30,6 +30,8 @@
         <!--Toaster Popup message CSS -->
         <link href="{{asset('/assets/node_modules/toast-master/css/jquery.toast.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.1.0/dist/flowbite.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"/>
         @stack('css')
         <style>
             .notify-m{
@@ -72,7 +74,7 @@
         
         <script src="{{ url('dist/new/js/script.js') }}"></script>
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans">
 
         <div class="preloader">
             <div class="loader">
@@ -82,14 +84,14 @@
             </div>
         </div>
 
-        <div class="min-h-screen m-auto">
-            @include('livewire.navigation')
+
+        @include('livewire.navigation')
             
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
+
 
         @stack('modals')
 
@@ -111,6 +113,9 @@
         <!-- Popup message jquery -->
         <script src="{{asset('/assets/node_modules/toast-master/js/jquery.toast.js')}}"></script>
         <script src="https://unpkg.com/@themesberg/flowbite@1.1.0/dist/flowbite.bundle.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        
         @stack('scripts')
         <script>
             $(function () {
@@ -130,9 +135,18 @@
                 });
             });
 
-            document.getElementById('togglemebutton').onclick = function() {
+            /* document.getElementById('togglemebutton').onclick = function() {
                 document.getElementById("resultnav").classList.toggle("hidden");
+            } */
+
+            document.getElementById('bar').onclick = function() {
+                document.getElementById("navbar").classList.toggle("active");
             }
+
+            document.getElementById('close').onclick = function() {
+                document.getElementById("navbar").classList.toggle("active");
+            }
+
         </script>
     </body>
 </html>

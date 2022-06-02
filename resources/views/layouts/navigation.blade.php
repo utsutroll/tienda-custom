@@ -12,8 +12,8 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Menu Principal') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -33,7 +33,11 @@
                         </button>
                     </x-slot>
 
+
                     <x-slot name="content">
+                        <x-dropdown-link :href="route('profile.show')">
+                            {{ __('Mi Perfil') }}
+                        </x-dropdown-link>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -41,7 +45,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Cerrar Sesión') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>

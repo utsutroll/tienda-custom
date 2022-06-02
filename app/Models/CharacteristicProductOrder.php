@@ -9,15 +9,15 @@ class CharacteristicProductOrder extends Model
 {
     use HasFactory;
 
-    protected $table = "order_items";
+    protected $table = "characteristic_product_order";
 
     public function order()
     {
         return $this->belongsTo(Order::class);
     }
 
-    public function product()
+    public function characteristic_product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(CharacteristicProduct::class);
     }
 }

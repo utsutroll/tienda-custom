@@ -3,16 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Events\OrderEvent;
+use App\Models\CharacteristicProduct;
 use App\Models\DollarRate;
 use App\Models\Order;
 use App\Models\CharacteristicProductOrder;
-use App\Models\Product;
-use App\Models\User;
-use App\Notifications\OrderNotification;
 use Livewire\Component;
 use Cart;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
 
 class CheckoutComponent extends Component
 {   
@@ -52,10 +49,10 @@ class CheckoutComponent extends Component
 
         foreach(Cart::instance('cart')->content() as $item)
         {
-            $stock_product = Product::find($item->id);
+            $stock_product = CharacteristicProduct::find($item->id);
             if ($stock_product->stock < $item->qty) {
                 
-               session()->flash('info', 'El producto: '.$stock_product->name.' se quedó sin stock. Hay Disponible: '.$stock_product->stock.' ');
+               session()->flash('info', 'El producto: '.$stock_product->product->name.' '.$stock_product->product->brand->name.' '.$stock_product->characteristic->name.' se quedó sin stock. Hay Disponible: '.$stock_product->stock.' ');
                return redirect()->to('cart'); 
                die();
             }
@@ -76,7 +73,7 @@ class CheckoutComponent extends Component
         foreach(Cart::instance('cart')->content() as $item)
         {
             $orderItem = new CharacteristicProductOrder();
-            $orderItem->product_id = $item->id;
+            $orderItem->characteristic_product_id = $item->id;
             $orderItem->order_id = $order->id;
             $orderItem->price = $item->price;
             $orderItem->quantity = $item->qty;

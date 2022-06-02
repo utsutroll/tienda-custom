@@ -14,13 +14,19 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ url('dist/new/css/styles.css') }}">
+        <link rel="stylesheet" href="{{asset('dist/css/style-custom.css')}}">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+            @if (Auth::user()->utype === 'ADM')
+                @include('layouts.navigation')
+            @else
+                @include('livewire.navigation')
+            @endif
 
             <!-- Page Heading -->
             <header class="bg-white shadow">
@@ -34,5 +40,7 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <script src="{{ asset('dist/new/js/script.js') }}"></script>
     </body>
 </html>
