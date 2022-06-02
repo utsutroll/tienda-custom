@@ -135,9 +135,9 @@
                 });
             });
 
-            /* document.getElementById('togglemebutton').onclick = function() {
+            document.getElementById('user-menu').onclick = function() {
                 document.getElementById("resultnav").classList.toggle("hidden");
-            } */
+            }
 
             document.getElementById('bar').onclick = function() {
                 document.getElementById("navbar").classList.toggle("active");

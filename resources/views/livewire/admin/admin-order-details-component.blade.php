@@ -89,16 +89,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($order->orderItems as $item)
+                                @foreach($order->characteristic_product_order as $item) 
                                 <tr>
-                                    <td width="150"><img src="{{Storage::url($item->product->image->url)}}" alt="{{$item->product->name}}" width="80"></td>
+                                    <td width="150"><img src="{{ Storage::url($item->characteristic_product->image) }}" width="80"></td>
                                     <td width="550">
-                                        <h5 class="font-500">{{$item->product->name}}</h5>
-                                        <p>{{$item->product->details}}</p>
+                                        <h5 class="font-500">{{ $item->characteristic_product->product->name }} {{ $item->characteristic_product->product->brand->name }} {{ $item->characteristic_product->characteristic->name }}</h5>
                                     </td>
                                     <td>{{$item->price}}$</td>
                                     <td width="80">{{ $item->quantity }}</td>
-                                    <td width="150" align="center" class="font-500">{{round(($item->price*$item->quantity),2)}}$</td>
+                                    <td width="150" align="center" class="font-500">{{ round(($item->price*$item->quantity),2) }}$</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -209,9 +208,15 @@
                                 @if ($order->transactions->status == "pending")
                                     <tr>
                                         <th><div class="form-group"><input type="text" wire:model.defer="observation" class="form-control" placeholder="Observación"></div></th>
-                                        <td>
-                                            <button class="btn btn-success ml-2" wire:click.prevent="approvePayment">Aprobar Pago</button>    
-                                            <button class="btn btn-danger" wire:click.prevent="declinedPayment">Rechazar Pago</button>    
+                                        <td colspan="2">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <button class="btn btn-success btn-small ml-2" wire:click.prevent="approvePayment">Aprobar Pago</button>            
+                                                </div>
+                                                <div class="col-6">
+                                                    <button class="btn btn-danger btn-small" wire:click.prevent="declinedPayment">Rechazar Pago</button>
+                                                </div>
+                                            </div>    
                                         </td>
                                     </tr>
                                 @endif    
