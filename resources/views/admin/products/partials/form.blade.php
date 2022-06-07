@@ -66,7 +66,17 @@
                     <label for="subcategory" class="form-label">Subategoría</label>
                     
                     @isset($product)
-                    {!! Form::select('subcategory_id', $subcategories, 'Selecciones', ['class'=> 'form-control select2', 'id' => 'subcategory_id', 'data-placeholder' => 'Seleccione']) !!}    
+                    {{-- {!! Form::select('subcategory_id', $subcategories, 'Selecciones', ['class'=> 'form-control select2', 'id' => 'subcategory_id', 'data-placeholder' => 'Seleccione']) !!} --}}    
+                    
+                    <select name="subcategory_id" id="subcategory_id" class="form-control select2" data-placeholder='Seleccione'>
+                        @foreach ($subcategories as $sub)
+                            @if ($product->subcategory_id == $sub->id)
+                                <option selected value="{{ $sub->id }}">{{ $sub->name }}</option>
+                            @else
+                                <option value="{{ $sub->id }}">{{ $sub->name }}</option>
+                            @endif
+                        @endforeach
+                    </select>
                     @else
                     <select class="form-control select2" name="subcategory_id" id="subcategory_id">
                     </select>

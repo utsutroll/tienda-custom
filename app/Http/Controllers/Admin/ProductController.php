@@ -125,7 +125,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::pluck('name', 'id');
-        $subcategories = Subcategory::pluck('name', 'id');
+        $subcategories = Subcategory::all();
         $brands = Brand::pluck('name', 'id');
         $characteristics = Characteristic::pluck('name', 'id');
 
