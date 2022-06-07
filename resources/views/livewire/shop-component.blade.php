@@ -36,63 +36,64 @@
         </a>
     </div>
 
-    <div class="p-3 mb-3 bg-gray-100">
-        <div class="grid grid-cols-8 gap-4">
-            <div class="col-start-4 col-span-2 flex outline-none">
-                <input type="search" id="search_box" wire:model="search" class="border-t-0 border-x-0 border-solid border-b-2 focus:outline-none" placeholder="Buscar &hellip;" />
-                @if ($search !== '')
-                    <button class="btn btn-outline-secondary border-0 btn-sm waves-effect waves-light" wire:click="$set('search', '')" type="button"><span class="btn-label"><i class="fa fa-times"></i></span></button>    
-                @endif
-               
-                <div class="ml-1 mt-1">
-                    <button class="btn btn-outline-secondary border-0" type="button" wire:click="$set('buscar', 1)"><i class="fa fa-search text-xl"></i></button>
-                </div>
-            </div> 
-        </div>            
+    <div class="p-3 mb-3 bg-slate-100 shadow-md shadow-black">
+        <div class="flex flex-row justify-center">
+            <input type="search" id="search_box" wire:model="search" class="border-t-0 border-l-0 border-r-0 border-b-2 focus:outline-none focus:ring-0" placeholder="Buscar &hellip;" />
+            @if ($search !== '')
+                <button class="btn btn-outline-secondary border-0 btn-sm waves-effect waves-light" wire:click="$set('search', '')" type="button"><span class="btn-label"><i class="fa fa-times"></i></span></button>    
+            @endif
+           
+            <div class="ml-1 mt-1">
+                <button class="btn btn-outline-secondary border-0" type="button" wire:click="$set('buscar', 1)"><i class="fa fa-search text-xl"></i></button>
+            </div>
+        </div>           
     </div>
 
-    <section id="product1" class="section-p1">
-        <h2>Productos destacados</h2>
-
-        @if (count($products) > 0)
-
-        <div class="pro-container">
-            @foreach ($products as $p)
-            <div class="pro">
-                @isset ($p->image->url)
-                <a href="{{ route('product.details',['slug'=>$p->slug]) }}">
-                    <img loading="lazy" src="{{ Storage::url($p->image->url) }}" alt="{{ $p->name }}">
-                </a>    
-                @endisset
-                <div class="des">
-                    <span>{{ $p->brand->name }}</span>
-                    <a href="{{ route('product.details',['slug'=>$p->slug]) }}"><h5>{{ $p->name }}</h5></a>
-                    <h4 data-tooltip-target="tooltip-top" data-tooltip-placement="top" class="text-center">{{ $p->price }}$</h4>
-                    <div id="tooltip-top" role="tooltip" class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 invisible" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(918px, 449px, 0px);">
-                        @foreach ($dollar as $d){{ number_format($d->price*$p->price, 2) }}@endforeach Bs
-                        <div class="tooltip-arrow" data-popper-arrow="" style="position: absolute; left: 0px; transform: translate3d(54px, 0px, 0px);"></div>
+    <div class="bg-white">
+        <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+            @if (count($products) > 0)
+            <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                @foreach ($products as $p)
+                <div class="group relative border border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
+                    <div class="w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                        @isset ($p->image->url)
+                        <a href="{{route('product.details',['slug'=>$p->slug])}}">
+                            <img loading="lazy" src="{{Storage::url($p->image->url)}}" alt="{{$p->name}}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
+                        </a>
+                        @endisset
+                    </div>
+                    <div class="py-4 px-4 flex-row">
+                        <div>
+                            <p class="my-2 text-sm text-gray-500">{{ $p->brand->name }}</p>
+                            <h3 class="text-sm font-medium text-gray-900">
+                                <a href="{{route('product.details',['slug'=>$p->slug])}}">
+                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    {{ $p->name }}
+                                </a>
+                            </h3>
+                        </div>
+                        <p class="text-md mt-2 text-center font-semibold text-teal-600">{{ $p->price }}$</p>
+                        <h6 class="text-xs text-center text-gray-600">~@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</h6>
                     </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
+            @elseif (count($products) == 0 & $search !== '')
+            <div class="my-4 text-center">
+                <h5 class="text-base text-gray-800">No hay Resultado para la Busqueda "{{$search}}"</h5>
+            </div>
+            @else
+            <div class="my-4 text-center">
+                <h5 class="text-base text-gray-800">No hay Productos en Stock</h5>
+            </div>
+            @endif
+            <div class="px-4 py-3 justify-self-end sm:px-6">               
+                {{$products->links()}}
+            </div>
         </div>
-        @elseif (count($products) == 0 & $search !== '')
-        <div class="my-4 text-center">
-            <h5 class="text-base text-gray-800">No hay Resultado para la Busqueda "{{$search}}"</h5>
-        </div>
-        @else
-        <div class="my-4 text-center">
-            <h5 class="text-base text-gray-800">No hay Productos en Stock</h5>
-        </div>
-        @endif
-        <div class="px-4 py-3 justify-self-end sm:px-6">
-                        
-            {{$products->links()}}
-
-        </div>
-    </section>
+    </div>
     
-    {{-- @livewire('offer') --}}
+    @livewire('offer')
 
     @push('css')
 	    <link rel="stylesheet" type="text/css" href="{{ asset('dist/offer_slider/css/owl.carousel.min.css') }}">

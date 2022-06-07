@@ -76,37 +76,45 @@
         </div>
     </section>
 
-    <section id="product1" class="section-p1">
-        <h2>Productos destacados</h2>
-
-        @if (count($products) > 0)
-
-        <div class="pro-container">
-            @foreach ($products as $p)
-            <div class="pro">
-                @isset ($p->image->url)
-                <a href="{{route('product.details',['slug'=>$p->slug])}}">
-                    <img loading="lazy" src="{{Storage::url($p->image->url)}}" alt="{{$p->name}}">
-                </a>
-                @endisset
-                <div class="des">
-                    <span>{{ $p->brand->name }}</span>
-                    <a href="{{route('product.details',['slug'=>$p->slug])}}"><h5>{{$p->name}}</h5></a>
-                    <h4 data-tooltip-target="tooltip-top" data-tooltip-placement="top" class="text-center">{{ $p->price }}$</h4>
-                    <div id="tooltip-top" role="tooltip" class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 invisible" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(918px, 449px, 0px);">
-                        @foreach ($dollar as $d){{ number_format($d->price*$p->price, 2) }}@endforeach Bs
-                        <div class="tooltip-arrow" data-popper-arrow="" style="position: absolute; left: 0px; transform: translate3d(54px, 0px, 0px);"></div>
+    <div class="bg-white">
+        <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+            <h2 class="text-2xl font-extrabold tracking-tight text-gray-900">Productos Destacados</h2>
+      
+            @if (count($products) > 0)
+            <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                @foreach ($products as $p)
+                <div class="group relative border border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
+                    <div class="w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                        @isset ($p->image->url)
+                        <a href="{{route('product.details',['slug'=>$p->slug])}}">
+                            <img loading="lazy" src="{{Storage::url($p->image->url)}}" alt="{{$p->name}}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
+                        </a>
+                        @endisset
+                    </div>
+                    <div class="py-4 px-4 flex-row">
+                        <div>
+                            <p class="my-2 text-sm text-gray-500">{{ $p->brand->name }}</p>
+                            <h3 class="text-sm font-medium text-gray-900">
+                                <a href="{{route('product.details',['slug'=>$p->slug])}}">
+                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    {{ $p->name }}
+                                </a>
+                            </h3>
+                        </div>
+                        <p class="text-md mt-2 text-center font-semibold text-teal-600">{{ $p->price }}$</p>
+                        <h6 class="text-xs text-center text-gray-600">~@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</h6>
                     </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
+            @else
+                <div class="my-4 text-center">
+                    <h5 class="text-base text-gray-800">No hay Productos en Stock</h5>
+                </div>
+            @endif
         </div>
-        @else
-        <div class="my-4 text-center">
-            <h5 class="text-base text-gray-800">No hay Productos en Stock</h5>
-        </div>
-        @endif
-    </section>
+    </div>
+
 
     <section id="banner" class="section-m1">
         <h4>Repair Services </h4>
@@ -114,40 +122,44 @@
         <button class="normal">Explore More</button>
     </section>
 
-    <section id="product1" class="section-p1">
-        <h2>Nuevos productos</h2>
-
-        @if (count($newproducts) > 0)
-
-        <div class="pro-container">
-            @foreach ($newproducts as $np)
-            <div class="pro">
-                @isset ($np->image->url)
-                <a href="{{route('product.details',['slug'=>$np->slug])}}">
-                    <img loading="lazy" src="{{Storage::url($np->image->url)}}" alt="{{$np->name}}">
-                </a>
-                @endisset
-                <div class="des">
-                    <span>{{ $np->brand->name }}</span>
-                    <a href="{{route('product.details',['slug'=>$np->slug])}}"><h5>{{$np->name}}</h5></a>
-                    <h4 data-tooltip-target="tooltip-top" data-tooltip-placement="top" class="text-center">{{ $np->price }}$</h4>
-                    <div id="tooltip-top" role="tooltip" class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 invisible" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(918px, 449px, 0px);">
-                        @foreach ($dollar as $d){{ number_format($d->price*$np->price, 2) }}@endforeach Bs
-                        <div class="tooltip-arrow" data-popper-arrow="" style="position: absolute; left: 0px; transform: translate3d(54px, 0px, 0px);"></div>
+    <div class="bg-white">
+        <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+            <h2 class="text-2xl text-center font-extrabold tracking-tight text-gray-900">Nuevos productos</h2>
+      
+            @if (count($newproducts) > 0)
+            <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                @foreach ($newproducts as $np)
+                <div class="group relative border border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
+                    <div class="w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 overflow-hidden lg:h-80 lg:aspect-none">
+                        @isset ($np->image->url)
+                        <a href="{{route('product.details',['slug'=>$np->slug])}}">
+                            <img loading="lazy" src="{{Storage::url($np->image->url)}}" alt="{{$np->name}}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
+                        </a>
+                        @endisset
+                    </div>
+                    <div class="py-4 px-4 flex-row">
+                        <div>
+                            <p class="my-2 text-sm text-gray-500">{{ $np->brand->name }}</p>
+                            <h3 class="text-sm font-medium text-gray-900">
+                                <a href="{{route('product.details',['slug'=>$np->slug])}}">
+                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    {{ $np->name }}
+                                </a>
+                            </h3>   
+                        </div>
+                        <p class="text-md mt-2 text-center font-semibold text-teal-600">{{ $np->price }}$</p>
+                        <h6 class="text-xs text-center text-gray-600">~@foreach ($dollar as $d){{ number_format($d->price * $np->price, 2) }}@endforeach Bs</h6>
                     </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
+            @else
+                <div class="my-4 text-center">
+                    <h5 class="text-base text-gray-800">No hay Productos en Stock</h5>
+                </div>
+            @endif
         </div>
-        @else
-        <div class="my-4 text-center">
-            <h5 class="text-base text-gray-800">No hay Productos en Stock</h5>
-        </div>
-        @endif
-            
-        </div>
-    </section>
-
+    </div>
 </div>
 
 @push('scripts')

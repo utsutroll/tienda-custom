@@ -20,6 +20,10 @@ class CategoryComponent extends Component
     public $entries = 30;
     public $buscar;
 
+    public $filter = [
+        'subcategory' => []
+    ];
+
     protected $paginationTheme = "tailwind";
 
     public function updatingSearch(){
@@ -31,24 +35,33 @@ class CategoryComponent extends Component
         'entries' => ['except' => '30']
     ];
 
+    public function getCategoriesProperty() {
 
-    public function mount($category_slug)
-    {
-        $this->category_slug = $category_slug;
+        return Category::all();
     }
+
+    public function getResultsProperty() {
+
+        if (empty($this->filter['subcategory'])) {
+            return Product::where('name', 'LIKE', "%{$this->search}%")
+                            ->paginate($this->entries);
+        } 
+        $this->filter['subcategory'] = array_filter($this->filter['subcategory']);
+        return Product::whereIn('subcategory_id', array_keys($this->filter['subcategory']))->paginate($this->entries);
+        
+    }
+
 
     public function render()
     {
         $dollar = DollarRate::all();
         $sliders = Slider::all();
         $business_partners = BusinessPartner::all();
-        $categories = Category::all();
-        $categori = Category::where('slug',$this->category_slug)->first();
-        $category_id = $categori->id;
-        $this->category_name = $categori->name;
-
-
-        if ($this->buscar == 1 ) {
+        /*$categories = Category::all();
+        
+        $products = Product::where('name', 'LIKE', "%{$this->search}%")
+                                ->paginate($this->entries);
+         if ($this->buscar == 1 ) {
             $productss = Product::where('name', 'LIKE', "%{$this->search}%")
                                 ->where('sale_price', '0')
                                 ->where('category_id', $category_id)
@@ -59,10 +72,10 @@ class CategoryComponent extends Component
             $productss = Product::where('category_id', $category_id)
                                 ->where('sale_price', '0')
                                 ->paginate($this->entries);
-        }
+        } */
             
 
-        return view('livewire.category-component', compact('productss', 'dollar', 'categories', 'sliders', 'business_partners'))->layout('layouts.base');
+        return view('livewire.category-component', compact('dollar', 'sliders', 'business_partners'))->layout('layouts.base');
     }
 
 }
