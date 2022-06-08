@@ -86,6 +86,7 @@
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
             @livewire('admin.admin-update-price-component') 
+            @livewire('admin.admin-update-price-char-component') 
             @livewire('admin.admin-update-dollar-component')
             <!-- ============================================================== -->
             <!-- Right sidebar -->

@@ -87,10 +87,11 @@
                 </li>                
                 <li class="nav-small-cap">--- Actualizar $</li>
                 <li> 
-                    <a class="waves-effect waves-dark" aria-expanded="false" href="javascript:void(0)">
-                        <i class="fa fa-refresh"></i>
-                        <span class="hide-menu" data-toggle="modal" data-target="#modalUpdatePrice">Precio de Producto</span>
-                    </a>
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-refresh"></i><span class="hide-menu">Actualizar Precios</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="javascript:void(0)" class="hide-menu" data-toggle="modal" data-target="#modalUpdatePrice">Precio General</a></li>
+                        <li><a href="javascript:void(0)" class="hide-menu" data-toggle="modal" data-target="#modalUpdatePriceChar">Por Característica</a></li>
+                    </ul>
                 </li>
                 <li> 
                     <a class="waves-effect waves-dark" aria-expanded="false" href="javascript:void(0)"> 
