@@ -13,20 +13,26 @@
         </div>    
         
         <div class="single-pro-details">
-            <h4>{{ $product->name }} {{ $product->brand->name }}</h4>
+            <h4 class="text-2xl text-black font-semibold">{{ $product->name }} {{ $product->brand->name }}</h4>
             <h2>{{ $product->price }}$</h2> 
-            <h4>Detalles del Producto</h4>
+            <h4 class="text-lg text-black font-semibold">Detalles del Producto</h4>
             <span>{{ $product->details }}</span>
          
             <form wire:submit.prevent="store" class="mt-8">
                 <ul class="block">
                     @foreach ($product->characteristics_product as $pro_char)
                         @if ($pro_char->stock > 0)
-                            <li class="inline-block">
-                                <div class="p-2 mr-2 border-2 border-solid rounded-lg">
+
+                            <li class="inline-block mb-2">
+                                <div class="p-4 mr-2 border-2 border-solid rounded-lg">
                                     <input type="radio" class="w-4 h-4" wire:model.defer="id_product" name="id_product" value="{{ $pro_char->id }}">
                                     <span class="font-bold">{{ $pro_char->characteristic->name }}</span>
-                                    <span class="font-bold ml-4 inline-block">{{ $pro_char->price }} $</span>
+                                    @if ($pro_char->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())
+                                        <span class="font-bold ml-4 font-sans">{{ $pro_char->sale_price }} $</span>
+                                        <del><span class="text-sm text-gray-600 font-sans">{{ $pro_char->price }} $</span></del>
+                                    @else
+                                        <span class="font-bold ml-4 inline-block font-sans">{{ $pro_char->price }} $</span>
+                                    @endif    
                                 </div>
                             </li>
                         @endif
@@ -43,18 +49,13 @@
                         <span class="m-auto">+</span>
                     </button>
                 </div> 
-                <button class="rounded-lg p-4" type="submit" wire:loading.attr="disabled" data-toggle="tooltip" title="" data-original-title="Añadir al carrito"><i class="fas fa-cart-plus"></i> <button>
-                {{-- @if ($product->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())
-                <button class="btn btn-dark btn-rounded m-r-5" wire:click.prevent="store({{$product->id}}, '{{$product->name}}', {{$product->sale_price}})" wire:loading.attr="disabled" data-toggle="tooltip" title="" data-original-title="Añadir al carrito"><i class="ti-shopping-cart"></i> <button>  
-                @else
-                <button class="btn btn-dark btn-rounded m-r-5" wire:click.prevent="store({{$product->id}}, '{{$product->name}}', {{$product->price}})" wire:loading.attr="disabled" data-toggle="tooltip" title="" data-original-title="Añadir al carrito"><i class="ti-shopping-cart"></i> <button>  
-                @endif  --}}   
+                <button class="rounded-lg p-4" type="submit" wire:loading.attr="disabled" title="Añadir al carrito"><i class="fas fa-cart-plus"></i> <button>  
             </form> 
         </div>
     </section>
     
-    <section id="product1" class="section-p1">
-        <h2>Productos Similares</h2>
+    <section id="product1" class="section-p1 mb-4">
+        <h2 class="text-2xl text-black font-bold font-sans">Productos Similares</h2>
 
         @if (count($similares) > 0)
         <div class="pro-container">
@@ -81,3 +82,11 @@
         @endif
     </section>
 </div>
+
+@push('scripts')
+    <script>
+        document.getElementsByClassName('small-img').onclick = function() {
+            document.getElementById('MainImg').src = document.getElementsByClassName('small-img').src;
+        }
+    </script>
+@endpush

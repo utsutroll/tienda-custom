@@ -11,7 +11,7 @@ class Offer extends Component
 {
     public function render()
     {   
-        $sproducts = CharacteristicProduct::where('sale_price', '>', 0)->inRandomOrder()->get()->take(8);
+        $sproducts = CharacteristicProduct::all()->where('sale_price', '>', 0)->take(8);
         
         if($sproducts->count() < 0)
         {

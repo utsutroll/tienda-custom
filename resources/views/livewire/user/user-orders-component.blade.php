@@ -127,7 +127,7 @@
             $('#table').DataTable({
                 language: {
                     lengthMenu: 'Mostrar _MENU_ registros por página',
-                    zeroRecords: 'No se ha encontrado nada - lo siento',
+                    zeroRecords: 'No se han encontrado registros',
                     info: 'Mostrar página _PAGE_ de _PAGES_',
                     infoEmpty: 'No hay registros disponibles',
                     infoFiltered: '(filtrado de _MAX_ total de registros)',

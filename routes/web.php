@@ -31,6 +31,7 @@ use App\Http\Livewire\User\UserChangePasswordComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\User\UserOrdersComponent;
 use App\Http\Livewire\User\UserOrdersDetailsComponent;
+use App\Models\CharacteristicProduct;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\Route;
 
@@ -108,6 +109,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
         $subcategories = Subcategory::where('category_id',$id)->get();
         return response()->json($subcategories);
     });
+
+    Route::post('delete_char/{id}', function ($id) {
+        CharacteristicProduct::where('characteristic_id', $id)->delete();
+        return response()->json('La característica se eliminó con éxito');
+    });
+
 
     /* Export PDF */
     Route::get('/admin/export-stock-pdf', [ProductEntryController::class, 'exportStockPDF'])->name('admin.stock.pdf');

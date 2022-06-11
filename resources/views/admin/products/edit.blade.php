@@ -169,8 +169,28 @@
                 $('#subcategory_id').empty();
             }
         });
-    });
 
+        $('#delete_id').on('click', function (event) {
+            var button = $(event.relatedTarget) 
+            var char_id = button.data('charid') 
+            $.ajax({
+                url: '/delete_char/'+char_id,
+                type: "post",
+                data : {"_token":"{{ csrf_token() }}"},
+                success:function(data){
+                    $.toast({
+                        heading: 'Notificación',
+                        text: 'Eliminado con exito',
+                        position: 'top-right',
+                        loaderBg:'#ff6849',
+                        icon: 'success',
+                        hideAfter: 3500, 
+                        stack: 6
+                    });
+                }
+            });        
+        });
+    });
     $(document).ready(function() {
         
         $('#activar').change(function(){ 
@@ -180,5 +200,6 @@
 
         });
     });
+    
     </script>
 @endpush    

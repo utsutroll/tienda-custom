@@ -161,6 +161,9 @@
                 <input type="file" name="image[]" id="image" class="form-control"/>
             </div>
         </div>
+        <div class="col-2">
+            <a class="btn btn-danger btn-block" id="delete_id" href="javascript:void(0)" data-charid="{{$c->characteristic_id}}">Eliminar</a> 
+        </div>
         @endforeach
         </div>
     </div>

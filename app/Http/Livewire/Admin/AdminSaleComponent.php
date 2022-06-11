@@ -2,43 +2,28 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\CharacteristicProduct;
 use App\Models\Sale;
+use App\Models\Subcategory;
 use Carbon\Carbon;
 use Livewire\Component;
-use Livewire\WithPagination;
-
 class AdminSaleComponent extends Component
 {
     /* Variables */
     public $status;
     public $sale_date;
     public $views = 'table';
-    public $search = '';
-    public $entries = '5';
-    public $sort = 'id';
-    public $direcction = 'desc';
-    public $category;
-    public $ssearch ='';
-    public $sprice;
+    public $producto;
+    public $nombre = '';
+    public $precio;
+    public $price;
+    public $product_id;
     public $sproduct_id;
+
     /* End Variables */
 
     /* Table */
 
-    use WithPagination;
-
-    protected $paginationTheme = "bootstrap";
-
-    public function updatingSearch(){
-            $this->resetPage();
-    }
-
-    protected $queryString = [
-        'search' => ['except' => ''],
-        'entries' => ['except' => '5']
-    ];
     
     public function mount()
     {
@@ -59,60 +44,39 @@ class AdminSaleComponent extends Component
     
     public function render()
     {
-        $categories = Category::all();
+        $ssproducts = CharacteristicProduct::all();
 
-        $ssproducts = Product::where('name', 'LIKE', "%{$this->ssearch}%")
-                                ->where('category_id', $this->category)
-                                ->paginate(10);
+        $sproducts = CharacteristicProduct::all()->where('sale_price', '>', 0);
 
-        $sproducts = Product::where('sale_price', '>', 0)
-                            ->where('name', 'LIKE', "%{$this->search}%")
-                            ->orderBy($this->sort, $this->direcction)
-                            ->paginate($this->entries);
-
-        return view('livewire.admin.admin-sale-component', compact('sproducts', 'categories', 'ssproducts'))->layout('layouts.base-a');
+        return view('livewire.admin.admin-sale-component', compact('sproducts', 'ssproducts'))->layout('layouts.base-a');
     }
 
-    public function order($sort){
-
-        if ($this->sort == $sort) {
-            
-            if ($this->direcction == 'desc') {
-                $this->direcction = 'asc';
-            }else{
-                $this->direcction = 'desc';
-            }
-        }else{
-            $this->sort = $sort;
-            $this->direcction = 'asc';
-        }
-        
-    }
-    public function clear(){
-
-        $this->search = '';
-        $this->page = 1;
-        $this->entries = '5';
-
-    }
-    /* End Table */
-
-    public function update($sid)
+    public function buscar()
     {
-        $this->sproduct_id = $sid;
+        $p = CharacteristicProduct::find($this->producto);
+        $this->nombre = $p->product->name.' '.$p->product->brand->name.' '.$p->characteristic->name;
+        $this->precio = $p->sale_price;
+        $this->product_id = $p->id;
+
+    }
+
+    public function update($id)
+    {
+        $product = CharacteristicProduct::find($id);
+
         $this->validate([
-            'sprice' => "required|min:0|numeric",  
+            'price' => "required",  
         ]);
 
-        $sproduct = Product::find($this->sproduct_id);  
+        CharacteristicProduct::where('id', $product->id)->update(['sale_price' => $this->price]);
 
-        $sproduct->update([
-            'sale_price' => $this->sprice,
-        ]);
+        $this->reset(['price']);
+        $this->reset(['nombre']);
+        $this->reset(['precio']);
+        $this->reset(['product_id']);
 
-        $this->reset(['sprice']);
 
-    }    
+    }  
 
     public function updateSale()
     {
@@ -142,7 +106,7 @@ class AdminSaleComponent extends Component
 
     public function restorePriceOffer()
     {
-        $products = Product::all();
+        $products = CharacteristicProduct::all();
 
         foreach($products as $product)
         {

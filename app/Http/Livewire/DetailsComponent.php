@@ -6,6 +6,7 @@ use App\Models\CharacteristicProduct;
 use App\Models\DollarRate;
 use App\Models\Product;
 use App\Models\Sale;
+use Carbon\Carbon;
 use Cart;
 use Livewire\Component;
 
@@ -42,10 +43,21 @@ class DetailsComponent extends Component
 
     public function store()
     {
+        $sale = Sale::find(1);
+        
         $product_cart = CharacteristicProduct::find($this->id_product);
+        
         $this->name = $product_cart->product->name.' '.$product_cart->product->brand->name.' '.$product_cart->characteristic->name;
 
-        Cart::instance('cart')->add($product_cart->id, $this->name, $this->qty, $product_cart->price)->associate('App\Models\CharacteristicProduct');
+        if ($product_cart->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon::now()) {
+
+            Cart::instance('cart')->add($product_cart->id, $this->name, $this->qty, $product_cart->sale_price)->associate('App\Models\CharacteristicProduct');
+
+        } else {
+            
+            Cart::instance('cart')->add($product_cart->id, $this->name, $this->qty, $product_cart->price)->associate('App\Models\CharacteristicProduct');
+
+        }
 
         $this->reset('id_product');
     }

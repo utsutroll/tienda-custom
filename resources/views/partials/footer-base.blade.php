@@ -1,47 +1,62 @@
-<footer class="section-p1">
+<footer class="section-p1 bg-gray-100">
     <div class="coll">
         <img class="logo" src="{{ url('dist/new/img/footer-meka.png') }}" alt="Inversiones Meka">
-        <h4>Contact</h4>
-        <p><strong>Address:</strong> 562 Wellington Road Street 32. San Francisco</p>
-        <p><strong>Phone:</strong> +01 2222 356 /(+91) 01 2345 6789</p>
-        <p><strong>Hours:</strong>10:00 - 18:00, Mon - Sat</p>
+        <h4 class="text-lg text-teal-600 font-semibold">Contacto</h4>
+        <p><strong>Dirección:</strong> Plasoleta el saman</p>
+        {{-- <p><strong>Teléfono:</strong> +01 2222 356 /(+91) 01 2345 6789</p> --}}
+        <p><strong>Correo:</strong> inversiones.meka@hotmail.com</p>
+        <p><strong>Horario:</strong> 7:30 - 16:00, Lunes a Sabados</p>
 
         <div class="follow">
-            <h4>Follow Us</h4>
+            <h4 class="text-lg text-teal-600 font-semibold">Siguenos</h4>
             <div class="icon">
-                <i class="fab fa facebook-f"></i>
-                <i class="fab fa-twitter"></i>
-                <i class="fab fa-instagram"></i>
-                <i class="fab fa-pinterest-p"></i>
-                <i class="fab fa-youtube"></i>
+                <a href="https://instagram.com/inversionesmekaca" target="_blank"><i class="fab fa facebook-f"></i></a>
+                <a href="https://instagram.com/inversionesmekaca" target="_blank"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </div>
 
     <div class="coll">
-        <h4>About</h4>
-        <a href="#">About us</a>
-        <a href="#">Delivery Information</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Term & Conditions</a>
-        <a href="#">Contact Us</a>
+        <h4 class="text-lg text-teal-600 font-semibold">Nosotros</h4>
+        <a href="{{ route('shop') }}">Tienda</a>
+        <a href="{{ route('categories') }}">Categorías</a>
+        <a href="{{ route('about') }}">Sobre Nosotros</a>
+        {{-- <a href="#">Delivery Information</a> --}}
+        <a href="{{ route('contact') }}">Contactanos</a>
     </div>
     
     <div class="coll">
-        <h4>My Account</h4>
-        <a href="#">Sign In</a>
-        <a href="#">View Cart</a>
-        <a href="#">My Wishlist</a>
-        <a href="#">Track My Order</a>
-        <a href="#">Help</a>
+        <h4 class="text-lg text-teal-600 font-semibold">Mi Cuenta</h4>
+        @if(Route::has('login'))
+            @auth
+
+                @if (Auth::user()->utype === 'ADM')
+                    <a href="{{ route('admin.dashboard') }}">Panel Administrativo</a>
+                @else
+                    <a href="{{ route('profile.show') }}">Perfil</a>
+                    <a href="{{ route('user.dashboard') }}">Panel Administrativo</a>
+                    <a href="{{ route('user.orders') }}">Mis Pedidos</a>
+                @endif
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                        this.closest('form').submit();">Cerrar Sesión</a>
+                    </form>
+        @else
+                <a href="{{ route('login') }}">Iniciar Sesión</a>
+                <a href="{{ route('register') }}">Registrarse</a>
+            @endauth
+        @endif 
+            
     </div>
 
     <div class="coll install">
-        <p>Secured Payment Gateways </p>
+        <p class="text-lg text-teal-600 font-semibold">Secured Payment Gateways </p>
         <img src="{{ url('dist/new/img/pay/pay.png') }}" alt="">
     </div>
 
     <div class="copyright">
-        <p>SpaceDigital Solucions C.A | 2022 Todos los Derechos Reservados</p>
+        <p>Inversiones Meka C.A J407833898 | 2022 Todos los Derechos Reservados <br>Web Elaborada por <a href="https://instagram.com/spacedigitalsolitions" target="_blank">SpaceDigital Solucions C.A</a></p>
     </div>
 </footer>
