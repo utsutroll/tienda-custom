@@ -4,15 +4,10 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Wallet;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 class AdminWalletComponent extends Component
 {
     /* Variables */
-    public $search = '';
-    public $entries = '5';
-    public $sort = 'id';
-    public $direcction = 'desc';
     public $type;
     public $wallet_email;
     public $name;
@@ -20,58 +15,14 @@ class AdminWalletComponent extends Component
     public $view = 'addWallet';
     /* End Variables */
 
-    /* Table */
-
-    use WithPagination;
-
-    protected $paginationTheme = "bootstrap";
-
-    public function updatingSearch(){
-            $this->resetPage();
-    }
-
-    protected $queryString = [
-        'search' => ['except' => ''],
-        'entries' => ['except' => '5']
-    ];
-
-
     protected $listeners = ['render', 'render'];
 
     public function render()
     {
-        $wallets = Wallet::where('type', 'LIKE', "%{$this->search}%")
-                                ->orWhere('wallet_email', 'LIKE', "%{$this->search}%")
-                                ->orWhere('name', 'LIKE', "%{$this->search}%")
-                                ->orderBy($this->sort, $this->direcction)
-                                ->paginate($this->entries);
+        $wallets = Wallet::all();
 
         return view('livewire.admin.admin-wallet-component', compact('wallets'))->layout('layouts.base-a');
     }
-
-    public function order($sort){
-
-        if ($this->sort == $sort) {
-            
-            if ($this->direcction == 'desc') {
-                $this->direcction = 'asc';
-            }else{
-                $this->direcction = 'desc';
-            }
-        }else{
-            $this->sort = $sort;
-            $this->direcction = 'asc';
-        }
-        
-    }
-    public function clear(){
-
-        $this->search = '';
-        $this->page = 1;
-        $this->entries = '5';
-
-    }
-    /* End Table */
 
     /* Create */
     public function create()

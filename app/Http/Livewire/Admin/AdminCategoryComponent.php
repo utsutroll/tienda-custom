@@ -4,17 +4,11 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Category;
 use Livewire\Component;
-use Livewire\WithPagination;
 use Illuminate\Support\Str;
 
 class AdminCategoryComponent extends Component
 {
     /* Variables */
-
-    public $search = '';
-    public $entries = '5';
-    public $sort = 'id';
-    public $direcction = 'desc';
     public $name;
     public $category_id;
     public $view = 'addCategory';
@@ -22,27 +16,11 @@ class AdminCategoryComponent extends Component
 
     /* Table */
 
-    use WithPagination;
-
-    protected $paginationTheme = "bootstrap";
-
-    public function updatingSearch(){
-            $this->resetPage();
-    }
-
-    protected $queryString = [
-        'search' => ['except' => ''],
-        'entries' => ['except' => '5']
-    ];
-
-
     protected $listeners = ['render', 'render'];
 
     public function render()
     {
-        $categories = Category::where('name', 'LIKE', "%{$this->search}%")
-                                ->orderBy($this->sort, $this->direcction)
-                                ->paginate($this->entries);
+        $categories = Category::all();
 
         return view('livewire.admin.admin-category-component', compact('categories'))->layout('layouts.base-a');
     }

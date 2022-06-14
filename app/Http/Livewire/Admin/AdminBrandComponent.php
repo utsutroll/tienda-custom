@@ -4,16 +4,11 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Brand;
 use Livewire\Component;
-use Livewire\WithPagination;
 use Illuminate\Support\Str;
 
 class AdminBrandComponent extends Component
 {
     /* Variables */
-    public $search = '';
-    public $entries = '5';
-    public $sort = 'id';
-    public $direcction = 'desc';
     public $name;
     public $slug='';
     public $brand_id;
@@ -22,53 +17,15 @@ class AdminBrandComponent extends Component
 
     /* Table */
 
-    use WithPagination;
-
-    protected $paginationTheme = "bootstrap";
-
-    public function updatingSearch(){
-            $this->resetPage();
-    }
-
-    protected $queryString = [
-        'search' => ['except' => ''],
-        'entries' => ['except' => '5']
-    ];
-
-
     protected $listeners = ['render', 'render'];
 
     public function render()
     {
-        $brands = Brand::where('name', 'LIKE', "%{$this->search}%")
-                        ->orderBy($this->sort, $this->direcction)
-                        ->paginate($this->entries);
+        $brands = Brand::all();
 
         return view('livewire.admin.admin-brand-component', compact('brands'))->layout('layouts.base-a');
     }
 
-    public function order($sort){
-
-        if ($this->sort == $sort) {
-            
-            if ($this->direcction == 'desc') {
-                $this->direcction = 'asc';
-            }else{
-                $this->direcction = 'desc';
-            }
-        }else{
-            $this->sort = $sort;
-            $this->direcction = 'asc';
-        }
-        
-    }
-    public function clear(){
-
-        $this->search = '';
-        $this->page = 1;
-        $this->entries = '5';
-
-    }
     /* End Table */
 
     /* Create */

@@ -5,16 +5,10 @@ namespace App\Http\Livewire\Admin;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 class AdminUsersComponent extends Component
 {
     /* Variables */
-
-    public $search = '';
-    public $entries = '5';
-    public $sort = 'id';
-    public $direcction = 'desc';
     public $name;
     public $email;
     public $password;
@@ -22,58 +16,15 @@ class AdminUsersComponent extends Component
     public $view = 'addUser';
     /* End Variables */
 
-    /* Table */
-
-    use WithPagination;
-
-    protected $paginationTheme = "bootstrap";
-
-    public function updatingSearch(){
-            $this->resetPage();
-    }
-
-    protected $queryString = [
-        'search' => ['except' => ''],
-        'entries' => ['except' => '5']
-    ];
-
-
     protected $listeners = ['render', 'render'];
 
     public function render()
     {
-        $users = User::where('name', 'LIKE', "%{$this->search}%")
-                    ->where('utype', 'ADM')
-                    ->where('su', '0')
-                    ->orderBy($this->sort, $this->direcction)
-                    ->paginate($this->entries);
+        $users = User::where('utype', 'ADM')
+                    ->where('su', '0');
 
         return view('livewire.admin.admin-users-component', compact('users'))->layout('layouts.base-a');
     }
-
-    public function order($sort){
-
-        if ($this->sort == $sort) {
-            
-            if ($this->direcction == 'desc') {
-                $this->direcction = 'asc';
-            }else{
-                $this->direcction = 'desc';
-            }
-        }else{
-            $this->sort = $sort;
-            $this->direcction = 'asc';
-        }
-        
-    }
-    public function clear(){
-
-        $this->search = '';
-        $this->page = 1;
-        $this->entries = '5';
-
-    }
-    /* End Table */
 
     /* Create */
     public function create()

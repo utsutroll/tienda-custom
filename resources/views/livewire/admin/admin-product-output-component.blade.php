@@ -24,55 +24,18 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Productos</h4>
-            <h6 class="card-subtitle"></h6>
-            <div class="m-t-4">
-                <div class="dataTables_length" id="myTable_length">
-                    <label>Mostrar 
-                        <select wire:model="entries"  class="">
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select> 
-                    Entradas</label>
-                </div>
-                <div class="dataTables_filter">
-                    <label>Buscar:
-                        <input type="search" wire:model="search" class="" placeholder="Buscar por Fecha">
-                        @if ($search !== '')
-                        <button class="btn btn-outline-secondary btn-sm waves-effect waves-light" wire:click="clear" type="button"><span class="btn-label"><i class="fa fa-times"></i></span></button>    
-                        @endif
-                        
-                    </label>
-                </div>
-    
-            </div>
             
             <div class="table-responsive m-t-2">
-                @if (count($products) > 0)
-                <table class="table table-striped">
+                <table id="table" class="table table-striped">
                     <thead>
                         <tr>
                             <th>Producto</th>
-                            <th width="20%">Cantidad</th>
-                            <th width="20%" wire:click="order('created_at')" style="cursor:pointer;">Fecha de Salida
-                                {{-- Sort --}}
-                                @if ($sort == 'created_at')
-                                    @if ($direcction == 'asc')
-                                        <i class="fa fa-sort-alpha-asc float-right mt-1"></i>    
-                                    @else
-                                        <i class="fa fa-sort-alpha-desc float-right mt-1"></i>    
-                                    @endif
-                                    
-                                @else
-                                    <i class="fa fa-sort float-right mt-1"></i>
-                                @endif
-                                
-                            </th>
-                            <th>Observación</th>
+                            <th>Cantidad</th>
+                            <th>Fecha de Salida</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach ($products as $product)
                         <tr>
                             <td>{{ $product->characteristic_product->product->name }} ({{ $product->characteristic_product->product->brand->name }} {{ $product->characteristic_product->characteristic->name }})</td>
@@ -82,38 +45,8 @@
                         </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </table> 
             </div>
-        </div>
-        <div class="card-footer">
-            <div class="float-right">
-                {{$products->links()}}
-            </div>
-        </div> 
-        @elseif (count($products) == 0 & $search !== '')
-            <div class="card-body">
-                No hay un resultado para la busqueda "{{$search}}"  
-            </div>
-            </div>
-            </div>
-        @else
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Fecha de Salida</th>
-                        <th colspan="2" class="text-nowrap">Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="text-center">
-                        <td colspan="5">No se Encontraron Registros</td>
-                    </tr>
-                </tbody>
-            </table> 
-            </div>
-            </div>      
-        @endif 
+        </div>       
     </div>
 </div>

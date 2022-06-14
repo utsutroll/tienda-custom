@@ -5,16 +5,11 @@ namespace App\Http\Livewire\Admin;
 use App\Models\Category;
 use App\Models\Subcategory;
 use Livewire\Component;
-use Livewire\WithPagination;
 use Illuminate\Support\Str;
 
 class AdminSubcategoryComponent extends Component
 {
     /* Variables */
-    public $search = '';
-    public $entries = '5';
-    public $sort = 'id';
-    public $direcction = 'desc';
     public $name;
     public $category_id;
     public $slug='';
@@ -22,59 +17,16 @@ class AdminSubcategoryComponent extends Component
     public $view = 'addSubcategory';
     /* End Variables */
 
-    /* Table */
-
-    use WithPagination;
-
-    protected $paginationTheme = "bootstrap";
-
-    public function updatingSearch(){
-            $this->resetPage();
-    }
-
-    protected $queryString = [
-        'search' => ['except' => ''],
-        'entries' => ['except' => '5']
-    ];
-
-
     protected $listeners = ['render', 'render'];
 
     public function render()
     {
         $categories = Category::all();
 
-        $subcategories = Subcategory::where('name', 'LIKE', "%{$this->search}%")
-                                    ->orWhere('category_id', 'LIKE', "%{$this->search}%")
-                                    ->orderBy($this->sort, $this->direcction)
-                                    ->paginate($this->entries);
+        $subcategories = Subcategory::all();
 
         return view('livewire.admin.admin-subcategory-component', compact('subcategories', 'categories'))->layout('layouts.base-a');
     }
-
-    public function order($sort){
-
-        if ($this->sort == $sort) {
-            
-            if ($this->direcction == 'desc') {
-                $this->direcction = 'asc';
-            }else{
-                $this->direcction = 'desc';
-            }
-        }else{
-            $this->sort = $sort;
-            $this->direcction = 'asc';
-        }
-        
-    }
-    public function clear(){
-
-        $this->search = '';
-        $this->page = 1;
-        $this->entries = '5';
-
-    }
-    /* End Table */
 
     /* Create */
     public function create()

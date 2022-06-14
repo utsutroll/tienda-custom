@@ -65,11 +65,11 @@
                         <li id="liOutput"><a href="{{route('admin.product-output.index')}}">Salida Producto</a></li>
                     </ul>
                 </li>
-                <li class="nav-small-cap">--- Órdenes de Compra</li>
+                <li class="nav-small-cap">---</li>
                 <li id="LiOrders"> 
                     <a class="waves-effect waves-dark" href="{{route('admin.orders')}}" aria-expanded="false">
                         <i class="ti-shopping-cart"></i>
-                        <span class="hide-menu">Órdenes</span>
+                        <span class="hide-menu">Pedidos</span>
                     </a>
                 </li>
                 <li class="nav-small-cap">--- Promocional</li>

@@ -5,14 +5,10 @@ namespace App\Http\Livewire\Admin;
 use App\Models\Bank;
 use App\Models\BankAccount;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 class AdminBankAccountComponent extends Component
 {
     /* Variables */
-    public $entries = '5';
-    public $sort = 'id';
-    public $direcction = 'desc';
     public $payment_id;
     public $type_account;
     public $account;
@@ -29,51 +25,16 @@ class AdminBankAccountComponent extends Component
 
     /* Table */
 
-    use WithPagination;
-
-    protected $paginationTheme = "bootstrap";
-
-    public function updatingSearch(){
-            $this->resetPage();
-    }
-
-    protected $queryString = [
-        'entries' => ['except' => '5']
-    ];
-
-
     protected $listeners = ['render', 'render'];
 
     public function render()
     {
         $banks = Bank::all();
-        $payments = BankAccount::orderBy($this->sort, $this->direcction)
-                                ->paginate($this->entries);
+        $payments = BankAccount::all();
 
         return view('livewire.admin.admin-bank-account-component', compact('banks', 'payments'))->layout('layouts.base-a');
     }
 
-    public function order($sort){
-
-        if ($this->sort == $sort) {
-            
-            if ($this->direcction == 'desc') {
-                $this->direcction = 'asc';
-            }else{
-                $this->direcction = 'desc';
-            }
-        }else{
-            $this->sort = $sort;
-            $this->direcction = 'asc';
-        }
-        
-    }
-    public function clear(){
-
-        $this->page = 1;
-        $this->entries = '5';
-
-    }
     /* End Table */
 
     /* Create */

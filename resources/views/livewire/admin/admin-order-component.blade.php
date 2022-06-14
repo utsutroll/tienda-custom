@@ -4,13 +4,13 @@
     <!-- ============================================================== -->
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Listado de Órdenes</h4>
+            <h4 class="text-themecolor">Listado de Pedidos</h4>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Menú Principal</a></li>
-                    <li class="breadcrumb-item active">Listado de Órdenes</li>
+                    <li class="breadcrumb-item active">Listado de Pedidos</li>
                 </ol>
             </div>
 
@@ -22,26 +22,13 @@
 
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Órdenes</h4>
-            <h6 class="card-subtitle"></h6>
-            <div class="m-t-4">
-                <div class="dataTables_length" id="myTable_length">
-                    <label>Mostrar 
-                        <select wire:model="entries"  class="">
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select> 
-                    Entradas</label>
-                </div>
-            </div>
+            <h4 class="card-title">Pedidos</h4>
             
             <div class="table-responsive m-t-2">
-                @if (count($orders) > 0)
-                <table class="table table-striped">
+                <table id="table" class="table table-striped">
                     <thead>
                         <tr>
-                            <th width="5%">Id</th>
+                            <th>Id</th>
                             <th>Nombre y Apellido</th>
                             <th>Teléfono</th>
                             <th>Total $</th>
@@ -49,7 +36,7 @@
                             <th>Estatus Pedido</th>
                             <th>Estatus Pago</th>
                             <th>Fecha de la Orden</th>
-                            <th class="text-nowrap text-center" colspan="2">Opciones</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,17 +68,15 @@
                                 @endif
                             </td>
                             <td>{{$o->created_at}}</td>
-                            <td width="10px" class="text-nowrap">
+                            <td>
                                 <a href="{{ route('admin.orderdetails',['order_id'=>$o->id]) }}"
-                                    class="btn btn-primary btn-sm"
+                                    class="btn btn-primary btn-sm mr-2"
                                     >
                                     <i class="ti-eye"></i> 
                                     Detalles
                                 </a>
-                            </td>
-                            @if($o->status == "ordered")
-                            <td width="10px" class="text-nowrap">
-                                <div class="btn-group">
+                                @if($o->status == "ordered")
+                                <div class="btn-group mt-2">
                                     <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Estatus
                                     </button>
@@ -100,80 +85,41 @@
                                         <a class="dropdown-item" href="#" wire:click.prevent="updateOrderStatus({{ $o->id }}, 'canceled')">Cancelado</a>
                                     </div>
                                 </div>
+                                @endif
                             </td>
-                            @endif
                         </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </table> 
             </div>
-        </div>
-        <div class="card-footer">
-            <div class="float-right">
-                {{$orders->links()}}
-            </div>
-        </div> 
-        @elseif (count($orders) == 0 & $search !== '')
-            <div class="card-body">
-                No hay un resultado para la busqueda "{{$search}}"  
-            </div>
-            </div>
-            </div>
-        @else
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Fecha de Entrada</th>
-                        <th colspan="2" class="text-nowrap">Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="text-center">
-                        <td colspan="5">No se Encontraron Registros</td>
-                    </tr>
-                </tbody>
-            </table> 
-            </div>
-            </div>      
-        @endif 
+        </div>       
     </div>
-    @push('scripts')
-    <!-- This is data table -->
-    <script src="{{url('assets/node_modules/datatables/jquery.dataTables.min.js')}}"></script>
-
-    <script type="text/javascript">
-          
-    $('#liOrders').addClass("active");
-
-    window.livewire.on('orderUpdate',()=>{
-
-        $.toast({
-            heading: 'Notificación',
-            text: 'El estatus de del pedido se actualizó con éxito.',
-            position: 'top-right',
-            loaderBg:'#ff6849',
-            icon: 'success',
-            hideAfter: 3500, 
-            stack: 6
-          });
-    });
-
-    window.livewire.on('orderUpdateC',()=>{
-
-        $.toast({
-            heading: 'Notificación',
-            text: 'El estatus de del pedido se actualizó con éxito.',
-            position: 'top-right',
-            loaderBg:'#ff6849',
-            icon: 'success',
-            hideAfter: 3500, 
-            stack: 6
-          });
-    });
-
-    </script>
-    @endpush
-</div>
+</div>    
+@push('scripts')
+<script type="text/javascript">
+      
+$('#liOrders').addClass("active");
+window.livewire.on('orderUpdate',()=>{
+    $.toast({
+        heading: 'Notificación',
+        text: 'El estatus de del pedido se actualizó con éxito.',
+        position: 'top-right',
+        loaderBg:'#ff6849',
+        icon: 'success',
+        hideAfter: 3500, 
+        stack: 6
+      });
+});
+window.livewire.on('orderUpdateC',()=>{
+    $.toast({
+        heading: 'Notificación',
+        text: 'El estatus de del pedido se actualizó con éxito.',
+        position: 'top-right',
+        loaderBg:'#ff6849',
+        icon: 'success',
+        hideAfter: 3500, 
+        stack: 6
+      });
+});
+</script>
+@endpush
