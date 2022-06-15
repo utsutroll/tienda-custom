@@ -28,7 +28,7 @@ class CategoryComponent extends Component
 
     public function updatingSearch(){
         $this->resetPage();
-    }
+    } 
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -76,6 +76,10 @@ class CategoryComponent extends Component
             
 
         return view('livewire.category-component', compact('dollar', 'sliders', 'business_partners'))->layout('layouts.base');
+    }
+
+    public function refresh() {
+        $this->reset(['filter']);
     }
 
 }

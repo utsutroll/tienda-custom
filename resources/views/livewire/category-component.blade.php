@@ -59,16 +59,25 @@
 
     <div class="w-full p-6 my-6 flex justify-between border-b-2">
         <h1 class="text-4xl font-bold font-sans">Categorías</h1>
-        <button type="button" id="filter" class="p-2 sm:ml-6 text-gray-400 hover:text-gray-500">
-            <span class="sr-only">Filters</span>
-            <!-- Heroicon name: solid/filter -->
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd"
-                    d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
-                    clip-rule="evenodd" />
-            </svg>
-        </button>
+        <div>
+            <button type="button" wire:click="refresh()" title="Todos" class="mr-2 p-2 sm:ml-6 text-gray-400 hover:text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                    <path d="M9 21h12V3H3v18h6zm10-4v2h-6v-6h6v4zM15 5h4v6h-6V5h2zM5 7V5h6v6H5V7zm0 12v-6h6v6H5z"></path>
+                </svg>
+                <span class="sr-only">Todos</span>
+            </button>
+
+            <button type="button" id="filter" title="Filtrar" class="p-2 sm:ml-6 text-gray-400 hover:text-gray-500">
+                <span class="sr-only">Filters</span>
+                <!-- Heroicon name: solid/filter -->
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
+                        clip-rule="evenodd" />
+                </svg>
+            </button>
+        </div>
     </div>
     
 

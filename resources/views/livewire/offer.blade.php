@@ -6,7 +6,7 @@
             <div class="mb-2 pl-2 py-2 border-y-2 border-gray-700 bg-gray-200 wrap-countdown mercado-countdown" data-expire="{{ Carbon\Carbon::parse($sale->sale_date)->format('Y/m/d h:m:s') }}"></div>
             <div class="mx-2 mb-2 wrap-products slide-carousel owl-carousel style-nav-1 equal-container " data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}'>
                 @foreach ($sproducts as $sp)
-                <div class="group relative border border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
+                <div class="group relative border mr-2 border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
                     <div class="w-full min-h-80 rounded-t-3xl overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
                         <a href="{{ route('product.details',['slug'=>$sp->product->slug]) }}">
                             @isset($sp->image)

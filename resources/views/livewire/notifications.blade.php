@@ -1,5 +1,5 @@
 <li x-data="{ dropdownOpen: false }" class="relative">
-    <button x-on:click="dropdownOpen = !dropdownOpen" class="relative z-10 block p-2 focus:outline-none">
+    <button x-on:click="dropdownOpen = !dropdownOpen" class="relative z-10 block focus:outline-none">
         <i class="far fa-bell"></i>
         @if (count(auth()->user()->unreadNotifications))
         <span class="flex absolute text-sm noty animate-pulse"><span class="rounded-full h-3 w-3 bg-red-600"></span></span>
