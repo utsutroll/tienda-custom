@@ -19,6 +19,8 @@ use App\Http\Livewire\Admin\AdminOrderComponent;
 use App\Http\Livewire\Admin\AdminOrderDetailsComponent;
 use App\Http\Livewire\Admin\AdminOrderReportsComponent;
 use App\Http\Livewire\Admin\AdminSaleComponent;
+use App\Http\Livewire\Admin\AdminSaleOpenComponent;
+use App\Http\Livewire\Admin\AdminSalePriceComponent;
 use App\Http\Livewire\Admin\AdminSubcategoryComponent;
 use App\Http\Livewire\Admin\AdminUsersComponent;
 use App\Http\Livewire\Admin\AdminWalletComponent;
@@ -102,6 +104,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::post('/import-price-products', [ProductController::class, 'import'])->name('admin.productimport');
     Route::post('/import-price-products-offer', [ProductController::class, 'importOffer'])->name('admin.productimportoffer');
     Route::get('/admin/sale', AdminSaleComponent::class)->name('admin.sale');
+    Route::get('/admin/sale-price', AdminSalePriceComponent::class)->name('admin.sale-price');
+    Route::get('/admin/sale-open', AdminSaleOpenComponent::class)->name('admin.sale-open');
     Route::get('/admin/orders-reports', AdminOrderReportsComponent::class)->name('admin.orders.reports');
     
     /* Select Dependiente */

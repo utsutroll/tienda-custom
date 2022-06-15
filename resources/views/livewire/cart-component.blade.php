@@ -76,11 +76,11 @@
 
     <section id="cart-add" class="section-p1">
         <div id="coupon">
-            <h3>Apply Coupon</h3>
+            {{-- <h3>Apply Coupon</h3>
             <div>
                 <input type="text" placeholder="Enter your Coupon">
                 <button class="normal">Aply</button>
-            </div>
+            </div> --}}
         </div>
 
         <div id="subtotal">
@@ -104,8 +104,8 @@
     </section>
     @else
         <div class="text-center" style="padding:30px 0;">
-            <h1>Su carrito está vacío!</h1>
-            <p>Añadir elemento a él ahora</p>
+            <h1 class="text-4xl mt-5 font-medium text-gray-800">Su carrito está vacío!</h1>
+            <p class="my-4 marker:text-base font-bold">Añadir elemento a él ahora</p>
             <a href="{{ route('shop') }}" class="rounded-md text-white text-base font-semibold p-3 bg-emerald-500 hover:bg-emerald-700">Ir al Catálogo</a>
         </div>
     @endif
