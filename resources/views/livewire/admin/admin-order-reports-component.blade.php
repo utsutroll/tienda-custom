@@ -35,7 +35,7 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane active" id="all" role="tabpanel">
-                                <p class="mb-5 font-weight-normal">Generar Reporte de todos los órdenes</p>
+                                <p class="mb-5 font-weight-normal">Generar Reporte de todos los Pedidos</p>
                                 <div class="row pl-5">
                                     <div class="col-md-12">
                                         <div class="d-flex">
@@ -57,10 +57,11 @@
                                             
                                             @if ($panel == "dia")
                                             <div class="container p-20">
-                                                <form action="" method="POST">
+                                                <form action="{{ route('admin.allordersday.pdf') }}" method="GET">
+                                                    @csrf
                                                     <div class="form-group">
                                                         <div class="input-group">
-                                                            <input type="date" class="form-control" placeholder="dd/mm/yyyy">
+                                                            <input type="date" name="day1" class="form-control" placeholder="dd/mm/yyyy">
                                                         </div>
                                                     </div>
 

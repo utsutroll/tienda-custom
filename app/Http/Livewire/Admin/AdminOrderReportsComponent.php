@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Admin;
 
+use Barryvdh\DomPDF\PDF;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class AdminOrderReportsComponent extends Component
@@ -14,4 +16,5 @@ class AdminOrderReportsComponent extends Component
     {
         return view('livewire.admin.admin-order-reports-component')->layout('layouts.base-a');
     }
+
 }

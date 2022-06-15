@@ -34,11 +34,11 @@
                     </thead>
                     <tbody>
                         
-                        @foreach ($products as $product)
+                        @foreach ($products as $p)
                         <tr>
-                            <td width="8%">{{$product->id}}</td>
-                            <td>{{ $product->name }} {{ $product->brand }} {{ $product->char }}</td>
-                            <td width="15%">{{$product->stock}}</td>
+                            <td width="8%">{{$p->id}}</td>
+                            <td>{{ $p->cedula }}</td>
+                            <td width="15%">{{$p->firstname}}</td>
                         </tr>
                         @endforeach
                     </tbody>

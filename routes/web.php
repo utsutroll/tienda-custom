@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BusinessPartnerController;
+use App\Http\Controllers\Admin\OrderReportController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductEntryController;
 use App\Http\Controllers\Admin\ProductOutputController;
@@ -123,6 +124,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     /* Export PDF */
     Route::get('/admin/export-stock-pdf', [ProductEntryController::class, 'exportStockPDF'])->name('admin.stock.pdf');
     Route::get('/admin/export-offer-pdf', [ProductController::class, 'exportOfferPDF'])->name('admin.offer.pdf');
+    Route::get('/admin/all-orders-day', [OrderReportController::class, 'allOrdersDay'])->name('admin.allordersday.pdf');
 
 
     Route::get('markReadAdmin', function(){

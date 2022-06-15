@@ -9,6 +9,7 @@ use App\Models\CharacteristicProductEntry;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\DB;
 
 class ProductEntryController extends Controller
 {
@@ -111,7 +112,13 @@ class ProductEntryController extends Controller
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
 
-        $products = CharacteristicProductEntry::all();
+        $products = DB::table('characteristic_product')
+                        ->join('products', 'products.id', '=', 'characteristic_product.product_id')
+                        ->join('brands', 'brands.id', '=', 'products.brand_id')
+                        ->join('characteristics', 'characteristics.id', '=', 'characteristic_product.characteristic_id')
+                        ->select('characteristic_product.id as id', 'products.name as name', 'brands.name as brand', 'characteristics.name as char', 'characteristic_product.stock as stock',)
+                        ->get();
+
         $pdf = PDF::loadview('admin.pdf.stock-product', compact('products', 'date'));
 
         return $pdf->download('Stock-de-Productos-'.$date->format('d-m-Y h:m:s').'.pdf');

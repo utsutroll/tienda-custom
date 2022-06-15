@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -256,7 +257,13 @@ class ProductController extends Controller
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
 
-        $products = Product::where('sale_price', '>', 0);
+        $products = DB::table('characteristic_product')
+                        ->join('products', 'products.id', '=', 'characteristic_product.product_id')
+                        ->join('brands', 'brands.id', '=', 'products.brand_id')
+                        ->join('characteristics', 'characteristics.id', '=', 'characteristic_product.characteristic_id')
+                        ->select('characteristic_product.id as id', 'products.name as name', 'brands.name as brand', 'characteristics.name as char', 'characteristic_product.price as price', 'characteristic_product.sale_price as sale_price')
+                        ->where('characteristic_product.sale_price', '>', 0)->get();
+               
         $sale = Sale::find(1);
 
         $pdf = PDF::loadview('admin.pdf.offer-product', compact('products', 'date', 'sale'));

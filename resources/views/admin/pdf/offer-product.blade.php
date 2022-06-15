@@ -5,16 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Stock de Productos | La Mega Teinda Turén</title>
-    <!-- Custom CSS -->
-    <style>
-        /*!
-        * Bootstrap v4.0.0 (https://getbootstrap.com)
-        * Copyright 2011-2018 The Bootstrap Authors
-        * Copyright 2011-2018 Twitter, Inc.
-        * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-        */
-        /*# sourceMappingURL=bootstrap.min.css.map */
-    </style>
+
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 </head>
 <body>
@@ -37,12 +28,12 @@
                     </thead>
                     <tbody>
                         
-                        @foreach ($products as $product)
+                        @foreach ($products as $p)
                         <tr>
                             <td width="8%">{{ $p->id }}</td>
-                            <td>{{ $p->name }} {{ $p->presentation->name }} {{ $p->presentation->medida }}</td>
-                            <td>{{ $p->price }}$</td>
-                            <td>{{ $p->sale_price }}$</td>
+                            <td>{{ $p->name }} {{ $p->brand }} {{ $p->char }}</td>
+                            <td width="15%">{{ $p->price }}$</td>
+                            <td width="25%">{{ $p->sale_price }}$</td>
                         </tr>
                         @endforeach
                     </tbody>
