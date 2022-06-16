@@ -13,8 +13,8 @@ class OrderItemObserver
         $product = CharacteristicProduct::find($orderItem->characteristic_product_id);
 
         $stock = $product->stock - $orderItem->quantity;
-        
-        CharacteristicProduct::where('id', $orderItem->product_id)
+
+        CharacteristicProduct::where('id', $orderItem->characteristic_product_id)
                 ->update(['stock' => $stock]);
     }
    

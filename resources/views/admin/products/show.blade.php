@@ -59,8 +59,8 @@
                                             <td> {{$product->subcategory->name}} </td>
                                         </tr>
                                         <tr>
-                                            <td>Caracteristica</td>
-                                            <td>Imagen</td>
+                                            <td>Característica</td>
+                                            <td>Imágen</td>
                                         </tr>
                                         @foreach ($product->characteristics_product as $c )
                                             <tr>

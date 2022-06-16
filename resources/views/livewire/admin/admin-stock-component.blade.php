@@ -33,7 +33,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Producto</th>
-                            <th>Cantida</th>
+                            <th>Cantidad</th>
                         </tr>
                     </thead>
                     <tbody>

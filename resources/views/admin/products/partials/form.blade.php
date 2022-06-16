@@ -68,7 +68,7 @@
                     @isset($product)
                     {{-- {!! Form::select('subcategory_id', $subcategories, 'Selecciones', ['class'=> 'form-control select2', 'id' => 'subcategory_id', 'data-placeholder' => 'Seleccione']) !!} --}}    
                     
-                    <select name="subcategory_id" id="subcategory_id" class="form-control select2" data-placeholder='Seleccione'>
+                    <select name="subcategory_id" id="subcategory_id" class="form-control select2" value="{{ old('subcategory_id') }}" data-placeholder='Seleccione'>
                         @foreach ($subcategories as $sub)
                             @if ($product->subcategory_id == $sub->id)
                                 <option selected value="{{ $sub->id }}">{{ $sub->name }}</option>
@@ -78,7 +78,7 @@
                         @endforeach
                     </select>
                     @else
-                    <select class="form-control select2" name="subcategory_id" id="subcategory_id">
+                    <select class="form-control select2" name="subcategory_id" value="{{ old('subcategory_id') }}" id="subcategory_id">
                     </select>
                     @endisset
 
@@ -103,18 +103,18 @@
         </div>
         @isset($product->image)
         <div class="form-group">
-            <label for="">Imagen que se mostrará del Producto</label>
+            <label for="">Imágen que se mostrará del Producto</label>
             <div class="image-wrapper d-flex justify-content-center">
                 <img id="picture" src="{{Storage::url($product->image->url)}}">
             </div>
         </div>
         <div class="form-group">
-            <input type="file" name="file" id="file" class="form-control"/>
+            <input type="file" name="file" id="file" class="form-control" value="{{ old('file') }}"/>
         </div>
             
         @else
         <div class="form-group">
-            {!! Form::label('file', 'Imagen que se mostrará del Producto') !!}
+            {!! Form::label('file', 'Imágen que se mostrará del Producto') !!}
             {!! Form::file('file', ['class' => 'dropify', 'accept' => 'image/*' ]) !!}
         @endisset
 
@@ -137,7 +137,7 @@
                 
                 {!! Form::label('caracteristica', 'Característica') !!}
                 
-                <select name="characteristic[]" class="form-control select2" style ="width: 100%;">
+                <select name="characteristic[]" class="form-control select2" value="{{ old('characteristic[]') }}" style ="width: 100%;">
                     @if ($c->characteristic->characteristic_id == $characteristics)
                     <option selected value="{{ $c->characteristic_id }}">{{ $c->characteristic->name }}</option>
                     @else
@@ -152,13 +152,13 @@
 
         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
             <div class="form-group">
-                <label for="">Imagen según la característica del Producto</label>
+                <label for="">Imágen según la característica del Producto</label>
                 <div class="image-wrapper d-flex justify-content-center">
                     <img id="pictures" src="{{ Storage::url($c->image) }}">
                 </div>
             </div>
             <div class="form-group">
-                <input type="file" name="image[]" id="image" class="form-control"/>
+                <input type="file" name="image[]" id="image" value="{{ old('image[]') }}" class="form-control"/>
             </div>
         </div>
         <div class="col-2">
@@ -199,7 +199,7 @@
                     
                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                     <div class="form-group">
-                        {!! Form::label('image', 'Imagen según la característica del Producto') !!}
+                        {!! Form::label('image', 'Imágen según la característica del Producto') !!}
                         {!! Form::file('imge[]', ['class' => 'form-control', 'accept' => 'image/*' ]) !!}
 
                         @error('image')

@@ -204,30 +204,33 @@
                                 @endif 
                             @endif 
 
-                            @if ($order->transactions !== null)
-                                @if ($order->transactions->status == "pending")
-                                    <tr>
-                                        <th><div class="form-group"><input type="text" wire:model.defer="observation" class="form-control" placeholder="Observación"></div></th>
-                                        <td colspan="2">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <button class="btn btn-success btn-small ml-2" wire:click.prevent="approvePayment">Aprobar Pago</button>            
-                                                </div>
-                                                <div class="col-6">
-                                                    <button class="btn btn-danger btn-small" wire:click.prevent="declinedPayment">Rechazar Pago</button>
-                                                </div>
-                                            </div>    
-                                        </td>
-                                    </tr>
-                                @endif    
-                            @endif
+                            @if ($order->status !== 'canceled')
+                                   
+                                @if ($order->transactions !== null)
+                                    @if ($order->transactions->status == "pending")
+                                        <tr>
+                                            <th><div class="form-group"><input type="text" wire:model.defer="observation" class="form-control" placeholder="Observación"></div></th>
+                                            <td colspan="2">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <button class="btn btn-success btn-small ml-2" wire:click.prevent="approvePayment">Aprobar Pago</button>            
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <button class="btn btn-danger btn-small" wire:click.prevent="declinedPayment">Rechazar Pago</button>
+                                                    </div>
+                                                </div>    
+                                            </td>
+                                        </tr>
+                                    @endif    
+                                @endif
 
-                            @if ($order->transactions->observation !== null)
-                                <tr>
-                                    <th>Observación</th>
-                                    <td>{{ $order->transactions->observation }}</td>
-                                </tr>
-                            @endif
+                                @if ($order->transactions->observation !== null && $order->status !== 'canceled')
+                                    <tr>
+                                        <th>Observación</th>
+                                        <td>{{ $order->transactions->observation }}</td>
+                                    </tr>
+                                @endif
+                            @endif       
                         </table>
 
                     </div>

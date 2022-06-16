@@ -30,7 +30,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Producto</th>
-                            <th>Imagen</th>
+                            <th>Imágen</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>

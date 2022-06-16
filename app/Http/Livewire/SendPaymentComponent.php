@@ -38,8 +38,7 @@ class SendPaymentComponent extends Component
     ];
 
     protected $validationAttributes = [
-        'captura'=>'Captura',
-        'referencia'=>'Referencia',
+        'reference'=>'Referencia',
     ];
 
     public function sendPayment()

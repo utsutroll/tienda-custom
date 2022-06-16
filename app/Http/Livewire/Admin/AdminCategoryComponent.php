@@ -14,8 +14,6 @@ class AdminCategoryComponent extends Component
     public $view = 'addCategory';
     /* End Variables */
 
-    /* Table */
-
     protected $listeners = ['render', 'render'];
 
     public function render()
@@ -25,29 +23,6 @@ class AdminCategoryComponent extends Component
         return view('livewire.admin.admin-category-component', compact('categories'))->layout('layouts.base-a');
     }
 
-    public function order($sort){
-
-        if ($this->sort == $sort) {
-            
-            if ($this->direcction == 'desc') {
-                $this->direcction = 'asc';
-            }else{
-                $this->direcction = 'desc';
-            }
-        }else{
-            $this->sort = $sort;
-            $this->direcction = 'asc';
-        }
-        
-    }
-    public function clear(){
-
-        $this->search = '';
-        $this->page = 1;
-        $this->entries = '5';
-
-    }
-    /* End Table */
 
     /* Create */
     public function create()
@@ -56,7 +31,7 @@ class AdminCategoryComponent extends Component
     }
 
     protected $rules = [
-        'name' => 'required|max:30|unique:categories',   
+        'name' => 'required|alpha|max:30|unique:categories',   
     ];
 
     protected $validationAttributes = [
@@ -94,7 +69,7 @@ class AdminCategoryComponent extends Component
     public function update()
     {
         $this->validate([
-            'name' => "required|max:30|unique:categories,name,$this->category_id",  
+            'name' => "required|alpha|max:30|unique:categories,name,$this->category_id",  
         ]);
 
         $category = Category::find($this->category_id);

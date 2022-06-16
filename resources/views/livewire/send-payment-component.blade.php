@@ -103,7 +103,7 @@
                         <div class="m-2">
                             <div class="my-2">
                                 <label for="captura" class="font-sans font-semibold text-gray-700">Agregue la Captura de la Trasnferencia o Pago Móvil (Opcional)</label>
-                                <input type="file" name="captura" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-4 pr-12 sm:text-sm border-gray-300 rounded-md" accept='image/*' wire:model.defer="captura" placeholder="Seleccione Una Imagen"/>
+                                <input type="file" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-4 pr-12 sm:text-sm border-gray-300 rounded-md" accept='image/*' wire:model.defer="captura" placeholder="Seleccione Una Imagen"/>
                             </div>
                             <div class="my-4">
                                 <label for="referencia" class="font-sans font-semibold text-gray-700">Nro. de Referencia<span style="color:red;">*</span></label>
