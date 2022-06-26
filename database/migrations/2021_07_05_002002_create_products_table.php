@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->bigInteger('brand_id')->unsigned();
             $table->text('details');
             $table->decimal('price', 11, 2)->nullable()->default('0');
+            $table->integer('stock')->nullable()->default('0');
             $table->string('slug')->unique();
             $table->timestamps();
             $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('restrict');

@@ -31,7 +31,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Título</th>
-                            <th>Imagen</th>
+                            <th>Imágen</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>

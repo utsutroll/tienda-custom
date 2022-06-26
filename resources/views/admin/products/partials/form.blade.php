@@ -63,7 +63,7 @@
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <label for="subcategory" class="form-label">Subategoría</label>
+                    <label for="subcategory" class="form-label">Subcategoría</label>
                     
                     @isset($product)
                     {{-- {!! Form::select('subcategory_id', $subcategories, 'Selecciones', ['class'=> 'form-control select2', 'id' => 'subcategory_id', 'data-placeholder' => 'Seleccione']) !!} --}}    
@@ -161,9 +161,9 @@
                 <input type="file" name="image[]" id="image" value="{{ old('image[]') }}" class="form-control"/>
             </div>
         </div>
-        <div class="col-2">
+        {{-- <div class="col-2">
             <a class="btn btn-danger btn-block" id="delete_id" href="javascript:void(0)" data-charid="{{$c->characteristic_id}}">Eliminar</a> 
-        </div>
+        </div> --}}
         @endforeach
         </div>
     </div>

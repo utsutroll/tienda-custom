@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\DollarRate;
 use App\Models\Product;
 use App\Models\Slider;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -43,11 +44,34 @@ class CategoryComponent extends Component
     public function getResultsProperty() {
 
         if (empty($this->filter['subcategory'])) {
-            return Product::where('name', 'LIKE', "%{$this->search}%")
+            return DB::table('products')
+                        ->join('brands', 'brands.id', '=', 'products.brand_id')
+                        ->join('images', 'images.imageable_id', '=', 'products.id')
+                        ->select(
+                            'products.name as product', 
+                            'brands.name as brand',
+                            'images.url as imagen',
+                            'products.price as price',
+                            'products.slug as slug',
+                            'products.stock as stock')
+                            ->where('stock', '>', '0')
                             ->paginate($this->entries);
         } 
+
         $this->filter['subcategory'] = array_filter($this->filter['subcategory']);
-        return Product::whereIn('subcategory_id', array_keys($this->filter['subcategory']))->paginate($this->entries);
+        return DB::table('products')
+                    ->join('brands', 'brands.id', '=', 'products.brand_id')
+                    ->join('images', 'images.imageable_id', '=', 'products.id')
+                    ->select(
+                        'products.name as product', 
+                        'brands.name as brand',
+                        'images.url as imagen',
+                        'products.price as price',
+                        'products.slug as slug',
+                        'products.stock as stock')
+                        ->where('stock', '>', '0')
+                    ->whereIn('subcategory_id', array_keys($this->filter['subcategory']))
+                    ->paginate($this->entries);
         
     }
 
@@ -57,23 +81,6 @@ class CategoryComponent extends Component
         $dollar = DollarRate::all();
         $sliders = Slider::all();
         $business_partners = BusinessPartner::all();
-        /*$categories = Category::all();
-        
-        $products = Product::where('name', 'LIKE', "%{$this->search}%")
-                                ->paginate($this->entries);
-         if ($this->buscar == 1 ) {
-            $productss = Product::where('name', 'LIKE', "%{$this->search}%")
-                                ->where('sale_price', '0')
-                                ->where('category_id', $category_id)
-                                ->paginate($this->entries);
-                    if ($productss == []) {
-                    }
-        } else {
-            $productss = Product::where('category_id', $category_id)
-                                ->where('sale_price', '0')
-                                ->paginate($this->entries);
-        } */
-            
 
         return view('livewire.category-component', compact('dollar', 'sliders', 'business_partners'))->layout('layouts.base');
     }

@@ -42,7 +42,7 @@ class AdminSubcategoryComponent extends Component
     ];
 
     protected $validationAttributes = [
-        'name' => 'Presentación',
+        'name' => 'Subcategoría',
         'category_id' => 'Categoría'
     ];
 

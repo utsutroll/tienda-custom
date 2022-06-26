@@ -93,9 +93,9 @@ class ProductOutputController extends Controller
 
     public function show($id)
     {
-        $product = CharacteristicProductOutput::find($id);
+        //$product = CharacteristicProductOutput::find($id);
 
-        return view('admin.product-output.show', compact("product"));
+        //return view('admin.product-output.show', compact("product"));
     }
 
     public function edit($id)

@@ -73,10 +73,10 @@
                                             
                                             @elseif ($panel == "mes")
                                             <div class="container p-20">
-                                                <form action="" method="POST">
+                                                <form action="{{ route('admin.allordersmonth.pdf') }}" method="GET">
                                                     <div class="form-group row">
                                                         <div class="col">
-                                                        <select name="mes" class="form-control form-control-select" required>
+                                                        <select name="mes1" class="form-control form-control-select" required>
                                                                 <option value="">Mes</option>
                                                                 <option value="01">Enero</option>
                                                                 <option value="02">Febrero</option>
@@ -93,7 +93,7 @@
                                                             </select>
                                                         </div>
                                                         <div class="col">       
-                                                            <select name="years" class="form-control form-control-select" required>
+                                                            <select name="years1" class="form-control form-control-select" required>
                                                                 <option value="">Año</option>
                                                                 @php
                                                                     $year=date("Y")
@@ -115,14 +115,14 @@
                                             
                                             @elseif ($panel == "range")
                                             <div class="container p-20">
-                                                <form action="" method="POST">                
+                                                <form action="{{ route('admin.allordersrange.pdf') }}" method="GET">                
                                                     <div class="form-group">
                                                         <div class="input-group" >
-                                                            <input type="date" class="form-control" name="start" />
+                                                            <input type="date" class="form-control" name="start1" />
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text bg-info b-0 text-white">Hasta</span>
                                                             </div>
-                                                            <input type="date" class="form-control" name="end" />
+                                                            <input type="date" class="form-control" name="end1" />
                                                         </div>
                                                     </div>
 

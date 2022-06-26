@@ -67,7 +67,7 @@
                 <span class="sr-only">Todos</span>
             </button>
 
-            <button type="button" id="filter" title="Filtrar" class="p-2 sm:ml-6 text-gray-400 hover:text-gray-500">
+            <button type="button" id="filter" title="Filtrarproduct" class="p-2 sm:ml-6 text-gray-400 hover:text-gray-500">
                 <span class="sr-only">Filters</span>
                 <!-- Heroicon name: solid/filter -->
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -135,20 +135,20 @@
             @foreach ($this->results as $p)
             <div class="group relative border border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
                 <div class="w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                    @isset ($p->image->url)
+                    @isset ($p->imagen)
                     <a href="{{route('product.details',['slug'=>$p->slug])}}">
-                        <img loading="lazy" src="{{Storage::url($p->image->url)}}" alt="{{$p->name}}"
+                        <img loading="lazy" src="{{Storage::url($p->imagen)}}" alt="{{$p->product}}"
                             class="w-full h-full object-center object-cover lg:w-full lg:h-full">
                     </a>
                     @endisset
                 </div>
                 <div class="py-4 px-4 flex-row">
                     <div>
-                        <p class="my-2 text-sm text-gray-500">{{ $p->brand->name }}</p>
+                        <p class="my-2 text-sm text-gray-500">{{ $p->brand }}</p>
                         <h3 class="text-sm font-medium text-gray-900">
                             <a href="{{route('product.details',['slug'=>$p->slug])}}">
                                 <span aria-hidden="true" class="absolute inset-0"></span>
-                                {{ $p->name }}
+                                {{ $p->product }}
                             </a>
                         </h3>
                     </div>

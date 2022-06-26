@@ -65,7 +65,7 @@ class ProductController extends Controller
 
         if ($product_slug->count() > 0 ) 
         {
-            return redirect()->route('admin.products.create')->with('slug', 'El nombre del producto con esa presentación ya existe.');
+            return redirect()->route('admin.products.create')->with('slug', 'El producto ya existe.');
             die();
         }
 
@@ -88,10 +88,10 @@ class ProductController extends Controller
         }
 
         $product_id=$request->id;
-        $characteristic_id=$request->characteristic;
+        $characteristic_id=$request->charact;
         $files = $request->file('image');
 
-        if($request->characteristic & $request->file('image')){
+        if($request->charact & $request->file('image')){
             $cont = 0;
 	    	while($cont < count($files)){
                 

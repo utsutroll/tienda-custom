@@ -37,7 +37,7 @@
                     </thead>
                     <tbody>
                         @foreach ($products as $product)
-
+                        
                         <tr>
                             <td>{{ $product->characteristic_product->product->name }} ({{ $product->characteristic_product->product->brand->name }} {{ $product->characteristic_product->characteristic->name }})</td>
                             <td width="20%">{{$product->quantity}}</td>

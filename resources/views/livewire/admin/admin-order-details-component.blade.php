@@ -81,7 +81,7 @@
                         <table class="table product-overview">
                             <thead>
                                 <tr>
-                                    <th>Imagen</th>
+                                    <th>Imágen</th>
                                     <th>Información del producto</th>
                                     <th>Precio</th>
                                     <th>Cantidad</th>

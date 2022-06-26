@@ -85,19 +85,19 @@
                 @foreach ($products as $p)
                 <div class="group relative border border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
                     <div class="w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                        @isset ($p->image->url)
+                        @isset ($p->imagen)
                         <a href="{{route('product.details',['slug'=>$p->slug])}}">
-                            <img loading="lazy" src="{{Storage::url($p->image->url)}}" alt="{{$p->name}}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
+                            <img loading="lazy" src="{{Storage::url($p->imagen)}}" alt="{{$p->product}}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
                         </a>
                         @endisset
                     </div>
                     <div class="py-4 px-4 flex-row">
                         <div>
-                            <p class="my-2 text-sm text-gray-500">{{ $p->brand->name }}</p>
+                            <p class="my-2 text-sm text-gray-500">{{ $p->brand }}</p>
                             <h3 class="text-sm font-medium text-gray-900">
                                 <a href="{{route('product.details',['slug'=>$p->slug])}}">
                                     <span aria-hidden="true" class="absolute inset-0"></span>
-                                    {{ $p->name }}
+                                    {{ $p->product }}
                                 </a>
                             </h3>
                         </div>
@@ -131,19 +131,19 @@
                 @foreach ($newproducts as $np)
                 <div class="group relative border border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
                     <div class="w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 overflow-hidden lg:h-80 lg:aspect-none">
-                        @isset ($np->image->url)
+                        @isset ($np->imagen)
                         <a href="{{route('product.details',['slug'=>$np->slug])}}">
-                            <img loading="lazy" src="{{Storage::url($np->image->url)}}" alt="{{$np->name}}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
+                            <img loading="lazy" src="{{Storage::url($np->imagen)}}" alt="{{$np->product}}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
                         </a>
                         @endisset
                     </div>
                     <div class="py-4 px-4 flex-row">
                         <div>
-                            <p class="my-2 text-sm text-gray-500">{{ $np->brand->name }}</p>
+                            <p class="my-2 text-sm text-gray-500">{{ $np->brand }}</p>
                             <h3 class="text-sm font-medium text-gray-900">
                                 <a href="{{route('product.details',['slug'=>$np->slug])}}">
                                     <span aria-hidden="true" class="absolute inset-0"></span>
-                                    {{ $np->name }}
+                                    {{ $np->product }}
                                 </a>
                             </h3>   
                         </div>

@@ -125,6 +125,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/admin/export-stock-pdf', [ProductEntryController::class, 'exportStockPDF'])->name('admin.stock.pdf');
     Route::get('/admin/export-offer-pdf', [ProductController::class, 'exportOfferPDF'])->name('admin.offer.pdf');
     Route::get('/admin/all-orders-day', [OrderReportController::class, 'allOrdersDay'])->name('admin.allordersday.pdf');
+    Route::get('/admin/all-orders-month', [OrderReportController::class, 'allOrdersMonth'])->name('admin.allordersmonth.pdf');
+    Route::get('/admin/all-orders-range', [OrderReportController::class, 'allOrdersRange'])->name('admin.allordersrange.pdf');
 
 
     Route::get('markReadAdmin', function(){

@@ -39,6 +39,7 @@
                     @endforeach
                 </ul>
             
+                @if ($product->stock > 0)
                 <div class="flex flex-row border h-10 w-24 rounded-lg border-gray-400 relative my-3">
                     <button wire:click.prevent="decreaseQuantityD" class="font-semibold border-r w-7 bg-gray-200 hover:bg-red-600 hover:text-white border-gray-400 flex rounded-l focus:outline-none cursor-pointer">
                         <span class="m-auto">-</span>
@@ -49,7 +50,9 @@
                         <span class="m-auto">+</span>
                     </button>
                 </div> 
-                <button class="rounded-lg p-4" type="submit" wire:loading.attr="disabled" title="Añadir al carrito"><i class="fas fa-cart-plus"></i> <button>  
+                <button class="rounded-lg p-4" type="submit" wire:loading.attr="disabled" title="Añadir al carrito"><i class="fas fa-cart-plus"></i> <button>    
+                @endif
+                 
             </form> 
         </div>
     </section>

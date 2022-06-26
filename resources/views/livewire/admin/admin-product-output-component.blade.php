@@ -32,7 +32,7 @@
                             <th>Producto</th>
                             <th>Cantidad</th>
                             <th>Fecha de Salida</th>
-                            <th>Opciones</th>
+                            <th>Observación</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Entry;
 use App\Models\CharacteristicProduct;
 use App\Models\CharacteristicProductEntry;
+use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -82,7 +83,24 @@ class ProductEntryController extends Controller
 
     public function show($id)
     {
-        $product = CharacteristicProductEntry::find($id);
+        $product = DB::table('characteristic_product_entry')
+                        ->join('characteristic_product', 'characteristic_product.id', '=', 'characteristic_product_entry.characteristic_product_id')
+                        ->join('entries', 'entries.id', '=', 'characteristic_product_entry.entry_id')
+                        ->join('characteristics', 'characteristics.id', '=', 'characteristic_product.characteristic_id')
+                        ->join('products', 'products.id', '=', 'characteristic_product.product_id')
+                        ->join('brands', 'brands.id', '=', 'products.brand_id')
+                        ->select(
+                            'characteristics.name as characteristic',
+                            'products.name as product',
+                            'products.details as details',
+                            'brands.name as brand',
+                            'characteristic_product.price as price',
+                            'characteristic_product.image as imagen',
+                            'characteristic_product_entry.quantity as quantity',
+                            'entries.date as date',
+                            'entries.time as time')
+                        ->where('characteristic_product_entry.id', '=', $id)
+                        ->get();
 
         return view('admin.product-entry.show', compact("product"));
     }
