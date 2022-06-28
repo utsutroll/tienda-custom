@@ -55,7 +55,7 @@
                             <td>
                                 <a 
                                     class="btn btn-secondary btn-sm"
-                                    href="{{route('admin.product-entry.show', $product->id)}}">
+                                    href="{{ route('admin.product-entry.show', $product->id) }}">
                                     <i class="ti-eye"></i> 
                                     Ver
                                 </a>

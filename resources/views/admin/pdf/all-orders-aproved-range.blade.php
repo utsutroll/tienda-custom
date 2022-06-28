@@ -21,7 +21,7 @@
     <div class="card">
 
         <div class="card-body">
-            <div class="card-title text-center font-weight-bold">Todos los Pedidos - {{ $date->format('d-m-Y h:m:s') }}</div>
+            <div class="card-title text-center font-weight-bold">Pedidos Entregados - {{ $date->format('d-m-Y h:m:s') }}</div>
 
             <div class="table-responsive m-t-2">
                 <table class="table table-striped">
@@ -31,7 +31,6 @@
                             <th width="50%">Cliente</th>
                             <th width="15%">Total $</th>
                             <th width="15%">Total Bs</th>
-                            <th width="15%">Estatus</th>
                             <th width="15%">Detalles</th>
                         </tr> 
                     </thead>
@@ -42,7 +41,6 @@
                             <td width="50%">C.I: {{ $p->cedula }} {{ $p->firstname }} {{ $p->lastname }}</td>
                             <td width="15%">{{ $p->total }}</td>
                             <td width="15%">{{ $p->total_bs }}</td>
-                            <td width="15%">{{ $p->status }}</td>
                             <td width="15%"><a href="{{ route('admin.orderdetails',['order_id'=>$p->id]) }}" target="_blank" rel="noopener noreferrer">Ver</a></td>
                         </tr>
                         @endforeach

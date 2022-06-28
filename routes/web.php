@@ -127,6 +127,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/admin/all-orders-day', [OrderReportController::class, 'allOrdersDay'])->name('admin.allordersday.pdf');
     Route::get('/admin/all-orders-month', [OrderReportController::class, 'allOrdersMonth'])->name('admin.allordersmonth.pdf');
     Route::get('/admin/all-orders-range', [OrderReportController::class, 'allOrdersRange'])->name('admin.allordersrange.pdf');
+    Route::get('/admin/all-orders-aproved-day', [OrderReportController::class, 'allOrdersAprovedDay'])->name('admin.allordersaprovedday.pdf');
+    Route::get('/admin/all-orders-aproved-month', [OrderReportController::class, 'allOrdersAprovedMonth'])->name('admin.allordersaprovedmonth.pdf');
+    Route::get('/admin/all-orders-aproved-range', [OrderReportController::class, 'allOrdersAprovedRange'])->name('admin.allordersaprovedrange.pdf');
+    Route::get('/admin/all-orders-canceled-day', [OrderReportController::class, 'allOrdersCanceledDay'])->name('admin.allorderscanceledday.pdf');
+    Route::get('/admin/all-orders-canceled-month', [OrderReportController::class, 'allOrdersCanceledMonth'])->name('admin.allorderscanceledmonth.pdf');
+    Route::get('/admin/all-orders-canceled-range', [OrderReportController::class, 'allOrdersCanceledRange'])->name('admin.allorderscanceledrange.pdf');
 
 
     Route::get('markReadAdmin', function(){

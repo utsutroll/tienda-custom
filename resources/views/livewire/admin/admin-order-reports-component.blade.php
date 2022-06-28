@@ -4,13 +4,13 @@
     <!-- ============================================================== -->
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Reporte de Órdenes</h4>
+            <h4 class="text-themecolor">Reporte de Pedidos</h4>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Menú Principal</a></li>
-                    <li class="breadcrumb-item active">Reporte de Órdenes</li>
+                    <li class="breadcrumb-item active">Reporte de Pedidos</li>
                 </ol>
             </div>
 
@@ -28,13 +28,14 @@
                     <!-- Nav tabs -->
                     <div class="vtabs customvtab">
                         <ul class="nav nav-tabs tabs-vertical" role="tablist">
-                            <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#all" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Todas</span> </a> </li>
-                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#approved" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Aprobadas</span></a> </li>
-                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#canceled" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Canceladas</span></a> </li>
+                            <li class="nav-item"> <a class="nav-link @if($tab == 'all') active @endif" data-toggle="tab" href="javascript(0)" wire:click="$set('tab', 'all')" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Todos</span> </a> </li>
+                            <li class="nav-item"> <a class="nav-link @if($tab == 'aproved') active @endif" data-toggle="tab" href="javascript(0)" wire:click="$set('tab', 'aproved')" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Entregados</span></a> </li>
+                            <li class="nav-item"> <a class="nav-link @if($tab == 'canceled') active @endif" data-toggle="tab" href="javascript(0)" wire:click="$set('tab', 'canceled')" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Cancelados</span></a> </li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane active" id="all" role="tabpanel">
+                            @if ($tab == 'all')
+                            <div class="tab-pane @if($tab == 'all') active @endif" role="tabpanel">
                                 <p class="mb-5 font-weight-normal">Generar Reporte de todos los Pedidos</p>
                                 <div class="row pl-5">
                                     <div class="col-md-12">
@@ -61,7 +62,7 @@
                                                     @csrf
                                                     <div class="form-group">
                                                         <div class="input-group">
-                                                            <input type="date" name="day1" class="form-control" placeholder="dd/mm/yyyy">
+                                                            <input type="date" name="day1" class="form-control" placeholder="dd/mm/yyyy" required>
                                                         </div>
                                                     </div>
 
@@ -118,11 +119,11 @@
                                                 <form action="{{ route('admin.allordersrange.pdf') }}" method="GET">                
                                                     <div class="form-group">
                                                         <div class="input-group" >
-                                                            <input type="date" class="form-control" name="start1" />
+                                                            <input type="date" class="form-control" name="start1" required/>
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text bg-info b-0 text-white">Hasta</span>
                                                             </div>
-                                                            <input type="date" class="form-control" name="end1" />
+                                                            <input type="date" class="form-control" name="end1" required/>
                                                         </div>
                                                     </div>
 
@@ -136,8 +137,9 @@
                                      </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="approved" role="tabpanel">
-                                <p class="mb-5 font-weight-normal">Generar Reporte de todos los órdenes</p>                                 
+                            @elseif($tab == 'aproved')
+                            <div class="tab-pane @if($tab == 'aproved') active @endif" role="tabpanel">
+                                <p class="mb-5 font-weight-normal">Generar Reporte de todos los Pedidos Aprobados</p>                                 
                                 <div class="row pl-5">
                                     <div class="col-md-12">                      
                                         <div class="d-flex">
@@ -147,7 +149,7 @@
                                             </div>
                                             <div class="custom-control custom-radio flex-1 mr-4">
                                                 <input type="radio" id="mes1" wire:model="panel1" value="mes1" class="custom-control-input">
-                                                <label class="custom-control-label" for="mes">Mes</label>
+                                                <label class="custom-control-label" for="mes1">Mes</label>
                                             </div>
                                             <div class="custom-control custom-radio flex-1">
                                                 <input type="radio" id="range1" wire:model="panel1" value="range1" class="custom-control-input">
@@ -159,10 +161,10 @@
                                             
                                             @if ($panel1 == "dia1")
                                             <div class="container p-20">
-                                                <form action="" method="POST">
+                                                <form action="{{ route('admin.allordersaprovedday.pdf') }}" method="GET">
                                                     <div class="form-group">
                                                         <div class="input-group">
-                                                            <input type="date" class="form-control" placeholder="dd/mm/yyyy">
+                                                            <input type="date" name="dia2" class="form-control" placeholder="dd/mm/yyyy" required>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex justify-content-end">
@@ -173,10 +175,10 @@
                                             
                                             @elseif ($panel1 == "mes1")
                                             <div class="container p-20">
-                                                <form action="" method="POST">
+                                                <form action="{{ route('admin.allordersaprovedmonth.pdf') }}" method="GET">
                                                     <div class="form-group row">
                                                         <div class="col">
-                                                        <select name="mes" class="form-control form-control-select" required>
+                                                        <select name="mes2" class="form-control form-control-select" required>
                                                                 <option value="">Mes</option>
                                                                 <option value="01">Enero</option>
                                                                 <option value="02">Febrero</option>
@@ -193,7 +195,7 @@
                                                             </select>
                                                         </div>
                                                         <div class="col">       
-                                                            <select name="years" class="form-control form-control-select" required>
+                                                            <select name="years2" class="form-control form-control-select" required>
                                                                 <option value="">Año</option>
                                                                 @php
                                                                     $year=date("Y")
@@ -214,14 +216,14 @@
                                             
                                             @elseif ($panel1 == "range1")
                                             <div class="container p-20">
-                                                <form action="" method="POST">                
+                                                <form action="{{ route('admin.allordersaprovedrange.pdf') }}" method="GET">                
                                                     <div class="form-group">
                                                         <div class="input-group" >
-                                                            <input type="date" class="form-control" name="start" />
+                                                            <input type="date" class="form-control" name="start2" required/>
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text bg-info b-0 text-white">Hasta</span>
                                                             </div>
-                                                            <input type="date" class="form-control" name="end" />
+                                                            <input type="date" class="form-control" name="end2" required/>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex justify-content-end">
@@ -234,22 +236,23 @@
                                     </div>
                                 </div>                                    
                             </div>
-                            <div class="tab-pane" id="canceled" role="tabpanel">
-                                <p class="mb-5 font-weight-normal">Generar Reporte de todos los órdenes</p>                                  
+                            @elseif($tab == 'canceled')
+                            <div class="tab-pane @if($tab == 'canceled') active @endif" role="tabpanel">
+                                <p class="mb-5 font-weight-normal">Generar Reporte de todos los Pedidos Cancelados</p>                                  
                                 <div class="row pl-5">
                                     <div class="col-md-12">                  
                                         <div class="d-flex">
                                             <div class="custom-control custom-radio flex-1 mr-4">
-                                                <input type="radio" id="dias" wire:model="panels" value="dias" class="custom-control-input">
-                                                <label class="custom-control-label" for="dias">Día</label>
+                                                <input type="radio" id="dia2" wire:model="panel2" value="dia2" class="custom-control-input">
+                                                <label class="custom-control-label" for="dia2">Día</label>
                                             </div>
                                             <div class="custom-control custom-radio flex-1 mr-4">
-                                                <input type="radio" id="mess" wire:model="panel" value="mess" class="custom-control-input">
-                                                <label class="custom-control-label" for="mes">Mes</label>
+                                                <input type="radio" id="mes2" wire:model="panel2" value="mes2" class="custom-control-input">
+                                                <label class="custom-control-label" for="mes2">Mes</label>
                                             </div>
                                             <div class="custom-control custom-radio flex-1">
-                                                <input type="radio" id="ranges" wire:model="panel" value="ranges" class="custom-control-input">
-                                                <label class="custom-control-label" for="ranges">Rango de Fechas</label>
+                                                <input type="radio" id="range2" wire:model="panel2" value="range2" class="custom-control-input">
+                                                <label class="custom-control-label" for="range2">Rango de Fechas</label>
                                             </div>
                                         </div>
                                         <hr/>
@@ -257,10 +260,10 @@
                                             
                                             @if ($panel2 == "dia2")
                                             <div class="container p-20">
-                                                <form action="" method="POST">
+                                                <form action="{{ route('admin.allorderscanceledday.pdf') }}" method="GET">
                                                     <div class="form-group">
                                                         <div class="input-group">
-                                                            <input type="date" class="form-control" placeholder="dd/mm/yyyy">
+                                                            <input type="date" name="day3" class="form-control" placeholder="dd/mm/yyyy" required>
                                                         </div>
                                                     </div>
 
@@ -272,10 +275,10 @@
                                             
                                             @elseif ($panel2 == "mes2")
                                             <div class="container p-20">
-                                                <form action="" method="POST">
+                                                <form action="{{ route('admin.allorderscanceledmonth.pdf') }}" method="GET">
                                                     <div class="form-group row">
                                                         <div class="col">
-                                                        <select name="mes" class="form-control form-control-select" required>
+                                                        <select name="mes3" class="form-control form-control-select" required>
                                                                 <option value="">Mes</option>
                                                                 <option value="01">Enero</option>
                                                                 <option value="02">Febrero</option>
@@ -292,7 +295,7 @@
                                                             </select>
                                                         </div>
                                                         <div class="col">       
-                                                            <select name="years" class="form-control form-control-select" required>
+                                                            <select name="years3" class="form-control form-control-select" required>
                                                                 <option value="">Año</option>
                                                                 @php
                                                                     $year=date("Y")
@@ -314,14 +317,14 @@
                                             
                                             @elseif ($panel2 == "range2")
                                             <div class="container p-20">
-                                                <form action="" method="POST">                
+                                                <form action="{{ route('admin.allorderscanceledrange.pdf') }}" method="GET">                
                                                     <div class="form-group">
                                                         <div class="input-group" >
-                                                            <input type="date" class="form-control" name="start" />
+                                                            <input type="date" class="form-control" name="start3" required />
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text bg-info b-0 text-white">Hasta</span>
                                                             </div>
-                                                            <input type="date" class="form-control" name="end" />
+                                                            <input type="date" class="form-control" name="end3" required />
                                                         </div>
                                                     </div>
 
@@ -335,6 +338,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>

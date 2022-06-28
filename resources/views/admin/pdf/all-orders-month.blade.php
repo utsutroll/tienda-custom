@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Stock de Productos | La Mega Teinda Turén</title>
+    <title>Inversiones Meka C.A</title>
     <!-- Custom CSS -->
     <style>
         /*!
@@ -28,21 +28,22 @@
                     <thead>
                         <tr>
                             <th width="8%">ID</th>
-                            <th width="30%">Cliente</th>
-                            <th>Total $</th>
-                            <th>Total Bs</th>
-                            <th>Estatus</th>
+                            <th width="50%">Cliente</th>
+                            <th width="15%">Total $</th>
+                            <th width="15%">Total Bs</th>
+                            <th width="15%">Estatus</th>
+                            <th width="15%">Detalles</th>
                         </tr> 
                     </thead>
                     <tbody>
-                        
                         @foreach ($products as $p)
                         <tr>
                             <td width="8%">{{ $p->id }}</td>
-                            <td  width="30%">C.I: {{ $p->cedula }} {{ $p->firstname }} {{ $p->lastname }}</td>
-                            <td>{{ $p->total }}</td>
-                            <td>{{ $p->total_bs }}</td>
-                            <td>{{ $p->status }}</td>
+                            <td width="50%">C.I: {{ $p->cedula }} {{ $p->firstname }} {{ $p->lastname }}</td>
+                            <td width="15%">{{ $p->total }}</td>
+                            <td width="15%">{{ $p->total_bs }}</td>
+                            <td width="15%">{{ $p->status }}</td>
+                            <td width="15%"><a href="{{ route('admin.orderdetails',['order_id'=>$p->id]) }}" target="_blank" rel="noopener noreferrer">Ver</a></td>
                         </tr>
                         @endforeach
                     </tbody>
