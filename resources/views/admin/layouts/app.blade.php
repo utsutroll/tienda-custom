@@ -157,6 +157,28 @@
             },
         });
 
+        document.addEventListener("DOMContentLoaded", () => {
+            Livewire.hook('element.updated', (el, component) => {
+                $("#table").DataTable().destroy();
+                $('#table').dataTable({
+                    language: {
+                        lengthMenu: 'Mostrar _MENU_ registros por página',
+                        zeroRecords: 'No se ha encontrado registros',
+                        info: 'Mostrar página _PAGE_ de _PAGES_',
+                        infoEmpty: 'No hay registros disponibles',
+                        infoFiltered: '(filtrado de _MAX_ total de registros)',
+                        sSearch: "Buscar:",
+                        oPaginate: {
+                            sFirst: "Primero",
+                            sLast: "Último",
+                            sNext: "Siguiente",
+                            sPrevious: "Anterior",
+                        },
+                    },
+                });
+            })
+        });
+
         window.livewire.on('dollarEdited',()=>{
             $('#modalUpdatePriceDolar').modal('hide');
 

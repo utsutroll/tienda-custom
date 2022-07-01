@@ -99,7 +99,7 @@
         var div='';
         for (var i=0;i<num;i++){ 
             var cont=i+1;
-            div+='<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12"><div class="form-group">{!! Form::label('caracteristica', 'Característica') !!}{!! Form::select('characteristic[]', $characteristics, null, ['class' => 'form-control select22', 'style' => 'width: 100%;', 'id' => '' ]) !!}</div></div><div class="col-lg-5 col-md-5 col-sm-5 col-xs-12"><div class="form-group">{!! Form::label('image', 'Imagen segun la característica del Producto') !!}{!! Form::file('image[]', ['class' => 'form-control', 'accept' => 'image' ]) !!}@error('file')<small class="text-danger">{{$message}}</small>@enderror</div></div>';
+            div+='<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12"><div class="form-group">{!! Form::label('caracteristica', 'Característica') !!}{!! Form::select('charact[]', $characteristics, null, ['class' => 'form-control select22', 'style' => 'width: 100%;', 'id' => '' ]) !!}</div></div><div class="col-lg-5 col-md-5 col-sm-5 col-xs-12"><div class="form-group">{!! Form::label('image', 'Imagen segun la característica del Producto') !!}{!! Form::file('imge[]', ['class' => 'form-control', 'accept' => 'image' ]) !!}@error('file')<small class="text-danger">{{$message}}</small>@enderror</div></div>';
         }
 
       document.getElementById("divMultiInputs").innerHTML=div;

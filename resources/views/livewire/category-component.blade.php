@@ -200,6 +200,7 @@
 <script src="{{ asset('dist/offer_slider/js/functions.js') }}"></script>
 
 <script>
+    $('#LiCategory').addClass("active");
     $(".accordion-titulo").click(function(){
 	
         var contenido=$(this).next("#accordion-content");

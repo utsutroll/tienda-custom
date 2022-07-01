@@ -36,20 +36,41 @@
         </div>
 
         <div class="form-group">
-            {!! Form::label('brand_id', 'Marca') !!}
+            {!! Form::label('Marca') !!}
+            @isset($product)
+            <select name="brand_id" class="form-control select2" placeholder="Seleccione">
+                @foreach ($brands as $brand)
+                    @if ($product->brand_id == $brand->id)
+                        <option selected value="{{ $brand->id }}">{{ $brand->name }}</option>
+                    @else
+                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                    @endif
+                @endforeach
+            </select>
+            @else
             {!! Form::select('brand_id', $brands, 'Selecciones', ['class'=> 'form-control select2', 'data-placeholder' => 'Seleccione']) !!}
+            @endisset
+            
 
             @error('brand_id')
                 <small class="text-danger">{{$message}}</small>   
             @enderror
         </div>
-
+ 
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    {!! Form::label('category_id', 'Categoría') !!}
+                    {!! Form::label('Categoría') !!}
                     @isset($product)
-                    {!! Form::select('category_id', $categories, 'Selecciones', ['class'=> 'form-control select2', 'id' => 'category_id', 'data-placeholder' => 'Seleccione']) !!}
+                    <select name="category_id" class="form-control select2" placeholder="Seleccione">
+                        @foreach ($categories as $cat)
+                            @if ($product->subcategory->category_id == $cat->id)
+                                <option selected value="{{ $cat->id }}">{{ $cat->name }}</option>
+                            @else
+                                <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                            @endif
+                        @endforeach
+                    </select>
                     @else
                     {!! Form::select('category_id', $categories, 'Selecciones', ['class'=> 'form-control select2', 'id' => 'category_id', 'placeholder' => 'Seleccione']) !!}
                     @endisset

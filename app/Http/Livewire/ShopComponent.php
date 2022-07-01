@@ -39,7 +39,8 @@ class ShopComponent extends Component
         $sliders = Slider::all();
         $business_partners = BusinessPartner::all();
 
-        $products = Product::where('name', 'LIKE', "%{$this->search}%")
+        $products = Product::where('name', 'LIKE', "%{$this->search}%")                
+                            ->where('stock', '>', '0')
                             ->paginate($this->entries);
 
 

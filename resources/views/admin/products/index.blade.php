@@ -60,17 +60,20 @@
         });
     });
     
-    window.livewire.on('productDeleted_e',()=>{
+    window.livewire.on('ProductDeleted_e',()=>{
 
         $.toast({
             heading: 'Notificación',
-            text: 'El Prducto se encuetra asignado a una Entrada, no puede ser eliminada.',
+            text: 'El Prducto se encuetra asignado a una Entrada, no puede ser eliminado.',
             position: 'top-right',
             loaderBg:'#ff6849',
             icon: 'error',
             hideAfter: 3500, 
             stack: 6
         });
+
+        $('#table').dataTable();
+
     });
 
 

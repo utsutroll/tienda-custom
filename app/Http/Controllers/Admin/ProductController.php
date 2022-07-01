@@ -89,9 +89,9 @@ class ProductController extends Controller
 
         $product_id=$request->id;
         $characteristic_id=$request->charact;
-        $files = $request->file('image');
+        $files = $request->file('imge');
 
-        if($request->charact & $request->file('image')){
+        if($request->activar == 'on'){
             $cont = 0;
 	    	while($cont < count($files)){
                 
@@ -125,9 +125,9 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $categories = Category::pluck('name', 'id');
+        $categories = Category::all();
         $subcategories = Subcategory::all();
-        $brands = Brand::pluck('name', 'id');
+        $brands = Brand::all();
         $characteristics = Characteristic::pluck('name', 'id');
 
         return view('admin.products.edit', compact('product', 'categories', 'subcategories', 'brands', 'characteristics'));

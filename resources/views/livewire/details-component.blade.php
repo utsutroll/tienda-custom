@@ -61,21 +61,28 @@
         <h2 class="text-2xl text-black font-bold font-sans">Productos Similares</h2>
 
         @if (count($similares) > 0)
-        <div class="pro-container">
-            
+        <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             @foreach ($similares as $s)
-            <div class="pro">
-                <a class="flex space-y-2 p-2" href="{{route('product.details',['slug'=>$s->slug])}}">
-                    <img src="{{Storage::url($s->image->url)}}" alt="{{$s->name}}">
-                </a>    
-                <div class="des">
-                    <a class="flex space-y-2 p-2" href="{{route('product.details',['slug'=>$s->slug])}}"><span>{{ $s->brand->name }}</span></a> 
-                    <h5>{{ $s->name }}</h5>
-                    <h4 data-tooltip-target="tooltip-top" data-tooltip-placement="top" class="text-center">{{ $s->price }}$</h4>
-                    <div id="tooltip-top" role="tooltip" class="tooltip absolute z-10 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg opacity-0 invisible" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(918px, 449px, 0px);">
-                        @foreach ($dollar as $d){{ number_format($d->price*$s->price, 2) }}@endforeach Bs
-                        <div class="tooltip-arrow" data-popper-arrow="" style="position: absolute; left: 0px; transform: translate3d(54px, 0px, 0px);"></div>
+            <div class="group relative border border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
+                <div class="w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 overflow-hidden lg:h-80 lg:aspect-none">
+                    @isset ($s->imagen)
+                    <a href="{{route('product.details',['slug'=>$s->slug])}}">
+                        <img loading="lazy" src="{{Storage::url($s->imagen)}}" alt="{{$s->product}}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
+                    </a>
+                    @endisset
+                </div>
+                <div class="py-4 px-4 flex-row">
+                    <div>
+                        <p class="my-2 text-sm text-gray-500">{{ $s->brand }}</p>
+                        <h3 class="text-sm font-medium text-gray-900">
+                            <a href="{{route('product.details',['slug'=>$s->slug])}}">
+                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                {{ $s->product }}
+                            </a>
+                        </h3>   
                     </div>
+                    <p class="text-md mt-2 text-center font-semibold text-teal-600">{{ $s->price }}$</p>
+                    <h6 class="text-xs text-center text-gray-600">~@foreach ($dollar as $d){{ number_format($d->price * $s->price, 2) }}@endforeach Bs</h6>
                 </div>
             </div>
             @endforeach

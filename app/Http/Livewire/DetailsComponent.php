@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Sale;
 use Carbon\Carbon;
 use Cart;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class DetailsComponent extends Component
@@ -31,11 +32,23 @@ class DetailsComponent extends Component
 
         $product = Product::where('slug', $this->slug)->first();
 
-        $similares = Product::where('subcategory_id', $product->subcategory_id)
-                           ->where('id', '!=', $product->id)
-                           ->latest('id')
-                           ->take(4)
-                           ->get(); 
+        $similares = DB::table('products')
+                        ->join('brands', 'brands.id', '=', 'products.brand_id')
+                        ->join('images', 'images.imageable_id', '=', 'products.id')
+                        ->select(
+                            'products.name as product', 
+                            'brands.name as brand',
+                            'images.url as imagen',
+                            'products.price as price',
+                            'products.slug as slug',
+                            'products.stock as stock',
+                            'products.subcategory_id as subcategory_id')
+                        ->where('stock', '>', '0')
+                        ->where('subcategory_id', $product->subcategory_id)
+                        ->where('products.id', '!=', $product->id)
+                        ->latest('products.id')
+                        ->take(4)
+                        ->get(); 
 
         return view('livewire.details-component', compact('dollar', 'product', 'similares', 'sale'))->layout('layouts.base');
     }

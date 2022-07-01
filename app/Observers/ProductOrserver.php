@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Product;
+use App\Models\CharacteristicProduct;
 use Illuminate\Support\Facades\Storage;
 
 class ProductOrserver
@@ -15,10 +16,13 @@ class ProductOrserver
 
     public function deleting(Product $product)
     {
-        if ($product->image) 
-        {
-            Storage::delete($product->image->url);
-        }
+        $charact = CharacteristicProduct::where('product_id', '=', $product->id);
+            
+            foreach ($charact as  $c) {
+
+                Storage::disk('public')->delete($c->image);
+
+            }
     }
 
 }

@@ -9,10 +9,11 @@ class CharacteristicProductObserver
 {
     public function deleting(CharacteristicProduct $characteristicproduct)
     {
-        if ($characteristicproduct->image) 
+        /* if ($characteristicproduct->image) 
         {
             Storage::delete($characteristicproduct->image);
-        }
+        } */
     }
+
 }
 
