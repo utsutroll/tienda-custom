@@ -26,7 +26,6 @@ use App\Http\Livewire\Admin\AdminSubcategoryComponent;
 use App\Http\Livewire\Admin\AdminUsersComponent;
 use App\Http\Livewire\Admin\AdminWalletComponent;
 use App\Http\Livewire\CategoryComponent;
-use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\SendPaymentComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\ThankyouComponent;
@@ -56,7 +55,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeComponent::class);
 Route::get('/shop', ShopComponent::class)->name('shop');
 Route::get('/about', AboutComponent::class)->name('about');
-Route::get('/contact', ContactComponent::class)->name('contact');
 Route::get('/cart', CartComponent::class)->name('cart');
 Route::get('/checkout', CheckoutComponent::class)->name('checkout');
 Route::get('/send-payment/{order_id}', SendPaymentComponent::class)->name('sendpayment');
@@ -123,6 +121,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     /* Export PDF */
     Route::get('/admin/export-stock-pdf', [ProductEntryController::class, 'exportStockPDF'])->name('admin.stock.pdf');
+    Route::get('/admin/export-entry-pdf', [ProductEntryController::class, 'exportEntryPDF'])->name('admin.entry.pdf');
+    Route::get('/admin/export-output-pdf', [ProductOutputController::class, 'exportOutputPDF'])->name('admin.output.pdf');
     Route::get('/admin/export-offer-pdf', [ProductController::class, 'exportOfferPDF'])->name('admin.offer.pdf');
     Route::get('/admin/all-orders-day', [OrderReportController::class, 'allOrdersDay'])->name('admin.allordersday.pdf');
     Route::get('/admin/all-orders-month', [OrderReportController::class, 'allOrdersMonth'])->name('admin.allordersmonth.pdf');

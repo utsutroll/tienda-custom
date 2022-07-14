@@ -54,8 +54,18 @@ class DetailsComponent extends Component
     }
 
 
+    protected $rules = [
+        'id_product' => 'required',   
+    ];
+
+    protected $validationAttributes = [
+        'id_product' => 'Producto'
+    ];
+
     public function store()
     {
+        $this->validate();
+
         $sale = Sale::find(1);
         
         $product_cart = CharacteristicProduct::find($this->id_product);

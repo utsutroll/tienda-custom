@@ -22,6 +22,11 @@
     <!-- ============================================================== -->
 
     <div class="card">
+        <div class="card-header bg-white">
+            <div class="d-flex justify-content-end">
+                <a href="{{ route('admin.output.pdf') }}" class="btn btn-secondary" title="Exportar a PDF"><i class="fa fa-file-pdf-o fa-2x"></i></a>
+            </div>   
+        </div>
         <div class="card-body">
             <h4 class="card-title">Productos</h4>
             
@@ -38,10 +43,10 @@
                     <tbody>
                         @foreach ($products as $product)
                         <tr>
-                            <td>{{ $product->characteristic_product->product->name }} ({{ $product->characteristic_product->product->brand->name }} {{ $product->characteristic_product->characteristic->name }})</td>
-                            <td width="20%">{{$product->quantity}}</td>
-                            <td width="20%">{{$product->output->date}} {{$product->output->time}}</td>
-                            <td>{{$product->observation}}</td>
+                            <td>{{ $product->characteristic_product->product->name }} {{ $product->characteristic_product->product->brand->name }} {{ $product->characteristic_product->characteristic->name }}</td>
+                            <td width="20%">{{ $product->quantity }}</td>
+                            <td width="20%">{{ date('d-m-Y', strtotime($product->output->date)) }} {{ date('h:i:s A', strtotime($product->output->time))  }}</td>
+                            <td>{{ $product->observation }}</td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -47,7 +47,7 @@
         </div>
         @isset($slider->image)
             <div class="form-group">
-                <label for="">Imagen que se mostrará en el Slider</label>
+                <label for="">Imágen que se mostrará en el Slider</label>
                 <div class="image-wrapper d-flex justify-content-center">
                     <img id="picture" src="{{Storage::url($slider->image->url)}}">
                 </div>
@@ -58,7 +58,7 @@
             
         @else
         <div class="form-group">
-            {!! Form::label('file', 'Imagen que se mostrará en el Slider') !!}
+            {!! Form::label('file', 'Imágen que se mostrará en el Slider') !!}
             {!! Form::file('file', ['class' => 'dropify', 'accept' => 'image/*' ]) !!}
             @endisset
 

@@ -31,7 +31,7 @@ class AdminCategoryComponent extends Component
     }
 
     protected $rules = [
-        'name' => 'required|alpha|max:30|unique:categories',   
+        'name' => 'required|regex:/^[\pL\s\-]+$/u|max:30|unique:categories',   
     ];
 
     protected $validationAttributes = [

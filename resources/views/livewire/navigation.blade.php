@@ -7,7 +7,6 @@
             <li><a id="LiShop" href="{{ route('shop') }}">Tienda</a></li>
             <li><a id="LiCategory" href="{{ route('categories') }}">Categorías</a></li>
             <li><a id="LiAbout" href="{{ route('about') }}">Nosotros</a></li>
-            <li><a id="LiContact" href="{{ route('contact') }}">Contacto</a></li>
             <livewire:icon-cart />
             @if(Route::has('login'))
                 @auth 

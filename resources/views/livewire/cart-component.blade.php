@@ -5,74 +5,66 @@
         <p>LEAVE A MESSAGE, We love to hear from you!</p>
     </section>
 
-    <section id="cart" class="section-p1">
-        @if(Cart::instance('cart')->count() > 0)
-        <div class="container">
-            <div class="flex flex-wrap -mx-4">
-               <div class="w-full px-4">
-                  <div class="max-w-full overflow-x-auto">
-                     <table class="table-auto w-full">
-                        <thead>
-                           <tr class="bg-primary text-center">
-                              <th class=" w-1/6 min-w-[160px] text-lg font-semibold py-4 lg:py-7 px-3 lg:px-4">
-                                 Remover
-                              </th>
-                              <th class=" w-1/6 min-w-[160px] text-lg font-semibold py-4 lg:py-7 px-3 lg:px-4">
-                                 Imágen
-                              </th>
-                              <th class=" w-1/6 min-w-[160px] text-lg font-semibold py-4 lg:py-7 px-3 lg:px-4">
-                                 Producto
-                              </th>
-                              <th class=" w-1/6 min-w-[160px] text-lg font-semibold py-4 lg:py-7 px-3 lg:px-4">
-                                 Precio
-                              </th>
-                              <th class=" w-1/6 min-w-[160px] text-lg font-semibold py-4 lg:py-7 px-3 lg:px-4">
-                                 Cantidad
-                              </th>
-                              <th class=" w-1/6 min-w-[160px] text-lg font-semibold py-4 lg:py-7 px-3 lg:px-4">
-                                 Subtotal
-                              </th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                        @foreach(Cart::instance('cart')->content() as $item) 
-                            <tr>
-                                <td class="text-start text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                 <a href="javascript:void(0)" wire:click.prevent="destroy('{{$item->rowId}}')"><i class="fas fa-times-circle"></i></a>
-                              </td>
-                              <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                 <img src="{{Storage::url($item->model->image)}}" class="inline-block" alt="{{$item->name}}">
-                              </td>
-                              <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                 {{$item->model->product->name}} {{$item->model->product->brand->name}} {{$item->model->characteristic->name}}
-                              </td>
-                              <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                 {{$item->price}}$
-                              </td>
-                              <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                 <div class="flex flex-row h-9 w-22 rounded-lg border-gray-400 relative">
-                                    <button wire:click.prevent="decreaseQuantity('{{$item->rowId}}')" class="font-semibold border-r w-10 bg-gray-200 hover:bg-red-600 hover:text-white border-gray-400 flex rounded-l focus:outline-none cursor-pointer">
-                                        <span class="m-auto">-</span>
-                                    </button>
-                                    <input type="text" type="text"value="{{$item->qty}}" disabled data-max="120" pattern="[0-9]" class="md:p-2 p-1 w-11 text-xs md:text-base border-gray-300 focus:outline-none text-center"/>
-        
-                                    <button  wire:click.prevent="increaseQuantity('{{$item->rowId}}')" class="font-semibold border-l w-10 bg-gray-200 hover:bg-red-600 hover:text-white border-gray-400 flex rounded-r focus:outline-none cursor-pointer">
-                                        <span class="m-auto">+</span>
-                                    </button>
-                                </div>
-                              </td>
-                              <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                 {{round(($item->subtotal),2)}}$
-                              </td>
-                           </tr>
-                        @endforeach
-                        </tbody>
-                     </table>
-                  </div>
-               </div>
-            </div>
-         </div>
-    </section>
+    @if(Cart::instance('cart')->count() > 0)
+    <div class="overflow-x-auto relative my-10 mx-2 md:mx-10 lg:mx-20">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-t border-gray-300">
+            <thead class="text-xs text-gray-700 uppercase border-b border-gray-300 bg-gray-50">
+                <tr>
+                    <th scope="col" class="py-3 px-6 text-center">
+                        Remover
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Imágen
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Producto
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Precio
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Cantidad
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Subtotal
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(Cart::instance('cart')->content() as $item)
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="py-4 px-6 text-center">
+                        <a href="javascript:void(0)" wire:click.prevent="destroy('{{$item->rowId}}')"><i class="fas fa-times-circle"></i></a>
+                    </td>
+                    <td class="py-4 px-6">
+                        <img src="{{Storage::url($item->model->image)}}" class="inline-block w-14" alt="{{$item->name}}">
+                    </td>
+                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $item->model->product->name }} {{ $item->model->product->brand->name }} {{ $item->model->characteristic->name }}
+                    </th>
+                    <td class="py-4 px-6">
+                        {{ $item->price }} $
+                    </td>
+                    <td class="py-4 px-6">
+                        <div class="flex flex-row h-9 w-22 rounded-lg border-gray-400 relative">
+                            <button wire:click.prevent="decreaseQuantity('{{$item->rowId}}')" class="font-semibold border border-gray-500 w-10 bg-gray-100 hover:bg-emerald-700 hover:text-white flex focus:outline-none cursor-pointer">
+                                <span class="m-auto">-</span>
+                            </button>
+                            <input type="text" type="text"value="{{$item->qty}}" disabled data-max="120" pattern="[0-9]" class="md:p-2 p-1 w-10 text-xs md:text-base border-t border-b border-r-0 border-l-0 border-gray-500 focus:outline-none text-center"/>
+
+                            <button  wire:click.prevent="increaseQuantity('{{$item->rowId}}')" class="font-semibold border border-gray-500 w-10 bg-gray-100 hover:bg-emerald-700 hover:text-white flex focus:outline-none cursor-pointer">
+                                <span class="m-auto">+</span>
+                            </button>
+                        </div>
+                    </td>
+                    <td class="py-4 px-6">
+                        {{ round(($item->subtotal),2) }} $
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
     <section id="cart-add" class="section-p1">
         <div id="coupon">

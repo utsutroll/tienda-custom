@@ -22,7 +22,6 @@
         <a href="{{ route('categories') }}">Categorías</a>
         <a href="{{ route('about') }}">Sobre Nosotros</a>
         {{-- <a href="#">Delivery Information</a> --}}
-        <a href="{{ route('contact') }}">Contactanos</a>
     </div>
     
     <div class="coll">

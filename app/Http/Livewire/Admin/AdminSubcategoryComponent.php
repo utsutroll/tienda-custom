@@ -37,7 +37,7 @@ class AdminSubcategoryComponent extends Component
     }
 
     protected $rules = [
-        'name' => 'required|min:1|unique:subcategories',   
+        'name' => 'required|regex:/^[\pL\s\-]+$/u|max:30|unique:subcategories',   
         'category_id' => 'required'    
     ];
 

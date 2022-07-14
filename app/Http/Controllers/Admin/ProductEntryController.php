@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Entry;
 use App\Models\CharacteristicProduct;
 use App\Models\CharacteristicProductEntry;
-use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -140,5 +139,31 @@ class ProductEntryController extends Controller
         $pdf = PDF::loadview('admin.pdf.stock-product', compact('products', 'date'));
 
         return $pdf->download('Stock-de-Productos-'.$date->format('d-m-Y h:m:s').'.pdf');
+    }
+
+    public function exportEntryPDF()
+    {
+        $carbon = new \Carbon\Carbon();
+        $date = $carbon->now();
+
+        $products = DB::table('characteristic_product')
+                        ->join('products', 'products.id', '=', 'characteristic_product.product_id')
+                        ->join('brands', 'brands.id', '=', 'products.brand_id')
+                        ->join('characteristics', 'characteristics.id', '=', 'characteristic_product.characteristic_id')
+                        ->join('characteristic_product_entry', 'characteristic_product_entry.characteristic_product_id', '=', 'characteristic_product.id')
+                        ->join('entries', 'entries.id', '=', 'characteristic_product_entry.entry_id')
+                        ->select( 
+                            'products.name as name', 
+                            'brands.name as brand', 
+                            'characteristics.name as char', 
+                            'characteristic_product_entry.quantity as quantity',
+                            'entries.date as date',
+                            'entries.time as time'
+                            )
+                        ->get();
+
+        $pdf = PDF::loadview('admin.pdf.entry-product', compact('products', 'date'));
+
+        return $pdf->download('Listado-de-entradas-de-productos-'.$date->format('d-m-Y h:m:s').'.pdf');
     }
 }

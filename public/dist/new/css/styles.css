@@ -459,8 +459,6 @@ footer .copyright {
 }
 
 #prodetails .single-pro-details select {
-    display: block;
-    padding: 5px 10px;
     margin-bottom: 10px
 }
 
@@ -474,11 +472,6 @@ footer .copyright {
 
 #prodetails .single-pro-details .input:focus {
     outline: none;
-}
-
-#prodetails .single-pro-details button {
-    background: #088178;
-    color: #fff;
 }
 
 #prodetails .single-pro-details span {
@@ -577,7 +570,7 @@ footer .copyright {
 
 #form-details {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin: 30px;
     padding: 80px;
     border: 1px solid #e1e1e1;

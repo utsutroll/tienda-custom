@@ -7,14 +7,14 @@
     <!-- ============================================================== -->
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Nueva Imagen Promocional</h4>
+            <h4 class="text-themecolor">Nueva Imágen Promocional</h4>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Menú Principal</a></li>
-                    <li class="breadcrumb-item"><a href="{{route('admin.slider.index')}}">Listado de Imagen Promocional</a></li>
-                    <li class="breadcrumb-item active">Nuevo Imagen Promocional</li>
+                    <li class="breadcrumb-item"><a href="{{route('admin.slider.index')}}">Listado de Imágen Promocional</a></li>
+                    <li class="breadcrumb-item active">Nuevo Imágen Promocional</li>
                 </ol> 
             </div>
 
@@ -29,8 +29,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Registrar Imagen Promocional</h4>
-                    <h6 class="card-subtitle">Sigue los pasos para registrar una Imagen Promocional</h6>
+                    <h4 class="card-title">Registrar Imágen Promocional</h4>
+                    <h6 class="card-subtitle"></h6>
                     {!! Form::open(['route' => 'admin.slider.store', 'autocomplete' => 'off', 'files' => true]) !!}    
                         
                         @include('admin.slider.partials.form')

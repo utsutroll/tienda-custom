@@ -50,15 +50,17 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="d-flex no-block align-items-center">
-                            <div>
-                                <h3><i class="ti-shopping-cart-full"></i></h3>
-                                <p class="text-muted">Pendientes</p>
+                        <a class="waves-dark" href="{{ route('admin.orders',['pendding' => 'pendiente']) }}">
+                            <div class="d-flex no-block align-items-center">
+                                <div>
+                                    <h3><i class="ti-shopping-cart-full" style="color: black;"></i></h3>
+                                    <p class="text-muted">Pendientes</p>
+                                </div>
+                                <div class="ml-auto">
+                                    <h2 class="counter text-cyan">{{ $pending }}</h2>
+                                </div>
                             </div>
-                            <div class="ml-auto">
-                                <h2 class="counter text-cyan">{{ $pending }}</h2>
-                            </div>
-                        </div>
+                        </a>    
                     </div>
                     <div class="col-12">
                         <div class="progress">
@@ -122,13 +124,8 @@
     <!-- End Info box -->
     <!-- ============================================================== -->
     @push('scripts')
-
-    <!--morris JavaScript -->
-    <script src="{{ asset('assets/node_modules/raphael/raphael-min.js') }}"></script>
-    <script src="{{ asset('assets/node_modules/morrisjs/morris.min.js') }}"></script>
-
     <script>
-    $('#liMenu').addClass("active");
+        $('#liMenu').addClass("active");
     </script>
     @endpush
 </div>

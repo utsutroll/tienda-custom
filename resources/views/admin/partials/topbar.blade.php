@@ -9,9 +9,9 @@
                 <b>
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
-                    <img src="{{ url('dist/new/img/logos/phone-dark.svg') }}" alt="homepage" class="dark-logo" width="20%"/>
+                    <img src="{{ url('dist/new/img/logos/phone-dark.svg') }}" alt="homepage" class="dark-logo" width="15%"/>
                     <!-- Light Logo icon -->
-                    <img src="{{ url('dist/new/img/logos/phone-light.svg') }}" alt="homepage" class="light-logo" width="20%"/>
+                    <img src="{{ url('dist/new/img/logos/phone-light.svg') }}" alt="homepage" class="light-logo" width="15%"/>
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text -->

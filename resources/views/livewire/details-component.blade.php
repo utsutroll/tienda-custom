@@ -15,11 +15,9 @@
         <div class="single-pro-details">
             <h4 class="text-2xl text-black font-semibold">{{ $product->name }} {{ $product->brand->name }}</h4>
             <h2>{{ $product->price }}$</h2> 
-            <h4 class="text-lg text-black font-semibold">Detalles del Producto</h4>
-            <span>{{ $product->details }}</span>
          
             <form wire:submit.prevent="store" class="mt-8">
-                <ul class="block">
+                {{-- <ul class="block">
                     @foreach ($product->characteristics_product as $pro_char)
                         @if ($pro_char->stock > 0)
 
@@ -37,23 +35,39 @@
                             </li>
                         @endif
                     @endforeach
-                </ul>
+                </ul> --}} 
+                <select wire:model.defer="id_product" class="bg-gray-100 border border-gray-500 p-3 w-36 text-gray-900 text-sm focus:ring-gray-500 focus:border-gray-500 max-w-18 max-h-16" title="Debe Seleccionar una Opción" required="required">
+                    <option value="0">Seleccione</option>
+                    @foreach ( $product->characteristics_product as $pro_char )
+                        @if ($pro_char->stock > 0 && $pro_char->price > 0 || $pro_char->sale_price > 0)
+                            <option value="{{ $pro_char->id }}">{{ $pro_char->characteristic->name }}  @if ($pro_char->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now()) {{ $pro_char->sale_price }} $ <del><span class="text-sm text-gray-600 font-sans">{{ $pro_char->price }} $</span></del> @else {{ $pro_char->price }} $ @endif</option>
+                        @endif
+                    @endforeach
+                </select>
+                @error('id_product')
+                    <small class="text-sm text-red-600">{{$message}}</small>   
+                @enderror
             
                 @if ($product->stock > 0)
-                <div class="flex flex-row border h-10 w-24 rounded-lg border-gray-400 relative my-3">
-                    <button wire:click.prevent="decreaseQuantityD" class="font-semibold border-r w-7 bg-gray-200 hover:bg-red-600 hover:text-white border-gray-400 flex rounded-l focus:outline-none cursor-pointer">
-                        <span class="m-auto">-</span>
-                    </button>
-                    <input type="text" type="text" wire:model.defer="qty" disabled data-max="120" pattern="[0-9]" class="md:p-2 p-1 w-11 text-xs md:text-base border-gray-300 focus:outline-none text-center"/>
+                <div class="flex items-center">
+                    <div class="flex flex-row border-0 h-10 w-32 rounded-lg border-gray-400 relative my-4 mr-4">
+                        <button wire:click.prevent="decreaseQuantityD" class="font-semibold border border-gray-500 w-10 h-12 bg-gray-100 hover:bg-emerald-700 hover:text-white flex focus:outline-none cursor-pointer">
+                            <span class="m-auto">-</span>
+                        </button>
+                        <input type="text" type="text" wire:model.defer="qty" disabled data-max="120" pattern="[0-9]" class="md:p-2 p-1 w-12 h-12 text-xs md:text-base border-t border-b border-r-0 border-l-0 border-gray-500 focus:outline-none text-center"/>
 
-                    <button wire:click.prevent="increaseQuantityD" class="font-semibold border-l w-7 bg-gray-200 hover:bg-red-600 hover:text-white border-gray-400 flex rounded-r focus:outline-none cursor-pointer">
-                        <span class="m-auto">+</span>
-                    </button>
-                </div> 
-                <button class="rounded-lg p-4" type="submit" wire:loading.attr="disabled" title="Añadir al carrito"><i class="fas fa-cart-plus"></i> <button>    
+                        <button wire:click.prevent="increaseQuantityD" class="font-semibold border border-gray-500 w-10 h-12 bg-gray-100 hover:bg-emerald-700 hover:text-white flex focus:outline-none cursor-pointer">
+                            <span class="m-auto">+</span>
+                        </button>
+                    </div> 
+                    <button class="border border-gray-500 p-2.5 mt-2 text-black hover:text-white font-semibold bg-gray-50 hover:bg-emerald-700" type="submit" wire:loading.attr="disabled" title="Añadir al carrito">Agregar al carrito <button>    
+                </div>
                 @endif
                  
             </form> 
+
+            <h4 class="text-2xl text-black font-semibold">Detalles del Producto</h4>
+            <span>{{ $product->details }}</span>
         </div>
     </section>
     

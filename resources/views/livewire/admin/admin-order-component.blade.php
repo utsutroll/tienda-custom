@@ -28,7 +28,7 @@
                 <table id="table" class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>ID</th>
                             <th>Nombre y Apellido</th>
                             <th>Teléfono</th>
                             <th>Total $</th>
