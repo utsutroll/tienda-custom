@@ -135,6 +135,7 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
+
         $request->validate([
             'id' => "unique:products,id,$product->id",   
             'name' => "required",   
@@ -172,27 +173,6 @@ class ProductController extends Controller
                     'url' => $url
                 ]);
             }
-        }
-
-        $files = $request->file('image');
-
-        if($request->characteristic & $request->file('image')){
-
-            foreach($product->characteristics as $c){
-                if ($request->characteristic != $c->characteristic_id | $request->file('image') != $c->image) {
-
-                    Storage::delete($c->image);
-                    
-                    $imagen = Storage::put('/products/images', $files);
-
-                    $product->characteristics->update([
-                        'characteristic_id' => $request->characteristic_id,
-                        'image' => $imagen,
-                    ]);
-                }
-                
-	    	}
-            
         }
 
         if($request->charact & $request->file('imge') & $request->activar == 'on'){

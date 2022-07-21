@@ -51,8 +51,8 @@
     </div>
 
     <div class="coll install">
-        <p class="text-lg text-teal-600 font-semibold">Secured Payment Gateways </p>
-        <img src="{{ url('dist/new/img/pay/pay.png') }}" alt="">
+        <p class="text-lg text-teal-600 font-semibold">Métodos de pago </p>
+        <img src="{{ url('dist/new/img/paymethod.png') }}" class="w-52" alt="">
     </div>
 
     <div class="copyright">

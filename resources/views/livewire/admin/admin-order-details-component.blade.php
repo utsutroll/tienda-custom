@@ -224,11 +224,13 @@
                                     @endif    
                                 @endif
 
-                                @if ($order->transactions->observation !== null && $order->status !== 'canceled')
-                                    <tr>
-                                        <th>Observación</th>
-                                        <td>{{ $order->transactions->observation }}</td>
-                                    </tr>
+                                @if ($order->transactions !== null)
+                                    @if ($order->transactions->observation !== null && $order->status !== 'canceled')
+                                        <tr>
+                                            <th>Observación</th>
+                                            <td>{{ $order->transactions->observation }}</td>
+                                        </tr>   
+                                    @endif
                                 @endif
                             @endif       
                         </table>

@@ -1,12 +1,14 @@
 <div>
     <section id="prodetails" class="section-p1">
         <div class="single-pro-image">
-            <img src="{{ Storage::url($product->image->url) }}" width="100%" id="MainImg" />
+            <div class="shadow-md shadow-black mb-4">
+                <img src="{{ Storage::url($product->image->url) }}" width="100%" id="MainImg" />
+            </div>
             
-            <div class="small-img-group">
+            <div class="grid grid-cols-4 gap-4">
                 @foreach ($product->characteristics_product as $pro_char_img)
-                <div class="small-img-col">
-                    <img src="{{Storage::url($pro_char_img->image)}}" width="100%" class="small-img"  />
+                <div class="small-img-col shadow-md shadow-black">
+                    <img src="{{ Storage::url($pro_char_img->image) }}" width="100%" class="small-img" onclick="myFunction(this)" />
                 </div>
                 @endforeach
             </div>
@@ -109,8 +111,19 @@
 
 @push('scripts')
     <script>
-        document.getElementsByClassName('small-img').onclick = function() {
-            document.getElementById('MainImg').src = document.getElementsByClassName('small-img').src;
+        $( document ).ready(function() {
+            var fullImgs = document.getElementById("MainImg");
+            var temp = fullImgs.src
+            $('#MainImg').click(function(){
+                fullImgs.src=temp;
+            })
+        });
+
+        function myFunction(smallImg) {
+            var fullImg = document.getElementById("MainImg");
+            fullImg.src=smallImg.src;
+
         }
+        
     </script>
 @endpush

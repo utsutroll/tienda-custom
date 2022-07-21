@@ -21,7 +21,7 @@
         </h5>
         <div class="">
             @foreach (auth()->user()->unreadNotifications as $notification)
-            <a wire:click.prevent="markViews" href="{{ route('admin.orderdetails', ['order_id'=>$notification->data['id']]) }}"
+            <a wire:click.prevent="markViews" @if (Auth::user()->utype === 'ADM') href="{{ route('admin.orderdetails', ['order_id'=>$notification->data['id']]) }}" @else href="{{ route('user.orderdetails', ['order_id'=>$notification->data['id']]) }}" @endif
                 class="flex items-center px-4 py-3 hover:bg-gray-100">
                 @if ($notification->data['status'] == "approved")
                 <div class="btn btn-success btn-circle"><i class="fa fa-shopping-cart muted"></i></div>
@@ -37,7 +37,7 @@
             @endforeach
             
             @forelse (auth()->user()->readNotifications as $notification)
-            <a href="{{ route('user.orderdetails', ['order_id'=>$notification->data['id']]) }}"
+            <a @if (Auth::user()->utype === 'ADM') href="{{ route('admin.orderdetails', ['order_id'=>$notification->data['id']]) }}" @else href="{{ route('user.orderdetails', ['order_id'=>$notification->data['id']]) }}" @endif
                 class="flex items-center px-4 py-3 hover:bg-gray-100">
                 @if ($notification->data['status'] == "approved")
                 <div class="btn btn-secondary btn-circle text-muted"><i class="fa fa-shopping-cart muted"></i></div>

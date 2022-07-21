@@ -35,8 +35,6 @@
                         
                         @include('admin.products.partials.form')
 
-                        <hr/>
-
                         <div class="form-group d-flex justify-content-end">
                             <div class="mr-3">
                                 {!! Form::submit('Guardar', ['class' => 'btn btn-info']) !!}
@@ -202,5 +200,32 @@
         });
     });
     
+
+    window.livewire.on('CharDeleted',()=>{
+
+        $.toast({
+            heading: 'Notificación',
+            text: 'La característica se eliminó con éxito.',
+            position: 'top-right',
+            loaderBg:'#ff6849',
+            icon: 'info',
+            hideAfter: 3500, 
+            stack: 6
+        });
+        });
+
+        window.livewire.on('CharDeleted_e',()=>{
+
+        $.toast({
+            heading: 'Notificación',
+            text: 'La característica se encuetra asignado a una Entrada, no puede ser eliminado.',
+            position: 'top-right',
+            loaderBg:'#ff6849',
+            icon: 'error',
+            hideAfter: 3500, 
+            stack: 6
+        });
+
+    });
     </script>
 @endpush    
