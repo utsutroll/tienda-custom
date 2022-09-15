@@ -1,8 +1,8 @@
-<footer class="section-p1 bg-gray-100">
+<footer class="section-p1 bg-gray-200">
     <div class="coll">
         <img class="logo" src="{{ url('dist/new/img/footer-meka.png') }}" alt="Inversiones Meka">
         <h4 class="text-lg text-teal-600 font-semibold">Contacto</h4>
-        <p><strong>Dirección:</strong> Plasoleta el saman</p>
+        <p><strong>Dirección:</strong> Plazoleta el Samán</p>
         {{-- <p><strong>Teléfono:</strong> +01 2222 356 /(+91) 01 2345 6789</p> --}}
         <p><strong>Correo:</strong> inversiones.meka@hotmail.com</p>
         <p><strong>Horario:</strong> 7:30 - 16:00, Lunes a Sabados</p>

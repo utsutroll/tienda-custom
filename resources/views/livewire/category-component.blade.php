@@ -81,7 +81,7 @@
     </div>
     
 
-    <div class="col-span-1 hidden" id="categories">
+    {{-- <div class="col-span-1 hidden" id="categories">
         <aside class="w-64 md:w-72 lg:w-80 h-full md:mt-6 lg:mt-12 fixed inset-y-10 left-0 z-40 bg-white border-r-2" aria-label="Sidebar">
             <div class="relative overflow-y-auto py-4 px-3 bg-slate-100 divide-y divide-gray-300">
                 <div class="px-4 flex items-center justify-between">
@@ -167,8 +167,18 @@
         <div class="px-4 py-3 justify-self-end sm:px-6">
             {{ $this->results->links() }}
         </div>
-    </div>
+    </div> --}}
 
+    <div class="grid grid-cols-2 sm:grid-cols-4 sm-gap-3 md-cols-4 md:gap-4 lg:grid-cols-4 lg:gap-6 mx-2 p-6">
+        @foreach ($this->categories as $category)
+        <div class="bg-gray-200 rounded-md shadow-sm hover:shadow-lg shadow-black">
+            <h3 class="px-2 pt-8 text-base font-semibold font-sans">{{ $category->name }}</h3>
+            <div class="bg-gradient-to-r from-green-500 to-blue-500 rounded-b-md flex m-0 justify-end cursor-pointer">
+                <i class="fas fa-plus text-gray-100 p-1"></i>
+            </div>
+        </div>
+        @endforeach
+    </div>
 
 
     @livewire('offer')

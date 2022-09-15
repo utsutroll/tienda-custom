@@ -1,8 +1,8 @@
 <div>
     <section id="page-header" class="about-header">
-        <h2>#KnowUs</h2>
+        <h2>#SobreNosotros</h2>
         
-        <p>Lorem ipsum dolor sit amet consectetur.</p>
+        <p>.</p>
     </section>
 
     <section id="about-head" class="section-p1">
@@ -16,13 +16,6 @@
             <br><br>
 
             <marquee bgcolor="#ccc" loop="-1" scrollamount="5" width="100%">Create stunning images wth as much or as little control as you like thanks to a choice of Basic and Creative modes.</marquee>
-        </div>
-    </section>
-
-    <section id="about-app" class="section-p1">
-        <h1>Download Our <a href="#">App</a></h1>
-        <div class="video">
-            <video autoplay muted loop src="{{ url('dist/new/img/about/1.mp4') }}"></video>
         </div>
     </section>
 
@@ -66,7 +59,7 @@
             <div>
                 <li>
                     <i class="fal fa-map"></i>
-                    <p>Plasoleta el Saman</p>
+                    <p>Plazoleta el Samán</p>
                 </li>
                 <li>
                     <i class="far fa-envelope"></i>

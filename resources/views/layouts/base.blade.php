@@ -75,7 +75,7 @@
         
         <script src="{{ url('dist/new/js/script.js') }}"></script>
     </head>
-    <body class="font-sans">
+    <body class="font-sans flex flex-col min-h-screen">
 
         <div class="preloader">
             <div class="loader">
@@ -89,7 +89,7 @@
         @include('livewire.navigation')
             
         <!-- Page Content -->
-        <main>
+        <main class="flex-grow">
             {{ $slot }}
         </main>
 
