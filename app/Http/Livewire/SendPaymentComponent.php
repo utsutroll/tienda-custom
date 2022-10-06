@@ -4,16 +4,15 @@ namespace App\Http\Livewire;
 
 use App\Events\CancelOrderEvent;
 use App\Models\BankAccount;
-use App\Models\DollarRate;
 use App\Models\Order;
 use App\Models\Transaction;
-use App\Models\Wallet;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Cart;
-use DB;
+use Illuminate\Support\Facades\DB;
+
 
 class SendPaymentComponent extends Component
 {
@@ -40,6 +39,21 @@ class SendPaymentComponent extends Component
     protected $validationAttributes = [
         'reference'=>'Referencia',
     ];
+
+    public function getBankProperty()
+    {
+        return BankAccount::all();
+    }
+    
+    public function getWalletProperty()
+    {
+        return DB::table('wallets')->select('id', 'name', 'wallet_email', 'type')->get();
+    }
+
+    public function getDollarProperty()
+    {
+        return DB::table('dollar_rates')->select('price')->get();
+    }
 
     public function sendPayment()
     {
@@ -116,11 +130,7 @@ class SendPaymentComponent extends Component
 
     public function render()
     {
-        $banks = BankAccount::all();
-        $wallets = Wallet::all();
-        $dollar = DollarRate::all();
-
         $this->verifyforCheckout();
-        return view('livewire.send-payment-component', compact('banks', 'wallets', 'dollar'))->layout('layouts.base');
+        return view('livewire.send-payment-component')->layout('layouts.base');
     }
 }

@@ -54,18 +54,15 @@
                             @else
                                 <button class="btn btn-sm btn-danger">Cancelada</button>
                             @endif</td>
-                            <td>
-                                @if ($o->transactions == null)
-                                    <div class="btn btn-sm btn-warning">No Enviado</div>
-                                @else  
-                                    @if ($o->transactions->status == "pending")
-                                    <div class="btn btn-sm btn-info">Pendiente</div>    
-                                    @elseif ($o->transactions->status == "approved")
-                                        <div class="btn btn-sm btn-success">Aprobado</div>
-                                    @elseif ($o->transactions->status == "declined")
-                                        <div class="btn btn-sm btn-danger">Rechazada</div>
-                                    @endif
+                            <td>  
+                                @if ($o->status_pago == "pending")
+                                <div class="btn btn-sm btn-info">Pendiente</div>    
+                                @elseif ($o->status_pago == "approved")
+                                    <div class="btn btn-sm btn-success">Aprobado</div>
+                                @elseif ($o->status_pago == "declined")
+                                    <div class="btn btn-sm btn-danger">Rechazada</div>
                                 @endif
+                                
                             </td>
                             <td>{{$o->created_at}}</td>
                             <td>

@@ -1,10 +1,5 @@
 <div>
-    <section id="page-header" class="about-header">
-        <h2>#Let's_talk</h2>
-        
-        <p>LEAVE A MESSAGE, We love to hear from you!</p>
-    </section>
-
+    
     @if(Cart::instance('cart')->count() > 0)
     <div class="overflow-x-auto relative my-10 mx-2 md:mx-10 lg:mx-20">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-t border-gray-300">
@@ -95,7 +90,7 @@
         </div>
     </section>
     @else
-        <div class="text-center" style="padding:30px 0;">
+        <div class="h-screen my-auto text-center" style="padding:30px 0;">
             <h1 class="text-4xl mt-5 font-medium text-gray-800">Su carrito está vacío!</h1>
             <p class="my-4 marker:text-base font-bold">Añadir elemento a él ahora</p>
             <a href="{{ route('shop') }}" class="rounded-md text-white text-base font-semibold p-3 bg-emerald-500 hover:bg-emerald-700">Ir al Catálogo</a>

@@ -7,9 +7,11 @@ use App\Models\Category;
 use App\Models\DollarRate;
 use App\Models\Product;
 use App\Models\Slider;
+use App\Models\Subcategory;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
+use phpDocumentor\Reflection\Types\This;
 
 class CategoryComponent extends Component
 {
@@ -20,9 +22,13 @@ class CategoryComponent extends Component
     public $search= '';
     public $entries = 30;
     public $buscar;
+    public $subcategories;
+    public $products;
+    public $category;
+    public $subcategory;
 
     public $filter = [
-        'subcategory' => []
+        'subcategory' => [],
     ];
 
     protected $paginationTheme = "tailwind";
@@ -41,39 +47,43 @@ class CategoryComponent extends Component
         return Category::all();
     }
 
-    public function getResultsProperty() {
+    public function subcategories($id) {
 
-        if (empty($this->filter['subcategory'])) {
-            return DB::table('products')
-                        ->join('brands', 'brands.id', '=', 'products.brand_id')
-                        ->join('images', 'images.imageable_id', '=', 'products.id')
-                        ->select(
-                            'products.name as product', 
-                            'brands.name as brand',
-                            'images.url as imagen',
-                            'products.price as price',
-                            'products.slug as slug',
-                            'products.stock as stock')
-                            ->where('stock', '>', '0')
-                            ->paginate($this->entries);
-        } 
-
-        $this->filter['subcategory'] = array_filter($this->filter['subcategory']);
-        return DB::table('products')
-                    ->join('brands', 'brands.id', '=', 'products.brand_id')
-                    ->join('images', 'images.imageable_id', '=', 'products.id')
-                    ->select(
-                        'products.name as product', 
-                        'brands.name as brand',
-                        'images.url as imagen',
-                        'products.price as price',
-                        'products.slug as slug',
-                        'products.stock as stock')
-                        ->where('stock', '>', '0')
-                    ->whereIn('subcategory_id', array_keys($this->filter['subcategory']))
-                    ->paginate($this->entries);
+        $this->subcategories = DB::table('subcategories')->where('category_id', $id)->get();
         
+        $categoria = Category::find($id);
+
+        $this->category = $categoria->name;
+
     }
+    
+    public function products($id) {
+        
+        $this->products = DB::table('products')
+                                ->join('brands', 'brands.id', '=', 'products.brand_id')
+                                ->join('images', 'images.imageable_id', '=', 'products.id')
+                                ->where('stock', '>', '0')
+                                ->where('subcategory_id', '=', $id)
+                                ->select(
+                                    'products.name as product', 
+                                    'brands.name as brand',
+                                    'images.url as imagen',
+                                    'products.price as price',
+                                    'products.slug as slug',
+                                    'products.stock as stock')
+                                ->orderBy('products.created_at', 'desc') 
+                                ->get();
+                                
+        $this->reset('subcategories');
+        $this->reset('category');
+        
+
+        $subcategoria = Subcategory::find($id);
+
+        $this->subcategory = $subcategoria->name;
+    }
+
+    
 
 
     public function render()
@@ -86,7 +96,10 @@ class CategoryComponent extends Component
     }
 
     public function refresh() {
-        $this->reset(['filter']);
+        $this->reset(['products']);
+        $this->reset(['subcategories']);
+        $this->reset(['subcategory']);
+        $this->reset(['category']);
     }
 
 }

@@ -137,6 +137,10 @@
                 });
             });
 
+            document.getElementById('users-menu').onclick = function() {
+                document.getElementById("resultsnav").classList.toggle("hidden");
+            }
+
             document.getElementById('user-menu').onclick = function() {
                 document.getElementById("resultnav").classList.toggle("hidden");
             }

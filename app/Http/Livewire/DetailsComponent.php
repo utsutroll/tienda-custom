@@ -24,7 +24,7 @@ class DetailsComponent extends Component
     {
         $this->slug = $slug;
     }
-
+    
     public function render()
     {
         $dollar = DollarRate::all();
@@ -83,6 +83,7 @@ class DetailsComponent extends Component
         }
 
         $this->reset('id_product');
+        return redirect()->route('product.details', ['slug'=>$this->slug]);
     }
 
 
