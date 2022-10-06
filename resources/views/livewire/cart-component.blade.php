@@ -53,7 +53,7 @@
                         </div>
                     </td>
                     <td class="py-4 px-6">
-                        {{ round(($item->subtotal),2) }} $
+                        @foreach ($dollar as $d){{ $d->price*round(($item->subtotal),2) }} @endforeach Bs
                     </td>
                 </tr>
                 @endforeach
@@ -73,14 +73,10 @@
         <div id="subtotal">
             <h3>Resumen del carrito</h3>
             <table>
-                <tr>
-                    <td>Precio total</td>
-                    <td>{{ Cart::instance('cart')->total()-Cart::instance('cart')->tax() }} dólares</td>
-                </tr>
-                <tr>
+                {{-- <tr>
                     <td>Tasa del día</td>
                     <td>@foreach ($dollar as $d){{ number_format($d->price, 2) }}@endforeach Bs</td>
-                </tr>
+                </tr> --}}
                 <tr>
                     <td><strong>Precio total</strong></td>
                     <td><strong>@foreach ($dollar as $d){{number_format(round(($d->price*Cart::instance('cart')->total()),2),2)}}@endforeach Bs</strong></td>

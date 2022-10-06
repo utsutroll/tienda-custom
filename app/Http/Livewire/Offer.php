@@ -9,6 +9,11 @@ use Livewire\Component;
 
 class Offer extends Component
 {
+    /* public function getDollarProperty()
+    {
+        return DB::table('dollar_rates')->select('price')->get();
+    } */
+
     public function render()
     {   
         $sproducts = CharacteristicProduct::all()->where('sale_price', '>', 0)->take(8);

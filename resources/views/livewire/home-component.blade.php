@@ -97,8 +97,7 @@
                                 </a>
                             </h3>
                         </div>
-                        <p class="text-md mt-2 text-center font-semibold text-teal-600">{{ $p->price }}$</p>
-                        <h6 class="text-xs text-center text-gray-600">~@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</h6>
+                        <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</p>
                     </div>
                 </div>
                 @endforeach
@@ -143,8 +142,7 @@
                                 </a>
                             </h3>   
                         </div>
-                        <p class="text-md mt-2 text-center font-semibold text-teal-600">{{ $np->price }}$</p>
-                        <h6 class="text-xs text-center text-gray-600">~@foreach ($dollar as $d){{ number_format($d->price * $np->price, 2) }}@endforeach Bs</h6>
+                        <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($dollar as $d){{ number_format($d->price * $np->price, 2) }}@endforeach Bs</p>
                     </div>
                 </div>
                 @endforeach

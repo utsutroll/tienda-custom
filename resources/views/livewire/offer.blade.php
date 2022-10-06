@@ -16,7 +16,7 @@
                     </div>
                     <div class="product-info text-center">
                         <a href="{{ route('product.details',['slug'=>$sp->product->slug]) }}" class="product-name"><span>{{ $sp->product->name }} {{ $sp->product->brand->name }} {{ $sp->characteristic->name }}</span></a>
-                        <div class="wrap-price"><ins><p class="text-md mt-2 text-center font-semibold text-teal-600">{{ $sp->sale_price }}$</p></ins> <del><p class="text-sm text-gray-500">{{ $sp->price }}</p></del></div>
+                        <div class="wrap-price"><ins><p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($dollar as $d){{ $d->price*$sp->sale_price }} @endforeach Bs</p></ins> <del><p class="text-sm text-gray-500">@foreach ($dollar as $d){{ $d->price*$sp->price }} @endforeach Bs</p></del></div>
                     </div>
                 </div>
                 @endforeach

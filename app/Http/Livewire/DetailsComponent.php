@@ -24,10 +24,14 @@ class DetailsComponent extends Component
     {
         $this->slug = $slug;
     }
+
+    public function getDollarProperty()
+    {
+        return DB::table('dollar_rates')->select('price')->get();
+    }
     
     public function render()
     {
-        $dollar = DollarRate::all();
         $sale = Sale::find(1);
 
         $product = Product::where('slug', $this->slug)->first();
@@ -50,7 +54,7 @@ class DetailsComponent extends Component
                         ->take(4)
                         ->get(); 
 
-        return view('livewire.details-component', compact('dollar', 'product', 'similares', 'sale'))->layout('layouts.base');
+        return view('livewire.details-component', compact('product', 'similares', 'sale'))->layout('layouts.base');
     }
 
 

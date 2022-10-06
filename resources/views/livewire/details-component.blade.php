@@ -16,7 +16,7 @@
         
         <div class="single-pro-details">
             <h4 class="text-2xl text-black font-semibold">{{ $product->name }} {{ $product->brand->name }}</h4>
-            <h2>{{ $product->price }}$</h2> 
+            <h2>@foreach ($this->dollar as $d){{ $d->price*$product->price }} @endforeach Bs</h2> 
          
             <form wire:submit.prevent="store" class="mt-8">
                 {{-- <ul class="block">
@@ -42,7 +42,7 @@
                     <option value="0">Seleccione</option>
                     @foreach ( $product->characteristics_product as $pro_char )
                         @if ($pro_char->stock > 0 && $pro_char->price > 0 || $pro_char->sale_price > 0)
-                            <option value="{{ $pro_char->id }}">{{ $pro_char->characteristic->name }}  @if ($pro_char->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now()) {{ $pro_char->sale_price }} $ <del><span class="text-sm text-gray-600 font-sans">{{ $pro_char->price }} $</span></del> @else {{ $pro_char->price }} $ @endif</option>
+                            <option value="{{ $pro_char->id }}">{{ $pro_char->characteristic->name }}  @if ($pro_char->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now()) @foreach ($this->dollar as $d){{ $d->price*$pro_char->sale_price }} @endforeach Bs <del><span class="text-sm text-gray-600 font-sans">@foreach ($this->dollar as $d){{ $d->price*$pro_char->price }} @endforeach Bs</span></del> @else @foreach ($this->dollar as $d){{ $d->price*$pro_char->price }} @endforeach Bs @endif</option>
                         @endif
                     @endforeach
                 </select>
@@ -97,8 +97,7 @@
                             </a>
                         </h3>   
                     </div>
-                    <p class="text-md mt-2 text-center font-semibold text-teal-600">{{ $s->price }}$</p>
-                    <h6 class="text-xs text-center text-gray-600">~@foreach ($dollar as $d){{ number_format($d->price * $s->price, 2) }}@endforeach Bs</h6>
+                    <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($this->dollar as $d){{ number_format($d->price * $s->price, 2) }}@endforeach Bs</p>
                 </div>
             </div>
             @endforeach

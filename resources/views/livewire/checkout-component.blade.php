@@ -47,8 +47,8 @@
                         <hr/>
                         @if(Auth::user()->utype == "USR")
                         <div class="flex justify-end my-2">
-                            <button wire:click.prevent="cancelCheckout" class="p-2 mr-2 text-base text-white font-semibold rounded-md bg-red-700 hover:bg-red-900 shadow-lg shadow-red-600">Cancelar</button>
-                            <button type="submit" class="p-2 mr-2 text-base text-white font-semibold rounded-md bg-teal-600 hover:bg-teal-800 shadow-lg shadow-teal-600">Comprobar</button>
+                            <button wire:click.prevent="cancelCheckout" class="p-2 mr-2 text-base text-white font-semibold bg-red-700 hover:bg-red-900 shadow-lg shadow-red-600">Cancelar</button>
+                            <button type="submit" class="p-2 mr-2 text-base text-white font-semibold bg-teal-600 hover:bg-teal-800 shadow-lg shadow-teal-600">Comprobar</button>
                         </div>
                         @endif
                     </form>
