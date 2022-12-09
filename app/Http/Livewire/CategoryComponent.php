@@ -5,13 +5,12 @@ namespace App\Http\Livewire;
 use App\Models\BusinessPartner;
 use App\Models\Category;
 use App\Models\DollarRate;
-use App\Models\Product;
 use App\Models\Slider;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
-use phpDocumentor\Reflection\Types\This;
+use Cart;
 
 class CategoryComponent extends Component
 {
@@ -65,6 +64,7 @@ class CategoryComponent extends Component
                                 ->where('stock', '>', '0')
                                 ->where('subcategory_id', '=', $id)
                                 ->select(
+                                    'products.id as id',
                                     'products.name as product', 
                                     'brands.name as brand',
                                     'images.url as imagen',
@@ -100,6 +100,25 @@ class CategoryComponent extends Component
         $this->reset(['subcategories']);
         $this->reset(['subcategory']);
         $this->reset(['category']);
+    }
+
+    public function addToWishlist($id, $name, $price)
+    {   
+        Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
+
+        $this->emit('addWishlist');
+    }
+
+    public function removeFromWishlist($product_id)
+    {
+        foreach(Cart::instance('wishlist')->content() as $witem)
+        {
+            if ($witem->id == $product_id) 
+            {
+                Cart::instance('wishlist')->remove($witem->rowId);
+                return;
+            }
+        }
     }
 
 }

@@ -7,6 +7,7 @@ use App\Models\DollarRate;
 use App\Models\Product;
 use App\Models\Slider;
 use App\Models\Subcategory;
+use Cart;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -43,6 +44,7 @@ class HomeComponent extends Component
                         ->join('brands', 'brands.id', '=', 'products.brand_id')
                         ->join('images', 'images.imageable_id', '=', 'products.id')
                         ->select(
+                            'products.id as id',
                             'products.name as product', 
                             'brands.name as brand',
                             'images.url as imagen',
@@ -57,6 +59,7 @@ class HomeComponent extends Component
                             ->join('images', 'images.imageable_id', '=', 'products.id')
                             ->where('stock', '>', '0')
                             ->select(
+                                'products.id as id',
                                 'products.name as product', 
                                 'brands.name as brand',
                                 'images.url as imagen',
@@ -68,6 +71,25 @@ class HomeComponent extends Component
         
 
         return view('livewire.home-component', compact('dollar', 'products', 'newproducts', 'sliders', 'business_partners'))->layout('layouts.base');
+    }
+
+    public function addToWishlist($id, $name, $price)
+    {   
+        Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
+
+        $this->emit('addWishlist');
+    }
+
+    public function removeFromWishlist($product_id)
+    {
+        foreach(Cart::instance('wishlist')->content() as $witem)
+        {
+            if ($witem->id == $product_id) 
+            {
+                Cart::instance('wishlist')->remove($witem->rowId);
+                return;
+            }
+        }
     }
 
 }

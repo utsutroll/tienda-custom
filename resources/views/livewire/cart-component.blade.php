@@ -38,7 +38,7 @@
                         {{ $item->model->product->name }} {{ $item->model->product->brand->name }} {{ $item->model->characteristic->name }}
                     </th>
                     <td class="py-4 px-6">
-                        {{ $item->price }} $
+                        @foreach ($dollar as $d){{ number_format($item->price, 2) }}@endforeach Bs
                     </td>
                     <td class="py-4 px-6">
                         <div class="flex flex-row h-9 w-22 rounded-lg border-gray-400 relative">

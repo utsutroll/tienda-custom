@@ -48,6 +48,10 @@
             </div>
         </div>           
     </div>
+    
+    @php
+        $witems = Cart::instance('wishlist')->content()->pluck('id');
+    @endphp
 
     <div class="bg-white">
         <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -67,13 +71,20 @@
                             <p class="my-2 text-sm text-gray-500">{{ $p->brand->name }}</p>
                             <h3 class="text-sm font-medium text-gray-900">
                                 <a href="{{route('product.details',['slug'=>$p->slug])}}">
-                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    <span aria-hidden="true" class="absolute"></span>
                                     {{ $p->name }}
                                 </a>
                             </h3>
                         </div>
-                        <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</p>
-
+                        
+                        <div class="flex justify-between">
+                            <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</p>
+                            @if ($witems->contains($p->id))
+                                <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$p->id}})" wire:loading.attr="disabled"><i class="fa fa-heart text-red-600"></i></a></div>
+                            @else
+                                <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$p->id}}, '{{$p->product}}', {{$p->price}})" wire:loading.attr="disabled"></i></a></div>
+                            @endif    
+                        </div>
                     </div>
                 </div>
                 @endforeach
@@ -92,20 +103,9 @@
             </div>
         </div>
     </div>
-    
-    @livewire('offer')
 
-    @push('css')
-	    <link rel="stylesheet" type="text/css" href="{{ asset('dist/offer_slider/css/owl.carousel.min.css') }}">
-	    <link rel="stylesheet" type="text/css" href="{{ asset('dist/offer_slider/css/styles.css') }}">
-    @endpush
+  
     @push('scripts')
-        <script src="{{ asset('dist/offer_slider/js/jquery.flexslider.js') }}"></script>
-        <script src="{{ asset('dist/offer_slider/js/owl.carousel.min.js') }}"></script>
-        <script src="{{ asset('dist/offer_slider/js/jquery.countdown.min.js') }}"></script>
-        <script src="{{ asset('dist/offer_slider/js/jquery.sticky.js') }}"></script>
-        <script src="{{ asset('dist/offer_slider/js/functions.js') }}"></script>
-
         <script>
             $('#LiShop').addClass("active");
         </script>

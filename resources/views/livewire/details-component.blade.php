@@ -13,36 +13,24 @@
                 @endforeach
             </div>
         </div>    
-        
+        @php
+            $witems = Cart::instance('wishlist')->content()->pluck('id');
+        @endphp
+
         <div class="single-pro-details">
+            @if ($witems->contains($product->id))
+                <span class="flex justify-start text-2xl"><i class="fa fa-heart text-red-600"></i></span>
+            @endif
+
             <h4 class="text-2xl text-black font-semibold">{{ $product->name }} {{ $product->brand->name }}</h4>
             <h2>@foreach ($this->dollar as $d){{ $d->price*$product->price }} @endforeach Bs</h2> 
-         
-            <form wire:submit.prevent="store" class="mt-8">
-                {{-- <ul class="block">
-                    @foreach ($product->characteristics_product as $pro_char)
-                        @if ($pro_char->stock > 0)
 
-                            <li class="inline-block mb-2">
-                                <div class="p-4 mr-2 border-2 border-solid rounded-lg">
-                                    <input type="radio" class="w-4 h-4" wire:model.defer="id_product" name="id_product" value="{{ $pro_char->id }}">
-                                    <span class="font-bold">{{ $pro_char->characteristic->name }}</span>
-                                    @if ($pro_char->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())
-                                        <span class="font-bold ml-4 font-sans">{{ $pro_char->sale_price }} $</span>
-                                        <del><span class="text-sm text-gray-600 font-sans">{{ $pro_char->price }} $</span></del>
-                                    @else
-                                        <span class="font-bold ml-4 inline-block font-sans">{{ $pro_char->price }} $</span>
-                                    @endif    
-                                </div>
-                            </li>
-                        @endif
-                    @endforeach
-                </ul> --}} 
+            <form wire:submit.prevent="store" class="mt-8">
                 <select wire:model.defer="id_product" class="bg-gray-100 border border-gray-500 p-3 w-36 text-gray-900 text-sm focus:ring-gray-500 focus:border-gray-500 max-w-18 max-h-16" title="Debe Seleccionar una Opción" required="required">
                     <option value="0">Seleccione</option>
                     @foreach ( $product->characteristics_product as $pro_char )
                         @if ($pro_char->stock > 0 && $pro_char->price > 0 || $pro_char->sale_price > 0)
-                            <option value="{{ $pro_char->id }}">{{ $pro_char->characteristic->name }}  @if ($pro_char->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now()) @foreach ($this->dollar as $d){{ $d->price*$pro_char->sale_price }} @endforeach Bs <del><span class="text-sm text-gray-600 font-sans">@foreach ($this->dollar as $d){{ $d->price*$pro_char->price }} @endforeach Bs</span></del> @else @foreach ($this->dollar as $d){{ $d->price*$pro_char->price }} @endforeach Bs @endif</option>
+                            <option value="{{ $pro_char->id }}">{{ $pro_char->characteristic->name }}  @if ($pro_char->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now()) @foreach ($this->dollar as $d){{ $d->price*$pro_char->sale_price }} @endforeach Bs @else @foreach ($this->dollar as $d){{ $d->price*$pro_char->price }} @endforeach Bs @endif</option>
                         @endif
                     @endforeach
                 </select>
@@ -92,12 +80,20 @@
                         <p class="my-2 text-sm text-gray-500">{{ $s->brand }}</p>
                         <h3 class="text-sm font-medium text-gray-900">
                             <a href="{{route('product.details',['slug'=>$s->slug])}}">
-                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                <span aria-hidden="true" class="absolute"></span>
                                 {{ $s->product }}
                             </a>
                         </h3>   
                     </div>
-                    <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($this->dollar as $d){{ number_format($d->price * $s->price, 2) }}@endforeach Bs</p>
+                    <div class="flex justify-between">
+                        <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($this->dollar as $d){{ number_format($d->price * $s->price, 2) }}@endforeach Bs</p>
+                        @if ($witems->contains($s->id))
+                            <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$s->id}})" wire:loading.attr="disabled"><i class="fa fa-heart text-red-600"></i></a></div>
+                        @else
+                            <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$s->id}}, '{{$s->product}}', {{$s->price}})" wire:loading.attr="disabled"></i></a></div>
+                        @endif   
+                    </div>
+                    
                 </div>
             </div>
             @endforeach
@@ -124,5 +120,11 @@
 
         }
         
+    @if (session()->has('info'))    
+        Swal.fire({
+            icon: 'success',
+            text: '{{ session('info') }}'
+        }); 
+    @endif
     </script>
 @endpush

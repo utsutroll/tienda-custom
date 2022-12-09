@@ -40,6 +40,7 @@ class DetailsComponent extends Component
                         ->join('brands', 'brands.id', '=', 'products.brand_id')
                         ->join('images', 'images.imageable_id', '=', 'products.id')
                         ->select(
+                            'products.id as id',
                             'products.name as product', 
                             'brands.name as brand',
                             'images.url as imagen',
@@ -79,15 +80,36 @@ class DetailsComponent extends Component
         if ($product_cart->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon::now()) {
 
             Cart::instance('cart')->add($product_cart->id, $this->name, $this->qty, $product_cart->sale_price)->associate('App\Models\CharacteristicProduct');
+            
+            $pro_id = Product::where('slug', $this->slug)->first();
 
+            foreach(Cart::instance('wishlist')->content() as $witem)
+            {
+                if ($witem->id == $pro_id->id)  
+                {
+                    Cart::instance('wishlist')->remove($witem->rowId);
+                }
+            }
         } else {
             
             Cart::instance('cart')->add($product_cart->id, $this->name, $this->qty, $product_cart->price)->associate('App\Models\CharacteristicProduct');
+            
+            $pro_id = Product::where('slug', $this->slug)->first();
 
+            foreach(Cart::instance('wishlist')->content() as $witem)
+            {
+
+                if ($witem->id == $pro_id->id) 
+                {
+                    Cart::instance('wishlist')->remove($witem->rowId);
+                }
+            }
         }
 
         $this->reset('id_product');
+        session()->flash('info', 'El producto se agregó al carrito de compras con éxito.');
         return redirect()->route('product.details', ['slug'=>$this->slug]);
+        
     }
 
 
@@ -117,6 +139,25 @@ class DetailsComponent extends Component
         $product = Cart::instance('cart')->get($rowId);
         $qty = $product->qty - 1;
         Cart::instance('cart')->update($rowId,$qty);
+    }
+
+    public function addToWishlist($id, $name, $price)
+    {   
+        Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
+
+        $this->emit('addWishlist');
+    }
+
+    public function removeFromWishlist($product_id)
+    {
+        foreach(Cart::instance('wishlist')->content() as $witem)
+        {
+            if ($witem->id == $product_id) 
+            {
+                Cart::instance('wishlist')->remove($witem->rowId);
+                return;
+            }
+        }
     }
 
 

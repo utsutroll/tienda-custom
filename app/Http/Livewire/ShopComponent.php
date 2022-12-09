@@ -6,18 +6,18 @@ use App\Models\BusinessPartner;
 use App\Models\DollarRate;
 use App\Models\Product;
 use App\Models\Slider;
-use App\Models\Subcategory;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Cart;
 use Illuminate\Support\Facades\Auth;
+
 
 class ShopComponent extends Component
 {
     use WithPagination;
 
     public $search = '';
-    public $entries = '8';
+    public $entries = '30';
     public $subcategory;
     public $buscar;
 
@@ -29,7 +29,7 @@ class ShopComponent extends Component
 
     protected $queryString = [
         'search' => ['except' => ''],
-        'entries' => ['except' => '8']
+        'entries' => ['except' => '30']
     ];
 
     
@@ -45,5 +45,24 @@ class ShopComponent extends Component
 
 
         return view('livewire.shop-component', compact('dollar', 'products', 'sliders'))->layout('layouts.base');
+    }
+
+    public function addToWishlist($id, $name, $price)
+    {   
+        Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
+
+        $this->emit('addWishlist');
+    }
+
+    public function removeFromWishlist($product_id)
+    {
+        foreach(Cart::instance('wishlist')->content() as $witem)
+        {
+            if ($witem->id == $product_id) 
+            {
+                Cart::instance('wishlist')->remove($witem->rowId);
+                return;
+            }
+        }
     }
 }

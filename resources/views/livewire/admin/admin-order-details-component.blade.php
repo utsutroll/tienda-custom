@@ -123,6 +123,23 @@
                     </div>
                 </div>
                 <div class="card-body collapse show">
+                    <h4 class="font-weight-bold">Datos del Usuario</h4>
+                    <div class="table-responsive">
+                        <table class="table product-overview">
+                            <thead>
+                                <th>Nombre y Apellido</th>
+                                <th>Correo</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                </tr>    
+                            </tbody>    
+                        </table>
+                    </div> 
+                    <hr>
+                    <h4 class="font-weight-bold">Datos de la persona que retirará el pedido</h4>
                     <div class="table-responsive">
                         <table class="table product-overview">
                             <thead>

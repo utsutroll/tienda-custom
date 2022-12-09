@@ -5,10 +5,10 @@
         <p><strong>Dirección:</strong> Plazoleta el Samán</p>
         {{-- <p><strong>Teléfono:</strong> +01 2222 356 /(+91) 01 2345 6789</p> --}}
         <p><strong>Correo:</strong> inversiones.meka@hotmail.com</p>
-        <p><strong>Horario:</strong> 7:30 - 16:00, Lunes a Sabados</p>
+        <p><strong>Horario:</strong> 7:30 - 16:00, Lunes a Sábados</p>
 
         <div class="follow">
-            <h4 class="text-lg text-teal-600 font-semibold">Siguenos</h4>
+            <h4 class="text-lg text-teal-600 font-semibold">Síguenos</h4>
             <div class="icon">
                 <a href="https://instagram.com/inversionesmekaca" target="_blank"><i class="fab fa facebook-f"></i></a>
                 <a href="https://instagram.com/inversionesmekaca" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -33,7 +33,7 @@
                     <a href="{{ route('admin.dashboard') }}">Panel Administrativo</a>
                 @else
                     <a href="{{ route('profile.show') }}">Perfil</a>
-                    <a href="{{ route('user.dashboard') }}">Panel Administrativo</a>
+                    {{-- <a href="{{ route('user.dashboard') }}">Panel Administrativo</a> --}}
                     <a href="{{ route('user.orders') }}">Mis Pedidos</a>
                 @endif
 

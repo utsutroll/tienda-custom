@@ -125,7 +125,7 @@
                             <p class="my-2 text-sm text-gray-500">{{ $p->brand }}</p>
                             <h3 class="text-sm font-medium text-gray-900">
                                 <a href="{{route('product.details',['slug'=>$p->slug])}}">
-                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    <span aria-hidden="true" class="absolute"></span>
                                     {{ $p->product }}
                                 </a>
                             </h3>
@@ -144,8 +144,6 @@
     </div>
     @endif
 
-    @livewire('offer')
-
     @if($business_partners->count() > 0)
     <h1 class="text-1xl font-bold text-center my-4">Aliados Comerciales</h1>
        
@@ -162,19 +160,9 @@
 </div>
 @endif
 
-@push('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('dist/offer_slider/css/owl.carousel.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('dist/offer_slider/css/styles.css') }}">
-@endpush
+</div>
 @push('scripts')
-<script src="{{ asset('dist/offer_slider/js/jquery.flexslider.js') }}"></script>
-<script src="{{ asset('dist/offer_slider/js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('dist/offer_slider/js/jquery.countdown.min.js') }}"></script>
-<script src="{{ asset('dist/offer_slider/js/jquery.sticky.js') }}"></script>
-<script src="{{ asset('dist/offer_slider/js/functions.js') }}"></script>
-
 <script>
     $('#LiCategory').addClass("active");           
 </script>
 @endpush
-</div>

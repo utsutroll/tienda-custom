@@ -26,6 +26,7 @@ use App\Http\Livewire\Admin\AdminSubcategoryComponent;
 use App\Http\Livewire\Admin\AdminUsersComponent;
 use App\Http\Livewire\Admin\AdminWalletComponent;
 use App\Http\Livewire\CategoryComponent;
+use App\Http\Livewire\Offer;
 use App\Http\Livewire\SendPaymentComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\ThankyouComponent;
@@ -33,6 +34,7 @@ use App\Http\Livewire\User\UserChangePasswordComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\User\UserOrdersComponent;
 use App\Http\Livewire\User\UserOrdersDetailsComponent;
+use App\Http\Livewire\WishlistComponent;
 use App\Models\CharacteristicProduct;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +58,8 @@ Route::get('/', HomeComponent::class);
 Route::get('/shop', ShopComponent::class)->name('shop');
 Route::get('/about', AboutComponent::class)->name('about');
 Route::get('/cart', CartComponent::class)->name('cart');
+Route::get('/offer', Offer::class)->name('offer');
+Route::get('/wishlist', WishlistComponent::class)->name('wishlist');
 Route::get('/checkout', CheckoutComponent::class)->name('checkout');
 Route::get('/send-payment/{order_id}', SendPaymentComponent::class)->name('sendpayment');
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
@@ -68,7 +72,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 //For User
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
-    Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
+    /* Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard'); */
     Route::get('/user/orders', UserOrdersComponent::class)->name('user.orders');
     Route::get('/user/orders/{order_id}', UserOrdersDetailsComponent::class)->name('user.orderdetails');
     Route::get('/user/change-password', UserChangePasswordComponent::class)->name('user.changepassword');

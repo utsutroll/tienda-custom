@@ -18,7 +18,7 @@
                             <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Panel Administrativo</a>    
                         @else
                             <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Perfil</a>
-                            <a href="{{ route('user.dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Panel Administrativo</a>
+                            {{-- <a href="{{ route('user.dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Panel Administrativo</a> --}}
                             <a href="{{ route('user.orders') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Mis Pedidos</a>
                         @endif
 
@@ -55,6 +55,7 @@
         <ul id="navbar">
             <li><a id="LiHome" href="/">Inicio</a></li>
             <li><a id="LiShop" href="{{ route('shop') }}">Tienda</a></li>
+            <li><a id="LiOffer" href="{{ route('offer') }}">Ofertas</a></li>
             <li><a id="LiCategory" href="{{ route('categories') }}">Categorías</a></li>
             <li><a id="LiAbout" href="{{ route('about') }}">Nosotros</a></li>
             <livewire:icon-cart />
@@ -70,6 +71,7 @@
 
     <div id="mobile">
         <a href="{{ route('cart') }}"><i class="far fa-shopping-bag"></i></a>
+        <a href="{{ route('wishlist') }}"><i class="fa fa-heart"></i></a>
         <i id="bar" class="fas fa-outdent"></i>
     </div>
 
