@@ -8,7 +8,7 @@
             <ul class="flex justify-items-end">
                 <li><a href="{{ route('shop') }}" class="underline font-semibold">Tienda</a></li>
                 <li><span class="mx-2">/</span></li>
-                <li><a href="{{ route('user.dashboard') }}" class="underline font-semibold">Panel Administrativo</a></li>
+                {{-- <li><a href="{{ route('user.dashboard') }}" class="underline font-semibold">Panel Administrativo</a></li> --}}
                 <li><span class="mx-2">/</span></li>
                 <li>Listado de Órdenes</li>
             </ul>

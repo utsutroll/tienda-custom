@@ -69,29 +69,37 @@ class SendPaymentComponent extends Component
     }
     elseif($this->paymentmode == "bank") 
     {
-        $this->captura->store('cap'); 
-        $url = $this->captura->store('cap');
-
+        if($this->captura != ''){
+            $this->captura->store('cap'); 
+            $url = $this->captura->store('cap');
+        }
         $transaction = new Transaction();
         $transaction->user_id = Auth::user()->id;
         $transaction->order_id = $this->order_id;
         $transaction->bank_id = $this->bank_id;
         $transaction->mode = 'bank';
-        $transaction->url = $url;
+        if($this->captura != ''){
+            $transaction->url = $url;
+        }
         $transaction->reference = $this->referencia;
         $transaction->save();
     } 
     else
     {
-        $this->captura->store('cap'); 
-        $url = $this->captura->store('cap');
+        if($this->captura != ''){
+            $this->captura->store('cap'); 
+            $url = $this->captura->store('cap');
+        }
+        
 
         $transaction = new Transaction();
         $transaction->user_id = Auth::user()->id;
         $transaction->order_id = $this->order_id;
         $transaction->wallet_id = $this->wallet_id;
         $transaction->mode = 'wallet';
-        $transaction->url = $url;
+        if($this->captura != ''){
+            $transaction->url = $url;
+        }
         $transaction->reference = $this->referencia;
         $transaction->save();
     }

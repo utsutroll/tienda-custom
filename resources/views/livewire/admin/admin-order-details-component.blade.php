@@ -213,11 +213,15 @@
                                     <tr>
                                         <th>Referencia</th>
                                         <td>{{ $order->transactions->reference }}</td>
-                                    </tr>    
-                                    <tr>
-                                        <th>Captura</th>
-                                        <td width="150"><img src="{{Storage::url($order->transactions->url)}}" width="250"></td>
-                                    </tr>
+                                    </tr>  
+                                    @isset($order->transactions->url)  
+                                        <tr>
+                                            <th>Captura</th>
+                                            <td width="150">
+                                                <img src="{{Storage::url($order->transactions->url)}}" width="250">
+                                            </td>
+                                        </tr>
+                                    @endisset
                                 @endif 
                             @endif 
 
