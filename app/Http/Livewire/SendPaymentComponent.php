@@ -55,10 +55,7 @@ class SendPaymentComponent extends Component
         return DB::table('dollar_rates')->select('price')->get();
     }
 
-    public function sendPayment()
-    {
-
-    if($this->paymentmode == "money")
+    public function sendPaymentMoney()
     {
         $transaction = new Transaction();
         $transaction->user_id = Auth::user()->id;
@@ -66,8 +63,13 @@ class SendPaymentComponent extends Component
         $transaction->mode = 'money';
         $transaction->reference = $this->referencia;
         $transaction->save();
+
+        Cart::instance('cart')->destroy();
+        session()->forget('checkout');
+        $this->thankyou = 1;
     }
-    elseif($this->paymentmode == "bank") 
+
+    public function sendPaymentBank()
     {
         if($this->captura != ''){
             $this->captura->store('cap'); 
@@ -83,8 +85,13 @@ class SendPaymentComponent extends Component
         }
         $transaction->reference = $this->referencia;
         $transaction->save();
-    } 
-    else
+
+        Cart::instance('cart')->destroy();
+        session()->forget('checkout');
+        $this->thankyou = 1;
+    }
+
+    public function sendPaymentWallet()
     {
         if($this->captura != ''){
             $this->captura->store('cap'); 
@@ -102,11 +109,11 @@ class SendPaymentComponent extends Component
         }
         $transaction->reference = $this->referencia;
         $transaction->save();
-    }
 
-    Cart::instance('cart')->destroy();
-    session()->forget('checkout');
-    $this->thankyou = 1;
+        Cart::instance('cart')->destroy();
+        session()->forget('checkout');
+        $this->thankyou = 1;
+    
     }
     
     public function cancelPayment()

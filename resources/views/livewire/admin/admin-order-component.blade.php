@@ -48,12 +48,21 @@
                             <td>{{$o->total}} $</td>
                             <td>{{number_format($o->total_bs)}} Bs</td>
                             <td>@if ($o->status == "ordered")
-                                <button class="btn btn-sm btn-info">Ordenada</button>
-                            @elseif($o->status == "delivered")
-                                <button class="btn btn-sm btn-success">Entregada</button>
-                            @else
-                                <button class="btn btn-sm btn-danger">Cancelada</button>
-                            @endif</td>
+                                <div class="btn-group mt-2">
+                                    <button class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Ordenada
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="javascript:void(0)" wire:click.prevent="updateOrderStatus({{ $o->id }}, 'delivered')">Entregado</a>
+                                        <a class="dropdown-item" href="javascript:void(0)" wire:click.prevent="updateOrderStatus({{ $o->id }}, 'canceled')">Cancelado</a>
+                                    </div>
+                                </div>
+                                @elseif($o->status == "delivered")
+                                    <button class="btn btn-sm btn-success">Entregada</button>
+                                @else
+                                    <button class="btn btn-sm btn-danger">Cancelada</button>
+                                @endif
+                            </td>
                             <td>  
                                 @if ($o->status_pago == "pending")
                                 <div class="btn btn-sm btn-info">Pendiente</div>    
@@ -72,17 +81,6 @@
                                     <i class="ti-eye"></i> 
                                     Detalles
                                 </a>
-                                @if($o->status == "ordered")
-                                <div class="btn-group mt-2">
-                                    <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Estatus
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#" wire:click.prevent="updateOrderStatus({{ $o->id }}, 'delivered')">Entregado</a>
-                                        <a class="dropdown-item" href="#" wire:click.prevent="updateOrderStatus({{ $o->id }}, 'canceled')">Cancelado</a>
-                                    </div>
-                                </div>
-                                @endif
                             </td>
                         </tr>
                         @endforeach

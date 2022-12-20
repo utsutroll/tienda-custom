@@ -161,7 +161,7 @@
                             @if ($witems->contains($np->id))
                                 <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$np->id}})" wire:loading.attr="disabled"><i class="fa fa-heart text-red-600"></i></a></div>
                             @else
-                                <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$np->id}}, '{{$np->product}}', {{$np->price}})" wire:loading.attr="disabled"></i></a></div>
+                                <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$np->id}}, '{{$np->product}}', {{$np->price}})"></i></a></div>
                             @endif
                             
                         </div>

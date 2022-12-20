@@ -26,8 +26,8 @@
         </section>
 
         <section>
-            <form wire:submit.prevent="sendPayment">
-                @if ($paymentmode == "money")
+            @if ($paymentmode == "money")
+                <form wire:submit.prevent="sendPaymentMoney">
                     <div class="my-2">
                         <p><span class="text-base font-medium text-gray-700 font-sans">Nota:</span> Al
                             elegir este método de pago también podrá pagar diferencia por punto de venta si así
@@ -59,7 +59,9 @@
                         <button type="submit"
                             class="p-2 mr-2 text-base text-white font-semibold bg-teal-600 hover:bg-teal-800 shadow-lg shadow-teal-600">Comprobar</button>
                     </div>
-                @elseif($paymentmode == "bank")
+                </form>    
+            @elseif($paymentmode == "bank")
+                <form wire:submit.prevent="sendPaymentBank">
                     @if (count($this->bank) > 0)
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
                             @foreach ($this->bank as $b)
@@ -159,7 +161,9 @@
                         @else
                             <h1 class="my-4 text-xl text-center font-medium text-gray-700 font-sans">No hay método de pago agregado</h1>
                     @endif
-                @elseif($paymentmode == "wallet")
+                </form>    
+            @elseif($paymentmode == "wallet")
+                <form wire:submit.prevent="sendPaymentWallet">
                     @if (count($this->wallet) > 0)
                         <div class="col-span-2 md:col-span-1 lg:col-span-1">
                             @foreach ($this->wallet as $w)
@@ -229,11 +233,8 @@
                             <h1 class="text-base font-semibold text-gray-700 font-sans">No hay método de pago agregado</h1>
                     @endif
 
-                @endif
-                
-
-                
-            </form>        
+                </form>        
+            @endif  
         </section>
     </main>
 </div>

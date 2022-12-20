@@ -82,7 +82,7 @@
                             @if ($witems->contains($p->id))
                                 <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$p->id}})" wire:loading.attr="disabled"><i class="fa fa-heart text-red-600"></i></a></div>
                             @else
-                                <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$p->id}}, '{{$p->product}}', {{$p->price}})" wire:loading.attr="disabled"></i></a></div>
+                                <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$p->id}}, '{{$p->name}}', {{$p->price}})"></i></a></div>
                             @endif    
                         </div>
                     </div>
