@@ -20,8 +20,8 @@
         <link rel="stylesheet" href="{{asset('dist/css/style-custom.css')}}">
 
         @livewireStyles
-        {{-- <link href="{{asset('dist/css/style.min.css')}}" rel="stylesheet">
-        <link rel="stylesheet" href="{{asset('/assets/node_modules/prism/prism.css')}}">
+        <link href="{{asset('dist/css/style.min.css')}}" rel="stylesheet">
+        {{--<link rel="stylesheet" href="{{asset('/assets/node_modules/prism/prism.css')}}">
         <link href="{{asset('/assets/node_modules/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('/assets/node_modules/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
         <link href="{{asset('assets/node_modules/glider.js-master/glider.min.css')}}" rel="stylesheet" />
@@ -109,8 +109,8 @@
         <script src="{{asset('/assets/node_modules/bootstrap/dist/js/bootstrap.min.js')}}"></script>
         <!-- slimscrollbar scrollbar JavaScript -->
         <script src="{{asset('/dist/js/perfect-scrollbar.jquery.min.js')}}"></script>
-        <script src="{{asset('assets/node_modules/prism/prism.js')}}"></script> --}}
-        <script src="{{asset('/dist/js/carrusel-app.js')}}" type="text/javascript"></script>  
+        <script src="{{asset('/dist/js/carrusel-app.js')}}" type="text/javascript"></script>  --}}
+        <script src="{{asset('assets/node_modules/prism/prism.js')}}"></script> 
         <!-- Popup message jquery -->
         <script src="{{asset('/assets/node_modules/toast-master/js/jquery.toast.js')}}"></script>
         <script src="https://unpkg.com/@themesberg/flowbite@1.1.0/dist/flowbite.bundle.js"></script>

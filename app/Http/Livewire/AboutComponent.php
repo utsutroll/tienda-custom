@@ -2,12 +2,15 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Slider;
 use Livewire\Component;
 
 class AboutComponent extends Component
 {
     public function render()
-    {
-        return view('livewire.about-component')->layout('layouts.base');
+    { 
+        $sliders = Slider::all(); 
+
+        return view('livewire.about-component', compact('sliders'))->layout('layouts.base');
     }
 }

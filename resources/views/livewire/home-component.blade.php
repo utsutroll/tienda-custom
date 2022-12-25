@@ -20,7 +20,7 @@
                 
                 <div class="carousel-caption d-none d-md-block">
                     <h3 style="font-size:2vw;">{{$s->title}}</h3>
-                    <p class="m-auto" style="font-size:1vw;">{{$s->subtitle}}</p>
+                    <p class="m-auto text-gray-200" style="font-size:1vw;">{{$s->subtitle}}</p>
                 </div>
             </div>
             @php $n++ @endphp
@@ -35,42 +35,6 @@
             <span class="sr-only">Siguiente</span>
         </a>
     </div>
-
-    <section class="w-full">
-        <img src="{{ url('dist/new/img/banner.jpg') }}">
-    </section>
-    
-    <section id="feature" class="section-p1">
-        <div class="fe-box">
-            <img src="{{ url('dist/new/img/features/f1.png') }}" alt="">
-            <h6>Envío gratuito</h6>
-        </div>
-    
-        <div class="fe-box">
-            <img src="{{ url('dist/new/img/features/f2.png') }}" alt="">
-            <h6>Pedido en línea</h6>
-        </div>
-    
-        <div class="fe-box">
-            <img src="{{ url('dist/new/img/features/f3.png') }}" alt="">
-            <h6>Ahorre dinero</h6>
-        </div>
-    
-        <div class="fe-box">
-            <img src="{{ url('dist/new/img/features/f4.png') }}" alt="">
-            <h6>Promociones</h6>
-        </div>
-    
-        <div class="fe-box">
-            <img src="{{ url('dist/new/img/features/f5.png') }}" alt="">
-            <h6>Venta segura</h6>
-        </div>
-    
-        <div class="fe-box">
-            <img src="{{ url('dist/new/img/features/f6.png') }}" alt="">
-            <h6>Soporte 24/7</h6>
-        </div>
-    </section>
 
     @php
         $witems = Cart::instance('wishlist')->content()->pluck('id');
@@ -122,14 +86,9 @@
         </div>
     </div>
 
-
-    <section id="banner" class="section-m1">
-        <h4>Repair Services </h4>
-        <h2>Up to <span>70% Off</span>  - All t-Shirts & Accessories</h2>
-        <button class="normal">Explore More</button>
+    <section class="w-full">
+        <img src="{{ url('dist/new/img/banner2meka-final.jpg') }}">
     </section>
-
-    
 
     <div class="bg-white">
         <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">

@@ -1,9 +1,40 @@
 <div>
-    <section id="page-header" class="about-header">
-        <h2>#SobreNosotros</h2>
-        
-        <p>.</p>
-    </section>
+    <div id="carousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            @for ($i = 0; $i < count($sliders); $i++)
+            <li data-target="#carousel" data-slide-to="{{$i}}" @if ($i == 0) class="active" @endif></li>
+            @endfor
+        </ol>
+
+        <div class="carousel-inner" role="listbox">
+            @php $n=0 @endphp
+            @foreach ($sliders as $s)
+            <div @if ($n == 0) class="carousel-item active" @else class="carousel-item" @endif>
+                @if ($s->link == '')
+                    <img loading="lazy" class="img-responsive" src="{{Storage::url($s->image->url)}}" alt="{{$s->title}}">
+                @else
+                <a href="{{$s->link}}" target="_blank">
+                    <img loading="lazy" class="img-responsive" src="{{Storage::url($s->image->url)}}" alt="{{$s->title}}">   
+                </a> 
+                @endif
+                
+                <div class="carousel-caption d-none d-md-block">
+                    <h3 style="font-size:2vw;">{{$s->title}}</h3>
+                    <p class="m-auto text-gray-200" style="font-size:1vw;">{{$s->subtitle}}</p>
+                </div>
+            </div>
+            @php $n++ @endphp
+            @endforeach
+        </div>
+        <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Siguiente</span>
+        </a>
+    </div>
 
     <section id="about-head" class="section-p1">
         <img src="{{ ('dist/new/img/about/a6.jpg') }}">
@@ -16,38 +47,6 @@
             <br><br>
 
             <marquee bgcolor="#ccc" loop="-1" scrollamount="5" width="100%">Create stunning images wth as much or as little control as you like thanks to a choice of Basic and Creative modes.</marquee>
-        </div>
-    </section>
-
-    <section id="feature" class="section-p1">
-        <div class="fe-box">
-            <img src="{{ url('dist/new/img/features/f1.png') }}" alt="">
-            <h6>Envío gratuito</h6>
-        </div>
-    
-        <div class="fe-box">
-            <img src="{{ url('dist/new/img/features/f2.png') }}" alt="">
-            <h6>Pedido en línea</h6>
-        </div>
-    
-        <div class="fe-box">
-            <img src="{{ url('dist/new/img/features/f3.png') }}" alt="">
-            <h6>Ahorre dinero</h6>
-        </div>
-    
-        <div class="fe-box">
-            <img src="{{ url('dist/new/img/features/f4.png') }}" alt="">
-            <h6>Promociones</h6>
-        </div>
-    
-        <div class="fe-box">
-            <img src="{{ url('dist/new/img/features/f5.png') }}" alt="">
-            <h6>Venta segura</h6>
-        </div>
-    
-        <div class="fe-box">
-            <img src="{{ url('dist/new/img/features/f6.png') }}" alt="">
-            <h6>Soporte 24/7</h6>
         </div>
     </section>
 

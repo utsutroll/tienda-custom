@@ -6,6 +6,7 @@ namespace App\Http\Livewire;
 use App\Models\CharacteristicProduct;
 use App\Models\DollarRate;
 use App\Models\Sale;
+use App\Models\Slider;
 use Livewire\Component;
 
 class Offer extends Component
@@ -15,6 +16,7 @@ class Offer extends Component
     public function render()
     {   
         $dollar = DollarRate::all(); 
+        $sliders = Slider::all();
         
         $sproducts = CharacteristicProduct::all()->where('sale_price', '>', 0)->take(8);
         
@@ -25,6 +27,7 @@ class Offer extends Component
 
         $sale = Sale::find(1);
 
-        return view('livewire.offer', compact('sproducts', 'sale', 'dollar'))->layout('layouts.base');
+        return view('livewire.offer', compact('sproducts', 'sale', 'dollar', 'sliders'))->layout('layouts.base');
     }
+
 }

@@ -22,7 +22,7 @@
 
                 <div class="carousel-caption d-none d-md-block">
                     <h3 style="font-size:2vw;">{{$s->title}}</h3>
-                    <p class="m-auto" style="font-size:1vw;">{{$s->subtitle}}</p>
+                    <p class="m-auto text-gray-200" style="font-size:1vw;">{{$s->subtitle}}</p>
                 </div>
             </div>
             @php $n++ @endphp
