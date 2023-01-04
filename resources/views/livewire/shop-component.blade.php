@@ -79,11 +79,15 @@
                         
                         <div class="flex justify-between">
                             <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</p>
-                            @if ($witems->contains($p->id))
-                                <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$p->id}})" wire:loading.attr="disabled"><i class="fa fa-heart text-red-600"></i></a></div>
-                            @else
-                                <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$p->id}}, '{{$p->name}}', {{$p->price}})"></i></a></div>
-                            @endif    
+                            @if(Route::has('login'))
+                                @auth
+                                    @if ($witems->contains($p->id))
+                                        <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$p->id}})" wire:loading.attr="disabled"><i class="fa fa-heart text-red-600"></i></a></div>
+                                    @else
+                                        <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$p->id}}, '{{$p->name}}', {{$p->price}})"></i></a></div>
+                                    @endif
+                                @endauth    
+                            @endif            
                         </div>
                     </div>
                 </div>

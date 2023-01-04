@@ -18,10 +18,13 @@
         @endphp
 
         <div class="single-pro-details">
-            @if ($witems->contains($product->id))
-                <span class="flex justify-start text-2xl"><i class="fa fa-heart text-red-600"></i></span>
+            @if(Route::has('login'))
+                @auth
+                    @if ($witems->contains($product->id))
+                        <span class="flex justify-start text-2xl"><i class="fa fa-heart text-red-600"></i></span>
+                    @endif
+                @endauth    
             @endif
-
             <h4 class="text-2xl text-black font-semibold">{{ $product->name }} {{ $product->brand->name }}</h4>
             <h2>@foreach ($this->dollar as $d){{ $d->price*$product->price }} @endforeach Bs</h2> 
 
@@ -87,11 +90,15 @@
                     </div>
                     <div class="flex justify-between">
                         <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($this->dollar as $d){{ number_format($d->price * $s->price, 2) }}@endforeach Bs</p>
-                        @if ($witems->contains($s->id))
-                            <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$s->id}})" wire:loading.attr="disabled"><i class="fa fa-heart text-red-600"></i></a></div>
-                        @else
-                            <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$s->id}}, '{{$s->product}}', {{$s->price}})" wire:loading.attr="disabled"></i></a></div>
-                        @endif   
+                        @if(Route::has('login'))
+                            @auth   
+                                @if ($witems->contains($s->id))
+                                    <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$s->id}})" wire:loading.attr="disabled"><i class="fa fa-heart text-red-600"></i></a></div>
+                                @else
+                                    <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$s->id}}, '{{$s->product}}', {{$s->price}})" wire:loading.attr="disabled"></i></a></div>
+                                @endif
+                            @endauth    
+                        @endif       
                     </div>
                     
                 </div>

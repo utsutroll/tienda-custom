@@ -4,10 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Models\BusinessPartner;
 use App\Models\DollarRate;
-use App\Models\Product;
 use App\Models\Slider;
-use App\Models\Subcategory;
 use Cart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -38,6 +37,10 @@ class HomeComponent extends Component
         $dollar = DollarRate::all();
         $sliders = Slider::all();
         $business_partners = BusinessPartner::all();
+        
+        if(Auth::check()){
+            Cart::instance('wishlist')->restore(Auth::user()->id);
+        }
 
         
         $products = DB::table('products')
@@ -76,6 +79,7 @@ class HomeComponent extends Component
     public function addToWishlist($id, $name, $price)
     {   
         Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
+        Cart::instance('wishlist')->store(Auth::user()->id);
 
         $this->emit('addWishlist');
     }
@@ -86,7 +90,7 @@ class HomeComponent extends Component
         {
             if ($witem->id == $product_id) 
             {
-                Cart::instance('wishlist')->remove($witem->rowId);
+                Cart::instance('wishlist')->remove($witem->rowId)->erase(Auth::user()->id);
                 return;
             }
         }

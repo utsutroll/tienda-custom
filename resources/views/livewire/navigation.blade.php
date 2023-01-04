@@ -71,7 +71,11 @@
 
     <div id="mobile">
         <a href="{{ route('cart') }}"><i class="far fa-shopping-bag"></i></a>
-        <a href="{{ route('wishlist') }}"><i class="fa fa-heart"></i></a>
+        @if(Route::has('login'))
+            @auth
+                <a href="{{ route('wishlist') }}"><i class="fa fa-heart"></i></a>
+            @endauth    
+        @endif         
         <i id="bar" class="fas fa-outdent"></i>
     </div>
 
