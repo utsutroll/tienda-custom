@@ -142,25 +142,9 @@
             @endif
         </div>
     </div>
-    @endif
-
-    @if($business_partners->count() > 0)
-    <h1 class="text-1xl font-bold text-center my-4">Aliados Comerciales</h1>
-       
+    @endif     
 </div>
-<div class="grid grid-cols-1 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 md:gap-4 lg:grid-cols-5 lg:gap-4 mx-2 p-4">
 
-    @foreach ($business_partners as $bp)
-    <div class="w-3/4 bg-white rounded-md shadow-md">
-        <a href="{{$bp->link}}" target="_blank"><img loading="lazy" src="{{Storage::url($bp->img)}}" alt="{{$bp->name}}"
-                title="{{$bp->name}}"></a>
-    </div>
-    @endforeach
-
-</div>
-@endif
-
-</div>
 @push('scripts')
 <script>
     $('#LiCategory').addClass("active");           

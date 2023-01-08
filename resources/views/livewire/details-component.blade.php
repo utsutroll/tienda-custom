@@ -18,6 +18,8 @@
         @endphp
 
         <div class="single-pro-details">
+            <a class="text-gray-900 hover:text-gray-700 hover:underline mb-4" href="{{ route('shop') }}"><i class="far fa-chevron-left"></i> <span class="mr-4">Volver</span></a>
+
             @if(Route::has('login'))
                 @auth
                     @if ($witems->contains($product->id))
@@ -93,9 +95,9 @@
                         @if(Route::has('login'))
                             @auth   
                                 @if ($witems->contains($s->id))
-                                    <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$s->id}})" wire:loading.attr="disabled"><i class="fa fa-heart text-red-600"></i></a></div>
+                                    <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$s->id}})"><i class="fa fa-heart text-red-600"></i></a></div>
                                 @else
-                                    <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$s->id}}, '{{$s->product}}', {{$s->price}})" wire:loading.attr="disabled"></i></a></div>
+                                    <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$s->id}}, '{{$s->product}}', {{$s->price}})"></i></a></div>
                                 @endif
                             @endauth    
                         @endif       
@@ -125,13 +127,7 @@
             var fullImg = document.getElementById("MainImg");
             fullImg.src=smallImg.src;
 
-        }
-        
-    @if (session()->has('info'))    
-        Swal.fire({
-            icon: 'success',
-            text: '{{ session('info') }}'
-        }); 
-    @endif
+        }  
+    
     </script>
 @endpush

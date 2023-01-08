@@ -17,7 +17,7 @@
                             <div class="message-center">
                                 @foreach (auth()->user()->unreadNotifications as $notification)
                                 <!-- Message -->
-                                <a wire:click="markViews" href="{{ route('admin.orderdetails', ['order_id'=>$notification->data['id']]) }}">
+                                <a wire:click.prevent="markViews({{ $notification->data['id'] }})" href="javascript:void(0)">
                                     @if ($notification->data['status'] == "ordered")
                                     <div class="btn btn-success btn-circle"><i class="fa fa-shopping-cart muted"></i></div> 
                                     @elseif ($notification->data['status'] == "canceled") 

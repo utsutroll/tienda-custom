@@ -6,7 +6,7 @@
             <p><strong>Dirección:</strong> Plazoleta el Samán</p>
             {{-- <p><strong>Teléfono:</strong> +01 2222 356 /(+91) 01 2345 6789</p> --}}
             <p><strong>Correo:</strong> inversiones.meka@hotmail.com</p>
-            <p><strong>Horario:</strong> 7:30 - 16:00, Lunes a Sábados</p>
+            <p><strong>Horario:</strong> 7:30 Am - 04:00 Pm, Lunes a Sábados</p>
 
             <div class="follo">
                 <h4 class="text-lg text-teal-600 font-semibold">Síguenos</h4>

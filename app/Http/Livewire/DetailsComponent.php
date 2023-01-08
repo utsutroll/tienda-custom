@@ -107,8 +107,11 @@ class DetailsComponent extends Component
         }
 
         $this->reset('id_product');
-        session()->flash('info', 'El producto se agregó al carrito de compras con éxito.');
-        return redirect()->route('product.details', ['slug'=>$this->slug]);
+
+        $this->emit('cartAdded');
+
+        $this->emit('alert', 'El producto se agregó al carrito de compras con éxito.');
+
         
     }
 
@@ -144,8 +147,13 @@ class DetailsComponent extends Component
     public function addToWishlist($id, $name, $price)
     {   
         Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
+        Cart::instance('wishlist')->store(Auth::user()->id);
 
-        $this->emit('addWishlist');
+        $this->emit('whishlistAdded');
+        $this->emit('render');
+
+        $this->emit('alert', 'El producto se agregó a la lista de deseos con éxito.');
+
     }
 
     public function removeFromWishlist($product_id)
@@ -154,10 +162,17 @@ class DetailsComponent extends Component
         {
             if ($witem->id == $product_id) 
             {
-                Cart::instance('wishlist')->remove($witem->rowId);
+                Cart::instance('wishlist')->remove($witem->rowId)->erase(Auth::user()->id);
+
+                $this->emit('wishlistRemoved');
+                
+                $this->emit('alert', 'El producto se eliminó a la lista de deseos con éxito.');
+                
                 return;
             }
         }
+
+        
     }
 
 

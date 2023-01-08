@@ -1,4 +1,4 @@
-<div>
+<div class="bg-white">
     <div id="carousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             @for ($i = 0; $i < count($sliders); $i++)
@@ -41,6 +41,12 @@
     @endphp
     
     <div class="bg-white">
+
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
             <h2 class="text-2xl font-extrabold tracking-tight text-gray-900">Productos Destacados</h2>
       
@@ -142,6 +148,24 @@
             @endif
         </div>
     </div>
+
+    @if($business_partners->count() > 0)
+    <div class="bg-white">
+        <h2 class="text-2xl font-extrabold tracking-tight text-center text-gray-900 mt-8">Aliados Comerciales</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 md:gap-4 lg:grid-cols-5 lg:gap-4 mx-2 p-4">
+
+            @foreach ($business_partners as $bp)
+            <div class="w-3/4 bg-white rounded-md shadow-md">
+                <a href="{{$bp->link}}" target="_blank"><img loading="lazy" src="{{Storage::url($bp->img)}}" alt="{{$bp->name}}"
+                        title="{{$bp->name}}"></a>
+            </div>
+            @endforeach
+
+        </div>
+    </div>    
+    @endif
+
 </div>
 
 @push('scripts')

@@ -125,6 +125,7 @@
     <script>
         $(document).ready(function () {
             $('#table').DataTable({
+                order: [[7, 'desc']],
                 language: {
                     lengthMenu: 'Mostrar _MENU_ registros por página',
                     zeroRecords: 'No se han encontrado registros',

@@ -233,7 +233,7 @@
                                             <th><div class="form-group"><input type="text" wire:model.defer="observation" class="form-control" placeholder="Observación"></div></th>
                                             <td colspan="2">
                                                 <div class="row">
-                                                    <div class="col-6">
+                                                    <div class="col-6 mr-2">
                                                         <button class="btn btn-success btn-small ml-2" wire:click.prevent="approvePayment">Aprobar Pago</button>            
                                                     </div>
                                                     <div class="col-6">

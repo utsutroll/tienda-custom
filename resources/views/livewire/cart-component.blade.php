@@ -15,7 +15,7 @@
                         Producto
                     </th>
                     <th scope="col" class="py-3 px-6">
-                        Precio
+                        Precio Unitario
                     </th>
                     <th scope="col" class="py-3 px-6">
                         Cantidad
@@ -38,7 +38,7 @@
                         {{ $item->model->product->name }} {{ $item->model->product->brand->name }} {{ $item->model->characteristic->name }}
                     </th>
                     <td class="py-4 px-6">
-                        @foreach ($dollar as $d){{ number_format($item->price, 2) }}@endforeach Bs
+                        @foreach ($dollar as $d){{ $d->price*round(($item->price), 2) }}@endforeach Bs
                     </td>
                     <td class="py-4 px-6">
                         <div class="flex flex-row h-9 w-22 rounded-lg border-gray-400 relative">
@@ -71,7 +71,7 @@
         </div>
 
         <div id="subtotal">
-            <h3>Resumen del carrito</h3>
+            <h3>Resúmen del carrito</h3>
             <table>
                 {{-- <tr>
                     <td>Tasa del día</td>
@@ -88,7 +88,7 @@
     @else
         <div class="h-screen my-auto text-center" style="padding:30px 0;">
             <h1 class="text-4xl mt-5 font-medium text-gray-800">Su carrito está vacío!</h1>
-            <p class="my-4 marker:text-base font-bold">Añadir elemento a él ahora</p>
+            <p class="my-4 marker:text-base font-bold">Añadir elemento ahora</p>
             <a href="{{ route('shop') }}" class="rounded-md text-white text-base font-semibold p-3 bg-emerald-500 hover:bg-emerald-700">Ir al Catálogo</a>
         </div>
     @endif

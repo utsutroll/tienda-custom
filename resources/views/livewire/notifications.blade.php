@@ -21,7 +21,7 @@
         </h5>
         <div class="">
             @foreach (auth()->user()->unreadNotifications as $notification)
-            <a wire:click.prevent="markViews" @if (Auth::user()->utype === 'ADM') href="{{ route('admin.orderdetails', ['order_id'=>$notification->data['id']]) }}" @else href="{{ route('user.orderdetails', ['order_id'=>$notification->data['id']]) }}" @endif
+            <a href="javascript:void(0)" @if (Auth::user()->utype === 'ADM') wire:click.prevent="markViews({{ $notification->data['id'] }}, 'admin.orderdetails')" @else wire:click.prevent="markViews({{ $notification->data['id'] }}, 'user.orderdetails')" @endif
                 class="flex items-center px-4 py-3 hover:bg-gray-100">
                 @if ($notification->data['status'] == "approved")
                 <div class="btn btn-success btn-circle"><i class="fa fa-shopping-cart muted"></i></div>

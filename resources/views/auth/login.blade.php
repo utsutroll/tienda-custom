@@ -12,11 +12,13 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+        <a class="mb-4 text-gray-900 hover:text-gray-700 hover:underline" href="/"><i class="far fa-chevron-left"></i> <span class="mr-4">Volver</span></a>
+        
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
             <!-- Email Address -->
-            <div>
+            <div class="mt-4">
                 <x-label for="email" :value="__('Correo electrónico')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
@@ -42,7 +44,7 @@
 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                    <a class="underline text-base text-gray-900 font-medium hover:text-gray-700" href="{{ route('password.request') }}">
                         {{ __('¿Ha olvidado su contraseña?') }}
                     </a>
                 @endif
@@ -53,7 +55,7 @@
             </div>
 
             <div class="flex items-center justify-center mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                <a class="underline text-lg text-gray-900 font-semibold hover:text-gray-700" href="{{ route('register') }}">
                     {{ __('Registrarse') }}
                 </a>  
             </div>

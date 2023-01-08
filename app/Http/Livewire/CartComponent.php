@@ -15,6 +15,8 @@ class CartComponent extends Component
         $qty = $product->qty + 1;
         Cart::instance('cart')->update($rowId,$qty);
 
+        $this->emit('cartAdded');
+
     }
 
     public function decreaseQuantity($rowId)
@@ -23,11 +25,15 @@ class CartComponent extends Component
         $qty = $product->qty - 1;
         Cart::instance('cart')->update($rowId,$qty);
 
+        $this->emit('cartRemoved');
+
     }
 
     public function destroy($rowId)
     {
         Cart::instance('cart')->remove($rowId);
+
+        $this->emit('cartRemoved');
 
     }
 

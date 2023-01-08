@@ -39,14 +39,17 @@
     <section id="about-head" class="section-p1">
         <img src="{{ ('dist/new/img/about/a6.jpg') }}">
         <div>
-            <h2>Who we Are?</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio possimus officiis labore, molestiae dignissimos hic, dolore voluptates quasi est eaque porro incidunt quidem. Eligendi amet atque debitis ipsam harum iure.</p>
+            <h2>Somos INVERSIONES MEKA C.A</h2>
+            <p>
+                Todo en Papeleria y Tecnología al alcance de tu mano. Podrás encontrarnos en la Av. Ricardo Pérez Zambrano, frente a la plazoleta el Samán al lado de la Panadería El Tigre, Edif. Hermanos Nimer. Acá encontraras todo lo relacionado con Tecnología, Aseo Personal, productos para el hogar y mucho más…
+                Contamos con una sucursal donde encontraras todo en papelería para el Colegio y oficina, además, podrás realizar tus creaciones o manualidades con todo lo que tenemos para ti, y para la temporada navideña ofrecemos todo en adornos, y luces de navidad. La sucursal se encuentra ubicada en la Avenida Ricardo Pérez Zambrano, diagonal a nuestro antiguo local.
+            </p>
 
-            <abbr title="">Create stunning images wth as much or as little control as you like thanks to a choice of Basic and Creative modes.</abbr>
+            <abbr title="">No dejes de visitarnos y conocer la gran variedad de productos que tenemos para ti, te hacemos la vida más  fácil, hermosa y colorida.</abbr>
 
             <br><br>
 
-            <marquee bgcolor="#ccc" loop="-1" scrollamount="5" width="100%">Create stunning images wth as much or as little control as you like thanks to a choice of Basic and Creative modes.</marquee>
+            <marquee bgcolor="#ccc" loop="-1" scrollamount="5" width="100%">No dejes de visitarnos y conocer la gran variedad de productos que tenemos para ti, te hacemos la vida más  fácil, hermosa y colorida.</marquee>
         </div>
     </section>
 
@@ -70,7 +73,7 @@
                 </li> --}}
                 <li>
                     <i class="far fa-clock"></i>
-                    <p>7:30 - 16:00, Lunes a Sabados</p>
+                    <p>7:30 Am - 04:00 Pm, Lunes a Sábados</p>
                 </li>
             </div>
         </div>

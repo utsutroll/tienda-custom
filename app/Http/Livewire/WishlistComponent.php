@@ -28,6 +28,9 @@ class WishlistComponent extends Component
             if ($witem->rowId == $product_id) 
             {
                 Cart::instance('wishlist')->remove($witem->rowId);
+
+                $this->emit('whishlistRemoved');
+                
                 return;
             }
         }

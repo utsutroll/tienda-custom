@@ -11,7 +11,7 @@
                         Imágen
                     </th>
                     <th scope="col" class="py-3 px-6">
-                        Producto
+                        Producto Unitario
                     </th>
                     <th scope="col" class="py-3 px-6">
                         Precio
@@ -34,7 +34,7 @@
                         {{ $items->name }} {{ $items->model->brand->name }}
                     </th>
                     <td class="py-4 px-6">
-                        @foreach ($dollar as $d){{ number_format($items->price, 2) }}@endforeach Bs
+                        @foreach ($dollar as $d){{ $d->price*round(($item->price), 2) }}@endforeach Bs
                     </td>
                     <td class="py-4 px-6">
                         <a href="{{route('product.details',['slug'=>$items->model->slug])}}" title="Agregar al Carrito de Compras"><i class="far fa-shopping-cart"></i></a>
@@ -55,7 +55,7 @@
         </div>
 
         <div id="subtotal">
-            <h3>Resumen de la Lista de Deseos</h3>
+            <h3>Resúmen de la Lista de Deseos</h3>
             <table>
                 {{-- <tr>
                     <td>Precio total</td>
@@ -75,7 +75,7 @@
     @else
         <div class="h-screen my-auto text-center" style="padding:30px 0;">
             <h1 class="text-4xl mt-5 font-medium text-gray-800">La lista de deseos está vacía!</h1>
-            <p class="my-4 marker:text-base font-bold">Añadir elemento a ella ahora</p>
+            <p class="my-4 marker:text-base font-bold">Añadir elemento ahora</p>
             <a href="{{ route('shop') }}" class="rounded-md text-white text-base font-semibold p-3 bg-emerald-500 hover:bg-emerald-700">Ir al Catálogo</a>
         </div>
     @endif

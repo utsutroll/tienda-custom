@@ -54,7 +54,7 @@ class AdminOrderDetailsComponent extends Component
 
         $user->notify(new ApprovePaymentNotification($order));
         $user->notify(new ApprovedPaymentMail($order));
-        $this->emit('orderUpdateC');  
+        $this->emit('orderUpdateC');   
     }
 
     public function render()

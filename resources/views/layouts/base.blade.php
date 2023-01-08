@@ -86,7 +86,7 @@
         </div>
 
 
-        @include('livewire.navigation')
+        <livewire:navigation-component>
             
         <!-- Page Content -->
         <main class="flex-grow">
@@ -153,6 +153,33 @@
                 document.getElementById("navbar").classList.toggle("active");
             }
 
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'bottom-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Livewire.on('alert', function(message){
+                Toast.fire({
+                    icon: 'success',
+                    title: message
+                })
+            })  
+
+            Livewire.on('alert1', function(message){
+                Toast.fire({
+                    icon: 'success',
+                    title: message
+                })
+            })  
+            
         </script>
     </body>
 </html>

@@ -81,7 +81,10 @@ class HomeComponent extends Component
         Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
         Cart::instance('wishlist')->store(Auth::user()->id);
 
-        $this->emit('addWishlist');
+        $this->emit('whishlistAdded');
+        $this->emit('render');
+
+        $this->emit('alert', 'El producto se agregó a la lista de deseos con éxito.');
     }
 
     public function removeFromWishlist($product_id)
@@ -91,6 +94,8 @@ class HomeComponent extends Component
             if ($witem->id == $product_id) 
             {
                 Cart::instance('wishlist')->remove($witem->rowId)->erase(Auth::user()->id);
+
+                $this->emit('wishlistRemoved');
                 return;
             }
         }
