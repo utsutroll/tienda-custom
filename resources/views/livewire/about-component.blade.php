@@ -43,11 +43,10 @@
             <p>
                 Todo en Papeleria y Tecnología al alcance de tu mano. Podrás encontrarnos en la Av. Ricardo Pérez Zambrano, frente a la plazoleta el Samán al lado de la Panadería El Tigre, Edif. Hermanos Nimer. Acá encontraras todo lo relacionado con Tecnología, Aseo Personal, productos para el hogar y mucho más…
                 Contamos con una sucursal donde encontraras todo en papelería para el Colegio y oficina, además, podrás realizar tus creaciones o manualidades con todo lo que tenemos para ti, y para la temporada navideña ofrecemos todo en adornos, y luces de navidad. La sucursal se encuentra ubicada en la Avenida Ricardo Pérez Zambrano, diagonal a nuestro antiguo local.
+                No dejes de visitarnos y conocer la gran variedad de productos que tenemos para ti, te hacemos la vida más  fácil, hermosa y colorida.
             </p>
 
-            <abbr title="">No dejes de visitarnos y conocer la gran variedad de productos que tenemos para ti, te hacemos la vida más  fácil, hermosa y colorida.</abbr>
-
-            <br><br>
+            <br><br><br>
 
             <marquee bgcolor="#ccc" loop="-1" scrollamount="5" width="100%">No dejes de visitarnos y conocer la gran variedad de productos que tenemos para ti, te hacemos la vida más  fácil, hermosa y colorida.</marquee>
         </div>
