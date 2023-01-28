@@ -85,7 +85,7 @@
                     <option value="Mujer">Mujer</option>
                   </select>
                 </div>
-              </div>
+            </div>
 
             <div class="flex items-center justify-end my-4 ">
                 <a class="underline text-lg text-gray-900 font-medium hover:text-gray-700" href="{{ route('login') }}">

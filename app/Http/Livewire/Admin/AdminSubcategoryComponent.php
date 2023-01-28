@@ -50,6 +50,8 @@ class AdminSubcategoryComponent extends Component
         
         $this->validate();
 
+        $this->emit('render');
+
         $this->slug = Str::slug($this->name);
         $subcategory = Subcategory::where('slug', $this->slug)
                                     ->Where('category_id', $this->category_id);
@@ -59,6 +61,8 @@ class AdminSubcategoryComponent extends Component
         {
             $this->emit('slugValidate');
             $this->slug = '';
+
+            $this->emit('render');
         }
         else 
         {
@@ -138,6 +142,7 @@ class AdminSubcategoryComponent extends Component
 
             $this->emit('subcategoryDeleted_e');
         }
+
     }
     /* End Destroy */
 }

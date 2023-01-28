@@ -48,6 +48,8 @@ class AdminWalletComponent extends Component
         
         $this->validate();
 
+        $this->emit('render');
+
         Wallet::create([
             'type' => $this->type,
             'wallet_email' => $this->wallet_email,
@@ -84,6 +86,8 @@ class AdminWalletComponent extends Component
             'wallet_email' => "required|unique:wallets,wallet_email,$this->wallet_id",   
             'name' => 'required'   
         ]);
+
+        $this->emit('render');
 
         $wallet = Wallet::find($this->wallet_id);
 

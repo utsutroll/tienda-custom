@@ -44,7 +44,7 @@
                         @foreach ($products as $product)
                         
                         <tr>
-                            <td>{{ $product->characteristic_product->product->name }} ({{ $product->characteristic_product->product->brand->name }} {{ $product->characteristic_product->characteristic->name }})</td>
+                            <td>{{ $product->characteristic_product->product->id }} - {{ $product->characteristic_product->product->name }} ({{ $product->characteristic_product->product->brand->name }} {{ $product->characteristic_product->characteristic->name }})</td>
                             <td width="20%">{{ $product->quantity }}</td>
                             <td width="20%">{{ date('d-m-Y', strtotime($product->entry->date)) }} {{ date('h:i:s A', strtotime($product->entry->time)) }}</td>
     

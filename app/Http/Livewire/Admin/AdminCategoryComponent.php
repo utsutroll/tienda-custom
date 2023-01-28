@@ -42,6 +42,8 @@ class AdminCategoryComponent extends Component
         
         $this->validate();
 
+        $this->emit('render');
+
         Category::create([
             'name' => $this->name,
             'slug' => Str::slug($this->name)
@@ -71,6 +73,8 @@ class AdminCategoryComponent extends Component
         $this->validate([
             'name' => "required|alpha|max:30|unique:categories,name,$this->category_id",  
         ]);
+
+        $this->emit('render');
 
         $category = Category::find($this->category_id);
 

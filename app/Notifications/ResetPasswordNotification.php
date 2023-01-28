@@ -62,7 +62,7 @@ class ResetPasswordNotification extends Notification
             ->action(Lang::get('Restablecer la Contraseña'), url(route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)))
             ->line(Lang::get('Este enlace para restablecer la contraseña caducará en :count minutos.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
             ->line(Lang::get('Si no ha solicitado un restablecimiento de la contraseña, no es necesario realizar ninguna otra acción.'))
-            ->salutation(Lang::get('¡Saludos!'));
+            ->salutation(Lang::get('Te Saluda Inversiones Meka C.A'));
     }
 
     /**

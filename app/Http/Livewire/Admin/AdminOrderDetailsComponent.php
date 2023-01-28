@@ -41,19 +41,23 @@ class AdminOrderDetailsComponent extends Component
 
         $transaction = Transaction::where('order_id',$this->order_id);
 
+        $transaction->update([
+            'status' => "declined"
+        ]);
+        
+        $transaction->update([
+            'observation' => $this->observation
+        ]);
+
         $order = Order::find($this->order_id);
         $user = User::find($order->user_id);
         
-        $transaction->update([
-            'status' => "declined",
-            'observation' => $this->observation,
-        ]);
 
         $order->canceled_date = FacadesDB::raw('CURRENT_DATE');
         $order->save();
 
         $user->notify(new ApprovePaymentNotification($order));
-        $user->notify(new ApprovedPaymentMail($order));
+        $user->notify(new ApprovedPaymentMail($order)); 
         $this->emit('orderUpdateC');   
     }
 

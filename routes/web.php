@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductEntryController;
 use App\Http\Controllers\Admin\ProductOutputController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Livewire\AboutComponent;
 use App\Http\Livewire\Admin\AdminBankAccountComponent;
 use App\Http\Livewire\Admin\AdminBrandComponent;
@@ -31,7 +32,6 @@ use App\Http\Livewire\SendPaymentComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\ThankyouComponent;
 use App\Http\Livewire\User\UserChangePasswordComponent;
-use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\User\UserOrdersComponent;
 use App\Http\Livewire\User\UserOrdersDetailsComponent;
 use App\Http\Livewire\WishlistComponent;
@@ -60,8 +60,12 @@ Route::get('/about', AboutComponent::class)->name('about');
 Route::get('/cart', CartComponent::class)->name('cart');
 Route::get('/offer', Offer::class)->name('offer');
 Route::get('/wishlist', WishlistComponent::class)->name('wishlist');
-Route::get('/checkout', CheckoutComponent::class)->name('checkout');
-Route::get('/send-payment/{order_id}', SendPaymentComponent::class)->name('sendpayment');
+
+Route::middleware(['cart.is.empty'])->group(function() {
+    Route::get('/checkout', CheckoutComponent::class)->name('checkout');
+    Route::get('/send-payment/{order_id}', SendPaymentComponent::class)->name('sendpayment');
+});
+
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 Route::get('/categories', CategoryComponent::class)->name('categories');
 Route::get('/thank-you', ThankyouComponent::class)->name('thankyou');
@@ -75,6 +79,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     /* Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard'); */
     Route::get('/user/orders', UserOrdersComponent::class)->name('user.orders');
     Route::get('/user/orders/{order_id}', UserOrdersDetailsComponent::class)->name('user.orderdetails');
+    Route::get('/user/invoice-report', [InvoiceController::class, 'userInvoiceReport'])->name('user.invoice.report');
     Route::get('/user/change-password', UserChangePasswordComponent::class)->name('user.changepassword');
 
     Route::get('markReadUser', function(){
@@ -85,7 +90,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
 
 //For Admin
-    Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function(){
+Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function(){
     Route::get('/admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
     Route::get('/admin/categories', AdminCategoryComponent::class)->name('admin.categories');
     Route::get('/admin/subcategories', AdminSubcategoryComponent::class)->name('admin.subcategories');
@@ -110,6 +115,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/admin/sale-price', AdminSalePriceComponent::class)->name('admin.sale-price');
     Route::get('/admin/sale-open', AdminSaleOpenComponent::class)->name('admin.sale-open');
     Route::get('/admin/orders-reports', AdminOrderReportsComponent::class)->name('admin.orders.reports');
+    Route::get('/admin/invoice-report', [InvoiceController::class, 'userInvoiceReport'])->name('admin.invoice.report');
+    
+    
     
     /* Select Dependiente */
     Route::get('select/{id}', function ($id) {

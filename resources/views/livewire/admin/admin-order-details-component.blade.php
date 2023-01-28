@@ -216,7 +216,7 @@
                                     </tr>  
                                     @isset($order->transactions->url)  
                                         <tr>
-                                            <th>Captura</th>
+                                            <th width="150">Captura</th>
                                             <td width="150">
                                                 <img src="{{Storage::url($order->transactions->url)}}" width="250">
                                             </td>
@@ -233,10 +233,10 @@
                                             <th><div class="form-group"><input type="text" wire:model.defer="observation" class="form-control" placeholder="Observación"></div></th>
                                             <td colspan="2">
                                                 <div class="row">
-                                                    <div class="col-6 mr-2">
+                                                    <div class="col-12 col-md-3 col-lg-3 mr-md-4 mb-2">
                                                         <button class="btn btn-success btn-small ml-2" wire:click.prevent="approvePayment">Aprobar Pago</button>            
                                                     </div>
-                                                    <div class="col-6">
+                                                    <div class="col-12 col-md-3 col-lg-3">
                                                         <button class="btn btn-danger btn-small" wire:click.prevent="declinedPayment">Rechazar Pago</button>
                                                     </div>
                                                 </div>    

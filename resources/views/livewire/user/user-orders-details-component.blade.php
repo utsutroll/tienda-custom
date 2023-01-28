@@ -68,7 +68,7 @@
                         {{ $order->delivered_date }}
                     </td>
                     @elseif($order->status == "canceled")
-                    <td class="px-6 py-4 text-right">
+                    <td class="px-6 py-4 text-left">
                         {{ $order->canceled_date }}
                     </td>
                     @endif
@@ -111,14 +111,14 @@
                     <td class="px-6 py-4">
                         <img src="{{ Storage::url($item->characteristic_product->image) }}" width="80">
                     </td>
-                    <td width="80" class="px-6 py-4">
-                        {{ $item->price }}$
+                    <td width="150" class="px-6 py-4">
+                        @foreach  ($this->dollar as $d) {{ round(($item->price*$d->price),2) }} @endforeach Bs
                     </td>
-                    <td width="150" class="px-6 py-4 text-center">
+                    <td width="80" class="px-6 py-4 text-center">
                         {{ $item->quantity }}
                     </td>
                     <td class="px-6 py-4 text-center">
-                        {{ round(($item->price*$item->quantity),2) }}$
+                        @foreach  ($this->dollar as $d) {{ round(($item->price*$item->quantity*$d->price),2) }} @endforeach Bs
                     </td>
                 </tr>
                 @endforeach
@@ -127,8 +127,7 @@
 
         <hr />
         <div class="flex justify-end my-3 mr-2">
-            <h5 class="text-base font-bold text-gray-800">Total Pagado: {{ $order->total }}$ ~ {{
-                number_format(round($order->total_bs,2),2)}} Bs</h5>
+            <h5 class="text-base font-bold text-gray-800">Total Pagado: {{ number_format(round($order->total_bs,2),2)}} Bs</h5>
         </div>
     </div>
 
@@ -177,9 +176,9 @@
             </div>
             @else
             <dl>
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-gray-50 px-4 pt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-lg font-medium text-gray-800">Modo de Transacción</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <dd class="mt-1 text-base font-semibold text-gray-900 sm:mt-0 sm:col-span-2">
                         @if ($order->transactions->mode == "bank")
                             Transferencia o Pago Móvil
                         @elseif($order->transactions->mode == "wallet")
@@ -202,24 +201,24 @@
                     </dd>
                 </div>
                 @if ($order->transactions->status == "declined")
-                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-white px-4 pb-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-lg font-medium text-gray-800">Observación</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $order->transactions->observation }}</dd>
+                    <dd class="mt-1 text-base font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{ $order->transactions->observation }}</dd>
                 </div>
                 @endif
-                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-white px-4 pb-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-lg font-medium text-gray-800">Fecha de la Transacción</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $order->transactions->created_at }}</dd>
+                    <dd class="mt-1 text-base font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{ $order->transactions->created_at }}</dd>
                 </div>
                 @if ($order->transactions->mode != "money")
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-white px-4 pb-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-lg font-medium text-gray-800">N° de Referencia</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $order->transactions->reference }}</dd>
+                        <dd class="mt-1 text-base font-semibold text-gray-900 sm:mt-0 sm:col-span-2">{{ $order->transactions->reference }}</dd>
                     </div>
                     @isset($order->transactions->url)
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div class="bg-gray-50 px-4 pb-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-lg font-medium text-gray-800">Captura</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <dd class="mt-1 text-base font-semibold text-gray-900 sm:mt-0 sm:col-span-2">
                             <img src="{{Storage::url($order->transactions->url)}}" width="150">    
                         </dd>
                     </div>

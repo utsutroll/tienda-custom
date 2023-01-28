@@ -139,15 +139,5 @@
         });
     });
 
-    $(document).ready(function() {
-        
-        $('#activar').change(function(){ 
-            if(this.checked) $('#caracter').fadeIn('slow');
-
-            else $('#caracter').fadeOut('slow'); 
-
-        });
-    });
-
     </script>
 @endpush    

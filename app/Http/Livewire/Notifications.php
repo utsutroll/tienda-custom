@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Notifications extends Component
@@ -14,6 +15,11 @@ class Notifications extends Component
         $this->emit('render');
 
         return redirect()->route($route, ['order_id'=> $id]); exit();
+    }
+
+    public function getDollarProperty()
+    {
+        return DB::table('dollar_rates')->select('price')->get();
     }
 
     public function render()

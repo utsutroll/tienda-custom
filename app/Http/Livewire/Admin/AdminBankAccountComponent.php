@@ -76,6 +76,8 @@ class AdminBankAccountComponent extends Component
         
         $this->validate();
 
+        $this->emit('render');
+
         BankAccount::create([
             'type_account' => $this->type_account,
             'account' => $this->account,
@@ -132,6 +134,8 @@ class AdminBankAccountComponent extends Component
             'type_d' => 'required',   
             'pm' => 'required',    
         ]);
+
+        $this->emit('render');
 
         $payment = BankAccount::find($this->payment_id);
 

@@ -22,19 +22,21 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(Cart::instance('wishlist')->content() as $items)
+                @foreach($wishlists as $items)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <td class="py-4 px-6 text-center">
                         <a href="javascript:void(0)"  wire:click="removeFromWishlist('{{$items->rowId}}')" title="Remover"><i class="far fa-times-circle"></i></a>
                     </td>
                     <td class="py-4 px-6">
-                        <img src="{{Storage::url($items->model->image->url)}}" class="inline-block w-14" alt="{{ $items->name }}">
+                        @isset($items->model->image->url)
+                            <img src="{{Storage::url($items->model->image->url)}}" class="inline-block w-14" alt="{{ $items->name }}">
+                        @endisset
                     </td>
                     <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $items->name }} {{ $items->model->brand->name }}
                     </th>
                     <td class="py-4 px-6">
-                        @foreach ($dollar as $d){{ $d->price*round(($item->price), 2) }}@endforeach Bs
+                        @foreach ($dollar as $d){{ $d->price*round(($items->price), 2) }}@endforeach Bs
                     </td>
                     <td class="py-4 px-6">
                         <a href="{{route('product.details',['slug'=>$items->model->slug])}}" title="Agregar al Carrito de Compras"><i class="far fa-shopping-cart"></i></a>

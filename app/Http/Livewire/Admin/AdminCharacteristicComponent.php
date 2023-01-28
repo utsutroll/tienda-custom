@@ -43,6 +43,7 @@ class AdminCharacteristicComponent extends Component
         
         $this->validate();
 
+        $this->emit('render');
         
         Characteristic::create([
             'name' => $this->name,
@@ -73,6 +74,8 @@ class AdminCharacteristicComponent extends Component
         $this->validate([
             'name' => "required|min:1|unique:characteristics,name,$this->characteristic_id"
         ]);
+
+        $this->emit('render');
 
         $characteristic = Characteristic::find($this->characteristic_id);
 

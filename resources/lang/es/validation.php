@@ -156,6 +156,7 @@ return [
         'file' => 'Imágen',
         'imge' => 'Imágen',
         'image' => 'Imágen',
+        'charact' => 'Característica',
         'product_id' => 'Producto',
         'quantity' => 'Cantidad',
         'price' => 'Precio',
@@ -164,5 +165,10 @@ return [
         'title' => 'Título',
         'subtitle' => 'Subtítulo',
         'detail' => 'Detalle',
+        'password' => 'Contraseña',
+        'document' => 'Documento',
+        'document_number' => 'Número de Documento',
+        'sexo' => 'Sexo'
+
     ],
 ];

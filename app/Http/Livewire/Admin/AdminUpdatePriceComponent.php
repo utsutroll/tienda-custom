@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -27,21 +28,27 @@ class AdminUpdatePriceComponent extends Component
     public function render()
     {
 
-        $productss = Product::where('name', 'LIKE', "%{$this->search_pro}%")
+        $productss = Product::where('id', 'LIKE', "%{$this->search_pro}%")
+                            ->orwhere('name', 'LIKE', "%{$this->search_pro}%")
                             ->paginate($this->entries);
 
         return view('livewire.admin.admin-update-price-component', compact('productss'));
     }
 
-    public function actualizar($id)
+    public function actualizar($slug)
     {
-        $product = Product::find($id);
+        
+        /* $product =  Product::findOrFail($id); */
+
+        $product = DB::table('products')
+        ->where('slug', $slug)
+        ->first();
 
         $this->validate([
             'prices' => "required",  
         ]);
 
-        Product::where('id', $product->id)->update(['price' => $this->prices]);
+        Product::where('slug', $product->slug)->update(['price' => $this->prices]);
 
         $this->reset(['prices']);
 

@@ -6,6 +6,7 @@ use App\Models\DollarRate;
 use Livewire\Component;
 use App\Models\Product;
 use Cart;
+use Illuminate\Support\Facades\Auth;
 
 class WishlistComponent extends Component
 {
@@ -14,10 +15,15 @@ class WishlistComponent extends Component
 
     public function render()
     {
-        $dollar = DollarRate::all();
-
+        if(Auth::check()){
+            Cart::instance('wishlist')->erase(Auth::user()->email);
+            Cart::instance('wishlist')->store(Auth::user()->email);
+        }
         
-        return view('livewire.wishlist-component', compact('dollar'))->layout('layouts.base');
+        $dollar = DollarRate::all();
+        $wishlists = Cart::instance('wishlist')->content();
+        
+        return view('livewire.wishlist-component', compact('dollar', 'wishlists'))->layout('layouts.base');
     }
 
 
@@ -29,7 +35,7 @@ class WishlistComponent extends Component
             {
                 Cart::instance('wishlist')->remove($witem->rowId);
 
-                $this->emit('whishlistRemoved');
+                $this->emit('wishlistRemoved');
                 
                 return;
             }

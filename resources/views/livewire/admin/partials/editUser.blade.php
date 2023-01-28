@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header bg-info">
                 <h4 class="modal-title text-light">Editar Usuario</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" class="close" wire:click="$emit('render')" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 
@@ -21,7 +21,15 @@
                 <div wire:loading.remove>
                     <div class="form-group">
                         <label for="name" class="control-label">Nombre</label>
-                        <input type="text" class="form-control" wire:model.defer="name" placeholder="Ingrese el Nombre y Apellido del Usuario">    
+                        <input type="text" class="form-control" wire:model.defer="name" placeholder="Ingrese el Nombre del Usuario">    
+            
+                        @error('name')
+                            <small class="text-danger">{{$message}}</small>   
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="control-label">Nombre</label>
+                        <input type="text" class="form-control" wire:model.defer="lastname" placeholder="Ingrese el Apellido del Usuario">    
             
                         @error('name')
                             <small class="text-danger">{{$message}}</small>   
@@ -43,9 +51,45 @@
                             <small class="text-danger">{{$message}}</small>   
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="document" class="control-label">Documento</label>   
+                        <select id="document" class="form-control" wire:model.defer="document" :value="old('document')">
+                            <option value="CÉDULA DE IDENTIDAD">CÉDULA DE IDENTIDAD</option>
+                            <option value=" CÉDULA DE EXTRANJERÍA">CÉDULA DE EXTRANJERÍA</option>
+                            <option value="RIF PERSONA JURÍDICA">RIF PERSONA JURÍDICA</option>
+                            <option value="RIF PERSONA NATURAL">RIF PERSONA NATURAL</option>
+                            <option value="RIF-V">RIF-V</option>
+                            <option value="RIF-E">RIF-E</option>
+                            <option value="RIF-G">RIF-G</option>
+                            <option value="PASAPORTE">PASAPORTE</option>
+                        </select>
+                        @error('document')
+                            <small class="text-danger">{{$message}}</small>   
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="document_number" class="control-label">Número de Documento</label>
+                        <input type="number" class="form-control" wire:model.defer="document_number" placeholder="Ingrese el Número de Documento" :value="old('document_number')">    
+            
+                        @error('document_number')
+                            <small class="text-danger">{{$message}}</small>   
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sexo" class="control-label">Sexo</label>   
+                        <select id="sexo" class="form-control" wire:model.defer="sexo" :value="old('sexo')">
+                            <option value="">Seleccione</option>
+                            <option value="Hombre">Hombre</option>
+                            <option value="Mujer">Mujer</option>
+                        </select>
+                        @error('sexo')
+                            <small class="text-danger">{{$message}}</small>   
+                        @enderror
+                    </div>
                 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cerrar</button>
+                        <button type="button" wire:click="$emit('render')" class="btn btn-default waves-effect" data-dismiss="modal">Cerrar</button>
                         <button wire:click.prevent="update()" wire:loading.remove wire:target="update" class="btn btn-info waves-effect waves-light">Editar Usuario</button>
                         <button wire:loading wire:target="update" class="btn btn-info waves-effect waves-light">Cargando...</button>
                     </div>

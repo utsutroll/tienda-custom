@@ -7,7 +7,7 @@
                 
                 {!! Form::label('caracteristica', 'Característica') !!}
                 
-                <select name="characteristic[]" class="form-control select2" value="{{ old('characteristic[]') }}" style ="width: 100%;">
+                <select name="characteristic" class="form-control select2" value="{{ old('characteristic[]') }}" style ="width: 100%;">
                     @if ($c->characteristic->characteristic_id == $characteristics)
                     <option selected value="{{ $c->characteristic_id }}">{{ $c->characteristic->name }}</option>
                     @else
@@ -18,7 +18,7 @@
                     <small class="text-danger">{{$message}}</small>   
                 @enderror
             </div>
-        </div>
+        </div> 
 
         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
             <div class="form-group">
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="file" name="image[]" id="image" value="{{ old('image[]') }}" class="form-control"/>
+                <input type="file" name="image" id="image" value="{{ old('image') }}" class="form-control"/>
             </div>
         </div>
         <div class="col-2">

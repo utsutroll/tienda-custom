@@ -30,17 +30,14 @@ class HomeComponent extends Component
         'search' => ['except' => ''],
         'entries' => ['except' => '8']
     ];
-    
+
+    protected $listener = ['render' => 'render'];
 
     public function render()
     {
         $dollar = DollarRate::all();
         $sliders = Slider::all();
-        $business_partners = BusinessPartner::all();
-        
-        if(Auth::check()){
-            Cart::instance('wishlist')->restore(Auth::user()->id);
-        }
+        $business_partners = BusinessPartner::all();  
 
         
         $products = DB::table('products')
@@ -54,13 +51,15 @@ class HomeComponent extends Component
                             'products.price as price',
                             'products.slug as slug',
                             'products.stock as stock')
-                            ->where('stock', '>', '0')
+                            ->where('products.stock', '>', '0')
+                            ->where('products.price', '>', '0')
                         ->take(8)->get();
 
         $newproducts = DB::table('products')
                             ->join('brands', 'brands.id', '=', 'products.brand_id')
                             ->join('images', 'images.imageable_id', '=', 'products.id')
-                            ->where('stock', '>', '0')
+                            ->where('products.stock', '>', '0')
+                            ->where('products.price', '>', '0')
                             ->select(
                                 'products.id as id',
                                 'products.name as product', 
@@ -72,17 +71,18 @@ class HomeComponent extends Component
                             ->orderBy('products.created_at', 'desc') 
                             ->take(8)->get();
         
-
+        if (Auth::check()) {
+            Cart::instance('wishlist')->restore(Auth::user()->email);
+        }                         
         return view('livewire.home-component', compact('dollar', 'products', 'newproducts', 'sliders', 'business_partners'))->layout('layouts.base');
     }
 
     public function addToWishlist($id, $name, $price)
     {   
+
         Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
-        Cart::instance('wishlist')->store(Auth::user()->id);
 
         $this->emit('whishlistAdded');
-        $this->emit('render');
 
         $this->emit('alert', 'El producto se agregó a la lista de deseos con éxito.');
     }
@@ -91,11 +91,19 @@ class HomeComponent extends Component
     {
         foreach(Cart::instance('wishlist')->content() as $witem)
         {
+
             if ($witem->id == $product_id) 
             {
-                Cart::instance('wishlist')->remove($witem->rowId)->erase(Auth::user()->id);
+                $user = Auth::user()->email;
+
+                Cart::instance('wishlist')->remove($witem->rowId);
+                Cart::erase($user);
 
                 $this->emit('wishlistRemoved');
+                $this->emit('render');
+
+                $this->emit('alert', 'El producto se eliminó a la lista de deseos con éxito.');
+
                 return;
             }
         }

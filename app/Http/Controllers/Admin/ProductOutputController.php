@@ -29,7 +29,7 @@ class ProductOutputController extends Controller
         if($products->count() > 0)
         {
             foreach($products as $p){
-                $product[$p->id] = $p->id = $p->product->name .' '. $p->product->brand->name .' '. $p->characteristic->name;
+                $product[$p->id] = $p->id = $p->product->id .' - '. $p->product->name .' '. $p->product->brand->name .' '. $p->characteristic->name;
             }
         }
         else 

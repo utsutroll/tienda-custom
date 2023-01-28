@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Sale;
 use Carbon\Carbon;
 use Cart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -32,6 +33,11 @@ class DetailsComponent extends Component
     
     public function render()
     {
+        if(Auth::check()){
+            Cart::instance('wishlist')->erase(Auth::user()->email);
+            Cart::instance('wishlist')->store(Auth::user()->email);
+        }
+
         $sale = Sale::find(1);
 
         $product = Product::where('slug', $this->slug)->first();
@@ -146,33 +152,34 @@ class DetailsComponent extends Component
 
     public function addToWishlist($id, $name, $price)
     {   
+
         Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
-        Cart::instance('wishlist')->store(Auth::user()->id);
 
         $this->emit('whishlistAdded');
-        $this->emit('render');
 
         $this->emit('alert', 'El producto se agregó a la lista de deseos con éxito.');
-
     }
 
     public function removeFromWishlist($product_id)
     {
         foreach(Cart::instance('wishlist')->content() as $witem)
         {
+
             if ($witem->id == $product_id) 
             {
-                Cart::instance('wishlist')->remove($witem->rowId)->erase(Auth::user()->id);
+                $user = Auth::user()->email;
+
+                Cart::instance('wishlist')->remove($witem->rowId);
+                Cart::erase($user);
 
                 $this->emit('wishlistRemoved');
-                
+                $this->emit('render');
+
                 $this->emit('alert', 'El producto se eliminó a la lista de deseos con éxito.');
                 
                 return;
             }
         }
-
-        
     }
 
 

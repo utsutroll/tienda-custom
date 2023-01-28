@@ -7,7 +7,7 @@
                 <button type="button" class="mt-2 inline-flex items-center justify-center" id="users-menu" aria-expanded="false">
                     <span class="sr-only">Open menu</span>
                     <!-- Heroicon name: outline/bars-3 -->
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                    <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
                         <path d="M12 2A10.13 10.13 0 0 0 2 12a10 10 0 0 0 4 7.92V20h.1a9.7 9.7 0 0 0 11.8 0h.1v-.08A10 10 0 0 0 22 12 10.13 10.13 0 0 0 12 2zM8.07 18.93A3 3 0 0 1 11 16.57h2a3 3 0 0 1 2.93 2.36 7.75 7.75 0 0 1-7.86 0zm9.54-1.29A5 5 0 0 0 13 14.57h-2a5 5 0 0 0-4.61 3.07A8 8 0 0 1 4 12a8.1 8.1 0 0 1 8-8 8.1 8.1 0 0 1 8 8 8 8 0 0 1-2.39 5.64z"></path>
                         <path d="M12 6a3.91 3.91 0 0 0-4 4 3.91 3.91 0 0 0 4 4 3.91 3.91 0 0 0 4-4 3.91 3.91 0 0 0-4-4zm0 6a1.91 1.91 0 0 1-2-2 1.91 1.91 0 0 1 2-2 1.91 1.91 0 0 1 2 2 1.91 1.91 0 0 1-2 2z"></path>
                     </svg>
@@ -60,14 +60,14 @@
         <li><a id="LiAbout" href="{{ route('about') }}">Nosotros</a></li>
         {{-- <livewire:icon-cart /> --}}
         <li id="lg-bag" class="">
-            <a id="LiCart" href="{{ route('cart') }}" class="relative inline-flex"><i class="far fa-shopping-bag"></i>
+            <a id="LiCart" href="{{ route('cart') }}" class="relative inline-flex"><i class="text-lg far fa-shopping-cart"></i>
                 @if(Cart::instance('cart')->count() > 0)
                 <span class="flex absolute text-sm noty animate-pulse">{{ Cart::instance('cart')->count() }}</span>
                 @endif
             </a>
         </li>
         <li id="lg-bag" class="">
-            <a id="LiCart" href="{{ route('wishlist') }}" class="relative inline-flex"><i class="far fa-heart"></i>
+            <a id="LiCart" href="{{ route('wishlist') }}" class="relative inline-flex"><i class="text-lg far fa-heart"></i>
                 @if(Cart::instance('wishlist')->count() > 0)
                 <span class="flex absolute text-sm noty animate-pulse">{{ Cart::instance('wishlist')->count() }}</span>
                 @endif
@@ -79,15 +79,15 @@
             @endauth         
         @endif
         @include('livewire.user-menu')    
-        <a href="#" id="close"><i class="far fa-times"></i></a>
+        <a href="#" id="close"><i class="text-lg far fa-times"></i></a>
     </ul>
 </div>
 
 <div id="mobile">
-    <a href="{{ route('cart') }}"><i class="far fa-shopping-bag"></i></a>
+    <a href="{{ route('cart') }}"><i class="text-lg far fa-shopping-cart"></i></a>
     @if(Route::has('login'))
         @auth
-            <a href="{{ route('wishlist') }}"><i class="fa fa-heart"></i></a>
+            <a href="{{ route('wishlist') }}"><i class="text-lg fa fa-heart"></i></a>
         @endauth    
     @endif         
     <i id="bar" class="fas fa-outdent"></i>

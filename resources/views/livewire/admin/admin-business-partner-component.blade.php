@@ -31,6 +31,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Aliado</th>
+                            <th>Imágen</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>

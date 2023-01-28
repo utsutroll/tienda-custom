@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header bg-secondary">
                 <h4 class="modal-title text-black font-bold">Ver Datos Bancarios</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" wire:click="$emit('render')" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <div wire:loading>
@@ -49,7 +49,7 @@
                         </table>
                     </div>  
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cerrar</button>
+                        <button type="button" wire:click="$emit('render')" class="btn btn-default waves-effect" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             

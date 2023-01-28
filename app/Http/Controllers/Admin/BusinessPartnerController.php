@@ -78,18 +78,25 @@ class BusinessPartnerController extends Controller
 
                 $url = Storage::put('partners', $request->file('file'));
 
-            }else{
-
-                $url = Storage::put('partners', $request->file('file'));
             }
+
+            $business_partner->update([
+                'name' => $request->name,  
+                'img' => $url,  
+                'link' => $request->link,       
+                'slug' => Str::slug($request->name),
+                
+            ]);
+        } else {
+            $business_partner->update([
+                'name' => $request->name,  
+                'link' => $request->link,       
+                'slug' => Str::slug($request->name),
+                
+            ]);
         }
-        $business_partner->update([
-            'name' => $request->name,   
-            'img' => $url,  
-            'link' => $request->link,       
-            'slug' => Str::slug($request->partner),
-            
-        ]);
+
+        
 
         return redirect()->route('admin.business-partners.index')->with('info_e', 'El Aliado Comercial se actualizó con éxito.');
     }

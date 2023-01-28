@@ -6,6 +6,8 @@
             </a>
         </x-slot>
 
+        <a class="text-gray-900 hover:text-gray-700 hover:underline mb-4" href="/"><i class="far fa-chevron-left"></i> <span class="mr-4">Volver</span></a>
+
         <div class="mb-4 text-sm text-gray-600">
             {{ __('¿Ha olvidado su contraseña? No hay problema. Sólo tienes que indicarnos tu dirección de correo electrónico y te enviaremos un enlace para restablecer la contraseña que te permitirá elegir una nueva.') }}
         </div>

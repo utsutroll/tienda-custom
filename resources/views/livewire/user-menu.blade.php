@@ -3,7 +3,7 @@
         @auth  
         <div class="">
             <button type="button" class="flex text-md focus:outline-none" id="user-menu" aria-expanded="false" aria-haspopup="true">
-                <i class="far fa-user-circle"></i>
+                <i class="text-lg far fa-user-circle"></i>
             </button>
 
             <div class="z-40 md:origin-top-right lg:origin-top-right absolute md:right-0 lg:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="resultnav" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
@@ -27,7 +27,7 @@
        
     @else
         <button type="button" class="flex text-md focus:outline-none" id="user-menu" aria-expanded="false" aria-haspopup="true">
-            <i class="far fa-user-circle"></i>
+            <i class="text-lg far fa-user-circle"></i>
         </button>
         <div class="z-40 md:origin-top-right lg:origin-top-right absolute md:right-0 lg:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="resultnav" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
             <a href="{{ route('login') }}" class="text-gray-800 px-4 py-2 rounded-md text-base font-medium">Iniciar Sesión</a>

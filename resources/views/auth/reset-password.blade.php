@@ -9,6 +9,8 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+        <a class="text-gray-900 hover:text-gray-700 hover:underline" href="/"><i class="far fa-chevron-left"></i> <span class="mr-4">Volver</span></a>
+
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
 

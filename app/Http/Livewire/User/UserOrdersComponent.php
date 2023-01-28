@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\User;
 
 use App\Models\Order;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -63,4 +65,5 @@ class UserOrdersComponent extends Component
 
     }
     /* End Table */
+
 }

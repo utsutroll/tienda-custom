@@ -150,18 +150,21 @@
 @isset($product)
 <hr>
 @livewire('admin.delete-characteristic', ['product' => $product, 'characteristics' => $characteristics])
-@endisset
-
-
 
 <div class="form-group p-2">
     {!! Form::label('activar', 'Agregar Características') !!}<br/>
     <input type="checkbox" name="activar" id="activar" class='js-switch' data-color='#3d3b3b'>
 </div>
+@endisset
+
 <div class="row">
     <div class="col-12">
         <hr>
-        <div id="caracter" style="display: none;">
+        <div id="caracter" @isset($product) style="display: none;" @endisset>
+            @if (session('message'))
+                <small class="text-danger">{{ session('message') }}</small>
+            @endif
+
             <div class="form-group col-5">
                 <label for="">Número de Características</label>
                 <input maxlength="2" class="form-control" name="numInputs" onkeyup="multiplicarInputs(this)" type="text" />
@@ -184,7 +187,7 @@
                         {!! Form::label('image', 'Imágen según la característica del Producto') !!}
                         {!! Form::file('imge[]', ['class' => 'form-control', 'accept' => 'image/*' ]) !!}
 
-                        @error('image')
+                        @error('imge')
                             <small class="text-danger">{{$message}}</small>   
                         @enderror
                     </div>

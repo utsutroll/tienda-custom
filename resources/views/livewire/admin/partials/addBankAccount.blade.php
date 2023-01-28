@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header bg-success">
                 <h4 class="modal-title text-light">Nueva Cuenta Bancaria</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" wire:click="$emit('render')" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <div wire:loading wire:target="create">
@@ -102,7 +102,7 @@
                     </div>
             
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cerrar</button>
+                        <button type="button" wire:click="$emit('render')" class="btn btn-default waves-effect" data-dismiss="modal">Cerrar</button>
                         <button wire:click.prevent="save()" wire:loading.remove wire:target="save" class="btn btn-success waves-effect waves-light">Registrar</button>
                         <button wire:loading wire:target="save" class="btn btn-info waves-effect waves-light">Cargando...</button>
                     </div>

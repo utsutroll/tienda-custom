@@ -33,7 +33,7 @@
     <div class="col-6">
         @isset($business_partner->img)
             <div class="form-group">
-                <label for="">Imagen que se mostrará en el Slider</label>
+                <label for="">Imágen que se mostrará en el Slider</label>
                 <div class="image-wrapper d-flex justify-content-center">
                     <img id="picture" src="{{Storage::url($business_partner->img)}}">
                 </div>

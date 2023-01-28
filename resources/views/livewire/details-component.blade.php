@@ -23,7 +23,9 @@
             @if(Route::has('login'))
                 @auth
                     @if ($witems->contains($product->id))
-                        <span class="flex justify-start text-2xl"><i class="fa fa-heart text-red-600"></i></span>
+                        <span class="flex justify-start text-2xl"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fa fa-heart text-red-600"></i></a></span>
+                    @else
+                        <span class="flex justify-start text-2xl"><a href="javascript:void(0)" wire:click.prevent="addToWishlist({{$product->id}}, '{{$product->name}}', {{$product->price}})"><i class="fa fa-heart"></i></a></span>
                     @endif
                 @endauth    
             @endif
@@ -97,7 +99,7 @@
                                 @if ($witems->contains($s->id))
                                     <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$s->id}})"><i class="fa fa-heart text-red-600"></i></a></div>
                                 @else
-                                    <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$s->id}}, '{{$s->product}}', {{$s->price}})"></i></a></div>
+                                    <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="addToWishlist({{$s->id}}, '{{$s->product}}', {{$s->price}})"><i class="text-teal-600 far fa-heart"></i></a></div>
                                 @endif
                             @endauth    
                         @endif       

@@ -19,14 +19,16 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+
+        @livewireStyles
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @if (Auth::user()->utype === 'ADM')
+            {{-- @if (Auth::user()->utype === 'ADM')
                 @include('layouts.navigation')
             @else
                 @include('livewire.navigation')
-            @endif
+            @endif --}}
 
             <!-- Page Heading -->
             <header class="bg-white shadow">
@@ -40,6 +42,8 @@
                 {{ $slot }}
             </main>
         </div>
+
+        @livewireScripts
 
         <script src="{{ asset('dist/new/js/script.js') }}"></script>
     </body>

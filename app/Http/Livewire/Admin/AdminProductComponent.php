@@ -49,6 +49,7 @@ class AdminProductComponent extends Component
             $images->delete(); 
 
             $this->emit('productDeleted');
+            $this->emit('render');
         }else {
             try {
                 Storage::delete($characteristic->image);
@@ -58,10 +59,12 @@ class AdminProductComponent extends Component
                 $images->delete(); 
                 
                 $this->emit('productDeleted');
+                $this->emit('render');
                 
             } catch (\Exception $e) {
     
                 $this->emit('ProductDeleted_e');
+                $this->emit('render');
             }
         }
         

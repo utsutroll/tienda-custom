@@ -24,7 +24,7 @@
                     <div class="pt-2">
                         <div class="form-material mt-4 d-flex justify-content-center">
                             <div class="col-10 form-group"> 
-                                <input type="text" wire:model="search_pro" class="form-control" placeholder="Buscar &hellip;" />
+                                <input type="text" wire:model="search_pro" class="form-control" placeholder="Buscar por código ó nombre del producto &hellip;" />
                             </div> 
                         </div>
                         
@@ -53,7 +53,7 @@
                                         <input type="number" wire:model.defer="prices" class="form-control">
                                     </div>
                                     <div class="col-2 mt-4">
-                                        <button wire:click.prevent="actualizar({{$pp->id}})" wire:loading.disabled wire:target="actualizar"  class="mt-2 btn btn-info waves-effect waves-light">Actualizar</button>
+                                        <button wire:click.prevent="actualizar('{{$pp->slug}}')" wire:loading.disabled wire:target="actualizar"  class="mt-2 btn btn-info waves-effect waves-light">Actualizar</button>
                                     </div>
                                 </div>
                             </li>

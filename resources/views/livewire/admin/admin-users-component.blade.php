@@ -33,33 +33,34 @@
                 <table id="table" class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Correo Electrónico</th>
+                            <th>Cédula</th>
+                            <th>Nombre y Apellido</th>
+                            <th>Email</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $u)
+                        @foreach ($users as $user)
                            
                         <tr>
-                            <td width="8%">{{ $u->id }}</td>
-                            <td>{{ $u->name }}</td>
-                            <td>{{ $u->email }}</td>
+                            <td width="8%">{{ $user->document_number }}</td>
+                            <td>{{ $user->name }} {{ $user->lastname }}</td>
+                            <td>{{ $user->email }}</td>
     
                             <td width="20%">
                                 <button 
-                                    class="btn btn-info btn-sm mr'2"
+                                    class="btn btn-info btn-sm mr-2"
                                     data-toggle="modal" data-target="#edit-modal"
-                                    wire:click="edit({{$u->id}})">
+                                    wire:click="edit({{$user->id}})">
                                     <i class="ti-pencil"></i> 
                                     Editar
                                 </button>
 
                                 <button 
                                     class="btn btn-danger btn-sm"
-                                    wire:click="destroy({{$u->id}})"> 
-                                    Desactivar
+                                    wire:click="destroy({{$user->id}})">
+                                    <i class="ti-trash"></i> 
+                                    Eliminar
                                 </button>
                             </td>
                         </tr>

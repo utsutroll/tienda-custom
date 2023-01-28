@@ -19,8 +19,8 @@
         
         <div class="col">
             <h4 class="text-lg text-teal-600 font-semibold">Nosotros</h4>
-            <a href="{{ route('shop') }}">Tienda</a>
-            <a href="{{ route('categories') }}">Categorías</a>
+            <a href="{{ route('shop') }}">Tienda</a><br>
+            <a href="{{ route('categories') }}">Categorías</a><br>
             <a href="{{ route('about') }}">Sobre Nosotros</a>
             {{-- <a href="#">Delivery Information</a> --}}
         </div>
@@ -33,7 +33,7 @@
                     @if (Auth::user()->utype === 'ADM')
                         <a href="{{ route('admin.dashboard') }}">Panel Administrativo</a>
                     @else
-                        <a href="{{ route('profile.show') }}">Perfil</a>
+                        <a href="{{ route('profile.show') }}">Perfil</a><br>
                         {{-- <a href="{{ route('user.dashboard') }}">Panel Administrativo</a> --}}
                         <a href="{{ route('user.orders') }}">Mis Pedidos</a>
                     @endif
@@ -44,7 +44,7 @@
                             this.closest('form').submit();">Cerrar Sesión</a>
                         </form>
             @else
-                    <a href="{{ route('login') }}">Iniciar Sesión</a>
+                    <a href="{{ route('login') }}">Iniciar Sesión</a><br>
                     <a href="{{ route('register') }}">Registrarse</a>
                 @endauth
             @endif 

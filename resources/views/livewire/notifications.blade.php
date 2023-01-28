@@ -1,6 +1,6 @@
 <li x-data="{ dropdownOpen: false }" class="relative">
     <button x-on:click="dropdownOpen = !dropdownOpen" class="relative z-10 block focus:outline-none">
-        <i class="far fa-bell"></i>
+        <i class="text-lg far fa-bell"></i>
         @if (count(auth()->user()->unreadNotifications))
         <span class="flex absolute text-sm noty animate-pulse"><span class="rounded-full h-3 w-3 bg-red-600"></span></span>
         @endif
@@ -46,7 +46,7 @@
                 @endif
                 <p class="text-gray-600 text-sm mx-2">
                     <span class="font-bold text-muted">@if ($notification->data['status'] == "approved") Se Aprobó @elseif ($notification->data['status'] == "declined")Se Canceló @endif</span> <br>
-                    <span class="mail-desc text-muted">Su compra #{{ $notification->data['id'] }} ({{ $notification->data['total'] }}$)</span> <br>
+                    <span class="mail-desc text-muted">Su compra #{{ $notification->data['id'] }} (@foreach ($this->dollar as $d){{ $d->price*$notification->data['total'] }} @endforeach Bs)</span> <br>
                     <span class="time text-muted">{{ $notification->created_at->diffForHumans() }}</span>
                 </p>
             </a>

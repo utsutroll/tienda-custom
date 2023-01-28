@@ -31,7 +31,7 @@
                 <table id="table" class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Código</th>
                             <th>Producto</th>
                             <th>Cantidad</th>
                         </tr>
@@ -40,7 +40,7 @@
                         @foreach ($products as $prod)
 
                         <tr>
-                            <td>{{ $prod->id }}</td>
+                            <td>{{ $prod->product->id }}</td>
                             <td>{{ $prod->product->name }} ({{ $prod->product->brand->name }} {{ $prod->characteristic->name }})</td>
                             <td>{{ $prod->stock }}</td>
                         </tr>

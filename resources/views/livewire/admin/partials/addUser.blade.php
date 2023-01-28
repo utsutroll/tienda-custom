@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header bg-success">
                 <h4 class="modal-title text-light">Nuevo Usuario</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" wire:click="$emit('render')" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <div wire:loading wire:target="create">
@@ -20,9 +20,17 @@
                 <div wire:loading.remove wire:target="create">
                     <div class="form-group">
                         <label for="name" class="control-label">Nombre</label>
-                        <input type="text" class="form-control" wire:model.defer="name" placeholder="Ingrese el Nombre y Apellido del Usuario">    
+                        <input type="text" class="form-control" wire:model.defer="name" placeholder="Ingrese el Nombre del Usuario">    
             
                         @error('name')
+                            <small class="text-danger">{{$message}}</small>   
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="control-label">Apellido</label>
+                        <input type="text" class="form-control" wire:model.defer="lastname" placeholder="Ingrese el Apellido del Usuario">    
+            
+                        @error('lastname')
                             <small class="text-danger">{{$message}}</small>   
                         @enderror
                     </div>
@@ -42,9 +50,46 @@
                             <small class="text-danger">{{$message}}</small>   
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="document" class="control-label">Documento</label>   
+                        <select class="form-control" wire:model.defer="document">
+                            <option value="">Seleccione</option>
+                            <option value="CÉDULA DE IDENTIDAD">CÉDULA DE IDENTIDAD</option>
+                            <option value="CÉDULA DE EXTRANJERÍA">CÉDULA DE EXTRANJERÍA</option>
+                            <option value="RIF PERSONA JURÍDICA">RIF PERSONA JURÍDICA</option>
+                            <option value="RIF PERSONA NATURAL">RIF PERSONA NATURAL</option>
+                            <option value="RIF-V">RIF-V</option>
+                            <option value="RIF-E">RIF-E</option>
+                            <option value="RIF-G">RIF-G</option>
+                            <option value="PASAPORTE">PASAPORTE</option>
+                        </select>
+                        @error('document')
+                            <small class="text-danger">{{$message}}</small>   
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="document_number" class="control-label">Número de Documento</label>
+                        <input type="number" class="form-control" wire:model.defer="document_number" placeholder="Ingrese el Número de Documento">    
+            
+                        @error('document_number')
+                            <small class="text-danger">{{$message}}</small>   
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sexo" class="control-label">Sexo</label>   
+                        <select class="form-control" wire:model.defer="sexo" :value="old('sexo')">
+                            <option value="">Seleccione</option>
+                            <option value="Hombre">Hombre</option>
+                            <option value="Mujer">Mujer</option>
+                        </select>
+                        @error('sexo')
+                            <small class="text-danger">{{$message}}</small>   
+                        @enderror
+                    </div>
             
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-default waves-effect" wire:click="$emit('render')" data-dismiss="modal">Cerrar</button>
                         <button wire:click.prevent="save()" wire:loading.remove wire:target="save" class="btn btn-success waves-effect waves-light">Crear Usuario</button>
                         <button wire:loading wire:target="save" class="btn btn-info waves-effect waves-light">Cargando...</button>
                     </div>

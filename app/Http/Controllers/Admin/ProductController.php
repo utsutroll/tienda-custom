@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
+use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -52,8 +53,9 @@ class ProductController extends Controller
             'subcategory_id' => 'required',  
             'brand_id' => 'required',  
             'details' => 'required',
-            'file' => 'required|image'
-
+            'file' => 'required|image',
+            'charact' => 'required',
+            'imge' => 'required',
         ]);
             
         $continuar = $request->continue;
@@ -91,7 +93,8 @@ class ProductController extends Controller
         $characteristic_id=$request->charact;
         $files = $request->file('imge');
 
-        if($request->activar == 'on'){
+        if($request->charact != 0 and $request->file('imge') != ''){
+            
             $cont = 0;
 	    	while($cont < count($files)){
                 
@@ -104,8 +107,12 @@ class ProductController extends Controller
                 ]);
                 $cont=$cont+1;
 	    	}
-            
+	    } else {
+            return redirect()->route('admin.products.create')->with('message', 'Debe agregar una Característica.');
+            die();
         }
+            
+        
         
         if($continuar == "on"){
             
@@ -143,7 +150,7 @@ class ProductController extends Controller
             'subcategory_id' => 'required',  
             'brand_id' => 'required',   
             'details' => 'required',
-            'slug' => "unique:products,slug,$product->slug"
+            'slug' => "unique:products,slug,$product->slug",
 
         ]);
          
@@ -175,25 +182,60 @@ class ProductController extends Controller
             }
         }
 
-        if($request->charact & $request->file('imge') & $request->activar == 'on'){
+
+        if($request->characteristic != 0 and $request->file('image') != '') {
+
+            $characteristic = CharacteristicProduct::where('product_id', $product->id)->get();
+
+            $image = $request->file('image');
             
+            $imagen = Storage::put('/products/images', $image);
+
+            
+            if($characteristic[0]->characteristic_id != $request->characteristic){
+                    
+                $characteristic[0]->update([
+                    'characteristic' => $request->characteristic,
+                    'image' => $imagen
+                ]);
+
+            } else {
+                $characteristic[0]->update([
+                    'image' => $url
+                ]);
+            }
+                
+
+        }
+
+
+        if($request->activar == 'on') {
+
             $charact_id=$request->charact;
             $file = $request->file('imge');
 
-            $cont = 0;
-            while($cont < count($file)){
-                    
-                $imgen = Storage::put('/products/images', $file[$cont]);
-
-                CharacteristicProduct::create([
-                    'characteristic_id' => $charact_id[$cont],
-                    'product_id' => $product->id,
-                    'image' => $imgen,
-                ]);
-                $cont=$cont+1;
+            if($request->charact != 0 and $request->file('imge') != ''){
+        
+                $cont = 0;
+                while($cont < count($file)){
+                        
+                    $imgen = Storage::put('/products/images', $file[$cont]);
+    
+                    CharacteristicProduct::create([
+                        'characteristic_id' => $charact_id[$cont],
+                        'product_id' => $product->id,
+                        'image' => $imgen,
+                    ]);
+                    $cont=$cont+1;
+                }
+                
+            } else {
+                return redirect()->back()->with('message', 'Debe agregar una Característica.');
+                die();
             }
-            
         }
+        
+           
 
         return redirect()->route('admin.products.index')->with('info_e', 'El Producto se actualizó con éxito.');
     }

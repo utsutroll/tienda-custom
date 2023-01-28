@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\DollarRate;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,11 @@ class UserOrdersDetailsComponent extends Component
     public function mount($order_id)
     {
         $this->order_id = $order_id;
+    }
+
+    public function getDollarProperty()
+    {
+        return DB::table('dollar_rates')->select('price')->get();
     }
 
     public function cancelOrder()

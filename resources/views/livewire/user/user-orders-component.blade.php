@@ -28,8 +28,6 @@
                             <th width="5%">Id</th>
                             <th>Nombre y Apellido</th>
                             <th>Télefono</th>
-                            <th>Total $</th>
-                            <th>Total Bs</th>
                             <th>Estatus Pedido</th>
                             <th>Estatus Pago</th>
                             <th>Fecha de la Orden</th>
@@ -47,12 +45,6 @@
                             </td>
                             <td>
                                 {{ $o->mobile }}
-                            </td>
-                            <td>
-                                {{ $o->total }} $
-                            </td>
-                            <td>
-                                {{ number_format($o->total_bs) }} Bs
                             </td>
                             <td>
                                 @if ($o->status == "ordered")
@@ -84,6 +76,18 @@
                                     <i class="far fa-eye"></i>
                                     Detalles
                                 </a>
+                                @if ($o->transactions->status == "pending")
+                                <a href="{{ route('sendpayment',['order_id'=>$o->id]) }}" class="ml-2 p-2 text-base text-white rounded-md bg-green-600 hover:bg-green-800">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                    Pagar
+                                </a>
+                                @endif
+                                @if ($o->transactions->status == "approved")
+                                <a href="{{ route('user.invoice.report', ['order_id'=>$o->id]) }}" class=" ml-2 p-2 text-base text-white rounded-md bg-gray-500 hover:bg-gray-700">
+                                    <i class="fa fa-file-pdf"></i>
+                                    Factura
+                                </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
@@ -106,7 +110,7 @@
                             <th>Estatus Pedido</th>
                             <th>Estatus Pago</th>
                             <th>Fecha de la Orden</th>
-                            <th>Opciones</th>
+                            <th>Opciones</th> 
                         </tr>
                     </thead>
                     <tbody>

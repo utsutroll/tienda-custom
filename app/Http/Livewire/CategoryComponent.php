@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Cart;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryComponent extends Component
 {
@@ -62,6 +63,7 @@ class CategoryComponent extends Component
                                 ->join('brands', 'brands.id', '=', 'products.brand_id')
                                 ->join('images', 'images.imageable_id', '=', 'products.id')
                                 ->where('stock', '>', '0')
+                                ->where('price', '>', '0')
                                 ->where('subcategory_id', '=', $id)
                                 ->select(
                                     'products.id as id',
@@ -92,6 +94,11 @@ class CategoryComponent extends Component
         $sliders = Slider::all();
         $business_partners = BusinessPartner::all();
 
+        if (Auth::check()) {
+            Cart::instance('wishlist')->erase(Auth::user()->email);
+            Cart::instance('wishlist')->store(Auth::user()->email);
+        }
+
         return view('livewire.category-component', compact('dollar', 'sliders', 'business_partners'))->layout('layouts.base');
     }
 
@@ -104,11 +111,10 @@ class CategoryComponent extends Component
 
     public function addToWishlist($id, $name, $price)
     {   
+        $user = Auth::user()->email;
         Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
-        Cart::instance('wishlist')->store(Auth::user()->id);
-
+        
         $this->emit('whishlistAdded');
-        $this->emit('render');
 
         $this->emit('alert', 'El producto se agregó a la lista de deseos con éxito.');
     }
@@ -119,7 +125,13 @@ class CategoryComponent extends Component
         {
             if ($witem->id == $product_id) 
             {
-                Cart::instance('wishlist')->remove($witem->rowId)->erase(Auth::user()->id);
+                $user = Auth::user()->email;
+
+                Cart::instance('wishlist')->remove($witem->rowId);
+                Cart::erase($user);
+
+                $this->emit('wishlistRemoved');
+                $this->emit('render');
 
                 $this->emit('alert', 'El producto se eliminó a la lista de deseos con éxito.');
                 return;

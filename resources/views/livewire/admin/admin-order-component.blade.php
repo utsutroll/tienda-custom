@@ -31,8 +31,6 @@
                             <th>ID</th>
                             <th>Nombre y Apellido</th>
                             <th>Teléfono</th>
-                            <th>Total $</th>
-                            <th>Total Bs</th>
                             <th>Estatus Pedido</th>
                             <th>Estatus Pago</th>
                             <th>Fecha de la Orden</th>
@@ -45,16 +43,18 @@
                             <td width="2%">{{ $o->id }}</td>
                             <td>{{$o->firstname}} {{$o->lastname}}</td>
                             <td>{{$o->mobile}}</td>
-                            <td>{{$o->total}} $</td>
-                            <td>{{number_format($o->total_bs)}} Bs</td>
                             <td>@if ($o->status == "ordered")
-                                <div class="btn-group mt-2">
+                                <div class="btn-group">
                                     <button class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Ordenada
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript:void(0)" wire:click.prevent="updateOrderStatus({{ $o->id }}, 'delivered')">Entregado</a>
-                                        <a class="dropdown-item" href="javascript:void(0)" wire:click.prevent="updateOrderStatus({{ $o->id }}, 'canceled')">Cancelado</a>
+                                        @if ($o->status_pago == "approved")
+                                            <a class="dropdown-item" href="javascript:void(0)" wire:click.prevent="updateOrderStatus({{ $o->id }}, 'delivered')">Entregado</a> 
+                                        @endif
+                                        @if ($o->status_pago == "declined")
+                                            <a class="dropdown-item" href="javascript:void(0)" wire:click.prevent="updateOrderStatus({{ $o->id }}, 'canceled')">Cancelado</a>
+                                        @endif
                                     </div>
                                 </div>
                                 @elseif($o->status == "delivered")

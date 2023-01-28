@@ -31,6 +31,8 @@ class AdminBusinessPartnerComponent extends Component
 
             $this->emit('partnerDeleted_e');
         }
+        
+        $this->emit('render');
 
     }
     /* End Destroy */

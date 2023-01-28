@@ -47,6 +47,7 @@ class AdminBrandComponent extends Component
         
         $this->validate();
 
+        $this->emit('render');
     
         Brand::create([
             'name' => $this->name,
@@ -77,6 +78,8 @@ class AdminBrandComponent extends Component
         $this->validate([
             'name' => "required|min:1|unique:brands,name,$this->brand_id"
         ]);
+
+        $this->emit('render');
 
         $brand = Brand::find($this->brand_id);
 

@@ -36,12 +36,18 @@ class ShopComponent extends Component
     
     public function render()
     {
+        if(Auth::check()){
+            Cart::instance('wishlist')->erase(Auth::user()->email);
+            Cart::instance('wishlist')->store(Auth::user()->email);
+        }
+
         $dollar = DollarRate::all();
         $sliders = Slider::all();
         $business_partners = BusinessPartner::all();
 
         $products = Product::where('name', 'LIKE', "%{$this->search}%")                
                             ->where('stock', '>', '0')
+                            ->where('price', '>', '0')
                             ->paginate($this->entries);
 
 
@@ -51,10 +57,8 @@ class ShopComponent extends Component
     public function addToWishlist($id, $name, $price)
     {   
         Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
-        Cart::instance('wishlist')->store(Auth::user()->id);
 
         $this->emit('whishlistAdded');
-        $this->emit('render');
 
         $this->emit('alert', 'El producto se agregó a la lista de deseos con éxito.');
     }
@@ -65,9 +69,13 @@ class ShopComponent extends Component
         {
             if ($witem->id == $product_id) 
             {
-                Cart::instance('wishlist')->remove($witem->rowId)->erase(Auth::user()->id);
+                $user = Auth::user()->email;
+
+                Cart::instance('wishlist')->remove($witem->rowId);
+                Cart::erase($user);
 
                 $this->emit('wishlistRemoved');
+                $this->emit('render');
 
                 $this->emit('alert', 'El producto se eliminó a la lista de deseos con éxito.');
                 return;
