@@ -113,7 +113,10 @@
             <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 @foreach ($this->products as $p)
                 <div class="group relative border border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
-                    <div class="w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                    <div class="relative w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                        <div class="absolute bottom-0 left-0 w-16 marca-de-agua">
+                            <img src="{{ asset('dist/new/img/logos/marca-de-agua.png') }}">
+                        </div>
                         @isset ($p->imagen)
                         <a href="{{route('product.details',['slug'=>$p->slug])}}">
                             <img loading="lazy" src="{{Storage::url($p->imagen)}}" alt="{{$p->product}}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
@@ -130,7 +133,7 @@
                                 </a>
                             </h3>
                         </div>
-                        <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</p>
+                        <p class="text-md mt-2 text-center font-semibold text-teal-400">@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</p>
                     </div>
                 </div>
                 @endforeach

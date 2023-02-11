@@ -54,7 +54,6 @@ class DetailsComponent extends Component
                             'products.slug as slug',
                             'products.stock as stock',
                             'products.subcategory_id as subcategory_id')
-                        ->where('stock', '>', '0')
                         ->where('subcategory_id', $product->subcategory_id)
                         ->where('products.id', '!=', $product->id)
                         ->latest('products.id')
@@ -78,7 +77,7 @@ class DetailsComponent extends Component
         $this->validate();
 
         $sale = Sale::find(1);
-        
+         
         $product_cart = CharacteristicProduct::find($this->id_product);
         
         $this->name = $product_cart->product->name.' '.$product_cart->product->brand->name.' '.$product_cart->characteristic->name;
@@ -150,10 +149,11 @@ class DetailsComponent extends Component
         Cart::instance('cart')->update($rowId,$qty);
     }
 
-    public function addToWishlist($id, $name, $price)
+    public function addToWishlist($id, $name, $price, $url, $brand, $slug)
     {   
 
-        Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
+        $cartItem = Cart::instance('wishlist')->add(['id' => $id, 'name' => $name, 'qty' => 1, 'price' => $price, 'weight' => 550, 'options' => ['url' => $url, 'brand' => $brand, 'slug' => $slug]]);
+        Cart::associate($cartItem->rowId, Product::class);
 
         $this->emit('whishlistAdded');
 
@@ -175,7 +175,7 @@ class DetailsComponent extends Component
                 $this->emit('wishlistRemoved');
                 $this->emit('render');
 
-                $this->emit('alert', 'El producto se eliminó a la lista de deseos con éxito.');
+                $this->emit('alert', 'El producto se eliminó de la lista de deseos con éxito.');
                 
                 return;
             }

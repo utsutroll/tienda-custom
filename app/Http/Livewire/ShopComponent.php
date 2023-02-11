@@ -45,8 +45,7 @@ class ShopComponent extends Component
         $sliders = Slider::all();
         $business_partners = BusinessPartner::all();
 
-        $products = Product::where('name', 'LIKE', "%{$this->search}%")                
-                            ->where('stock', '>', '0')
+        $products = Product::where('name', 'LIKE', "%{$this->search}%")
                             ->where('price', '>', '0')
                             ->paginate($this->entries);
 
@@ -54,9 +53,11 @@ class ShopComponent extends Component
         return view('livewire.shop-component', compact('dollar', 'products', 'sliders'))->layout('layouts.base');
     }
 
-    public function addToWishlist($id, $name, $price)
+    public function addToWishlist($id, $name, $price, $url, $brand, $slug)
     {   
-        Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
+
+        $cartItem = Cart::instance('wishlist')->add(['id' => $id, 'name' => $name, 'qty' => 1, 'price' => $price, 'weight' => 550, 'options' => ['url' => $url, 'brand' => $brand, 'slug' => $slug]]);
+        Cart::associate($cartItem->rowId, Product::class);
 
         $this->emit('whishlistAdded');
 
@@ -77,7 +78,7 @@ class ShopComponent extends Component
                 $this->emit('wishlistRemoved');
                 $this->emit('render');
 
-                $this->emit('alert', 'El producto se eliminó a la lista de deseos con éxito.');
+                $this->emit('alert', 'El producto se eliminó de la lista de deseos con éxito.');
                 return;
             }
         }

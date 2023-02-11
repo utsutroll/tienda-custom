@@ -137,13 +137,13 @@
 
     $(document).ready(function() {
         
-        $('#category_id').on('selected', function() {
+        /* $('#category_id').on('selected', function() {
             var dato = $('#category_id').val();
-            console.log(dato);
-        });
-        
-        $('#category_id').on('change', function() {
-            
+
+        }); */
+
+        $('select[name="category_id"]').on('change', function() {
+            $('#subcategory_id').append('<option hidden>Seleccione</option>');
             var categoryID = $(this).val();
             if(categoryID) {
                 $.ajax({

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{url('favicon.svg')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url('favicon.png')}}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -52,7 +52,7 @@
     <div class="preloader">
         <div class="loader">
             <div>
-               <img class="animate-pulse w-16" src="{{ asset('dist/new/img/logos/logo-meka.svg') }}" alt="Inversiones Meka">
+               <img class="animate-pulse w-16" src="{{ asset('dist/new/img/logos/logo-meka.png') }}" alt="Inversiones Meka">
             </div>    
         </div>
     </div>

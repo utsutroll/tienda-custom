@@ -2,7 +2,7 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <img src="{{ url('dist/new/img/logos/logo-meka.svg') }}" class="w-30 h-20 fill-current text-gray-500" alt="Inversiones Meka">
+                <img src="{{ url('dist/new/img/logos/logo-meka.png') }}" class="w-30 h-20 fill-current text-gray-500" alt="Inversiones Meka">
             </a>
         </x-slot>
 
@@ -86,6 +86,22 @@
                   </select>
                 </div>
             </div>
+
+            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
+                <div class="mt-4">
+                    <x-jet-label for="terms">
+                        <div class="flex items-center">
+                            <x-jet-checkbox name="terms" id="terms"/>
+
+                            <div class="ml-2">
+                                {!! __('Estoy de acuerdo con los :terms_of_service ', [
+                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terminos y Condiciones').'</a>',
+                                ]) !!}
+                            </div>
+                        </div>
+                    </x-jet-label>
+                </div>
+            @endif
 
             <div class="flex items-center justify-end my-4 ">
                 <a class="underline text-lg text-gray-900 font-medium hover:text-gray-700" href="{{ route('login') }}">

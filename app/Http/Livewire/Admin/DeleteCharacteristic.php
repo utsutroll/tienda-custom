@@ -55,6 +55,7 @@ class DeleteCharacteristic extends Component
             } catch (\Exception $e) {
     
                 $this->emit('CharDeleted_e');
+                $this->emit('render');
             }
         }
     }

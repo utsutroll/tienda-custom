@@ -35,6 +35,7 @@ use App\Http\Livewire\User\UserChangePasswordComponent;
 use App\Http\Livewire\User\UserOrdersComponent;
 use App\Http\Livewire\User\UserOrdersDetailsComponent;
 use App\Http\Livewire\WishlistComponent;
+use App\Mail\SendContactForm;
 use App\Models\CharacteristicProduct;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\Route;

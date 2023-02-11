@@ -10,7 +10,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         
         <!-- Favicon icon -->
-        <link rel="icon" type="image/png" sizes="16x16" href="{{url('favicon.svg')}}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{url('favicon.png')}}">
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -55,7 +55,7 @@
         <div class="preloader">
             <div class="loader">
                 <div>
-                   <img class="animate-pulse w-16" src="{{ asset('dist/new/img/logos/logo-meka.svg') }}" alt="Inversiones Meka">
+                   <img class="animate-pulse w-16" src="{{ asset('dist/new/img/logos/logo-meka.png') }}" alt="Inversiones Meka">
                 </div>    
             </div>
         </div>

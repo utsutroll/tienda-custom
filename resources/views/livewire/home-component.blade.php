@@ -54,7 +54,10 @@
             <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 @foreach ($products as $p)
                 <div class="group relative border border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
-                    <div class="w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                    <div class="relative w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                        <div class="absolute bottom-0 left-0 w-16 marca-de-agua">
+                            <img src="{{ asset('dist/new/img/logos/marca-de-agua.png') }}">
+                        </div>
                         @isset ($p->imagen)
                         <a href="{{route('product.details',['slug'=>$p->slug])}}">
                             <img loading="lazy" src="{{Storage::url($p->imagen)}}" alt="{{$p->product}}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
@@ -72,13 +75,13 @@
                             </h3>
                         </div>
                         <div class="flex justify-between">
-                            <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</p>
+                            <p class="text-md mt-2 text-center font-semibold text-teal-400">@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</p>
                             @if(Route::has('login'))
                                 @auth 
                                     @if ($witems->contains($p->id))
                                         <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{ $p->id }})"><i class="fa fa-heart text-red-600"></i></a></div>
                                     @else
-                                        <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="addToWishlist({{ $p->id }}, '{{ $p->product }}', {{ $p->price }})"><i class="text-teal-600 far fa-heart"></i></a></div>
+                                        <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="addToWishlist({{ $p->id }}, '{{ $p->product }}', {{ $p->price }}, '{{ $p->imagen }}', '{{ $p->brand }}', '{{ $p->slug }}')"><i class="text-teal-600 far fa-heart"></i></a></div>
                                     @endif
                                 @endauth    
                             @endif            
@@ -108,7 +111,10 @@
             <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 @foreach ($newproducts as $np)
                 <div class="group relative border border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
-                    <div class="w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 overflow-hidden lg:h-80 lg:aspect-none">
+                    <div class="relative w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                        <div class="absolute bottom-0 left-0 w-16 marca-de-agua">
+                            <img src="{{ asset('dist/new/img/logos/marca-de-agua.png') }}">
+                        </div>
                         @isset ($np->imagen)
                         <a href="{{route('product.details',['slug'=>$np->slug])}}">
                             <img loading="lazy" src="{{Storage::url($np->imagen)}}" alt="{{$np->product}}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
@@ -126,13 +132,13 @@
                             </h3>   
                         </div>
                         <div class="flex justify-between">
-                            <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($dollar as $d){{ number_format($d->price * $np->price, 2) }}@endforeach Bs</p>
+                            <p class="text-md mt-2 text-center font-semibold text-teal-400">@foreach ($dollar as $d){{ number_format($d->price * $np->price, 2) }}@endforeach Bs</p>
                             @if(Route::has('login'))
                                 @auth 
                                     @if ($witems->contains($np->id))
                                         <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$np->id}})" wire:loading.attr="disabled"><i class="fa fa-heart text-red-600"></i></a></div>
                                     @else
-                                        <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$np->id}}, '{{$np->product}}', {{$np->price}})"></i></a></div>
+                                        <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$np->id}}, '{{$np->product}}', {{$np->price}}, '{{ $np->imagen }}', '{{ $np->brand }}', '{{ $np->slug }}'))"></i></a></div>
                                     @endif
                                 @endauth    
                             @endif 

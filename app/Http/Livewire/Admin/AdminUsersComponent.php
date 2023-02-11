@@ -157,10 +157,12 @@ class AdminUsersComponent extends Component
                 'status' => '1'
             ]);
             $this->emit('userDeleted');
+            $this->emit('render');
             
         } catch (\Exception $e) {
 
             $this->emit('userDeleted_e');
+            $this->emit('render');
         }
 
     }

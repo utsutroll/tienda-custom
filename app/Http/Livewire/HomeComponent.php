@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\BusinessPartner;
 use App\Models\DollarRate;
+use App\Models\Product;
 use App\Models\Slider;
 use Cart;
 use Illuminate\Support\Facades\Auth;
@@ -51,14 +52,12 @@ class HomeComponent extends Component
                             'products.price as price',
                             'products.slug as slug',
                             'products.stock as stock')
-                            ->where('products.stock', '>', '0')
                             ->where('products.price', '>', '0')
                         ->take(8)->get();
 
         $newproducts = DB::table('products')
                             ->join('brands', 'brands.id', '=', 'products.brand_id')
                             ->join('images', 'images.imageable_id', '=', 'products.id')
-                            ->where('products.stock', '>', '0')
                             ->where('products.price', '>', '0')
                             ->select(
                                 'products.id as id',
@@ -77,11 +76,11 @@ class HomeComponent extends Component
         return view('livewire.home-component', compact('dollar', 'products', 'newproducts', 'sliders', 'business_partners'))->layout('layouts.base');
     }
 
-    public function addToWishlist($id, $name, $price)
+    public function addToWishlist($id, $name, $price, $url, $brand, $slug)
     {   
 
-        Cart::instance('wishlist')->add($id,$name,1,$price)->associate('App\Models\Product');
-
+        $cartItem = Cart::instance('wishlist')->add(['id' => $id, 'name' => $name, 'qty' => 1, 'price' => $price, 'weight' => 550, 'options' => ['url' => $url, 'brand' => $brand, 'slug' => $slug]]);
+        Cart::associate($cartItem->rowId, Product::class);
         $this->emit('whishlistAdded');
 
         $this->emit('alert', 'El producto se agregó a la lista de deseos con éxito.');
@@ -102,7 +101,7 @@ class HomeComponent extends Component
                 $this->emit('wishlistRemoved');
                 $this->emit('render');
 
-                $this->emit('alert', 'El producto se eliminó a la lista de deseos con éxito.');
+                $this->emit('alert', 'El producto se eliminó de la lista de deseos con éxito.');
 
                 return;
             }

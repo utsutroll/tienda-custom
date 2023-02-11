@@ -8,7 +8,7 @@
             </div>
             
             <p class="my-4 text-base font-bold">Cuando se verifique el pago, le llegará una notificación a su correo.</p>
-            <a href="{{ route('shop') }}" class="p-2 mr-2 text-base text-white font-semibold rounded-md bg-teal-600 hover:bg-teal-800 shadow-lg shadow-teal-600">Continuar Comprando</a>
+            <a href="{{ route('shop') }}" class="p-2 mr-2 text-base text-white font-semibold rounded-md bg-teal-400 hover:bg-teal-800 shadow-lg shadow-teal-600">Continuar Comprando</a>
         </div>
     </div>
 </div>

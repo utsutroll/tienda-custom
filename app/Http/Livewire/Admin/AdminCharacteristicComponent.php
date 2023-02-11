@@ -99,10 +99,12 @@ class AdminCharacteristicComponent extends Component
         try {
             $characteristic->delete();
             $this->emit('characteristicDeleted');
+            $this->emit('render');
             
         } catch (\Exception $e) {
 
             $this->emit('characteristicDeleted_e');
+            $this->emit('render');
         }
     }
     /* End Destroy */

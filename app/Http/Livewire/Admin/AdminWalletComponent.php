@@ -115,10 +115,12 @@ class AdminWalletComponent extends Component
         try {
             $wallet->delete();
             $this->emit('walletDeleted');
+            $this->emit('render');
             
         } catch (\Exception $e) {
 
             $this->emit('walletDeleted_e');
+            $this->emit('render');
         }
 
     }

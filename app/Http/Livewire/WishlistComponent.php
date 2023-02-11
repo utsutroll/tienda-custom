@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Product;
 use Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class WishlistComponent extends Component
 {
@@ -22,6 +23,7 @@ class WishlistComponent extends Component
         
         $dollar = DollarRate::all();
         $wishlists = Cart::instance('wishlist')->content();
+
         
         return view('livewire.wishlist-component', compact('dollar', 'wishlists'))->layout('layouts.base');
     }

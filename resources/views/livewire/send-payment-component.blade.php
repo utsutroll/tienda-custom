@@ -57,7 +57,7 @@
                         <button wire:click.prevent="cancelPayment"
                             class="p-2 mr-2 text-base text-white font-semibold bg-red-700 hover:bg-red-900 shadow-lg shadow-red-600">Cancelar</button>
                         <button type="submit"
-                            class="p-2 mr-2 text-base text-white font-semibold bg-teal-600 hover:bg-teal-800 shadow-lg shadow-teal-600">Comprobar</button>
+                            class="p-2 mr-2 text-base text-white font-semibold bg-teal-400 hover:bg-teal-800 shadow-lg shadow-teal-600">Comprobar</button>
                     </div>
                 </form>    
             @elseif($paymentmode == "bank")
@@ -156,7 +156,7 @@
                                 <button wire:click.prevent="cancelPayment"
                                     class="p-2 mr-2 text-base text-white font-semibold bg-red-700 hover:bg-red-900 shadow-lg shadow-red-600">Cancelar</button>
                                 <button type="submit"
-                                    class="p-2 mr-2 text-base text-white font-semibold bg-teal-600 hover:bg-teal-800 shadow-lg shadow-teal-600">Comprobar</button>
+                                    class="p-2 mr-2 text-base text-white font-semibold bg-teal-400 hover:bg-teal-800 shadow-lg shadow-teal-600">Comprobar</button>
                             </div>
                         @else
                             <h1 class="my-4 text-xl text-center font-medium text-gray-700 font-sans">No hay método de pago agregado</h1>
@@ -227,7 +227,7 @@
                                 <button wire:click.prevent="cancelPayment"
                                     class="p-2 mr-2 text-base text-white font-semibold bg-red-700 hover:bg-red-900 shadow-lg shadow-red-600">Cancelar</button>
                                 <button type="submit"
-                                    class="p-2 mr-2 text-base text-white font-semibold bg-teal-600 hover:bg-teal-800 shadow-lg shadow-teal-600">Comprobar</button>
+                                    class="p-2 mr-2 text-base text-white font-semibold bg-teal-400 hover:bg-teal-800 shadow-lg shadow-teal-600">Comprobar</button>
                             </div>
                         @else
                             <h1 class="text-base font-semibold text-gray-700 font-sans">No hay método de pago agregado</h1>

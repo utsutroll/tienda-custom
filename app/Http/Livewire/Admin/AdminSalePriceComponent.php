@@ -11,6 +11,7 @@ class AdminSalePriceComponent extends Component
     public $product;
     public $nombre = '';
     public $precio;
+    public $sale_precio;
     public $price;
     public $product_id;
 
@@ -29,7 +30,8 @@ class AdminSalePriceComponent extends Component
     {
         $p = CharacteristicProduct::find($this->product);
         $this->nombre = $p->product->name.' '.$p->product->brand->name.' '.$p->characteristic->name;
-        $this->precio = $p->sale_price;
+        $this->precio = $p->price;
+        $this->sale_precio = $p->sale_price;
         $this->product_id = $p->id;
 
     }

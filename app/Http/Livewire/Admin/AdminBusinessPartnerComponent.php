@@ -26,13 +26,14 @@ class AdminBusinessPartnerComponent extends Component
         try {
             $slider->delete();
             $this->emit('partnerDeleted');
+            $this->emit('render');
             
         } catch (\Exception $e) {
 
             $this->emit('partnerDeleted_e');
+            $this->emit('render');
         }
         
-        $this->emit('render');
 
     }
     /* End Destroy */

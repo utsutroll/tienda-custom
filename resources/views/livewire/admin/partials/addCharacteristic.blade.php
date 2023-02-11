@@ -10,7 +10,7 @@
                 <div wire:loading wire:target="create">
                     <div class="loader">
                         <div>
-                           <img class="animate-pulse" width="80" height="60" src="{{ asset('dist/new/img/logos/logo-meka.svg') }}" alt="Inversiones Meka">
+                           <img class="animate-pulse" width="80" height="60" src="{{ asset('dist/new/img/logos/logo-meka.png') }}" alt="Inversiones Meka">
                         </div>    
                     </div>
                     <div>

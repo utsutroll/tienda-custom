@@ -25,17 +25,18 @@
                     @if ($witems->contains($product->id))
                         <span class="flex justify-start text-2xl"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fa fa-heart text-red-600"></i></a></span>
                     @else
-                        <span class="flex justify-start text-2xl"><a href="javascript:void(0)" wire:click.prevent="addToWishlist({{$product->id}}, '{{$product->name}}', {{$product->price}})"><i class="fa fa-heart"></i></a></span>
+                        <span class="flex justify-start text-2xl"><a href="javascript:void(0)" wire:click.prevent="addToWishlist({{$product->id}}, '{{$product->name}}', {{$product->price}}, '{{ $product->image->url }}', '{{ $product->brand->name }}', {{ $product->slug }} )"><i class="fa fa-heart"></i></a></span>
                     @endif
                 @endauth    
             @endif
             <h4 class="text-2xl text-black font-semibold">{{ $product->name }} {{ $product->brand->name }}</h4>
             <h2>@foreach ($this->dollar as $d){{ $d->price*$product->price }} @endforeach Bs</h2> 
-
+            
             <form wire:submit.prevent="store" class="mt-8">
                 <select wire:model.defer="id_product" class="bg-gray-100 border border-gray-500 p-3 w-36 text-gray-900 text-sm focus:ring-gray-500 focus:border-gray-500 max-w-18 max-h-16" title="Debe Seleccionar una Opción" required="required">
                     <option value="0">Seleccione</option>
                     @foreach ( $product->characteristics_product as $pro_char )
+                    
                         @if ($pro_char->stock > 0 && $pro_char->price > 0 || $pro_char->sale_price > 0)
                             <option value="{{ $pro_char->id }}">{{ $pro_char->characteristic->name }}  @if ($pro_char->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now()) @foreach ($this->dollar as $d){{ $d->price*$pro_char->sale_price }} @endforeach Bs @else @foreach ($this->dollar as $d){{ $d->price*$pro_char->price }} @endforeach Bs @endif</option>
                         @endif
@@ -56,11 +57,28 @@
                         <button wire:click.prevent="increaseQuantityD" class="font-semibold border border-gray-500 w-10 h-12 bg-gray-100 hover:bg-emerald-700 hover:text-white flex focus:outline-none cursor-pointer">
                             <span class="m-auto">+</span>
                         </button>
-                    </div> 
-                    <button class="border border-gray-500 p-2.5 mt-2 text-black hover:text-white font-semibold bg-gray-50 hover:bg-emerald-700" type="submit" wire:loading.attr="disabled" title="Añadir al carrito">Agregar al carrito <button>    
+                    </div>
+                    <button class="border border-gray-500 p-2.5 mt-2 text-black hover:text-white font-semibold bg-gray-50 hover:bg-emerald-700" type="submit" wire:loading.attr="disabled" title="Añadir al carrito">Agregar al carrito </button>
                 </div>
+                @else
+                <div class="flex items-center">
+                    <div class="flex flex-row border-0 h-10 w-32 rounded-lg border-gray-400 relative my-4 mr-4">
+                        <button disabled class="font-semibold border w-10 h-12 border-gray-800 text-gray-700 bg-gray-400 flex focus:outline-none cursor-pointer">
+                            <span class="m-auto">-</span>
+                        </button>
+                        <input type="text" type="text" disabled data-max="120" value="0" pattern="[0-9]" class="md:p-2 p-1 w-12 h-12 text-xs md:text-base border-t border-b border-r-0 border-l-0 border-gray-500 focus:outline-none text-center"/>
+
+                        <button disabled class="font-semibold border w-10 h-12 border-gray-800 text-gray-700 bg-gray-400 flex focus:outline-none cursor-pointer">
+                            <span class="m-auto">+</span>
+                        </button>
+                    </div>
+                    <button class="border border-gray-800 p-2.5 mt-2 text-gray-700 bg-gray-400" disabled title="Añadir al carrito">Agregar al carrito </button>    
+                            
+                    
+                </div>
+                <h4 class="text-md text-red-600 font-sans font-medium">Producto sin stock (Más en camino)</h4>
                 @endif
-                 
+                
             </form> 
 
             <h4 class="text-2xl text-black font-semibold">Detalles del Producto</h4>
@@ -75,7 +93,10 @@
         <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             @foreach ($similares as $s)
             <div class="group relative border border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
-                <div class="w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 overflow-hidden lg:h-80 lg:aspect-none">
+                <div class="relative w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                    <div class="absolute bottom-0 left-0 w-16 marca-de-agua">
+                        <img src="{{ asset('dist/new/img/logos/marca-de-agua.png') }}">
+                    </div>
                     @isset ($s->imagen)
                     <a href="{{route('product.details',['slug'=>$s->slug])}}">
                         <img loading="lazy" src="{{Storage::url($s->imagen)}}" alt="{{$s->product}}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
@@ -93,13 +114,13 @@
                         </h3>   
                     </div>
                     <div class="flex justify-between">
-                        <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($this->dollar as $d){{ number_format($d->price * $s->price, 2) }}@endforeach Bs</p>
+                        <p class="text-md mt-2 text-center font-semibold text-teal-400">@foreach ($this->dollar as $d){{ number_format($d->price * $s->price, 2) }}@endforeach Bs</p>
                         @if(Route::has('login'))
                             @auth   
                                 @if ($witems->contains($s->id))
                                     <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$s->id}})"><i class="fa fa-heart text-red-600"></i></a></div>
                                 @else
-                                    <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="addToWishlist({{$s->id}}, '{{$s->product}}', {{$s->price}})"><i class="text-teal-600 far fa-heart"></i></a></div>
+                                    <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="addToWishlist({{$s->id}}, '{{$s->product}}', {{$s->price}}, '{{ $s->imagen }}', '{{ $s->brand }}', '{{ $s->slug }}')"><i class="text-teal-400 far fa-heart"></i></a></div>
                                 @endif
                             @endauth    
                         @endif       

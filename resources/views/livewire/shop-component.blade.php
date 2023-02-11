@@ -38,13 +38,13 @@
 
     <div class="p-3 mb-3 bg-slate-100 shadow-md shadow-black">
         <div class="flex flex-row justify-center">
-            <input type="search" id="search_box" wire:model="search" class="border-t-0 border-l-0 border-r-0 border-b-2 focus:outline-none focus:ring-0" placeholder="Buscar &hellip;" />
-            @if ($search !== '')
-                <button class="btn btn-outline-secondary border-0 btn-sm waves-effect waves-light" wire:click="$set('search', '')" type="button"><span class="btn-label"><i class="fa fa-times"></i></span></button>    
-            @endif
-           
-            <div class="ml-1 mt-1">
-                <button class="btn btn-outline-secondary border-0" type="button" wire:click="$set('buscar', 1)"><i class="fa fa-search text-xl"></i></button>
+            <input type="search" id="search_box" wire:model="search" class="bg-gray-200 rounded-lg" placeholder="Buscar &hellip;" />
+            <div class="ml-1">
+                @if ($search !== '')
+                    <button class="p-2 rounded-lg bg-teal-400 hover:bg-teal-300 shadow-lg shadow-teal-600" wire:click="$set('search', '')" type="button"><span class="btn-label"><i class="text-white hover:text-gray-400 fa fa-times text-xl"></i></span></button>    
+                @else
+                    <button class="p-2 rounded-lg bg-teal-400 hover:bg-teal-300 shadow-lg shadow-teal-600" type="button" wire:click="$set('buscar', 1)"><i class="text-white hover:text-gray-400 fa fa-search text-xl"></i></button>
+                @endif
             </div>
         </div>           
     </div>
@@ -59,7 +59,10 @@
             <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 @foreach ($products as $p)
                 <div class="group relative border border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
-                    <div class="w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                    <div class="relative w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                        <div class="absolute bottom-0 left-0 w-16 marca-de-agua">
+                            <img src="{{ asset('dist/new/img/logos/marca-de-agua.png') }}">
+                        </div>
                         @isset ($p->image->url)
                         <a href="{{route('product.details',['slug'=>$p->slug])}}">
                             <img loading="lazy" src="{{Storage::url($p->image->url)}}" alt="{{$p->name}}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
@@ -78,13 +81,13 @@
                         </div>
                         
                         <div class="flex justify-between">
-                            <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</p>
+                            <p class="text-md mt-2 text-center font-semibold text-teal-400">@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</p>
                             @if(Route::has('login'))
                                 @auth
                                     @if ($witems->contains($p->id))
                                         <div class="mt-1"><a href="#" wire:click.prevent="removeFromWishlist({{$p->id}})"><i class="fa fa-heart text-red-600"></i></a></div>
                                     @else
-                                        <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="addToWishlist({{$p->id}}, '{{$p->name}}', {{$p->price}})"><i class="text-teal-600 far fa-heart"></i></a></div>
+                                        <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="addToWishlist({{$p->id}}, '{{$p->name}}', {{$p->price}}, '{{ $p->image->url }}', '{{ $p->brand->name }}', '{{ $p->slug }}')"><i class="text-teal-400 far fa-heart"></i></a></div>
                                     @endif
                                 @endauth    
                             @endif            

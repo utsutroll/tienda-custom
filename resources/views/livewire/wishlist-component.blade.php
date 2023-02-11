@@ -23,25 +23,24 @@
             </thead>
             <tbody>
                 @foreach($wishlists as $items)
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="py-4 px-6 text-center">
-                        <a href="javascript:void(0)"  wire:click="removeFromWishlist('{{$items->rowId}}')" title="Remover"><i class="far fa-times-circle"></i></a>
-                    </td>
-                    <td class="py-4 px-6">
-                        @isset($items->model->image->url)
-                            <img src="{{Storage::url($items->model->image->url)}}" class="inline-block w-14" alt="{{ $items->name }}">
-                        @endisset
-                    </td>
-                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $items->name }} {{ $items->model->brand->name }}
-                    </th>
-                    <td class="py-4 px-6">
-                        @foreach ($dollar as $d){{ $d->price*round(($items->price), 2) }}@endforeach Bs
-                    </td>
-                    <td class="py-4 px-6">
-                        <a href="{{route('product.details',['slug'=>$items->model->slug])}}" title="Agregar al Carrito de Compras"><i class="far fa-shopping-cart"></i></a>
-                    </td>
-                </tr>
+
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="py-4 px-6 text-center">
+                            <a href="javascript:void(0)"  wire:click="removeFromWishlist('{{$items->rowId}}')" title="Remover"><i class="far fa-times-circle"></i></a>
+                        </td>
+                        <td class="py-4 px-6">
+                            <img src="{{ Storage::url($items->options->url) }}" class="inline-block w-14" alt="{{ $items->name }}">
+                        </td>
+                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $items->name }} {{ $items->options->brand }}
+                        </th>
+                        <td class="py-4 px-6">
+                            @foreach ($dollar as $d){{ $d->price*round(($items->price), 2) }}@endforeach Bs
+                        </td>
+                        <td class="py-4 px-6">
+                            <a href="{{route('product.details',['slug'=>$items->options->slug])}}" title="Agregar al Carrito de Compras"><i class="far fa-shopping-cart"></i></a>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
@@ -78,7 +77,7 @@
         <div class="h-screen my-auto text-center" style="padding:30px 0;">
             <h1 class="text-4xl mt-5 font-medium text-gray-800">La lista de deseos está vacía!</h1>
             <p class="my-4 marker:text-base font-bold">Añadir elemento ahora</p>
-            <a href="{{ route('shop') }}" class="rounded-md text-white text-base font-semibold p-3 bg-emerald-500 hover:bg-emerald-700">Ir al Catálogo</a>
+            <a href="{{ route('shop') }}" class="rounded-md text-white text-base font-semibold p-3 bg-teal-400 hover:bg-teal-700">Ir al Catálogo</a>
         </div>
     @endif
 

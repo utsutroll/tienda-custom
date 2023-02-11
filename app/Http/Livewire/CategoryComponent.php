@@ -62,7 +62,6 @@ class CategoryComponent extends Component
         $this->products = DB::table('products')
                                 ->join('brands', 'brands.id', '=', 'products.brand_id')
                                 ->join('images', 'images.imageable_id', '=', 'products.id')
-                                ->where('stock', '>', '0')
                                 ->where('price', '>', '0')
                                 ->where('subcategory_id', '=', $id)
                                 ->select(

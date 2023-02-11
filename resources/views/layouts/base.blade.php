@@ -4,11 +4,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="description" content="En Inversiones Meka C.A encontrarás todo lo relacionado con Tecnología, Aseo Personal, productos para el hogar y mucho más. Contamos con una sucursal donde encontraras todo en papelería para el Colegio y oficina, además, podrás realizar tus creaciones o manualidades con todo lo que tenemos para ti."/>
+        <meta name="keywords" content="Inversiones Meka C.A, Inversiones Meka, Meka, Tienda"/>
+        <meta name="robots" content="Inicio,Tienda,Ofertas,Categorías,Nosotros"/>
 
         <title>{{ config('app.name', 'Laravel') }}</title>
         
         <!-- Favicon icon -->
-        <link rel="icon" type="image/png" sizes="16x16" href="{{url('favicon.svg')}}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{url('favicon.png')}}">
 
         <!-- FontAwesome Pro -->
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
@@ -21,12 +24,6 @@
 
         @livewireStyles
         <link href="{{asset('dist/css/style.min.css')}}" rel="stylesheet">
-        {{--<link rel="stylesheet" href="{{asset('/assets/node_modules/prism/prism.css')}}">
-        <link href="{{asset('/assets/node_modules/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{asset('/assets/node_modules/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
-        <link href="{{asset('assets/node_modules/glider.js-master/glider.min.css')}}" rel="stylesheet" />
-        <link href="{{asset('dist/pages/ecommerce.css')}}" rel="stylesheet">
-         --}}
         <!--Toaster Popup message CSS -->
         <link href="{{asset('/assets/node_modules/toast-master/css/jquery.toast.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.1.0/dist/flowbite.min.css" />
@@ -70,6 +67,20 @@
             .w-16 {
                 width: 10rem;
             }
+
+            .marca-de-agua {
+                background-repeat: no-repeat;
+                background-position: center;
+                width: 40%;
+                height: auto;
+                margin: auto;
+            }
+            .marca-de-agua img {
+                padding: 0;
+                width: 40%;
+                height: auto;
+                opacity: 0.7;
+            }
         </style>
         <!-- Scripts -->
         
@@ -80,7 +91,7 @@
         <div class="preloader">
             <div class="loader">
                 <div>
-                   <img class="animate-pulse w-16" src="{{ asset('dist/new/img/logos/logo-meka.svg') }}" alt="Inversiones Meka">
+                   <img class="animate-pulse w-16" src="{{ asset('dist/new/img/logos/logo-meka.png') }}" alt="Inversiones Meka">
                 </div>    
             </div>
         </div>
@@ -137,6 +148,8 @@
                 });
             });
 
+            
+
             document.getElementById('users-menu').onclick = function() {
                 document.getElementById("resultsnav").classList.toggle("hidden");
             }
@@ -179,6 +192,15 @@
                     title: message
                 })
             })  
+
+            window.livewire.on('sendMessaje',()=>{
+    
+                Toast.fire({
+                    icon: 'success',
+                    title: 'El mensaje fue enviado correctamente.'
+                });
+                    
+            });
             
         </script>
     </body>

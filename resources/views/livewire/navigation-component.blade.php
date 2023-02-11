@@ -49,7 +49,7 @@
         @endif
         
     </div>
-    <a href="/" class="ml-4"> <img src="{{ url('dist/new/img/footer-meka.png') }}" class="logo" alt="Inversiones Meka"></a>
+    <a href="/" class="ml-4"> <img src="{{ url('dist/new/img/logos/logo-meka.png') }}" class="logo" alt="Inversiones Meka"></a>
 
 <div>
     <ul id="navbar">

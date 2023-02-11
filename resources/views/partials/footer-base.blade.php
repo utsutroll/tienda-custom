@@ -1,15 +1,15 @@
 <footer class="section-p1 bg-gray-200">
     <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
         <div class="col">
-            <img class="logo" src="{{ url('dist/new/img/footer-meka.png') }}" alt="Inversiones Meka">
-            <h4 class="text-lg text-teal-600 font-semibold">Contacto</h4>
+            <img class="logo" src="{{ url('dist/new/img/logos/logo-meka.png') }}" alt="Inversiones Meka">
+            <h4 class="text-lg text-teal-400 font-semibold">Contacto</h4>
             <p><strong>Dirección:</strong> Plazoleta el Samán</p>
             {{-- <p><strong>Teléfono:</strong> +01 2222 356 /(+91) 01 2345 6789</p> --}}
             <p><strong>Correo:</strong> inversiones.meka@hotmail.com</p>
-            <p><strong>Horario:</strong> 7:30 Am - 04:00 Pm, Lunes a Sábados</p>
+            <p><strong>Horario:</strong> 7:30 Am - 06:00 Pm, Lunes a Sábados</p>
 
             <div class="follo">
-                <h4 class="text-lg text-teal-600 font-semibold">Síguenos</h4>
+                <h4 class="text-lg text-teal-400 font-semibold">Síguenos</h4>
                 <div class="icon">
                     <a href="https://instagram.com/inversionesmekaca" target="_blank"><i class="fab fa facebook-f"></i></a>
                     <a href="https://instagram.com/inversionesmekaca" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -18,7 +18,7 @@
         </div>
         
         <div class="col">
-            <h4 class="text-lg text-teal-600 font-semibold">Nosotros</h4>
+            <h4 class="text-lg text-teal-400 font-semibold">Nosotros</h4>
             <a href="{{ route('shop') }}">Tienda</a><br>
             <a href="{{ route('categories') }}">Categorías</a><br>
             <a href="{{ route('about') }}">Sobre Nosotros</a>
@@ -26,7 +26,7 @@
         </div>
         
         <div class="col">
-            <h4 class="text-lg text-teal-600 font-semibold">Mi Cuenta</h4>
+            <h4 class="text-lg text-teal-400 font-semibold">Mi Cuenta</h4>
             @if(Route::has('login'))
                 @auth
 
@@ -52,7 +52,7 @@
         </div>
 
         <div class="col instal">
-            <p class="text-lg text-teal-600 font-semibold">Métodos de pago </p>
+            <p class="text-lg text-teal-400 font-semibold">Métodos de pago </p>
             <img src="{{ url('dist/new/img/paymethod.png') }}" class="w-52" alt="">
         </div>
     </div>

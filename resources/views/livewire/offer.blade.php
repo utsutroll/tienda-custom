@@ -35,6 +35,11 @@
             <span class="sr-only">Siguiente</span>
         </a>
     </div>
+
+    @php
+        $citems = Cart::instance('cart')->content()->pluck('id');
+    @endphp
+
     @if($sproducts->count() > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())
     <div class="mb-2 pl-2 py-2 border-y-2 border-gray-700 bg-gray-200 wrap-countdown mercado-countdown" data-expire="{{ Carbon\Carbon::parse($sale->sale_date)->format('Y/m/d h:m:s') }}"></div>
     <div class="bg-white">
@@ -43,7 +48,10 @@
             <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 @foreach ($sproducts as $sp)
                 <div class="group relative border border-green-200 rounded-tr-3xl rounded-3xl hover:shadow-lg shadow-black">
-                    <div class="w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                    <div class="relative w-full min-h-80 bg-gray-200 rounded-t-3xl aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                        <div class="absolute bottom-0 left-0 w-16 marca-de-agua">
+                            <img src="{{ asset('dist/new/img/logos/marca-de-agua.png') }}">
+                        </div>
                         @isset ($sp->image)
                         <a href="{{route('product.details',['slug'=>$sp->product->slug])}}">
                             <figure><img src="{{ Storage::url($sp->image) }}" width="800" height="800"></figure>
@@ -55,18 +63,21 @@
                             {{-- <p class="my-2 text-sm text-gray-500">{{ $sp->brand->name }}</p> --}}
                             <h3 class="text-sm font-medium text-gray-900 text-center">
                                 <a href="{{ route('product.details',['slug'=>$sp->product->slug]) }}" class="product-name"><span>{{ $sp->product->name }} {{ $sp->product->brand->name }} {{ $sp->characteristic->name }}</span></a>
-                                <div class="wrap-price"><ins><p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($dollar as $d){{ $d->price*$sp->sale_price }} @endforeach Bs</p></ins> <del><p class="text-sm text-gray-500">@foreach ($dollar as $d){{ $d->price*$sp->price }} @endforeach Bs</p></del></div>
+                                <div class="wrap-price"><ins><p class="text-md mt-2 text-center font-semibold text-teal-400">@foreach ($dollar as $d){{ $d->price*$sp->sale_price }} @endforeach Bs</p></ins> <del><p class="text-sm text-gray-500">@foreach ($dollar as $d){{ $d->price*$sp->price }} @endforeach Bs</p></del></div>
                             </h3>
                         </div>
                         
-                        {{-- <div class="flex justify-between">
-                            <p class="text-md mt-2 text-center font-semibold text-teal-600">@foreach ($dollar as $d){{ number_format($d->price * $sp->price, 2) }}@endforeach Bs</p>
-                            {{-- @if ($witems->contains($p->id))
-                                <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="removeFromWishlist({{$p->id}})" wire:loading.attr="disabled"><i class="fa fa-heart text-red-600"></i></a></div>
+                        <div class="flex justify-end">
+                            @if ($sp->stock > 0)
+                                @if ($citems->contains($sp->id))
+                                    <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="destroy('{{$sp->id}}')" title="Quitar del carrito"><i class="text-lg fad fa-cart-arrow-down"></i></a></div>
+                                @else
+                                    <div class="mt-1"><a href="javascript:void(0)" wire:click.prevent="store({{$sp->id}}, '{{ $sp->product->name }} {{ $sp->product->brand->name }} {{ $sp->characteristic->name }}', {{ $sp->sale_price }})" wire:loading.attr="disabled" title="Agregar al Carrito"><i class="text-lg far fa-shopping-cart"></i></a></div>
+                                @endif
                             @else
-                                <div class="mt-1"><a href="javascript:void(0)"><i class="text-teal-600 far fa-heart" wire:click.prevent="addToWishlist({{$p->id}}, '{{$p->product}}', {{$p->price}})" wire:loading.attr="disabled"></i></a></div>
+                                <div class="mt-1 text-base text-red-600">Sin Stock</div>
                             @endif    
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
                 @endforeach

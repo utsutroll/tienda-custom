@@ -1,14 +1,30 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Mi Perfil') }}
-            </h2>
+            @if (Auth::user()->utype === 'ADM')
+            <a href="{{ route('admin.dashboard') }}" class="ml-4">
+                <h2 class="underline font-semibold text-xl text-gray-800 leading-tight hover:text-gray-700">
+                    {{ __('Panel Administrativo') }}
+                </h2>
+            </a>
+            @else
+            <a href="/" class="ml-4">
+                <h2 class="underline font-semibold text-xl text-gray-800 leading-tight hover:text-gray-700">
+                    {{ __('Inicio') }}
+                </h2>
+            </a>
             <a href="{{ route('shop') }}" class="ml-4">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight hover:text-gray-700">
+                <h2 class="underline font-semibold text-xl text-gray-800 leading-tight hover:text-gray-700">
                     {{ __('Tienda') }}
                 </h2>
             </a>
+            <a href="{{ route('user.orders') }}" class="ml-4">
+                <h2 class="underline font-semibold text-xl text-gray-800 leading-tight hover:text-gray-700">
+                    {{ __('Mis Pedidos') }}
+                </h2>
+            </a>
+            @endif
+            
         </div>
     </x-slot>
 

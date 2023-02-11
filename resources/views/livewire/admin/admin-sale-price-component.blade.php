@@ -56,13 +56,17 @@
                     <ul class="list-group mt-4 list-group-flush">
                         <li class="list-group-item">
                             <div class="form-group row">
-                                <div class="col-5">
+                                <div class="col-3">
                                     <label for="">Producto</label><br/>
                                     <span class="font-bold mt-3">{{ $nombre }}</span>
                                 </div>
                                 <div class="col-3 text-center"> 
-                                    <label for="">Precio actual</label><br>
+                                    <label for="">Precio</label><br>
                                     <span class="font-bold mt-3">{{ $precio }}$</span>
+                                </div>
+                                <div class="col-2 text-center"> 
+                                    <label for="">Oferta</label><br>
+                                    <span class="font-bold mt-3">{{ $sale_precio }}$</span>
                                 </div>
                                 <div class="col-2">
                                     <label for="">Precio Nuevo</label>

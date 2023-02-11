@@ -7,17 +7,17 @@
                 <button type="button" wire:click="$emit('render')" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <div wire:loading wire:target="create">
+                <div wire:loading wire:target="edit">
                     <div class="loader">
                         <div>
-                           <img class="animate-pulse" width="80" height="60" src="{{ asset('dist/new/img/logos/logo-meka.svg') }}" alt="Inversiones Meka">
+                           <img class="animate-pulse" width="80" height="60" src="{{ asset('dist/new/img/logos/logo-meka.png') }}" alt="Inversiones Meka">
                         </div>    
                     </div>
                     <div>
                         <br><br><br><br><br><br><br><br><br>
                     </div>
                 </div>
-                <div wire:loading.remove wire:target="create">
+                <div wire:loading.remove wire:target="edit">
                     <div class="form-group">
                         <label for="caracteristica" class="control-label">Característica</label>
                         <input type="text" class="form-control" min="1" wire:model.defer="name" placeholder="Ingrese la Característica">    

@@ -192,10 +192,12 @@ class AdminBankAccountComponent extends Component
         try {
             $payment->delete();
             $this->emit('paymentDeleted');
+            $this->emit('render');
             
         } catch (\Exception $e) {
 
             $this->emit('paymentDeleted_e');
+            $this->emit('render');
         }
 
     }

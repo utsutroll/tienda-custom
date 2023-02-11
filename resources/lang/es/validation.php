@@ -168,7 +168,7 @@ return [
         'password' => 'Contraseña',
         'document' => 'Documento',
         'document_number' => 'Número de Documento',
-        'sexo' => 'Sexo'
-
+        'sexo' => 'Sexo',
+        'terms' => 'Terminos y Condiciones',
     ],
 ];

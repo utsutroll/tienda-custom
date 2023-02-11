@@ -103,10 +103,12 @@ class AdminBrandComponent extends Component
         try {
             $brand->delete();
             $this->emit('brandDeleted');
+            $this->emit('render');
             
         } catch (\Exception $e) {
 
             $this->emit('brandDeleted_e');
+            $this->emit('render');
         }
     }
     /* End Destroy */

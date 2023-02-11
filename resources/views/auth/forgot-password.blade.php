@@ -2,7 +2,7 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <img src="{{ url('dist/new/img/logos/logo-meka.svg') }}" class="w-30 h-20 fill-current text-gray-500" alt="Inversiones Meka">
+                <img src="{{ url('dist/new/img/logos/logo-meka.png') }}" class="w-30 h-20 fill-current text-gray-500" alt="Inversiones Meka">
             </a>
         </x-slot>
 

@@ -32,7 +32,9 @@
                         <a href="javascript:void(0)" wire:click.prevent="destroy('{{$item->rowId}}')"><i class="fas fa-times-circle"></i></a>
                     </td>
                     <td class="py-4 px-6">
-                        <img src="{{Storage::url($item->model->image)}}" class="inline-block w-14" alt="{{$item->name}}">
+                        @isset($item->model->image)
+                            <img src="{{Storage::url($item->model->image)}}" class="inline-block w-14" alt="{{$item->name}}">   
+                        @endisset
                     </td>
                     <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $item->model->product->name }} {{ $item->model->product->brand->name }} {{ $item->model->characteristic->name }}

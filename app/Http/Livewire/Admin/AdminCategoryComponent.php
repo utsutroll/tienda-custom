@@ -98,10 +98,12 @@ class AdminCategoryComponent extends Component
         try {
             $category->delete();
             $this->emit('categoryDeleted');
+            $this->emit('render');
             
         } catch (\Exception $e) {
 
             $this->emit('categoryDeleted_e');
+            $this->emit('render');
         }
 
     }

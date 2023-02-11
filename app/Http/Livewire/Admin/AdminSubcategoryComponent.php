@@ -137,10 +137,12 @@ class AdminSubcategoryComponent extends Component
         try {
             $subcategory->delete();
             $this->emit('subcategoryDeleted');
+            $this->emit('render');
             
         } catch (\Exception $e) {
 
             $this->emit('subcategoryDeleted_e');
+            $this->emit('render');
         }
 
     }
