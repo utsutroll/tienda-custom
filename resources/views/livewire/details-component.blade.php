@@ -114,7 +114,7 @@
                         </h3>   
                     </div>
                     <div class="flex justify-between">
-                        <p class="text-md mt-2 text-center font-semibold text-teal-400">@foreach ($this->dollar as $d){{ number_format($d->price * $s->price, 2) }}@endforeach Bs</p>
+                        <p class="text-md mt-2 text-center font-bold text-blue-600">@foreach ($this->dollar as $d){{ number_format($d->price * $s->price, 2) }}@endforeach Bs</p>
                         @if(Route::has('login'))
                             @auth   
                                 @if ($witems->contains($s->id))

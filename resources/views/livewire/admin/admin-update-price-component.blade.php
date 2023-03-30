@@ -42,7 +42,7 @@
                                 <div class="form-group row">
                                     <div class="col-3">
                                         <label for="">Producto</label><br/>
-                                        <span class="font-bold mt-3">{{$pp->name}} {{$pp->brand->name}} </span>
+                                        <span class="font-bold mt-3">({{$pp->id}}) {{$pp->name}} {{$pp->brand->name}} </span>
                                     </div>
                                     <div class="col-3 text-center"> 
                                         <label for="">Precio actual</label><br>

@@ -44,7 +44,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        /*dd($request);*/
 
         $request->validate([
             'id' => 'required|numeric|unique:products,id',   
@@ -201,39 +200,38 @@ class ProductController extends Controller
 
             } else {
                 $characteristic[0]->update([
-                    'image' => $url
+                    'image' => $imagen
                 ]);
             }
                 
 
         }
 
+	    
+        $product_id = $product->id;
+        $characteristic_id=$request->charact;
+        $files = $request->file('imge');
 
-        if($request->activar == 'on') {
-
-            $charact_id=$request->charact;
-            $file = $request->file('imge');
-
-            if($request->charact != 0 and $request->file('imge') != ''){
-        
-                $cont = 0;
-                while($cont < count($file)){
-                        
-                    $imgen = Storage::put('/products/images', $file[$cont]);
+        if($request->charact != 0 and $request->file('imge') != ''){
     
-                    CharacteristicProduct::create([
-                        'characteristic_id' => $charact_id[$cont],
-                        'product_id' => $product->id,
-                        'image' => $imgen,
-                    ]);
-                    $cont=$cont+1;
-                }
+            $cont = 0;
+            while($cont < count($files)){
                 
-            } else {
-                return redirect()->back()->with('message', 'Debe agregar una Característica.');
-                die();
+                $imagen = Storage::put('/products/images', $files[$cont]);
+    
+                CharacteristicProduct::create([
+                    'characteristic_id' => $characteristic_id[$cont],
+                    'product_id' => $product_id,
+                    'image' => $imagen,
+                ]);
+                $cont=$cont+1;
             }
+            
+        } else {
+            return redirect()->back()->with('message', 'Debe agregar una Característica.');
+            die();
         }
+        
         
            
 

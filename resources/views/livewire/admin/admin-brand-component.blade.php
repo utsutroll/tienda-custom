@@ -28,13 +28,36 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Marca</h4>
-           
+            <div class="m-t-4">
+                <div class="dataTables_length" id="myTable_length">
+                    <label>Mostrar 
+                        <select wire:model="entries"  class="">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select> 
+                    Entradas</label>
+                </div>
+                <div class="dataTables_filter">
+                    <label>Buscar:
+                        <input type="search" wire:model="search" class="" placeholder=""> 
+                    </label>
+                </div>
+    
+            </div>
             <div class="table-responsive m-t-2">
-                <table id="table" class="table table-striped">
+                @if (count($brands) > 0)
+                <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Marca</th>
+                            <th wire:click='sortBy("id")' style="cursor:pointer;">ID
+                                <x-sort-icon sortField='id' :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                            </th>
+                            <th wire:click='sortBy("name")' style="cursor:pointer;">Marca
+                                <x-sort-icon sortField='name' :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                            </th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -66,6 +89,35 @@
                 </table> 
             </div>
         </div>
+        <div class="card-footer">
+            <div class="float-right">
+                {{$brands->links()}}
+            </div>
+        </div> 
+        @elseif (count($brands) == 0 & $search !== '')
+            <div class="card-body">
+                No hay un resultado para la busqueda "{{$search}}"  
+            </div>
+            </div>
+            </div>
+        @else
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Marca</th>
+                        <th colspan="2" class="text-nowrap">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        <td colspan="3">No se Encontraron Registros</td>
+                    </tr>
+                </tbody>
+            </table> 
+            </div>
+            </div>      
+        @endif 
     </div>
 </div>    
 @push('scripts')

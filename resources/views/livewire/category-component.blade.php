@@ -133,7 +133,7 @@
                                 </a>
                             </h3>
                         </div>
-                        <p class="text-md mt-2 text-center font-semibold text-teal-400">@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</p>
+                        <p class="text-md mt-2 text-center font-bold text-blue-600">@foreach ($dollar as $d){{ number_format($d->price * $p->price, 2) }}@endforeach Bs</p>
                     </div>
                 </div>
                 @endforeach

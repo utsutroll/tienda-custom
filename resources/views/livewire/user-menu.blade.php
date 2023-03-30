@@ -7,6 +7,12 @@
             </button>
 
             <div class="z-40 md:origin-top-right lg:origin-top-right absolute md:right-0 lg:right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="resultnav" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                <div class="px-4 py-2">
+                    <span class="block text-sm font-semibold text-gray-900 truncate font-sans">{{ Auth::user()->name }} {{ Auth::user()->lastname }}</span>
+                    <span
+                        class="block text-sm font-medium text-gray-500 truncate font-sans">{{ Auth::user()->email }}</span>
+                </div>
+                <hr>
                 @if (Auth::user()->utype === 'ADM')
                     <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Panel Administrativo</a>    
                 @else

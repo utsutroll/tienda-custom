@@ -137,13 +137,13 @@
         <div class="form-group">
             {!! Form::label('file', 'Imágen que se mostrará del Producto') !!}
             {!! Form::file('file', ['class' => 'dropify', 'accept' => 'image/*' ]) !!}
-        @endisset
+        
 
             @error('file')
                 <small class="text-danger">{{$message}}</small>   
             @enderror
         </div>
-        
+        @endisset
     </div>
 </div>
 
@@ -154,7 +154,7 @@
 <div class="form-group p-2">
     {!! Form::label('activar', 'Agregar Características') !!}<br/>
     <input type="checkbox" name="activar" id="activar" class='js-switch' data-color='#3d3b3b'>
-</div>
+</div> 
 @endisset
 
 <div class="row">
@@ -195,7 +195,7 @@
             </div>
         </div>
 
-        <div class="row" id="divMultiInputs">
+        <div class="row p-2" id="divMultiInputs">
         </div>
         <hr/>
     </div>
