@@ -32,14 +32,6 @@ class SendPaymentComponent extends Component
         $this->order_id = $order_id;
     }
 
-    protected $rules = [
-        'reference' => 'reqired|numeric|min:1',
-    ];
-
-    protected $validationAttributes = [
-        'reference'=>'Referencia',
-    ];
-
     public function getBankProperty()
     {
         return BankAccount::all();
@@ -54,6 +46,16 @@ class SendPaymentComponent extends Component
     {
         return DB::table('dollar_rates')->select('price')->get();
     }
+
+    protected $rules = [
+        'referencia' => 'required|numeric|min:1',
+        'captura' => 'required|image'
+    ];
+
+    protected $validationAttributes = [
+        'referencia'=>'Referencia',
+        'captura' => 'Captura'
+    ];
 
     public function sendPaymentMoney()
     {
@@ -71,18 +73,17 @@ class SendPaymentComponent extends Component
 
     public function sendPaymentBank()
     {
-        if($this->captura != ''){
-            $this->captura->store('cap'); 
-            $url = $this->captura->store('cap');
-        }
+        $this->validate();
+
+        $this->captura->store('cap'); 
+        $url = $this->captura->store('cap');
+
         $transaction = new Transaction();
         $transaction->user_id = Auth::user()->id;
         $transaction->order_id = $this->order_id;
         $transaction->bank_id = $this->bank_id;
         $transaction->mode = 'bank';
-        if($this->captura != ''){
-            $transaction->url = $url;
-        }
+        $transaction->url = $url;
         $transaction->reference = $this->referencia;
         $transaction->save();
 
@@ -93,20 +94,17 @@ class SendPaymentComponent extends Component
 
     public function sendPaymentWallet()
     {
-        if($this->captura != ''){
-            $this->captura->store('cap'); 
-            $url = $this->captura->store('cap');
-        }
-        
+        $this->validate();
+
+        $this->captura->store('cap'); 
+        $url = $this->captura->store('cap');
 
         $transaction = new Transaction();
         $transaction->user_id = Auth::user()->id;
         $transaction->order_id = $this->order_id;
         $transaction->wallet_id = $this->wallet_id;
         $transaction->mode = 'wallet';
-        if($this->captura != ''){
-            $transaction->url = $url;
-        }
+        $transaction->url = $url;
         $transaction->reference = $this->referencia;
         $transaction->save();
 

@@ -7,17 +7,17 @@
                 <button type="button" wire:click="$emit('render')" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <div wire:loading wire:target="create">
+                <div wire:loading>
                     <div class="loader">
                         <div>
                            <img class="animate-pulse" width="80" height="60" src="{{ asset('dist/new/img/logos/logo-meka.png') }}" alt="Inversiones Meka">
                         </div>    
                     </div>
                     <div>
-                        <br><br><br><br><br><br><br><br><br>
+                        <br><br><br><br><br><br><br><br><br><br><br><br>
                     </div>
                 </div>
-                <div wire:loading.remove wire:target="create">
+                <div wire:loading.remove>
                     <div class="form-group">
                         <label for="subcategory" class="control-label">Subcategoría</label>
                         <input type="text" class="form-control" min="1" wire:model.defer="name" placeholder="Ingrese la Subcategoría">    
@@ -37,6 +37,23 @@
                         </select>
 
                         @error('category_id')
+                            <small class="text-danger">{{$message}}</small>   
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image" class="control-label">Imágen que se mostrará de la subcategoría</label>
+                        @if ($imagen)
+                            <div class="image-wrapper d-flex justify-content-center">
+                                <img src="{{ $imagen->temporaryUrl() }}">
+                            </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        
+                        <input type="file" class="form-control" wire:model.defer="imagen" accept="image/*">
+                
+                        @error('imagen')
                             <small class="text-danger">{{$message}}</small>   
                         @enderror
                     </div>

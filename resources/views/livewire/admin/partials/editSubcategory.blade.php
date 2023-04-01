@@ -14,7 +14,7 @@
                         </div>    
                     </div>
                     <div>
-                        <br><br><br><br><br><br><br><br><br>
+                        <br><br><br><br><br><br><br><br><br><br><br><br>
                     </div>
                 </div>
                 <div wire:loading.remove>
@@ -41,6 +41,26 @@
                         </select>
 
                         @error('category_id')
+                            <small class="text-danger">{{$message}}</small>   
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        @if ($image != $oldimage)
+                            <div class="image-wrapper d-flex justify-content-center">
+                                <img src="{{ $image->temporaryUrl() }}">
+                            </div>
+                        @else
+                            <div class="image-wrapper d-flex justify-content-center">
+                                <img id="picture" src="{{Storage::url($image)}}">
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="form-group">
+                        <input type="file" wire:model.defer="image" id="file" class="form-control" accept="image/*"/>
+
+                        @error('image')
                             <small class="text-danger">{{$message}}</small>   
                         @enderror
                     </div>

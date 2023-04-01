@@ -4,18 +4,24 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class AdminCategoryComponent extends Component
 {
     use WithPagination;
+    use WithFileUploads;
 
     protected $paginationTheme = "bootstrap";
     
     /* Variables */
     public $name;
+    public $image;
+    public $imagen;
+    public $oldimage;
     public $category_id;
     public $view = 'addCategory';
 
@@ -36,7 +42,7 @@ class AdminCategoryComponent extends Component
     public function render()
     {
         $categories = DB::table('categories')
-                        ->select('id', 'name')
+                        ->select('id', 'name', 'url')
                         ->when($this->search, function($query) {
                             return $query->where(function ($query) {
                                 $query->where('name', 'like', '%' .$this->search. '%');
@@ -69,28 +75,35 @@ class AdminCategoryComponent extends Component
     public function create()
     {
         $this->reset(['name']);
+        $this->reset(['imagen']);
     }
 
     protected $rules = [
-        'name' => 'required|regex:/^[\pL\s\-]+$/u|max:40|unique:categories',   
+        'name' => 'required|regex:/^[\pL\s\-]+$/u|max:40|unique:categories', 
+        'imagen' => 'required|image'  
     ];
 
     protected $validationAttributes = [
-        'name' => 'Categoría'
+        'name' => 'Categoría',
+        'image' => 'Imágen',
+        'imagen' => 'Imágen',
     ];
 
     public function save(){
         
         $this->validate();
 
-        $this->emit('render');
+        $this->imagen->store('icons'); 
+        $url = $this->imagen->store('icons'); 
 
         Category::create([
             'name' => $this->name,
-            'slug' => Str::slug($this->name)
+            'slug' => Str::slug($this->name),
+            'url' => $url
         ]);
 
         $this->reset(['name']);
+        $this->reset(['imagen']);
 
         $this->emit('render');
 
@@ -106,25 +119,42 @@ class AdminCategoryComponent extends Component
 
         $this->category_id = $id;
         $this->name = $category->name;
+        $this->image = $category->url;
+        $this->oldimage = $category->url;
   
     }
 
     public function update()
     {
         $this->validate([
-            'name' => "required|regex:/^[\pL\s\-]+$/u|max:40|unique:categories,name,$this->category_id" 
+            'name' => "required|regex:/^[\pL\s\-]+$/u|max:40|unique:categories,name,$this->category_id", 
+            'image' => 'required|image' 
         ]);
-
-        $this->emit('render');
 
         $category = Category::find($this->category_id);
 
+        if ($category->url == '') {
+
+            $this->image->store('icons');
+            $url = $this->image->store('icons');
+
+        }else {
+            
+            Storage::disk('public')->delete($category->url);
+            $this->image->store('icons');
+            $url = $this->image->store('icons');
+        }
+
+
         $category->update([
             'name' => $this->name,
-            'slug' => Str::slug($this->name)
+            'slug' => Str::slug($this->name),
+            'url' => $url
         ]);
         
         $this->reset(['name']);
+        $this->reset(['image']);
+        $this->reset(['oldimage']);
         $this->emit('categoryEdited');
         
     }

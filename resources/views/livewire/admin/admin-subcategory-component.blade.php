@@ -28,15 +28,41 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Subcategorías</h4>
-            
+            <div class="m-t-4">
+                <div class="dataTables_length" id="myTable_length">
+                    <label>Mostrar 
+                        <select wire:model="entries"  class="">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select> 
+                    Entradas</label>
+                </div>
+                <div class="dataTables_filter">
+                    <label>Buscar:
+                        <input type="search" wire:model="search" class="" placeholder=""> 
+                    </label>
+                </div>
+    
+            </div>
             <div class="table-responsive m-t-2">
+                @if (count($subcategories) > 0)
                 <table id="table" class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Subcategoría</th>
-                            <th>Categoría</th>
-                            <th>Opciones</th>
+                            <th wire:click='sortBy("id")' style="cursor:pointer;">ID
+                                <x-sort-icon sortField='id' :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                            </th>
+                            <th wire:click='sortBy("subcategory")' style="cursor:pointer;">Subcategoría
+                                <x-sort-icon sortField='subcategory' :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                            </th>
+                            <th wire:click='sortBy("category")' style="cursor:pointer;">Categoría
+                                <x-sort-icon sortField='category' :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                            </th>
+                            <th>Imágen</th>
+                            <th colspan="2" class="text-nowrap">Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,8 +70,9 @@
                            
                         <tr>
                             <td width="8%">{{ $s->id }}</td>
-                            <td>{{ $s->name }}</td>
-                            <td>{{ $s->category->name }}</td>
+                            <td>{{ $s->subcategory }}</td>
+                            <td>{{ $s->category }}</td>
+                            <td width="40%"><img width="20%" @if ($s->url) src="{{Storage::url($s->url) }}" @else src="" @endif class="img-thumbnail"></td>
     
                             <td width="20%">
                                 <button 
@@ -69,14 +96,58 @@
                     </tbody>
                 </table>
             </div>
-        </div>      
+        </div>
+        <div class="card-footer">
+            <div class="float-right">
+                {{$subcategories->links()}}
+            </div>
+        </div> 
+        @else
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Subcategoría</th>
+                        <th>Categoría</th>
+                        <th>Imágen</th>
+                        <th colspan="2" class="text-nowrap">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        @if (count($subcategories) == 0 & $search !== '')
+                            <td colspan="3">No hay un resultado para la busqueda "{{$search}}"</td>
+                        @else
+                            <td colspan="3">No se Encontraron Registros</td>
+                        @endif
+                    </tr>
+                </tbody>
+            </table> 
+            </div>
+            </div>      
+        @endif      
     </div>
 </div>
     
 @push('css')
 <link href="{{asset('assets/node_modules/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/node_modules/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
+
+<style>
+    .imagen-wrapper{
+        position: relative;
+        padding-bottom: 56.25%
+    }
+
+    .image-wrapper img{
+
+        object-fit: cover;
+        width: 50%;
+        height: 50%;
+    }
+</style>
 @endpush
+
 @push('scripts')
 <script src="{{asset('assets/node_modules/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/node_modules/bootstrap-select/bootstrap-select.min.js')}}" type="text/javascript"></script>
@@ -84,6 +155,7 @@
 <script type="text/javascript">
 $(".select2").select2();
 $('#LiSubcategories').addClass("active");
+
 
 window.livewire.on('subcategoryAdded',()=>{
     $('#create-modal').modal('hide');
@@ -142,5 +214,6 @@ window.livewire.on('slugValidate',()=>{
         stack: 6
       });
 });
+
 </script>
 @endpush

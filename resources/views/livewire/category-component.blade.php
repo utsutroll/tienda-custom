@@ -62,7 +62,7 @@
     <div wire:loading class="preloader">
         <div class="loader">
             <div>
-                <img class="animate-pulse w-16" src="{{ asset('dist/new/img/logos/logo-meka.svg') }}" alt="Inversiones Meka">
+                <img class="animate-pulse w-16" src="{{ asset('dist/new/img/logos/logo-meka.png') }}" alt="Inversiones Meka">
             </div>    
         </div>
     </div>
@@ -72,8 +72,9 @@
         <div wire:loading.remove wire:target="subcategories" class="grid grid-cols-2 sm:grid-cols-4 sm-gap-3 md-cols-4 md:gap-4 lg:grid-cols-4 lg:gap-6 mx-2 p-6">
             @foreach ($this->categories as $category)
             <div class="bg-gray-200 rounded-md shadow-sm hover:shadow-lg shadow-black">
-                <h3 class="px-2 pt-8 text-base font-semibold font-sans">{{ $category->name }}</h3>
-                <div wire:click="subcategories({{ $category->id }})" class="bg-gradient-to-r from-green-500 to-blue-500 rounded-b-md flex m-0 justify-end cursor-pointer">
+                @isset($category->url)<img style="width:300px; height:130px;" src="{{ Storage::url($category->url) }}">@endisset
+                <div wire:click="subcategories({{ $category->id }})" class="bg-gradient-to-r from-green-500 to-blue-500 rounded-b-md flex m-0 justify-between cursor-pointer">
+                    <h3 class="ml-2 text-white text-base font-semibold font-sans">{{ $category->name }}</h3>
                     <i class="fas fa-plus text-gray-100 p-1"></i>
                 </div>
             </div>
@@ -88,8 +89,9 @@
             @foreach ($this->subcategories as $subcategory)
 
             <div class="bg-gray-200 rounded-md shadow-sm hover:shadow-lg shadow-black">
-                <h3 class="px-2 pt-8 text-base font-semibold font-sans">{{ $subcategory->name }}</h3>
-                <div wire:click="products({{  $subcategory->id }})" class="bg-gradient-to-r from-blue-500 to-green-500 rounded-b-md flex m-0 justify-end cursor-pointer">
+                @isset($subcategory->url)<img style="width:300px; height:130px;" src="{{ Storage::url($subcategory->url) }}">@endisset
+                <div wire:click="products({{  $subcategory->id }})" class="bg-gradient-to-r from-blue-500 to-green-500 rounded-b-md flex m-0 justify-between cursor-pointer">
+                    <h3 class="ml-2 text-white text-base font-semibold font-sans">{{ $subcategory->name }}</h3>
                     <i class="fas fa-plus text-gray-100 p-1"></i>
                 </div>
             </div>

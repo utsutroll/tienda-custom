@@ -4,10 +4,16 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Bank;
 use App\Models\BankAccount;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AdminBankAccountComponent extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme = "bootstrap";
+    
     /* Variables */
     public $payment_id;
     public $type_account;
@@ -21,6 +27,17 @@ class AdminBankAccountComponent extends Component
     public $bankn = '';
     public $code = '';
     public $view = 'addBankAccount';
+
+    public $search;
+    public $entries = 5;
+    public $sortBy = 'id';
+    public $sortAsc = 'true';
+
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'sortBy' => ['except' => 'id'],
+        'sortAsc' => ['except' => false],
+    ];
     /* End Variables */
 
     /* Table */
@@ -32,7 +49,33 @@ class AdminBankAccountComponent extends Component
         $banks = Bank::all();
         $payments = BankAccount::all();
 
+        $payments = DB::table('bank_accounts')
+                        ->select('id', 'beneficiary', 'type_account', 'account')
+                        ->when($this->search, function($query) {
+                            return $query->where(function ($query) {
+                                $query->where('beneficiary', 'like', '%' .$this->search. '%')
+                                    ->where('type_account', 'like', '%' .$this->search. '%');
+                            });
+                        })
+                        ->orderBy($this->sortBy, $this->sortAsc ? 'ASC' : 'DESC');
+
+
+        $payments = $payments->paginate($this->entries);
+
         return view('livewire.admin.admin-bank-account-component', compact('banks', 'payments'))->layout('layouts.base-a');
+    }
+
+    public function updatingSearch() 
+    {
+        $this->resetPage();
+    }
+
+    public function sortBy($field) 
+    {
+        if($field == $this->sortBy) {
+            $this->sortAsc = !$this->sortAsc;
+        }
+        $this->sortBy = $field;
     }
 
     /* End Table */

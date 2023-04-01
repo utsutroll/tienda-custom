@@ -118,17 +118,20 @@
                                         class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-4 pr-12 sm:text-sm border-gray-300 rounded-md"
                                         wire:model.defer="referencia" min="1" placeholder="Ingrese el Nro. Referencia">
                                     @error('referencia')
-                                    <small class=text-red-600">{{$message}}</small>
+                                    <small class="text-red-600">{{$message}}</small>
                                     @enderror
                                 </div>
 
                                 <div class="col-span-2 md:col-span-1 lg:col-span-1">
                                     <label for="captura" class="font-sans font-semibold text-gray-700">
-                                        Captura de la Trasnferencia (Opcional)</label>
+                                        Captura de la Trasnferencia<span class="text-red-500 text-lg font-bold">*</span></label>
                                     <input type="file"
                                         class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-4 pr-12 sm:text-sm border-gray-300 rounded-md"
                                         accept='image/*' wire:model.defer="captura"
                                         placeholder="Seleccione Una Imagen" />
+                                    @error('captura')
+                                        <small class="text-red-600">{{$message}}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -189,16 +192,19 @@
                                         class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-4 pr-12 sm:text-sm border-gray-300 rounded-md"
                                         wire:model.defer="referencia" min="1" placeholder="Ingrese el Nro. Referencia">
                                     @error('referencia')
-                                    <small class=text-red-600">{{$message}}</small>
+                                    <small class="text-red-600">{{$message}}</small>
                                     @enderror
                                 </div>
                                 <div class="col-span-2 md:col-span-1 lg:col-span-1">
-                                <label for="captura" class="font-sans font-semibold text-gray-700">
-                                    Captura de la Trasnferencia (Opcional)</label>
-                                <input type="file"
-                                    class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-4 pr-12 sm:text-sm border-gray-300 rounded-md"
-                                    accept='image/*' wire:model.defer="captura"
-                                    placeholder="Seleccione Una Imagen" />
+                                    <label for="captura" class="font-sans font-semibold text-gray-700">
+                                        Captura de la Trasnferencia<span class="text-red-500 text-lg font-bold">*</span></label>
+                                    <input type="file"
+                                        class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-4 pr-12 sm:text-sm border-gray-300 rounded-md"
+                                        accept='image/*' wire:model.defer="captura"
+                                        placeholder="Seleccione Una Imagen" />
+                                    @error('captura')
+                                        <small class="text-red-600">{{$message}}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

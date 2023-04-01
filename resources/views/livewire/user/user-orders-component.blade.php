@@ -76,7 +76,7 @@
                                     <i class="far fa-eye"></i>
                                     Detalles
                                 </a>
-                                @if ($o->transactions->status == "pending")
+                                @if ($o->transactions->mode != 'money' & $o->transactions->status == "pending" & $o->transactions->reference == '' & $o->transactions->url == '')
                                 <a href="{{ route('sendpayment',['order_id'=>$o->id]) }}" class="ml-2 p-2 text-base text-white rounded-md bg-green-600 hover:bg-green-800">
                                     <i class="fas fa-file-invoice-dollar"></i>
                                     Pagar

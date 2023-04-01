@@ -58,6 +58,7 @@
                             <th wire:click='sortBy("name")' style="cursor:pointer;">Categoría
                                 <x-sort-icon sortField='name' :sort-by="$sortBy" :sort-asc="$sortAsc" />
                             </th>
+                            <th>Imágen</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -66,6 +67,7 @@
                         <tr>
                             <td width="8%">{{ $c->id }}</td>
                             <td>{{ $c->name }}</td>
+                            <td width="40%"><img width="20%" @if ($c->url) src="{{Storage::url($c->url) }}" @else src="" @endif class="img-thumbnail"></td>
     
                             <td>
                                 <button 
@@ -94,36 +96,52 @@
                 {{$categories->links()}}
             </div>
         </div> 
-        @elseif (count($categories) == 0 & $search !== '')
-            <div class="card-body">
-                No hay un resultado para la busqueda "{{$search}}"  
-            </div>
-            </div>
-            </div>
         @else
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Categoría</th>
-                        <th colspan="2" class="text-nowrap">Opciones</th>
+                        <th>Imágen</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="text-center">
+                        @if (count($categories) == 0 & $search != '')
+                        <td colspan="3">No hay un resultado para la busqueda "{{$search}}"</td>
+                        @else
                         <td colspan="3">No se Encontraron Registros</td>
+                        @endif
                     </tr>
                 </tbody>
             </table> 
             </div>
             </div>      
-        @endif 
+        @endif
     </div>
-</div>    
+</div>
+@push('css')
+    <style>
+        .imagen-wrapper{
+            position: relative;
+            padding-bottom: 56.25%
+        }
+
+        .image-wrapper img{
+
+            object-fit: cover;
+            width: 50%;
+            height: 50%;
+        }
+    </style>
+@endpush  
+
 @push('scripts')
+
 <script type="text/javascript">
       
-$('#liCategories').addClass("active");
+$('#LiCategories').addClass("active");
 
 window.livewire.on('categoryAdded',()=>{
     $('#create-modal').modal('hide');
@@ -171,5 +189,6 @@ window.livewire.on('categoryDeleted_e',()=>{
         stack: 6
       });
 });
+
 </script>
 @endpush

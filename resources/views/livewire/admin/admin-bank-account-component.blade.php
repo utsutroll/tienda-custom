@@ -30,16 +30,43 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Cuentas Bancarias</h4>
-            
+            <div class="m-t-4">
+                <div class="dataTables_length" id="myTable_length">
+                    <label>Mostrar 
+                        <select wire:model="entries"  class="">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select> 
+                    Entradas</label>
+                </div>
+                <div class="dataTables_filter">
+                    <label>Buscar:
+                        <input type="search" wire:model="search" class="" placeholder=""> 
+                    </label>
+                </div>
+    
+            </div>
             <div class="table-responsive m-t-2">
-                <table id="table" class="table table-striped">
+                @if (count($payments) > 0)
+                <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Beneficiario</th>
-                            <th>Tipo de Cuenta</th>
-                            <th>Nro. de Cuenta</th>
-                            <th>Opciones</th>
+                            <th wire:click='sortBy("id")' style="cursor:pointer;">ID
+                                <x-sort-icon sortField='id' :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                            </th>
+                            <th wire:click='sortBy("beneficiary")' style="cursor:pointer;">Beneficiario
+                                <x-sort-icon sortField='beneficiary' :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                            </th>
+                            <th wire:click='sortBy("type_account")' style="cursor:pointer;">Tipo de Cuenta
+                                <x-sort-icon sortField='type_account' :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                            </th>
+                            <th wire:click='sortBy("account")' style="cursor:pointer;">Nro. de Cuenta
+                                <x-sort-icon sortField='account' :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                            </th>
+                            <th colspan="2" class="text-nowrap">Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -76,12 +103,40 @@
                                 </button>
                             </td>
                         </tr>
-    
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
+        <div class="card-footer">
+            <div class="float-right">
+                {{$payments->links()}}
+            </div>
+        </div> 
+        @else
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Beneficiario</th>
+                        <th>Tipo de Cuenta</th>
+                        <th>Nro. de Cuenta</th>
+                        <th colspan="2" class="text-nowrap">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        @if (count($payments) == 0 & $search != '')
+                        <td colspan="5">No hay un resultado para la busqueda "{{$search}}"</td>
+                        @else
+                        <td colspan="5">No se Encontraron Registros</td>
+                        @endif
+                    </tr>
+                </tbody>
+            </table> 
+            </div>
+            </div>      
+        @endif
     </div>
 </div>
 @push('scripts')

@@ -58,7 +58,7 @@
                             <th wire:click='sortBy("name")' style="cursor:pointer;">Marca
                                 <x-sort-icon sortField='name' :sort-by="$sortBy" :sort-asc="$sortAsc" />
                             </th>
-                            <th>Opciones</th>
+                            <th colspan="2" class="text-nowrap">Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,12 +94,6 @@
                 {{$brands->links()}}
             </div>
         </div> 
-        @elseif (count($brands) == 0 & $search !== '')
-            <div class="card-body">
-                No hay un resultado para la busqueda "{{$search}}"  
-            </div>
-            </div>
-            </div>
         @else
             <table class="table table-striped">
                 <thead>
@@ -111,7 +105,11 @@
                 </thead>
                 <tbody>
                     <tr class="text-center">
-                        <td colspan="3">No se Encontraron Registros</td>
+                        @if (count($brands) == 0 & $search !== '')
+                            <td colspan="3">No hay un resultado para la busqueda "{{$search}}"</td>
+                        @else
+                            <td colspan="3">No se Encontraron Registros</td>
+                        @endif
                     </tr>
                 </tbody>
             </table> 

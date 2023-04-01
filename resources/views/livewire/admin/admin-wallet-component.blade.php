@@ -28,16 +28,43 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Billeteras</h4>
-            
+            <div class="m-t-4">
+                <div class="dataTables_length" id="myTable_length">
+                    <label>Mostrar 
+                        <select wire:model="entries"  class="">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select> 
+                    Entradas</label>
+                </div>
+                <div class="dataTables_filter">
+                    <label>Buscar:
+                        <input type="search" wire:model="search" class="" placeholder=""> 
+                    </label>
+                </div>
+    
+            </div>
             <div class="table-responsive m-t-2">
+                @if (count($wallets) > 0)
                 <table id="table" class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Plataforma</th>
-                            <th>Tipo de Billetera</th>
-                            <th>Billetera</th>
-                            <th>Opciones</th>
+                            <th wire:click='sortBy("id")' style="cursor:pointer;">ID
+                                <x-sort-icon sortField='id' :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                            </th>
+                            <th wire:click='sortBy("name")' style="cursor:pointer;">Plataforma
+                                <x-sort-icon sortField='name' :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                            </th>
+                            <th wire:click='sortBy("type")' style="cursor:pointer;">Tipo de Billetera
+                                <x-sort-icon sortField='type' :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                            </th>
+                            <th wire:click='sortBy("wallet_email")' style="cursor:pointer;">Billetera
+                                <x-sort-icon sortField='wallet_email' :sort-by="$sortBy" :sort-asc="$sortAsc" />
+                            </th>
+                            <th colspan="2" class="text-nowrap">Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,12 +93,40 @@
                                 </button>
                             </td>
                         </tr>
-    
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
+        <div class="card-footer">
+            <div class="float-right">
+                {{$wallets->links()}}
+            </div>
+        </div> 
+        @else
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Plataforma</th>
+                        <th>Tipo de Billetera</th>
+                        <th>Billetera</th>
+                        <th colspan="2" class="text-nowrap">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        @if (count($wallets) == 0 & $search !== '')
+                            <td colspan="3">No hay un resultado para la busqueda "{{$search}}"</td>
+                        @else
+                            <td colspan="3">No se Encontraron Registros</td>
+                        @endif
+                    </tr>
+                </tbody>
+            </table> 
+            </div>
+            </div>      
+        @endif
     </div>
 </div>
 
