@@ -69,7 +69,7 @@
         
     @if (empty($this->subcategories) & empty($this->products)) 
     <div class="h-screen">    
-        <div wire:loading.remove wire:target="subcategories" class="grid grid-cols-2 sm:grid-cols-4 sm-gap-3 md-cols-4 md:gap-4 lg:grid-cols-4 lg:gap-6 mx-2 p-6">
+        <div wire:loading.remove wire:target="subcategories" class="grid grid-cols-1 gap-8 sm:grid-cols-2 sm-gap-3 md-cols-4 md:gap-4 lg:grid-cols-4 lg:gap-6 mx-2 p-12 md-p-4 lg-p-4">
             @foreach ($this->categories as $category)
             <div class="bg-gray-200 rounded-md shadow-sm hover:shadow-lg shadow-black">
                 @isset($category->url)<img style="width:300px; height:130px;" src="{{ Storage::url($category->url) }}">@endisset
@@ -85,7 +85,7 @@
 
     @if (!empty($this->subcategories)) 
     <div class="h-screen">  
-        <div wire:loading.class="hidden" wire:target="products" class="grid grid-cols-2 sm:grid-cols-4 sm-gap-3 md-cols-4 md:gap-4 lg:grid-cols-4 lg:gap-6 mx-2 p-6">
+        <div wire:loading.class="hidden" wire:target="products" class="grid grid-cols-1 gap-8 sm:grid-cols-2 sm-gap-3 md-cols-4 md:gap-4 lg:grid-cols-4 lg:gap-6 mx-2 p-12 md-p-4 lg-p-4">
             @foreach ($this->subcategories as $subcategory)
 
             <div class="bg-gray-200 rounded-md shadow-sm hover:shadow-lg shadow-black">
